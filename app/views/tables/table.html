@@ -1,0 +1,32 @@
+<div class="col-md-3">
+  <div class="panel  {% if table.isPrivate %}panel-warning {% else %} panel-success {% endif %}">
+    <div class="panel-heading">
+      {{table.title | title}}
+    </div>
+    
+      <img class="img-responsive" src="img/game2.jpg">
+      <div class="post-content">
+        <p>
+          Tags: &nbsp;
+          {% for tag in table.tags.split(',') %}
+            <i class="muted fa fa-tag"></i>&nbsp;
+            <a href="{{ '/tags/' + tag }}" class="tag">{{ tag }}</a>
+            &nbsp;&nbsp;
+          {% endfor %}
+
+
+        </p>
+        <p>Players: 
+            <i class="muted fa fa-users"></i>&nbsp;
+
+        </p>
+        <span class="small">Started {{ table.createdAt.toISOString()|date('G:i') }}</span>
+      </div>
+    <div class="panel-footer">
+      <a href="tables/{{ table.id }}" class="btn btn-primary">
+        join table
+        <i class="fa fa-play-circle"></i>
+      </a>
+    </div>
+  </div>
+</div>

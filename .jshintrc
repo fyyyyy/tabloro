@@ -9,7 +9,7 @@
   "boss": true,
   "eqnull": true,
   "expr": true,
-  "globalstrict": true,
+  "globalstrict": false,
   "laxbreak": true,
   "loopfunc": true,
   "sub": true,

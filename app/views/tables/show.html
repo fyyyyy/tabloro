@@ -1,0 +1,76 @@
+{% extends '../layouts/default.html' %}
+
+{% block main %}
+  <h1>{{ title }}</h1>
+{% endblock %}
+
+{% block content %}
+  <section class="container">
+    <div class="col-md-12">
+      <div class="panel">
+        <h2>{{table.title | title}}</h2>
+      </div>
+    </div>
+    
+    <div class="col-md-7">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4>Players</h4>
+        </div>
+        <div class="panel-body">
+          None
+          <a class="btn btn-primary btn-block" href="/game">Join</a>
+        </div>
+      </div>
+    </div>
+    
+
+    <div class="col-md-5">
+      <ul class="list-group">
+        {% if (table.isPrivate) %}
+          <li class="list-group-item list-group-item-warning">Private</li>
+        {% else %}
+          <li class="list-group-item list-group-item-success">Public</li>
+        {% endif %}
+        <li class="list-group-item list-group-item-info">Started {{ table.createdAt.toISOString()|date('M d,  h:i a') }}</li>
+        {% if (table.tags) %}
+          <li class="list-group-item meta">
+            <p>
+            Tags: &nbsp;
+            {% for tag in table.tags.split(',') %}
+              <i class="muted fa fa-tag"></i>&nbsp;
+              <a href="{{ '/tags/' + tag }}" class="tag">{{ tag }}</a>
+              &nbsp;&nbsp;
+            {% endfor %}
+            </p>
+          </li>
+        {% endif %}
+        {% if isAdmin %}
+          <li class="list-group-item list-group-item-danger">
+            <form action="{{ '/tables/' + table.id }}" method="post" onsubmit="return confirm('Are you sure?')">
+              <br>
+              <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+              <a href="{{ '/tables/' + table._id + '/edit' }}" title="edit" class="btn btn-default">
+                Edit
+              </a>
+              &nbsp;
+              <input type="hidden" name="_method" value="DELETE">
+              <button class="btn btn-danger" type="submit">Delete</button>
+            </form>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+
+    
+  </section>
+
+  <div class="spacer"></div>
+
+  <section class="bg-primary about">
+    <div class="container">
+      
+      <a href="/tables" class="btn btn-default">Back to tables</a>
+    </div>
+  </section>
+{% endblock %}

@@ -1,0 +1,170 @@
+{% extends '../layouts/noHeader.html' %}
+
+{% block main %}
+    <h1>Tablemania<small>beta</small></h1>
+    <h3>Your online game table in the browser.
+    <br>Play your favourite board games with friends &amp family.</h3>
+    <br>
+    <a href="#current_games" class="btn btn-dark btn-lg">Play now</a>
+
+{% endblock %}
+
+
+{% block content %}
+    <!-- About -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Play <strong>any</strong> board game, <strong>any</strong> time, <strong>any</strong> device. </h2>
+                    <p class="lead">Play in your browser, invite friends &amp family, save and resume any time.</p>
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </section>
+
+    <!-- Services -->
+    <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
+    <section id="features" class="services bg-primary">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <h2>Tablemania Features</h2>
+                    <hr class="small">
+                    <div class="row">
+
+                        <div class="col-md-3 col-sm-6">
+                            <div class="service-item">
+                                <span class="fa-stack fa-4x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-tablet fa-stack-1x text-primary"></i>
+                            </span>
+                                <h4>
+                                    <strong>Play anywhere</strong>
+                                </h4>
+                                <p>It runs on your computer, tablet, or smartphone.</p>
+                                <!-- <a href="#" class="btn btn-light">Search now</a> -->
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-sm-6">
+                            <div class="service-item">
+                                <span class="fa-stack fa-4x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-backward fa-stack-1x text-primary"></i>
+                            </span>
+                                <h4>
+                                    <strong>Playback</strong>
+                                </h4>
+                                <p>For registered users, every game session is saved online. Every move can be replayed or rewinded any time.</p>
+                                <!-- <a href="#" class="btn btn-light">Free sign up</a> -->
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-sm-6">
+                            <div class="service-item">
+                                <span class="fa-stack fa-4x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-camera fa-stack-1x text-primary"></i>
+                            </span>
+                                <h4>
+                                    <strong>Video &amp Audio chat</strong>
+                                </h4>
+                                <p>Built in private peer-to-peer video &amp audio chat.</p>
+                                <!-- <a href="#" class="btn btn-light">How That ?</a> -->
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-sm-6">
+                            <div class="service-item">
+                                <span class="fa-stack fa-4x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-cut fa-stack-1x text-primary"></i>
+                            </span>
+                                <h4>
+                                    <strong>Upload your own game</strong>
+                                </h4>
+                                <p>Scan your own game tiles, share the link and start playing with friends &amp family.</p>
+                                <!-- <a href="#" class="btn btn-light">Upload</a> -->
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- /.row (nested) -->
+                </div>
+                <!-- /.col-lg-10 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </section>
+
+    <!-- Callout -->
+    <aside class="callout">
+        <div class="text-vertical-center">
+            <h1>Play the hype</h1>
+            <h2>
+                <a class="btn btn-success" href="/tables/new">
+                    <i class="fa fa-plus-circle"></i>
+                    Create your own table
+                </a> 
+                and share with friends
+            </h2>
+        </div>
+    </aside>
+
+    <!-- Portfolio -->
+    <section id="current_games" class="portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="text-center">
+                    <h4>Latest Public Tables 
+                        <a class="btn btn-info btn-s" href="/tables">
+                            <i class="fa fa-search"></i>
+                            &nbsp; find more tables
+                        </a>
+                    </h4>
+                    <hr class="">
+                    <div class="row">
+                        {% if (tables.length) %}
+                            {% for table in tables %}
+                                {% include '../tables/table.html' %}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    </a>
+                </div>
+                <!-- /.col-lg-10 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </section>
+
+    {% if (!req.isAuthenticated()) %}
+
+    <!-- Call to Action -->
+    <aside class="call-to-action bg-primary">
+        <div class="container" id="signup">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <!-- <img class="img-portfolio img-responsive" src="img/girl.jpg"> -->
+                    <h4>Free signup required to store your game sessions online.</h4>
+                    <a href="/signup" class="btn btn-lg btn-light" data-toggle="modal" data-target="/signup">Board me Up!</a>
+                    <a href="/login" class="btn btn-lg btn-dark" data-toggle="modal" data-target="/login">Login</a>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    {% endif %}
+
+    <!-- Map -->
+    <section id="contact">
+    </section>
+
+    {% include '../join_table.html' %}
+
+{% endblock %}

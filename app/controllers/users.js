@@ -6,6 +6,8 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var utils = require('../../lib/utils');
+var extend = require('util')._extend;
+
 
 /**
  * Load
@@ -54,10 +56,48 @@ exports.create = function (req, res) {
 exports.show = function (req, res) {
   var user = req.profile;
   res.render('users/show', {
-    title: user.name,
+    title: 'User: ' + user.username,
     user: user
   });
 };
+
+
+/**
+ * Edit user
+ */
+
+exports.edit = function (req, res) {
+  res.render('users/edit', {
+    title: 'Edit ' + req.user.username,
+    user: req.user
+  });
+};
+
+
+/**
+ * Update user
+ */
+
+exports.update = function (req, res){
+  var user = req.user;
+
+  // make sure no one changes the user
+  delete req.body.user;
+  user = extend(user, req.body);
+
+  user.save(function (err) {
+    if (!err) {
+      return res.redirect('/users/' + user._id);
+    }
+
+    res.render('users/edit', {
+      title: 'Edit ' + user.username,
+      user: user,
+      errors: utils.errors(err.errors || err)
+    });
+  });
+};
+
 
 exports.signin = function (req, res) {};
 

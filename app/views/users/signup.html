@@ -1,22 +1,35 @@
 {% extends 'auth.html' %}
 
+
 {% block auth %}
-  <form action="/users" method="post" role="form" class="form-horizontal">
+  {% if user.isNew %}
+    {% set action = '/users' %}
+  {% else %}
+    {% set action = '/users/' + user._id %}
+  {% endif %}
+
+  <form action="{{action}}" method="post" role="form" class="form-horizontal">
     <input type="hidden" name="_csrf" value="{{ csrf_token }}">
 
-    <div class="form-group">
+    {% if not user.isNew %}
+        <input type="hidden" name="_method" value="PUT">
+    {% endif %}
+
+<!--     <div class="form-group">
       <label for="name" class="col-sm-2 control-label">Full name</label>
       <div class="col-sm-10">
         <input id="name" class="form-control" type="text" name="name" placeholder="Full name" value="{{ user.name }}">
       </div>
-    </div>
+    </div> -->
 
-    <div class="form-group">
-      <label for="email" class="col-sm-2 control-label">Email</label>
-      <div class="col-sm-10">
-        <input type="text" name="email" placeholder="Email" value="{{ user.email }}" id="email" class="form-control">
+    {% if user.isNew %}
+       <div class="form-group">
+        <label for="email" class="col-sm-2 control-label">Email</label>
+        <div class="col-sm-10">
+            <input type="text" name="email" placeholder="Email" value="{{ user.email }}" id="email" class="form-control">
+        </div>
       </div>
-    </div>
+    {% endif %}
 
     <div class="form-group">
       <label for="username" class="col-sm-2 control-label">Username</label>
@@ -28,16 +41,23 @@
     <div class="form-group">
       <label for="password" class="col-sm-2 control-label">Password</label>
       <div class="col-sm-10">
-        <input id="password" class="form-control" type="password" name="password" placeholder="Password">
+        <input id="password" class="form-control" type="password" name="password" placeholder="Password" required="true">
       </div>
     </div>
 
     <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-10">
-        <button class="btn btn-primary" type="submit">Sign up</button>
+        <label for="selected_cursor" class="col-sm-2 control-label">Pick an avatar</label>
+        <div class="col-sm-10">
+          <div id="my-icon-select"></div>
+        </div>
+        <input type="hidden" id="cursor-id" name="selected_cursor" value="{{req.user.selected_cursor}}" style="width:65px;">
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-primary" type="submit">Submit</button>
         &nbsp; or &nbsp;
         <a href="/login" class="show-login">Log in</a>
-      </div>
     </div>
   </form>
+
 {% endblock %}

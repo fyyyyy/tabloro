@@ -2,11 +2,12 @@
 /**
  * Module dependencies.
  */
+"use strict";
 
-var mongoose = require('mongoose')
-var Article = mongoose.model('Article')
-var utils = require('../../lib/utils')
-var extend = require('util')._extend
+var mongoose = require('mongoose');
+var Article = mongoose.model('Article');
+var utils = require('../../lib/utils');
+var extend = require('util')._extend;
 
 /**
  * Load
@@ -39,7 +40,7 @@ exports.index = function (req, res){
     if (err) return res.render('500');
     Article.count().exec(function (err, count) {
       res.render('articles/index', {
-        title: 'Articles',
+        title: 'News',
         articles: articles,
         page: page + 1,
         pages: Math.ceil(count / perPage)

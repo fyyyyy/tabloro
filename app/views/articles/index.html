@@ -1,26 +1,39 @@
 {% extends '../layouts/default.html' %}
 
 {% block main %}
-  <h1>{{ title }}</h1>
+    <h1>{{ title }}</h1>
 {% endblock %}
 
 {% block content %}
-  {% if (articles.length) %}
-    {% for article in articles %}
-      {% include 'article.html' %}
-    {% endfor %}
 
-    {% if (pages > 1) %}
-      <ul class="pagination">
-        {% autoescape false %}
-          {{ createPagination(pages, page) }}
-        {% endautoescape %}
-      </ul>
+  
+  <div class="col-md-3">
+    {% if (req.isAuthenticated()) %}
+      <a class="btn btn-primary" href="/articles/new">Add news</a>
     {% endif %}
-  {% else %}
-    <h4 class="muted">
-      No articles.&nbsp;
-      <a href="/articles/new">create one</a>
-    </h4>
-  {% endif %}
+  </div>
+
+  <div class="col-md-6">
+    {% if (articles.length) %}
+      {% for article in articles %}
+        {% include 'article.html' %}
+      {% endfor %}
+
+      {% if (pages > 1) %}
+        <ul class="pagination">
+          {% autoescape false %}
+            {{ createPagination(pages, page) }}
+          {% endautoescape %}
+        </ul>
+      {% endif %}
+    {% else %}
+      <h4 class="muted">
+        No articles.&nbsp;
+      </h4>
+    {% endif %}
+  </div>
+
+  <div class="col-md-3"></div>
+
+
 {% endblock %}

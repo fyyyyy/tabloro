@@ -5,14 +5,15 @@
 {% endblock %}
 
 {% block content %}
-  <div class="row">
+  <section class="container">
+    
     <div class="col-md-8">
-      <p>{{ article.body }}</p>
+      <p class="large">{{ article.body }}</p>
       <div class="meta">
         {% if (article.user) %}
           Author: &nbsp;
           <a href="{{ '/users/' + article.user._id }}">
-            {{ article.user.name || article.user.username }}
+            {{ article.user.username }}
           </a>
         {% endif %}
         {% if (article.tags) %}
@@ -25,31 +26,40 @@
             {% endfor %}
           </p>
         {% endif %}
-        <span class="muted">{{ article.createdAt.toISOString()|date('M d, Y  h:m a') }}</span>
+        <span class="muted">{{ article.createdAt.toISOString()|date('M d, Y  h:i a') }}</span>
       </div>
     </div>
+    
     <div class="col-md-4">
       {% if (!article.isNew && article.image && article.image.files && article.image.files.length) %}
         <img src="{{ article.image.cdnUri + '/mini_' + article.image.files[0] }}" alt="">
       {% endif %}
     </div>
-  </div>
 
-  <form action="{{ '/articles/' + article.id }}" method="post" onsubmit="return confirm('Are you sure?')">
-    <br>
-    <input type="hidden" name="_csrf" value="{{ csrf_token }}">
-    <a href="{{ '/articles/' + article._id + '/edit' }}" title="edit" class="btn btn-default">
-      Edit
-    </a>
-    &nbsp;
-    <input type="hidden" name="_method" value="DELETE">
-    <button class="btn btn-danger" type="submit">Delete</button>
-  </form>
+    {% if isAdmin %}
+      <form action="{{ '/articles/' + article.id }}" method="post" onsubmit="return confirm('Are you sure?')">
+        <br>
+        <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+        <a href="{{ '/articles/' + article._id + '/edit' }}" title="edit" class="btn btn-default">
+          Edit
+        </a>
+        &nbsp;
+        <input type="hidden" name="_method" value="DELETE">
+        <button class="btn btn-danger" type="submit">Delete</button>
+      </form>
+    {% endif %}
 
-  <br>
-  <h3>Comments</h3>
-  {% for comment in article.comments %}
-    {% include '../comments/comment.html' %}
-  {% endfor %}
-  {% include '../comments/form.html' %}
+  </section>
+
+
+  <section class="container">
+    <h2>Comments</h2>
+      
+    {% for comment in article.comments %}
+      {% include '../comments/comment.html' %}
+    {% endfor %}
+    <div>
+    {% include '../comments/form.html' %}
+    </div>
+  </section>
 {% endblock %}

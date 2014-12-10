@@ -1,0 +1,2343 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"padd",
+				"padding"
+			],
+			[
+				"isA",
+				"isAuthenticated"
+			],
+			[
+				"table",
+				"tableAuth"
+			],
+			[
+				"select",
+				"selected_cursor"
+			],
+			[
+				"mar",
+				"margin-top"
+			],
+			[
+				"is",
+				"isAdmin"
+			],
+			[
+				"se",
+				"section	Tag"
+			],
+			[
+				"user",
+				"UserSchema"
+			],
+			[
+				"co",
+				"console"
+			],
+			[
+				"o",
+				"ofn	function as a property of an object"
+			],
+			[
+				"cl",
+				"cl	console.log"
+			],
+			[
+				"val",
+				"values"
+			],
+			[
+				"va",
+				"values"
+			],
+			[
+				"de",
+				"delay"
+			],
+			[
+				"di",
+				"diceId"
+			],
+			[
+				"dela",
+				"delays"
+			],
+			[
+				"dice",
+				"diceInGroup"
+			],
+			[
+				"chil",
+				"children"
+			],
+			[
+				"find",
+				"findTile"
+			],
+			[
+				"roo",
+				"roomId"
+			],
+			[
+				"room",
+				"roomTimeouts"
+			],
+			[
+				"cli",
+				"client"
+			],
+			[
+				"rota",
+				"rotationControls"
+			],
+			[
+				"in",
+				"input"
+			],
+			[
+				"inn",
+				"innerHeight"
+			],
+			[
+				"conn",
+				"connection"
+			],
+			[
+				"remo",
+				"removeFromArray"
+			],
+			[
+				"curr",
+				"currentRoom"
+			],
+			[
+				"game",
+				"gameRoom"
+			],
+			[
+				"clie",
+				"clients"
+			],
+			[
+				"remove",
+				"removeFromArray"
+			],
+			[
+				"coll",
+				"collidingStackId"
+			],
+			[
+				"cur",
+				"currentRoom"
+			],
+			[
+				"newc",
+				"newClientId"
+			],
+			[
+				"newCl",
+				"newClientRemote"
+			],
+			[
+				"fin",
+				"findOrCreateRoom"
+			],
+			[
+				"for",
+				"forEach"
+			],
+			[
+				"newC",
+				"newClient"
+			],
+			[
+				"new",
+				"newClientId"
+			],
+			[
+				"pla",
+				"playerName"
+			],
+			[
+				"upda",
+				"updateStackCards"
+			],
+			[
+				"cus",
+				"cursors"
+			],
+			[
+				"cu",
+				"cursor"
+			],
+			[
+				"curs",
+				"cursorId"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"fon",
+				"font-size"
+			],
+			[
+				"fil",
+				"filter"
+			],
+			[
+				"al",
+				"alignStackCards"
+			],
+			[
+				"ti",
+				"tileId"
+			],
+			[
+				"car",
+				"cardId"
+			],
+			[
+				"card",
+				"cardId"
+			],
+			[
+				"stack",
+				"stackData"
+			],
+			[
+				"til",
+				"tileId"
+			],
+			[
+				"stak",
+				"stacks"
+			],
+			[
+				"colli",
+				"collidingStackId"
+			],
+			[
+				"tidy",
+				"tidyAll"
+			],
+			[
+				"tid",
+				"tidyAll"
+			],
+			[
+				"ali",
+				"alignPosition"
+			],
+			[
+				"poi",
+				"pointIntersection"
+			],
+			[
+				"sta",
+				"stackId"
+			],
+			[
+				"te",
+				"textElements"
+			],
+			[
+				"fi",
+				"fixedToCamera"
+			],
+			[
+				"gam",
+				"gameText"
+			],
+			[
+				"ca",
+				"camera"
+			],
+			[
+				"set",
+				"setText"
+			],
+			[
+				"name",
+				"nameText"
+			],
+			[
+				"old",
+				"oldClient"
+			],
+			[
+				"mess",
+				"messageText"
+			],
+			[
+				"pl",
+				"playerName"
+			],
+			[
+				"pos",
+				"positionTile"
+			],
+			[
+				"sc",
+				"Screen"
+			],
+			[
+				"wo",
+				"World"
+			],
+			[
+				"re",
+				"relativePosition"
+			],
+			[
+				"assi",
+				"assignRelativePosition"
+			],
+			[
+				"get",
+				"getCardPosition"
+			],
+			[
+				"offs",
+				"offsetY"
+			],
+			[
+				"add",
+				"addToStack"
+			],
+			[
+				"move",
+				"movedStack"
+			],
+			[
+				"mo",
+				"mousePosition"
+			],
+			[
+				"up",
+				"updatePositions"
+			],
+			[
+				"current",
+				"currentClient"
+			],
+			[
+				"eure",
+				"eurecaServer"
+			],
+			[
+				"l",
+				"log"
+			],
+			[
+				"tile",
+				"tileId"
+			],
+			[
+				"last",
+				"lastPosition"
+			],
+			[
+				"play",
+				"playerList"
+			],
+			[
+				"lsat",
+				"lastPosition"
+			],
+			[
+				"on",
+				"onRotate"
+			],
+			[
+				"con",
+				"controls"
+			],
+			[
+				"h",
+				"hidden"
+			],
+			[
+				"chi",
+				"children"
+			],
+			[
+				"shu",
+				"shuffleButton"
+			],
+			[
+				"sh",
+				"shuffleButton"
+			],
+			[
+				"upd",
+				"updatePosition"
+			],
+			[
+				"onst",
+				"onStopDrag"
+			],
+			[
+				"onSt",
+				"onStopDrag"
+			],
+			[
+				"make",
+				"makeRotateable"
+			],
+			[
+				"spin",
+				"spinDice"
+			],
+			[
+				"Sound",
+				"SoundtaxiCms"
+			],
+			[
+				"Sou",
+				"SoundtaxiCms"
+			],
+			[
+				"term",
+				"terms_conditions"
+			],
+			[
+				"oppose",
+				"oppose2"
+			],
+			[
+				"opp",
+				"oppose2"
+			],
+			[
+				"oop",
+				"oppose1"
+			],
+			[
+				"pag",
+				"paginationLimitComponent"
+			],
+			[
+				"licens",
+				"licenseRequestComponent"
+			],
+			[
+				"selec",
+				"selectedProject"
+			],
+			[
+				"pare",
+				"parentController"
+			],
+			[
+				"contr",
+				"controllers"
+			],
+			[
+				"paren",
+				"parentCtrl"
+			],
+			[
+				"lice",
+				"licenseCreatorComponent"
+			],
+			[
+				"lic",
+				"licenseCreatorComponent"
+			],
+			[
+				"data",
+				"dataFn"
+			],
+			[
+				"licen",
+				"licenseRequestComponents"
+			],
+			[
+				"delete",
+				"deleteRateTrackComponent"
+			],
+			[
+				"rateTrack",
+				"rateTrackComponent"
+			],
+			[
+				"controlTra",
+				"controlTrackComponents"
+			],
+			[
+				"controlT",
+				"controlTrackComponent"
+			],
+			[
+				"limit",
+				"limitOptions"
+			],
+			[
+				"pagi",
+				"paginationPageComponent"
+			],
+			[
+				"pagin",
+				"paginationPageComponent"
+			],
+			[
+				"len",
+				"length"
+			],
+			[
+				"controllerArra",
+				"controllerArrayOfArrays"
+			],
+			[
+				"index",
+				"indexes"
+			],
+			[
+				"child",
+				"childController"
+			],
+			[
+				"createCo",
+				"createControlTrackControllers"
+			],
+			[
+				"create",
+				"createPlayBackControllers"
+			],
+			[
+				"playBack",
+				"playBackComponent"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "app/controllers/tables.js",
+			"settings":
+			{
+				"buffer_size": 1863,
+				"line_ending": "Unix",
+				"name": "games.js"
+			}
+		},
+		{
+			"file": "app/controllers/home.js",
+			"settings":
+			{
+				"buffer_size": 835,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/tables/index.html",
+			"settings":
+			{
+				"buffer_size": 916,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/tables/show.html",
+			"settings":
+			{
+				"buffer_size": 2151,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/includes/footer.html",
+			"settings":
+			{
+				"buffer_size": 1025,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/tables/table.html",
+			"settings":
+			{
+				"buffer_size": 762,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/tables/form.html",
+			"settings":
+			{
+				"buffer_size": 2337,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/models/table.js",
+			"settings":
+			{
+				"buffer_size": 1411,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "config/routes.js",
+			"settings":
+			{
+				"buffer_size": 3975,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/home/index.html",
+			"settings":
+			{
+				"buffer_size": 7438,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/layouts/default.html",
+			"settings":
+			{
+				"buffer_size": 569,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/js/app.js",
+			"settings":
+			{
+				"buffer_size": 727,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/models/article.js",
+			"settings":
+			{
+				"buffer_size": 3711,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/articles/article.html",
+			"settings":
+			{
+				"buffer_size": 747,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/css/stylish-portfolio.css",
+			"settings":
+			{
+				"buffer_size": 4763,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/join_table.html",
+			"settings":
+			{
+				"buffer_size": 2546,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "config/middlewares/authorization.js",
+			"settings":
+			{
+				"buffer_size": 1693,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/users/show.html",
+			"settings":
+			{
+				"buffer_size": 534,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "Packages/JSLint/JSLint.sublime-build",
+	"command_palette":
+	{
+		"height": 47.0,
+		"selected_items":
+		[
+			[
+				"Package Control: ins",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: in",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: inst",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: isn",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: insta",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: re",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: rem",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: li",
+				"Package Control: List Packages"
+			],
+			[
+				"Snippet: for",
+				"Snippet: for (…) {…}"
+			],
+			[
+				"Snippet: id",
+				"Snippet: if_debug_log"
+			],
+			[
+				"scope",
+				"Scope Hunter: Show Scope Under Cursor(s)"
+			],
+			[
+				"sc",
+				"Scope Hunter: Show Scope Under Cursor(s)"
+			],
+			[
+				"sco",
+				"Scope Hunter: Show Scope Under Cursor(s)"
+			],
+			[
+				"",
+				"Scope Hunter: Show Scope Under Cursor(s)"
+			],
+			[
+				"Snippet: if",
+				"Snippet: if … else … end"
+			]
+		],
+		"width": 467.0
+	},
+	"console":
+	{
+		"height": 233.0,
+		"history":
+		[
+			"which node",
+			"jshint",
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/controllers",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/mailer",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/models",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/views",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/views/articles",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/views/game",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/views/home",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/views/includes",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/views/layouts",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/views/users",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/lib",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/public",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/public/css"
+	],
+	"file_history":
+	[
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/controllers/users.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/models/user.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/views/includes/foot.html",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/public/js/jquery.tagsinput.min.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/views/tables/show.html",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/views/comments/comment.html",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/views/articles/show.mobile.html",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/views/articles/show.html",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/views/index.html",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/mailer/index.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/public/css/iconselect.css",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/views/articles/article.html",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/models/article.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/config/middlewares/authorization.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/controllers/articles.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/public/js/bootstrap.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/public/js/app.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/config/passport/twitter.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/config/passport/local.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/config/passport/linkedin.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/config/passport/google.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/config/passport/github.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/config/passport/facebook.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/config/env/test.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/config/env/production.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/config/env/development.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/models/table.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/controllers/tags.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/controllers/tables.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/controllers/home.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/controllers/comments.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/test/helper.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/public_game/Utils.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/public_game/UI.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/public_game/Tile.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/public_game/Stack.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/public_game/phaser.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/public_game/Network.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/public_game/main.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/public_game/Game.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/public_game/Dice.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/public_game/Cursor.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/public_game/Controls.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/public_game/Assets.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/lib/utils.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/config/passport.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/config/imager.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/config/express.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/config/config.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/package.json",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/nodemon.json",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/.jshintrc",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/.jshintignore",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/server.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/eurecaserver.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/views/home/index.html",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/public/css/jquery.tagsinput.css",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/public/css/stylish-portfolio.css",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/views/game/game.html",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/views/includes/head.html",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/views/join_table.html",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/views/tables/new.html",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/config/routes.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/public/font-awesome-4.1.0/less/bordered-pulled.less",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/express_demo.sublime-project",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/views/articles/index.html",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/public/js/iconselector.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/public/js/iconselect.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/views/game/index.html",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/public/css/game.css",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/game/main.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/public/js/jquery.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/game/index.html",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/game/Cursor.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/views/users/signup.html",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/views/layouts/default.html",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/game/eurecaserver.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/game/Dice.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/public/font-awesome-4.1.0/fonts/FontAwesome.otf",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/Procfile",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/game/Controls.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/game/Tile.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/game/Game.js",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/views/users/login.html",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/public/font-awesome-4.1.0/less/spinning.less",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/views/includes/header.html",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/views/users/show.html",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/views/users/edit.html",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/views/articles/form.html",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/public/font-awesome-4.1.0/less/variables.less",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/public/css/app.css",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/views/comments/form.html",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/views/layouts/noHeader.html",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/views/users/auth.html",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/CONTRIBUTING.md",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/views/includes/footer.html",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/views/404.html",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/public/font-awesome-4.1.0/less/path.less",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/mailer/templates/comment.html",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/views/.DS_Store",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/views/articles/edit.html",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/express_demo.sublime-workspace",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/views/layouts/smallHeader.html",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/app/views/articles/new.html",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/.DS_Store",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/public/css/bootstrap.css",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/public/font-awesome-4.1.0/less/larger.less",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/LICENSE.txt",
+		"/Users/tree/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/test/test-articles.js",
+		"/Users/tree/Library/Application Support/Sublime Text 3/Packages/User/SublimeLinter.sublime-settings",
+		"/Users/tree/Documents/phaser/node-express-mongoose-demo/.travis.yml",
+		"/Users/tree/Documents/phaser/testProject/node_modules/grunt-contrib-clean/docs/clean-options.md",
+		"/Users/tree/Documents/phaser/testProject/config/csrf.js",
+		"/Users/tree/Documents/phaser/testProject/app.js",
+		"/Users/tree/Documents/phaser/testProject/node_modules/grunt-contrib-uglify/node_modules/uglify-js/node_modules/optimist/example/line_count_options.js",
+		"/Users/tree/Documents/phaser/testProject/node_modules/grunt-contrib-less/node_modules/less/test/css/css-3.css",
+		"/Users/tree/Documents/phaser/testProject/node_modules/grunt-contrib-watch/node_modules/gaze/test/watch_race_test.js",
+		"/Users/tree/Documents/phaser/testProject/node_modules/grunt-contrib-less/node_modules/less/test/less/import/import-and-relative-paths-test.less",
+		"/Users/tree/Documents/phaser/testProject/node_modules/grunt-contrib-less/node_modules/less/test/less/errors/extend-not-at-end.txt",
+		"/Users/tree/Documents/phaser/testProject/node_modules/grunt-contrib-less/node_modules/less/test/less/errors/extend-not-at-end.less",
+		"/Users/tree/Documents/phaser/testProject/node_modules/grunt-contrib-less/node_modules/less/node_modules/request/node_modules/tough-cookie/generate-pubsuffix.js",
+		"/Users/tree/Documents/phaser/testProject/node_modules/grunt-contrib-watch/node_modules/gaze/test/rename_test.js",
+		"/Users/tree/Documents/phaser/testProject/node_modules/grunt-contrib-watch/node_modules/gaze/test/relative_test.js",
+		"/Users/tree/Documents/phaser/testProject/node_modules/grunt-contrib-watch/test/tasks/reloadgruntfile_test.js",
+		"/Users/tree/Documents/phaser/testProject/node_modules/sails/node_modules/waterline/lib/waterline/utils/nestedOperations/create.js",
+		"/Users/tree/Documents/phaser/testProject/node_modules/sails/node_modules/waterline/lib/waterline/query/dql/create.js",
+		"/Users/tree/Documents/phaser/testProject/node_modules/grunt/node_modules/exit/test/fixtures/create-files.sh"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"<open folders>",
+			"/Users/tree/Documents/rails/audiopitch",
+			"/Users/tree/rails/audiopitch",
+			"/home/tree/rails/audiopitch"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"disabled",
+			"xs",
+			"btn",
+			"div",
+			"sm",
+			"aside",
+			"section",
+			"panel",
+			"h:m",
+			"h4",
+			"<h4>",
+			"20px",
+			"h2",
+			"hidden",
+			"isPublic",
+			"public",
+			"a",
+			"button",
+			"type",
+			"button",
+			"h3",
+			"Article",
+			"add a tag",
+			"tag",
+			"id",
+			"show",
+			"req",
+			"load",
+			"show",
+			"article",
+			"articles",
+			"article",
+			"articles",
+			"article",
+			"Article",
+			"articles",
+			"article",
+			"articles",
+			"table",
+			"article",
+			"articles",
+			"Article",
+			"article",
+			"Article",
+			"utils",
+			"config",
+			"article",
+			"Article",
+			"ArticleSchema",
+			"favico",
+			"game",
+			"games",
+			"game",
+			"index",
+			"extend",
+			"articles",
+			"log",
+			"selected_cursor",
+			"Cursor",
+			"selected-cursor",
+			"static",
+			"setSelectedIndex",
+			"getSelectedIndex",
+			"console",
+			"server",
+			"username",
+			"selected-cursor",
+			"images",
+			"article",
+			".",
+			"png",
+			"img",
+			"userAuth",
+			"ConnectRoles",
+			"hasAuthorization",
+			"authorization",
+			"auth",
+			"isAdmin",
+			"hasAuthorization",
+			"muted",
+			"footer",
+			"padding",
+			"content",
+			"about",
+			"large",
+			"em",
+			"row",
+			"div",
+			"p",
+			"small",
+			"stylish-portfolio",
+			"comment",
+			"p",
+			"primary",
+			"hasAuthorization",
+			"articleAuth",
+			"view-helpers",
+			"isAuthenticated",
+			"li",
+			"smaller",
+			"small",
+			"page-header",
+			"content",
+			"container",
+			"#",
+			"create",
+			"articles",
+			"virtual",
+			"load",
+			"res",
+			"span",
+			"profile",
+			"async.",
+			"async(",
+			"asynch(",
+			"asynch",
+			"res",
+			"count",
+			"user.auth",
+			"name",
+			"options",
+			"timestamps",
+			"required",
+			"font",
+			"user_name",
+			"required",
+			"password",
+			"username"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"selected_cursor",
+			"updateStackCards",
+			"dropStack",
+			"moveCursor",
+			"tileDragStop",
+			"tileDragStart",
+			"st.yield",
+			"st.ajaxRequest",
+			"newProjectFormToggle",
+			"licensed_tracks_for_artist",
+			"\\\"$1\\\"",
+			"\"\\$1\"",
+			"\"$1\"",
+			",",
+			"ListUserSubmissionController",
+			"UserResourceId",
+			"init_licenses",
+			"term",
+			"media_type",
+			"media_types",
+			"Term",
+			"term_units",
+			"term_unit",
+			"term_number",
+			"AngryHistory",
+			"angrylinks_title",
+			"angrylink_to",
+			"scope.name",
+			"scope.!name",
+			"scope._name",
+			"scope.$name",
+			"getTagsFromUrl",
+			"PitchSubmission Service",
+			"urlParams",
+			"=",
+			"\"",
+			" ",
+			"",
+			"/******************************************************************************************************** \\\\n.panel",
+			"/******************************************************************************************************** \\n.panel",
+			".panel /********************************************************************************************************",
+			"/********************************************************************************************************",
+			"pitch_submission",
+			"submission.track",
+			"submission.t",
+			"submission.track",
+			"pitch",
+			"@pitch.",
+			"$1:",
+			"",
+			"2.seconds",
+			"Selection.updateSubmitted",
+			"audiopitchModule",
+			"ListPitchesController",
+			"selected",
+			"tracks.selected",
+			"$scope.tracks.submitted",
+			"$scope.tracks.selected",
+			"$scope.tracks.all",
+			"service.scope.",
+			"scope.tracks",
+			"track",
+			"sortdirection",
+			"{{ 'pitches.$1' | translate }}",
+			"'$1'",
+			"[0]",
+			"loadJsonData",
+			"submissions.new",
+			"i",
+			"renderPaginationLinks",
+			"paginationLinks",
+			"synchronizeArrayObjects",
+			"selected-color",
+			"allSubmittedTracksByThisUser",
+			"item",
+			"submittedTracksByThisUser",
+			"track"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "app/controllers/tables.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1863,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								224,
+								224
+							]
+						],
+						"settings":
+						{
+							"auto_name": "games.js",
+							"color_scheme": "Packages/User/Color Highlighter/themes/RailsCastsColorScheme (SL).tmTheme",
+							"history_list_is_closing": true,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 108.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app/controllers/home.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 835,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								367,
+								367
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/RailsCastsColorScheme (SL).tmTheme",
+							"history_list_is_closing": true,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/views/tables/index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 916,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								119,
+								119
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/RailsCastsColorScheme (SL).tmTheme",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "app/views/tables/show.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2151,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								257,
+								257
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/RailsCastsColorScheme (SL).tmTheme",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/views/includes/footer.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1025,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								943,
+								943
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/RailsCastsColorScheme (SL).tmTheme",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "app/views/tables/table.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 762,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								20,
+								20
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/RailsCastsColorScheme (SL).tmTheme",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "app/views/tables/form.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2337,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1515,
+								1515
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/RailsCastsColorScheme (SL).tmTheme",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 85.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 15,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "app/models/table.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1411,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								233,
+								233
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/RailsCastsColorScheme (SL).tmTheme",
+							"history_list_is_closing": true,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 13,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 9,
+			"sheets":
+			[
+				{
+					"buffer": 8,
+					"file": "config/routes.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3975,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1894,
+								1894
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/RailsCastsColorScheme (SL).tmTheme",
+							"history_list_is_closing": true,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 753.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 17,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "app/views/home/index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7438,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5228,
+								5228
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/RailsCastsColorScheme (SL).tmTheme",
+							"history_list_is_closing": true,
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 1.0,
+						"translation.y": 981.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "app/views/layouts/default.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 569,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								124,
+								124
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/RailsCastsColorScheme (SL).tmTheme",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "public/js/app.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 727,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								727,
+								727
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/RailsCastsColorScheme (SL).tmTheme",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 16,
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "app/models/article.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3711,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								238,
+								238
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/RailsCastsColorScheme (SL).tmTheme",
+							"history_list_is_closing": true,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 14,
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "app/views/articles/article.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 747,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								251,
+								251
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/RailsCastsColorScheme (SL).tmTheme",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 12,
+					"type": "text"
+				},
+				{
+					"buffer": 14,
+					"file": "public/css/stylish-portfolio.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4763,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3372,
+								3372
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/RailsCastsColorScheme (SL).tmTheme",
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 152.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 15,
+					"file": "app/views/join_table.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2546,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/RailsCastsColorScheme (SL).tmTheme",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 16,
+					"file": "config/middlewares/authorization.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1693,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								605,
+								605
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/RailsCastsColorScheme (SL).tmTheme",
+							"history_list_is_closing": true,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 181.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 17,
+					"file": "app/views/users/show.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 534,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								472,
+								472
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/RailsCastsColorScheme (SL).tmTheme",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 34.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.5,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.coffeecompile_output":
+	{
+		"height": 293.0
+	},
+	"output.exec":
+	{
+		"height": 326.0
+	},
+	"output.find_results":
+	{
+		"height": 112.0
+	},
+	"output.git":
+	{
+		"height": 112.0
+	},
+	"output.scope_viewer":
+	{
+		"height": 112.0
+	},
+	"project": "express_demo.sublime-project",
+	"replace":
+	{
+		"height": 40.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"usershow",
+				"app/views/users/show.html"
+			],
+			[
+				"foo",
+				"app/views/includes/footer.html"
+			],
+			[
+				"def",
+				"app/views/layouts/default.html"
+			],
+			[
+				"tableshow",
+				"app/views/tables/show.html"
+			],
+			[
+				"index",
+				"app/views/tables/index.html"
+			],
+			[
+				"arti",
+				"app/views/articles/article.html"
+			],
+			[
+				"artic",
+				"app/models/article.js"
+			],
+			[
+				"js",
+				"public/js/app.js"
+			],
+			[
+				"sty",
+				"public/css/stylish-portfolio.css"
+			],
+			[
+				"home",
+				"app/controllers/home.js"
+			],
+			[
+				"join",
+				"app/views/join_table.html"
+			],
+			[
+				"inde",
+				"app/views/index.html"
+			],
+			[
+				"tag",
+				"public/js/jquery.tagsinput.min.js"
+			],
+			[
+				"users",
+				"app/controllers/users.js"
+			],
+			[
+				"comme",
+				"app/controllers/comments.js"
+			],
+			[
+				"auth",
+				"config/middlewares/authorization.js"
+			],
+			[
+				"routes",
+				"config/routes.js"
+			],
+			[
+				"icon",
+				"public/js/iconselector.js"
+			],
+			[
+				"jo",
+				"app/views/join_table.html"
+			],
+			[
+				"ser",
+				"server.js"
+			],
+			[
+				"artiinde",
+				"app/views/articles/index.html"
+			],
+			[
+				"eur",
+				"eurecaserver.js"
+			],
+			[
+				"head",
+				"app/views/includes/head.html"
+			],
+			[
+				"icons",
+				"public/js/iconselector.js"
+			],
+			[
+				"curs",
+				"game/Cursor.js"
+			],
+			[
+				"tile",
+				"game/Tile.js"
+			],
+			[
+				"main",
+				"game/main.js"
+			],
+			[
+				"sele",
+				"public/js/iconselector.js"
+			],
+			[
+				"sign",
+				"app/views/users/signup.html"
+			],
+			[
+				"log",
+				"app/views/users/login.html"
+			],
+			[
+				"hom",
+				"app/controllers/home.js"
+			],
+			[
+				"conf",
+				"config/config.js"
+			],
+			[
+				"pack",
+				"package.json"
+			],
+			[
+				"pak",
+				"package.json"
+			],
+			[
+				"serv",
+				"game/server.js"
+			],
+			[
+				"user",
+				"app/models/user.js"
+			],
+			[
+				"comments",
+				"app/controllers/comments.js"
+			],
+			[
+				"form",
+				"app/views/articles/form.html"
+			],
+			[
+				"iconse",
+				"public/js/iconselector.js"
+			],
+			[
+				"articles",
+				"app/controllers/articles.js"
+			],
+			[
+				"usershwo",
+				"app/views/users/show.html"
+			],
+			[
+				"signup",
+				"app/views/users/signup.html"
+			],
+			[
+				"signu",
+				"app/views/users/signup.html"
+			],
+			[
+				"commentsho",
+				"app/views/comments/comment.html"
+			],
+			[
+				"aut",
+				"config/middlewares/authorization.js"
+			],
+			[
+				"artish",
+				"app/views/articles/show.html"
+			],
+			[
+				"footer",
+				"app/views/includes/footer.html"
+			],
+			[
+				"article",
+				"app/views/articles/article.html"
+			],
+			[
+				"sig",
+				"app/views/users/signup.html"
+			],
+			[
+				"defa",
+				"app/views/layouts/default.html"
+			],
+			[
+				"404",
+				"app/views/404.html"
+			],
+			[
+				"users.",
+				"app/controllers/users.js"
+			],
+			[
+				"app",
+				"public/css/app.css"
+			],
+			[
+				"comm",
+				"app/views/comments/comment.html"
+			],
+			[
+				"artiso",
+				"app/views/articles/show.html"
+			],
+			[
+				"her",
+				"test/helper.js"
+			],
+			[
+				"exp",
+				"config/express.js"
+			],
+			[
+				"show",
+				"app/views/articles/show.html"
+			],
+			[
+				"new",
+				"app/views/articles/new.html"
+			],
+			[
+				"syt",
+				"public/css/stylish-portfolio.css"
+			],
+			[
+				"app.js",
+				"public/js/app.js"
+			],
+			[
+				"lay",
+				"app/views/layouts/default.html"
+			],
+			[
+				"foot",
+				"app/views/includes/foot.html"
+			],
+			[
+				"header",
+				"app/views/includes/header.html"
+			],
+			[
+				"rou",
+				"config/routes.js"
+			],
+			[
+				"us",
+				"app/controllers/users.js"
+			],
+			[
+				"tags",
+				"app/controllers/tags.js"
+			],
+			[
+				"conne",
+				"config/connections.js"
+			],
+			[
+				"adap",
+				"node_modules/sails-disk/lib/adapter.js"
+			],
+			[
+				"loc",
+				"config/local.js"
+			],
+			[
+				"403",
+				"views/403.ejs"
+			],
+			[
+				"gru",
+				"Gruntfile.js"
+			],
+			[
+				"csrf",
+				"config/csrf.js"
+			],
+			[
+				"min.map",
+				"node_modules/jquery/dist/jquery.min.map"
+			],
+			[
+				"netw",
+				"game/Network.js"
+			],
+			[
+				"di",
+				"game/Dice.js"
+			],
+			[
+				"con",
+				"game/Controls.js"
+			],
+			[
+				"sta",
+				"game/Stack.js"
+			],
+			[
+				"ga",
+				"game/Game.js"
+			],
+			[
+				"ti",
+				"game/Tile.js"
+			],
+			[
+				"cur",
+				"game/Cursor.js"
+			],
+			[
+				"ico",
+				"public/css/iconselect.css"
+			],
+			[
+				"ui",
+				"game/UI.js"
+			],
+			[
+				"uti",
+				"game/Utils.js"
+			],
+			[
+				"mai",
+				"game/main.js"
+			],
+			[
+				"net",
+				"game/Network.js"
+			],
+			[
+				"ass",
+				"game/Assets.js"
+			],
+			[
+				"gam",
+				"game.html"
+			],
+			[
+				"tes",
+				"test.html"
+			],
+			[
+				"in",
+				"index.html"
+			],
+			[
+				"zep",
+				"js/vendor/zepto.js"
+			],
+			[
+				"ramd",
+				"ramda.js"
+			],
+			[
+				"ram",
+				"ramda.js"
+			],
+			[
+				"car",
+				"assets/carcassone.json"
+			],
+			[
+				"ut",
+				"Utils.js"
+			],
+			[
+				"ramda",
+				"ramda.js"
+			],
+			[
+				"ali",
+				"ext/contrib/align.js"
+			],
+			[
+				"paginco",
+				"app/assets/javascripts/pagination_component.js.msx"
+			],
+			[
+				"pagein",
+				"app/assets/javascripts/angular/directives/pageInputDirective.js"
+			],
+			[
+				"pagli",
+				"app/assets/javascripts/pagination_limit_component.js.msx"
+			],
+			[
+				"pagin",
+				"app/assets/javascripts/pagination_page_component.js.msx"
+			],
+			[
+				"env",
+				".env"
+			],
+			[
+				"pop",
+				"lib/tasks/populate.rake"
+			],
+			[
+				"popu",
+				"lib/tasks/populate.rake"
+			],
+			[
+				"rabl",
+				"app/views/soundtaxi_audio/tracks/index.json.rabl"
+			],
+			[
+				"jsonformco",
+				"app/assets/javascripts/json_form_component.js.msx"
+			],
+			[
+				"trackcom",
+				"app/assets/javascripts/track_component.js.msx"
+			],
+			[
+				"pricing",
+				"app/views/pricing/new.html.slim"
+			],
+			[
+				"pricingn",
+				"app/assets/javascripts/angular/controllers/PricingController.js"
+			],
+			[
+				"adminappl",
+				"app/assets/javascripts/admin/application.js"
+			],
+			[
+				"licensingjs",
+				"app/assets/javascripts/components/licensing_state.js.jsx"
+			],
+			[
+				"licensjs",
+				"app/assets/javascripts/admin/licensings.js"
+			],
+			[
+				"json",
+				"app/views/api/v1/licenses/licenses_data.json"
+			],
+			[
+				"react",
+				"app/assets/javascripts/react-with-addons.min.js"
+			],
+			[
+				"reac",
+				"app/assets/javascripts/react-with-addons.js"
+			],
+			[
+				"mithr",
+				"app/assets/javascripts/mithril_app.js"
+			],
+			[
+				"trackrabl",
+				"app/views/api/v1/tracks/show.json.rabl"
+			],
+			[
+				"trakrabl",
+				"app/views/soundtaxi_audio/tracks/index.json.rabl"
+			],
+			[
+				"trackcon",
+				"app/controllers/api/v1/tracks_controller.rb"
+			],
+			[
+				"ratetra",
+				"app/assets/javascripts/rate_track_component.js.msx"
+			],
+			[
+				"aver",
+				"app/assets/javascripts/average_rating_track_component.js.msx"
+			],
+			[
+				"gemfi",
+				"Gemfile"
+			],
+			[
+				"avera",
+				"app/assets/javascripts/average_rating_track_component.js.msx"
+			],
+			[
+				"trakco",
+				"app/assets/javascripts/track_component.js.msx"
+			],
+			[
+				"pagispr",
+				"app/assets/javascripts/pagination_sort_component.js.msx"
+			],
+			[
+				"pagipag",
+				"app/assets/javascripts/pagination_page_component.js.msx"
+			],
+			[
+				"pagili",
+				"app/assets/javascripts/pagination_limit_component.js.msx"
+			],
+			[
+				"selepro",
+				"app/assets/javascripts/select_project_component.js.msx"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 1,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 232.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

@@ -1,33 +1,47 @@
 <!doctype html>
 <html>
-  <head prefix="og: http://ogp.me/ns# nodejsexpressdemo: http://ogp.me/ns/apps/nodejsexpressdemo#">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+  <head>
 
-    <title>{{ title }} | {{ pkg.name }}</title>
-    <meta name="keywords" content="{{ pkg.keywords.join(',') }}">
-    <meta name="description" content="{{ pkg.description }}">
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="">
+      <meta name="author" content="">
 
-    {# Opengraph tags #}
-    <meta property="fb:app_id" content="293989217296609">
-    <meta property="og:title" content=pkg.name + ' - ' + title>
-    <meta property="og:description" content=pkg.description>
-    <meta property="og:url" content="http://nodejs-express-demo.herokuapp.com">
-    <meta property="og:site_name" content="Node.js Express Mongoose Demo">
-    <meta property="fb:admins" content="1037213945">
+      <title>{% if title %} {{ title }} | {% endif %} {{ pkg.name }}</title>
+      
+      <meta name="keywords" content="{{ pkg.keywords.join(',') }}">
+      <meta name="description" content="{{ pkg.description }}">
 
-    {% block head %}
-      {# Styles #}
-      <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-      <link href="/css/jquery.tagsinput.css" rel="stylesheet">
-      <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-      <link rel="stylesheet" href="/css/app.css">
-    {% endblock %}
+      {# Opengraph tags #}
+      <meta property="fb:app_id" content="293989217296609">
+      <meta property="og:title" content=pkg.name + ' - ' + title>
+      <meta property="og:description" content=pkg.description>
+      <meta property="og:url" content="http://nodejs-express-demo.herokuapp.com">
+      <meta property="og:site_name" content="Node.js Express Mongoose Demo">
+      <meta property="fb:admins" content="1037213945">
+
+      <script src="/js/jquery.js"></script>
+
+      {% block head %}
+        {# Styles #}
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/css/jquery.tagsinput.css" rel="stylesheet">
+        <!-- Custom Fonts -->
+        <link href="/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+      
+        <!-- Custom CSS -->
+        <link href="/css/iconselect.css" rel="stylesheet">
+        <link href="/css/stylish-portfolio.css" rel="stylesheet">
+      {% endblock %}
+
+
+      <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+      <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+      <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+
   </head>
-
-  {# HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries #}
-  <!--[if lt IE 9]>
-    <script src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js'></script>
-    <script src='https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js'></script>
-  <![endif]-->

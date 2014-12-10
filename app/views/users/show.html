@@ -1,5 +1,18 @@
 {% extends '../layouts/default.html' %}
 
 {% block main %}
-  <h1>{{ user.name || user.username }}</h1>
+  <h1>{{ title|title }}</h1>
+{% endblock %}
+
+{% block content %}
+  <section class="bg-primary">
+    <div class="container text-center">
+      <h3>
+        <img src={{"/img/cursors/" + (req.user.selected_cursor || 1) + ".png"}}></img>
+        {{user.username|title}}'s user profile
+      </h3>
+      <p>Registered: <b>{{ user.createdAt.toISOString()|date('M d, Y') }}</b></p>
+      
+    </div>
+  </section>
 {% endblock %}

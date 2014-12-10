@@ -1,4 +1,5 @@
 
+
 /*
  *  Generic require login routing middleware
  */
@@ -7,7 +8,7 @@ exports.requiresLogin = function (req, res, next) {
   if (req.isAuthenticated()) return next()
   if (req.method == 'GET') req.session.returnTo = req.originalUrl
   res.redirect('/login')
-}
+};
 
 /*
  *  User authorization routing middleware
@@ -16,12 +17,12 @@ exports.requiresLogin = function (req, res, next) {
 exports.user = {
   hasAuthorization: function (req, res, next) {
     if (req.profile.id != req.user.id) {
-      req.flash('info', 'You are not authorized')
-      return res.redirect('/users/' + req.profile.id)
+      req.flash('info', 'You are not authorized');
+      return res.redirect('/users/' + req.profile.id);
     }
-    next()
+    next();
   }
-}
+};
 
 /*
  *  Article authorization routing middleware
@@ -29,13 +30,33 @@ exports.user = {
 
 exports.article = {
   hasAuthorization: function (req, res, next) {
-    if (req.article.user.id != req.user.id) {
-      req.flash('info', 'You are not authorized')
-      return res.redirect('/articles/' + req.article.id)
+    if (!res.locals.isAdmin) {
+      req.flash('info', 'You are not authorized');
+      if (req.article) {
+        return res.redirect('/articles/' + req.article.id);
+      }
+      return res.redirect('/articles/');
     }
-    next()
+    next();
   }
-}
+};
+
+/*
+ *  Table authorization routing middleware
+ */
+
+exports.table = {
+  hasAuthorization: function (req, res, next) {
+    if (!req.isAuthenticated()) {
+      req.flash('info', 'You are not authorized');
+      if (req.table) {
+        return res.redirect('/tables/' + req.table.id);
+      }
+      return res.redirect('/tables/');
+    }
+    next();
+  }
+};
 
 /**
  * Comment authorization routing middleware

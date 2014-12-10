@@ -6,8 +6,10 @@
 // Note: We can require users, articles and other cotrollers because we have
 // set the NODE_PATH to be ./app/controllers (package.json # scripts # start)
 
+var home = require('home');
 var users = require('users');
 var articles = require('articles');
+var tables = require('tables');
 var comments = require('comments');
 var tags = require('tags');
 var auth = require('./middlewares/authorization');
@@ -17,7 +19,12 @@ var auth = require('./middlewares/authorization');
  */
 
 var articleAuth = [auth.requiresLogin, auth.article.hasAuthorization];
+var tableAuth = [auth.requiresLogin, auth.table.hasAuthorization];
 var commentAuth = [auth.requiresLogin, auth.comment.hasAuthorization];
+var userAuth = [auth.requiresLogin, auth.user.hasAuthorization];
+
+
+
 
 /**
  * Expose routes
@@ -36,6 +43,9 @@ module.exports = function (app, passport) {
       failureFlash: 'Invalid email or password.'
     }), users.session);
   app.get('/users/:userId', users.show);
+  app.get('/users/:userId/edit', userAuth, users.edit);
+  app.put('/users/:userId', userAuth, users.update);
+
   app.get('/auth/facebook',
     passport.authenticate('facebook', {
       scope: [ 'email', 'user_about_me'],
@@ -45,14 +55,7 @@ module.exports = function (app, passport) {
     passport.authenticate('facebook', {
       failureRedirect: '/login'
     }), users.authCallback);
-  app.get('/auth/github',
-    passport.authenticate('github', {
-      failureRedirect: '/login'
-    }), users.signin);
-  app.get('/auth/github/callback',
-    passport.authenticate('github', {
-      failureRedirect: '/login'
-    }), users.authCallback);
+
   app.get('/auth/twitter',
     passport.authenticate('twitter', {
       failureRedirect: '/login'
@@ -61,6 +64,7 @@ module.exports = function (app, passport) {
     passport.authenticate('twitter', {
       failureRedirect: '/login'
     }), users.authCallback);
+
   app.get('/auth/google',
     passport.authenticate('google', {
       failureRedirect: '/login',
@@ -73,38 +77,34 @@ module.exports = function (app, passport) {
     passport.authenticate('google', {
       failureRedirect: '/login'
     }), users.authCallback);
-  app.get('/auth/linkedin',
-    passport.authenticate('linkedin', {
-      failureRedirect: '/login',
-      scope: [
-        'r_emailaddress'
-      ]
-    }), users.signin);
-  app.get('/auth/linkedin/callback',
-    passport.authenticate('linkedin', {
-      failureRedirect: '/login'
-    }), users.authCallback);
 
   app.param('userId', users.load);
 
   // article routes
-  app.param('id', articles.load);
+  app.param('articleId', articles.load);
   app.get('/articles', articles.index);
-  app.get('/articles/new', auth.requiresLogin, articles.new);
+  app.get('/articles/new', articleAuth, articles.new);
   app.post('/articles', auth.requiresLogin, articles.create);
-  app.get('/articles/:id', articles.show);
-  app.get('/articles/:id/edit', articleAuth, articles.edit);
-  app.put('/articles/:id', articleAuth, articles.update);
-  app.delete('/articles/:id', articleAuth, articles.destroy);
+  app.get('/articles/:articleId', articles.show);
+  app.get('/articles/:articleId/edit', articleAuth, articles.edit);
+  app.put('/articles/:articleId', articleAuth, articles.update);
+  app.delete('/articles/:articleId', articleAuth, articles.destroy);
+
+  // table routes
+  app.param('tableId', tables.load);
+  app.get('/tables', tables.index);
+  app.get('/tables/new', tableAuth, tables.new);
+  app.post('/tables', auth.requiresLogin, tables.create);
+  app.get('/tables/:tableId', tables.show);
 
   // home route
-  app.get('/', articles.index);
+  app.get('/', home.index);
 
   // comment routes
   app.param('commentId', comments.load);
-  app.post('/articles/:id/comments', auth.requiresLogin, comments.create);
-  app.get('/articles/:id/comments', auth.requiresLogin, comments.create);
-  app.delete('/articles/:id/comments/:commentId', commentAuth, comments.destroy);
+  app.post('/articles/:articleId/comments', auth.requiresLogin, comments.create);
+  app.get('/articles/:articleId/comments', auth.requiresLogin, comments.create);
+  app.delete('/articles/:articleId/comments/:commentId', commentAuth, comments.destroy);
 
   // tag routes
   app.get('/tags/:tag', tags.index);
@@ -121,7 +121,7 @@ module.exports = function (app, passport) {
       || (~err.message.indexOf('Cast to ObjectId failed')))) {
       return next();
     }
-    console.error(err.stack);
+    console.error('error', err.stack);
     // error page
     res.status(500).render('500', { error: err.stack });
   });
@@ -133,4 +133,4 @@ module.exports = function (app, passport) {
       error: 'Not found'
     });
   });
-}
+};

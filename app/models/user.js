@@ -2,17 +2,18 @@
 /**
  * Module dependencies.
  */
+'use strict';
 
 var mongoose = require('mongoose');
 var crypto = require('crypto');
+var Article = mongoose.model('Article');
+
 
 var Schema = mongoose.Schema;
 var oAuthTypes = [
-  'github',
   'twitter',
   'facebook',
-  'google',
-  'linkedin'
+  'google'
 ];
 
 /**
@@ -23,6 +24,7 @@ var UserSchema = new Schema({
   name: { type: String, default: '' },
   email: { type: String, default: '' },
   username: { type: String, default: '' },
+  selected_cursor: { type: String, default: '1'},
   provider: { type: String, default: '' },
   hashed_password: { type: String, default: '' },
   salt: { type: String, default: '' },
@@ -31,7 +33,8 @@ var UserSchema = new Schema({
   twitter: {},
   github: {},
   google: {},
-  linkedin: {}
+  linkedin: {},
+  createdAt  : {type : Date, default : Date.now}
 });
 
 /**
@@ -45,7 +48,7 @@ UserSchema
     this.salt = this.makeSalt();
     this.hashed_password = this.encryptPassword(password);
   })
-  .get(function() { return this._password });
+  .get(function() { return this._password; });
 
 /**
  * Validations
@@ -57,10 +60,10 @@ var validatePresenceOf = function (value) {
 
 // the below 5 validations only apply if you are signing up traditionally
 
-UserSchema.path('name').validate(function (name) {
-  if (this.skipValidation()) return true;
-  return name.length;
-}, 'Name cannot be blank');
+// UserSchema.path('name').validate(function (name) {
+//   if (this.skipValidation()) return true;
+//   return name.length;
+// }, 'Name cannot be blank');
 
 UserSchema.path('email').validate(function (email) {
   if (this.skipValidation()) return true;
@@ -102,7 +105,7 @@ UserSchema.pre('save', function(next) {
   } else {
     next();
   }
-})
+});
 
 /**
  * Methods
@@ -159,6 +162,12 @@ UserSchema.methods = {
 
   skipValidation: function() {
     return ~oAuthTypes.indexOf(this.provider);
+  },
+
+
+  articleCount: function () {
+    var criteria = {user: this._id};
+    return Article.count(criteria);
   }
 };
 
@@ -177,11 +186,11 @@ UserSchema.statics = {
    */
 
   load: function (options, cb) {
-    options.select = options.select || 'name username';
+    options.select = options.select || 'name username createdAt selected_cursor';
     this.findOne(options.criteria)
       .select(options.select)
       .exec(cb);
   }
-}
+};
 
 mongoose.model('User', UserSchema);

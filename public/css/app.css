@@ -30,28 +30,21 @@ body {
 /* Not required for template or sticky footer method. */
 
 
-.container .text-muted {
-  margin: 20px 0;
-}
-
-#footer > .container {
-  padding-left: 15px;
-  padding-right: 15px;
-}
 
 /* -----------------------------------------------
   App styles
   ------------------------------------------------ */
 
-body {
-  padding-top: 60px;
-}
 
-.article, .comment {
+
+/*.article {
   padding: 15px 0;
   border-bottom: 1px solid #e8e8e8;
 }
 
+.comment {
+  padding: 0px;
+}
 .error,
 a.error,
 a.error:hover,
@@ -83,13 +76,6 @@ button.error:focus {
 .navbar-brand {
   font-size: 14px;
   color: #000 !important;
-}
+}*/
 
-.navbar-nav > li > a.travis{
-  padding-top: 13px;
-}
 
-.navbar-right > li > a {
-  padding-left: 5px;
-  padding-right: 5px;
-}

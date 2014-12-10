@@ -1,12 +1,12 @@
 <div class="article">
-  <h3>
+  <h2>
     <a href="{{ '/articles/' + article._id }}" title="{{ article.title }}">
       {{ article.title }}
     </a>
-  </h3>
+  </h2>
   <p>{{ article.body }}</p>
 
-  <span class="muted">{{ article.createdAt.toISOString()|date('M d, Y  h:m a') }}</span>
+  <span class="muted">{{ article.createdAt.toISOString()|date('M d, Y  h:i a') }}</span>
 
   {% if (article.user) %}
     &nbsp; - &nbsp;

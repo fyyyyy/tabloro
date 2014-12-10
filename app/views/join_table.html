@@ -1,0 +1,55 @@
+<div class="modal fade" id="joinTableModal" tabindex="-1" role="dialog" aria-labelledby="joinTableModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="tables" method="get">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="joinTableModalLabel">Join Carcassone table</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label name="game-room">Table</label>
+                        <input type="hidden" id="game-room-hidden" name="game-room" class="form-control">
+                        <input type="text" id="game-room" name="game-room" class="form-control" placeholder="Please enter a table name" required="true">
+                        <div class="input-group">
+                            <label name="username">Your name</label>
+                            <input type="text" id="user_name" name="username" value="{{req.user.username}}" class="form-control" placeholder="Please enter your name" required="true">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div id="my-icon-select"></div>
+                        <p>Pick an icon</p>
+                        <input type="hidden" id="cursor-id" value="{{req.user.selected_cursor}}" name="selected_cursor" style="width:65px;">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Join Game</button>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    /*globals $*/
+
+    $('#joinTableModal').on('shown.bs.modal', function (e) {
+        $('#user_name').focus();
+
+        // set room name
+        var id = $(e.relatedTarget).data('id');
+        if (id) {
+            $('#game-room').val(id);
+            $('#game-room').attr('disabled', 'disabled');
+            $('#game-room-hidden').val(id);
+        } else {
+            $('#game-room-hidden').attr('disabled', 'disabled');
+        }
+    });
+
+</script>

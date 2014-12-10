@@ -1,0 +1,17 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Nov 28, 2013, 7:09:35 AM
+    Author     : bugraozden
+*/
+
+body { 
+  margin: 0;
+  cursor : url(/img/cursors/1.png), auto;
+}
+
+/* style for IE<9 */
+.lt-ie9 body { cursor : url(/img/cursors/1.png); }
