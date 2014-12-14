@@ -30,10 +30,10 @@ describe('Articles', function () {
     user.save(done)
   })
 
-  describe('GET /articles', function () {
+  describe('GET /news', function () {
     it('should respond with Content-Type text/html', function (done) {
       agent
-      .get('/articles')
+      .get('/news')
       .expect('Content-Type', /html/)
       .expect(200)
       .expect(/Articles/)
@@ -41,11 +41,11 @@ describe('Articles', function () {
     })
   })
 
-  describe('GET /articles/new', function () {
+  describe('GET /news/new', function () {
     context('When not logged in', function () {
       it('should redirect to /login', function (done) {
         agent
-        .get('/articles/new')
+        .get('/news/new')
         .expect('Content-Type', /plain/)
         .expect(302)
         .expect('Location', '/login')
@@ -66,7 +66,7 @@ describe('Articles', function () {
 
       it('should respond with Content-Type text/html', function (done) {
         agent
-        .get('/articles/new')
+        .get('/news/new')
         .expect('Content-Type', /html/)
         .expect(200)
         .expect(/New Article/)
@@ -75,11 +75,11 @@ describe('Articles', function () {
     })
   })
 
-  describe('POST /articles', function () {
+  describe('POST /news', function () {
     context('When not logged in', function () {
       it('should redirect to /login', function (done) {
         request(app)
-        .get('/articles/new')
+        .get('/news/new')
         .expect('Content-Type', /plain/)
         .expect(302)
         .expect('Location', '/login')
@@ -108,7 +108,7 @@ describe('Articles', function () {
 
         it('should respond with error', function (done) {
           agent
-          .post('/articles')
+          .post('/news')
           .field('title', '')
           .field('body', 'foo')
           .expect('Content-Type', /html/)
@@ -135,11 +135,11 @@ describe('Articles', function () {
 
         it('should redirect to the new article page', function (done) {
           agent
-          .post('/articles')
+          .post('/news')
           .field('title', 'foo')
           .field('body', 'bar')
           .expect('Content-Type', /plain/)
-          .expect('Location', /\/articles\//)
+          .expect('Location', /\/news\//)
           .expect(302)
           .expect(/Moved Temporarily/)
           .end(done)

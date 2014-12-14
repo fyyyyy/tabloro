@@ -58,17 +58,19 @@ UI.handCursor = function (button) {
 
 UI.message = function () {
     var text = R.join(' ', slice(arguments));
-    UI.lines = R.concat([text], UI.lines);
+    text = text.match(/.{1,30}/g); // split string every 30 characters
+
+    UI.lines = R.concat(text, UI.lines);
 
     if (UI.lines.length > 15) {
         UI.lines.pop();
     }
 
-    UI.messageText.setText('>>> ' + R.join('\n')(UI.lines) + '\n...');
+    UI.messageText.setText('-> ' + R.join('\n')(UI.lines) + '\n...');
 };
 
 UI.setNames = function (names) {
-    UI.nameText.setText(R.join('-', new Array(41)) + '\nTable: ' + gameRoom + '\n' + R.join('\n')(names));
+    UI.nameText.setText(R.join('-', new Array(41)) + '\nTable: ' + roomName + '\n' + R.join('\n')(names));
 };
 
 UI.updateNames = function () {

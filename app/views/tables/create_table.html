@@ -1,0 +1,26 @@
+{% if (req.isAuthenticated()) %}
+<div class="col-md-3">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      ...
+    </div>
+    
+      <img class="img-responsive greyscale" src="/img/game2.jpg">
+
+      <div class="post-content">
+        <a class="btn btn-success" href="/tables/new">
+          <i class="fa fa-plus fa-4x"></i>
+        </a>
+      </div>
+
+    <div class="panel-footer">
+
+      <a class="btn btn-success" href="/tables/new">
+        <i class="fa fa-plus-circle"></i>
+        Open New Table
+      </a>
+
+    </div>
+  </div>
+</div>
+{% endif %}

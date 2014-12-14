@@ -13,12 +13,12 @@ body {
 }
 
 h1 {
-    text-shadow: 8px 8px 0px #333;
+    text-shadow: 6px 6px 0px #321;
     color: #efefef;
 }
 
 h3 {
-    text-shadow: 2px 1px 1px #111;
+    text-shadow: 2px 1px 1px #321;
     color: #efefef;
 }
 
@@ -41,7 +41,7 @@ body {
 }
 .text-vertical-center h1 small {
     font-size: 0.2em;
-    text-shadow: 3px 3px 0px #333;
+    text-shadow: 3px 3px 0px #321;
     color: #efefef;
 }
 
@@ -186,11 +186,17 @@ hr.small {
 
 .smaller {
     width: 100%;
-    height: 100%;
     display: table;
-    height: 25%;
-    background: url(../img/example.jpg) no-repeat center center scroll;
+    height: 30%;
+    background: url(/assets/table_low.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
 
+}
+.smaller h1 {
+    font-size: 4em;
 }
 
 .spacer {
@@ -245,6 +251,11 @@ hr.small {
     opacity: 0.8;
 }
 
+.greyscale {
+    -webkit-filter: grayscale(100%);
+}
+
+
 .post-content {
     background: none repeat scroll 0 0 #FFFFFF;
     opacity: 0.7;
@@ -291,6 +302,25 @@ hr.small {
 footer {
     clear: both;
     padding: 100px 0;
+
+    width: 100%;
+    display: table;
+    background: url(/assets/table_low.jpg) no-repeat center bottom fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    color: #eee;
+    /*text-shadow: 1px 2px 5px #432;*/
+    text-shadow: 2px 2px 0px #321;
+}
+
+footer .list-unstyled a {
+    color: #eee;
+}
+
+footer .list-inline a{
+    text-shadow: 15px 15px 0px #321;
 }
 
 

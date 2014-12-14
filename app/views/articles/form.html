@@ -5,10 +5,12 @@
 {% endblock %}
 
 {% block content %}
+  <div class="about"></div>
+
   {% if article.isNew %}
-    {% set action = '/articles' %}
+    {% set action = '/news' %}
   {% else %}
-    {% set action = '/articles/' + article._id %}
+    {% set action = '/news/' + article._id %}
   {% endif %}
 
   <section class="bg">
@@ -55,7 +57,7 @@
             <div class="col-sm-offset-2 col-sm-10">
               <button class="btn btn-primary" type="submit">Save</button>
               &nbsp;
-              <a href="/articles" class="btn btn-link">Cancel</a>
+              <a href="/news" class="btn btn-link">Cancel</a>
             </div>
           </div>
         </form>
@@ -67,5 +69,8 @@
       </div>
     </div>
   </section>
+  
+  <div class="about"></div>
+
 
 {% endblock %}

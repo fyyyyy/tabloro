@@ -31,7 +31,8 @@ var eurecaServer = new EurecaServer({
     'setId', 'spawnPlayer', 'kill', 'updateCursor',
     'positionTile', 'dropTile', 'dragTile',
     'dragStack', 'dropStack', 'positionStack', 'updateStackCards', 'flipStack',
-    'spin'
+    'spin',
+    'receiveChat'
   ]
 });
 log('attach eurecaServer', eurecaServer.version);
@@ -59,7 +60,7 @@ fs.readdirSync(__dirname + '/app/models').forEach(function (file) {
 require('./config/passport')(passport, config);
 
 // Bootstrap application settings
-require('./config/express')(app, passport);
+require('./config/express')(app, passport, eurecaServer);
 
 // Bootstrap routes
 require('./config/routes')(app, passport);

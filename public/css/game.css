@@ -15,3 +15,10 @@ body {
 
 /* style for IE<9 */
 .lt-ie9 body { cursor : url(/img/cursors/1.png); }
+
+
+.chat {
+  position: absolute;
+  top: 180px;
+  right: 100px;
+}

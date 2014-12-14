@@ -75,7 +75,7 @@ exports.create = function (req, res) {
   article.uploadAndSave(images, function (err) {
     if (!err) {
       req.flash('success', 'Successfully created article!');
-      return res.redirect('/articles/'+article._id);
+      return res.redirect('/news/'+article._id);
     }
     console.log(err);
     res.render('articles/new', {
@@ -113,7 +113,7 @@ exports.update = function (req, res){
 
   article.uploadAndSave(images, function (err) {
     if (!err) {
-      return res.redirect('/articles/' + article._id);
+      return res.redirect('/news/' + article._id);
     }
 
     res.render('articles/edit', {
@@ -143,6 +143,6 @@ exports.destroy = function (req, res){
   var article = req.article;
   article.remove(function (err){
     req.flash('info', 'Deleted successfully');
-    res.redirect('/articles');
+    res.redirect('/news');
   });
 };

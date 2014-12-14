@@ -3,24 +3,9 @@
 "use strict";
 var log = console.log;
 var R = require('./public/js/ramda.js');
-var BOARD_DEFAULTS = {};
 
-
-BOARD_DEFAULTS = function () {
-    return {
-
-        '0': {
-            position: {x: 500, y: 300},
-            cards: R.range(2, 49)
-        },
-
-        '1': {
-            position: {x: 100, y: 300},
-            cards: []
-        },
-
-    };
-};
+var mongoose = require('mongoose');
+var Table = mongoose.model('Table');
 
 
 module.exports = function (eurecaServer) {
@@ -32,7 +17,22 @@ module.exports = function (eurecaServer) {
 
     // list of timeouts for destroying empty rooms
     var roomTimeouts = {};
+    eurecaServer.name = 'eurecaServer';
+    eurecaServer.clients = clients;
 
+    eurecaServer.getPlayers = function getPlayers (roomId) {
+        var clientIds = rooms[roomId] && rooms[roomId].clients;
+        return clientIds && R.props(clientIds)(clients);
+    };
+
+    eurecaServer.getPlayerIds = function getPlayerIds (roomId) {
+        var clientIds = rooms[roomId] && rooms[roomId].clients;
+        return clientIds || [];
+    };
+
+    function saveTable (room) {
+        Table.eurecaUpdate(room.name, room.tiles, room.stacks);    
+    }
 
     function or(a, b) {
         return a || b;
@@ -59,25 +59,35 @@ module.exports = function (eurecaServer) {
         return room.stacks[stackId];
     }
 
-    function findOrCreateRoom(roomId) {
+    function findOrCreateRoom(roomId, callback) {
         if (roomId === undefined) {
-            log('ERROR, no room id given', roomId);
+            return undefined;
         }
         if (!rooms[roomId]) {
-            log('+ Creating room', roomId);
-            rooms[roomId] = {
-                clients: [],
-                tiles: {},
-                stacks: new BOARD_DEFAULTS(),
-                name: roomId
-            };
-        } else if (roomTimeouts[roomId]) {
-            log('preventing room destruction of', roomId);
-            clearTimeout(roomTimeouts[roomId]);
-            delete roomTimeouts[roomId];
+            log('> Looking for table on server: ', roomId);
+            return Table.load(roomId, function (err, table) {
+                if (err) {
+                    console.error('Table not found on server', err);
+                    return undefined;
+                } else {
+                    log('Table', roomId, 'found on server');
+                    callback(rooms[roomId] = {
+                        clients: [],
+                        tiles: table.tiles || {},
+                        stacks: table.stacks,
+                        name: roomId
+                    });
+                }
+            });
+            
+        } else {
+            if (roomTimeouts[roomId]) {
+                log('preventing destruction of room', roomId);
+                clearTimeout(roomTimeouts[roomId]);
+                delete roomTimeouts[roomId];
+            }
+            callback(rooms[roomId]);
         }
-        // rooms[roomId] = rooms[roomId] || newRoom;
-        return rooms[roomId];
     }
 
 
@@ -107,6 +117,10 @@ module.exports = function (eurecaServer) {
     });
 
     function forEachClient(room, fn) {
+        if(room === undefined) {
+            console.error('room not defined, forEachClient');
+            return;
+        }
         R.forEach(function (clientId) {
             var c = clients[clientId];
             if (!c) {
@@ -140,19 +154,21 @@ module.exports = function (eurecaServer) {
         };
     }
 
-    function currentRoom(that) {
+    function currentRoom(that, callback) {
         var conn = that.connection,
             client = clients[conn.id];
         // log('currentRoom', client.roomId);
-        return findOrCreateRoom(client.roomId);
+        return findOrCreateRoom(client.roomId, callback);
     }
 
     function findClient(id) {
         var client = clients[id];
+        if(!client)
+            console.error('no client found');
         return client;
     }
 
-    function findRemote(id) {
+    function getRemote(id) {
         var client = clients[id];
         return client.remote;
     }
@@ -162,7 +178,7 @@ module.exports = function (eurecaServer) {
     // eureca.io provides events to detect clients connect/disconnect
     // detect client connection
     eurecaServer.onConnect(function (conn) {
-        log('New Client id=%s ', conn.id, conn.remoteAddress);
+        log('onConnect New Client id=%s ', conn.id, conn.remoteAddress);
 
         // the getClient method provide a proxy allowing us to call remote client functions
         var remote = eurecaServer.getClient(conn.id);
@@ -187,7 +203,7 @@ module.exports = function (eurecaServer) {
         client = findClient(clientId);
         room = rooms[client.roomId];
 
-        log('Client ', client.id, 'disconnected from room ', room && room.name);
+        log('onDisconnect Client ', client.id, 'from room ', room && room.name);
 
 
         // here we call kill() method defined in the client side
@@ -199,66 +215,79 @@ module.exports = function (eurecaServer) {
         });
 
         delete clients[clientId];
-        removeFromArray(clientId, room.clients);
+        if(room) {
+            removeFromArray(clientId, room.clients);
 
-        if (room.clients.length === 0) {
-            var delay = 5 * 60 * 1000; // 5 minutes
-            log('\tkilling room', room.name, 'in', delay / 60 / 1000, 'minutes');
-            roomTimeouts[client.roomId] = setTimeout(function () {
-                delete rooms[client.roomId];
-                log('\tkilled room', client.roomId, '\topen rooms:', R.size(R.keys(rooms)));
-                delete roomTimeouts[client.roomId];
-            }, delay);
+            if (room.clients.length === 0) {
+                var delay = 5 * 60 * 1000; // 5 minutes
+                log('\tkilling room', room.name, 'in', delay / 60 / 1000, 'minutes');
+                roomTimeouts[client.roomId] = setTimeout(function () {
+                    delete rooms[client.roomId];
+                    log('\tkilled room', client.roomId, '\topen rooms:', R.size(R.keys(rooms)));
+                    delete roomTimeouts[client.roomId];
+                }, delay);
+            }
         }
     });
 
 
 
     eurecaServer.exports.handshake = function (newClientId, cursorId, name, roomId) {
+        log('handshake with', name, 'room', roomId);
         var that = this,
+            room,
             newClient = findClient(newClientId),
-            room = findOrCreateRoom(roomId),
-            newClientRemote = findRemote(newClientId);
+            newClientRemote = getRemote(newClientId);
+        
+        room = findOrCreateRoom(roomId, function (room) {
+            log('room exists');
 
-        newClient.cursor = cursorId;
-        newClient.name = name;
-        newClient.roomId = roomId;
-        room.clients.push(newClientId);
+            newClient.cursor = cursorId;
+            newClient.name = name;
+            newClient.roomId = roomId;
+            room.clients.push(newClientId);
 
-        // spawning the new client on each machine of the old players
-        forEachClient(room, function (oldRemote) {
-            oldRemote.spawnPlayer(findClient(newClientId));
+
+            // spawning the new client on each machine of the old players
+            forEachClient(room, function (oldRemote) {
+                oldRemote.spawnPlayer(findClient(newClientId));
+            });
+
+
+            // spawn already existing clients on new player's machine
+            forEachClient(room, function (rem, otherClientId) {
+                newClientRemote.spawnPlayer(findClient(otherClientId));
+            });
+
+            // position tiles of current game session
+            R.forEach(function (tileId) {
+                log('positioning tile  id: ', tileId, 'in', room.name);
+                newClientRemote.positionTile(currentClient(that), tileId, tilePosition(room, tileId), true);
+            })(R.keys(room.tiles));
+
+            // position stacks of current game session
+            R.forEach(function (stackId) {
+                log('positioning stack  id: ', stackId, 'in', room.name);
+                newClientRemote.positionStack(currentClient(that), stackId, room.stacks[stackId], true);
+            })(R.keys(room.stacks));
+            
         });
 
-
-        // spawn already existing clients on new player's machine
-        forEachClient(room, function (rem, otherClientId) {
-            newClientRemote.spawnPlayer(findClient(otherClientId));
-        });
-
-        // position tiles of current game session
-        R.forEach(function (tileId) {
-            log('positioning tile  id: ', tileId, 'in', room.name);
-            newClientRemote.positionTile(currentClient(that), tileId, tilePosition(room, tileId), true);
-        })(R.keys(room.tiles));
-
-        // position stacks of current game session
-        R.forEach(function (stackId) {
-            log('positioning stack  id: ', stackId, 'in', room.name);
-            newClientRemote.positionStack(currentClient(that), stackId, room.stacks[stackId], true);
-        })(R.keys(room.stacks));
     };
 
 
 
     // be exposed to client side
     eurecaServer.exports.moveCursor = function (mousePosition) {
-        var that = this,
-            room = currentRoom(that);
+        // log('moveCursor');
+        var that = this;
 
-        forEachClient(room, function (remote) {
-            remote.updateCursor(currentClient(that), mousePosition);
+        currentRoom(that, function (room) {
+            forEachClient(room, function (remote) {
+                remote.updateCursor(currentClient(that), mousePosition);
+            });
         });
+
     };
 
 
@@ -267,53 +296,61 @@ module.exports = function (eurecaServer) {
 
 
     eurecaServer.exports.tileDragStart = function (tileId) {
-        var that = this,
-            room = currentRoom(that);
+        log('tileDragStart');
+        var that = this;
 
-        forEachClient(room, function (remote) {
-            remote.dragTile(currentClient(that), tileId);
+        currentRoom(that, function (room) {
+            forEachClient(room, function (remote) {
+                remote.dragTile(currentClient(that), tileId);
+            });
         });
+
     };
 
 
 
     // be exposed to client side
     eurecaServer.exports.tileDragStop = function (tileId, newPosition) {
+        log('tileDragStop');
         var that = this,
-            room = currentRoom(that),
             collidingStacks,
             collidingStackId,
             cards;
 
-        // keep last known tile position so we can send it to new connected clients
+        currentRoom(that, function (room) {
+            // keep last known tile position so we can send it to new connected clients
 
-        collidingStacks = stackIntersection(room, newPosition);
-        collidingStackId = collidingStacks[0];
+            collidingStacks = stackIntersection(room, newPosition);
+            collidingStackId = collidingStacks[0];
 
-        if (collidingStacks.length > 0) {
-            // store last tile position at stack position
-            room.tiles[tileId] = stackPosition(room, collidingStackId);
-
-
-            // store card in stack.cards
-            cards = addCardToStack(room, collidingStackId, tileId);
-            log('stack', collidingStackId, 'cards', cards);
+            if (collidingStacks.length > 0) {
+                // store last tile position at stack position
+                room.tiles[tileId] = stackPosition(room, collidingStackId);
 
 
-            forEachClient(room, function (remote) {
-                remote.updateStackCards(currentClient(that), collidingStackId, cards);
-            });
+                // store card in stack.cards
+                cards = addCardToStack(room, collidingStackId, tileId);
+                log('stack', collidingStackId, 'cards', cards);
 
-        } else { // no stack collision
-            room.tiles[tileId] = newPosition;
 
-            // removing tile from all stacks
-            removeCardFromStacks(room, tileId);
+                forEachClient(room, function (remote) {
+                    remote.updateStackCards(currentClient(that), collidingStackId, cards);
+                });
 
-            forEachClient(room, function (remote) {
-                remote.dropTile(currentClient(that), tileId, newPosition);
-            });
-        }
+            } else { // no stack collision
+                room.tiles[tileId] = newPosition;
+
+                // removing tile from all stacks
+                removeCardFromStacks(room, tileId);
+
+                forEachClient(room, function (remote) {
+                    remote.dropTile(currentClient(that), tileId, newPosition);
+                });
+            }
+
+            saveTable(room);
+        });
+
     };
 
 
@@ -334,48 +371,60 @@ module.exports = function (eurecaServer) {
     }
 
     eurecaServer.exports.stackDragStart = function (stackId, newPosition) {
-        var that = this,
-            room = currentRoom(that);
+        log('stackDragStart');
+        var that = this;
 
-        forEachClient(room, function (remote) {
-            remote.dragStack(currentClient(that), stackId);
+        currentRoom(that, function (room) {
+            forEachClient(room, function (remote) {
+                remote.dragStack(currentClient(that), stackId);
+            });
         });
     };
 
 
     eurecaServer.exports.stackDragStop = function (stackId, newPosition) {
-        var that = this,
-            room = currentRoom(that);
+        log('stackDragStop');
+        var that = this;
 
-        // keep last known stack position so we can send it to new connected clients
-        findOrCreateStack(room, stackId).position = newPosition;
+        currentRoom(that, function (room) {
+            // keep last known stack position so we can send it to new connected clients
+            findOrCreateStack(room, stackId).position = newPosition;
 
-        forEachClient(room, function (remote) {
-            remote.dropStack(currentClient(that), stackId, newPosition);
+            forEachClient(room, function (remote) {
+                remote.dropStack(currentClient(that), stackId, newPosition);
+            });
+
+            saveTable(room);
         });
     };
 
     eurecaServer.exports.shuffleStack = function (stackId) {
-        var that = this,
-            room = currentRoom(that),
-            stack = findOrCreateStack(room, stackId);
+        log('shuffleStack');
+        var that = this;
 
-        log('shuffled', stackId, 'in room', room.name);
+        currentRoom(that, function (room) {
+            var stack = findOrCreateStack(room, stackId);
+            log('shuffled', stackId, 'in room', room.name);
 
-        stack.cards = shuffle(stackCards(room, stackId));
+            stack.cards = shuffle(stackCards(room, stackId));
 
-        forEachClient(room, function (remote) {
-            remote.updateStackCards(currentClient(that), stackId, stack.cards);
+            forEachClient(room, function (remote) {
+                remote.updateStackCards(currentClient(that), stackId, stack.cards);
+            });
         });
+
     };
 
     eurecaServer.exports.flipStack = function (stackId) {
-        var that = this,
-            room = currentRoom(that);
+        log('flipStack');
+        var that = this;
 
-        forEachClient(room, function (remote) {
-            remote.flipStack(currentClient(that), stackId);
+        currentRoom(that, function (room) {
+            forEachClient(room, function (remote) {
+                remote.flipStack(currentClient(that), stackId);
+            });
         });
+
     };
 
 
@@ -384,22 +433,40 @@ module.exports = function (eurecaServer) {
     /******************* DICE ******************/
 
     eurecaServer.exports.spin = function (diceInGroup) {
+        log('spin');
         var that = this,
             delays,
-            values,
-            room = currentRoom(that);
+            values;
 
-        delays = R.map(function () {
-            return Math.floor(300 + 567 * Math.random());
-        })(diceInGroup);
+        currentRoom(that, function (room) {
+            delays = R.map(function () {
+                return Math.floor(300 + 567 * Math.random());
+            })(diceInGroup);
 
-        values = R.map(function () {
-            return Math.floor(Math.random() * 6);
-        })(diceInGroup);
+            values = R.map(function () {
+                return Math.floor(Math.random() * 6);
+            })(diceInGroup);
 
-        forEachClient(room, function (remote) {
-            remote.spin(currentClient(that), diceInGroup, delays, values);
+            forEachClient(room, function (remote) {
+                remote.spin(currentClient(that), diceInGroup, delays, values);
+            });
         });
+
+    };
+
+
+    /******************* CHAT ******************/
+
+    eurecaServer.exports.chat = function (text) {
+        log('chat', text);
+        var that = this;
+
+        currentRoom(that, function (room) {
+            forEachClient(room, function (remote) {
+                remote.receiveChat(currentClient(that), text);
+            });
+        });
+
     };
 
 };

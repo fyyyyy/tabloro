@@ -33,9 +33,9 @@ exports.article = {
     if (!res.locals.isAdmin) {
       req.flash('info', 'You are not authorized');
       if (req.article) {
-        return res.redirect('/articles/' + req.article.id);
+        return res.redirect('/news/' + req.article.id);
       }
-      return res.redirect('/articles/');
+      return res.redirect('/news/');
     }
     next();
   }
@@ -50,7 +50,7 @@ exports.table = {
     if (!req.isAuthenticated()) {
       req.flash('info', 'You are not authorized');
       if (req.table) {
-        return res.redirect('/tables/' + req.table.id);
+        return res.redirect('/tables/' + req.table.title);
       }
       return res.redirect('/tables/');
     }
@@ -70,7 +70,7 @@ exports.comment = {
       next()
     } else {
       req.flash('info', 'You are not authorized')
-      res.redirect('/articles/' + req.article.id)
+      res.redirect('/news/' + req.article.id)
     }
   }
 }

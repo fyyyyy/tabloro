@@ -82,29 +82,30 @@ module.exports = function (app, passport) {
 
   // article routes
   app.param('articleId', articles.load);
-  app.get('/articles', articles.index);
-  app.get('/articles/new', articleAuth, articles.new);
-  app.post('/articles', auth.requiresLogin, articles.create);
-  app.get('/articles/:articleId', articles.show);
-  app.get('/articles/:articleId/edit', articleAuth, articles.edit);
-  app.put('/articles/:articleId', articleAuth, articles.update);
-  app.delete('/articles/:articleId', articleAuth, articles.destroy);
+  app.get('/news', articles.index);
+  app.get('/news/new', articleAuth, articles.new);
+  app.post('/news', auth.requiresLogin, articles.create);
+  app.get('/news/:articleId', articles.show);
+  app.get('/news/:articleId/edit', articleAuth, articles.edit);
+  app.put('/news/:articleId', articleAuth, articles.update);
+  app.delete('/news/:articleId', articleAuth, articles.destroy);
 
   // table routes
-  app.param('tableId', tables.load);
+  app.param('tableName', tables.load);
   app.get('/tables', tables.index);
   app.get('/tables/new', tableAuth, tables.new);
   app.post('/tables', auth.requiresLogin, tables.create);
-  app.get('/tables/:tableId', tables.show);
+  app.get('/tables/:tableName', tables.show);
+  app.get('/tables/:tableName/play', tables.play);
 
   // home route
   app.get('/', home.index);
 
   // comment routes
   app.param('commentId', comments.load);
-  app.post('/articles/:articleId/comments', auth.requiresLogin, comments.create);
-  app.get('/articles/:articleId/comments', auth.requiresLogin, comments.create);
-  app.delete('/articles/:articleId/comments/:commentId', commentAuth, comments.destroy);
+  app.post('/news/:articleId/comments', auth.requiresLogin, comments.create);
+  app.get('/news/:articleId/comments', auth.requiresLogin, comments.create);
+  app.delete('/news/:articleId/comments/:commentId', commentAuth, comments.destroy);
 
   // tag routes
   app.get('/tags/:tag', tags.index);

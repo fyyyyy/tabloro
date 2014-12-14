@@ -5,6 +5,8 @@
 {% endblock %}
 
 {% block content %}
+  <div class="about"></div>
+
   <section class="container">
     
     <div class="col-md-8">
@@ -37,10 +39,10 @@
     </div>
 
     {% if isAdmin %}
-      <form action="{{ '/articles/' + article.id }}" method="post" onsubmit="return confirm('Are you sure?')">
+      <form action="{{ '/news/' + article.id }}" method="post" onsubmit="return confirm('Are you sure?')">
         <br>
         <input type="hidden" name="_csrf" value="{{ csrf_token }}">
-        <a href="{{ '/articles/' + article._id + '/edit' }}" title="edit" class="btn btn-default">
+        <a href="{{ '/news/' + article._id + '/edit' }}" title="edit" class="btn btn-default">
           Edit
         </a>
         &nbsp;
@@ -62,4 +64,16 @@
     {% include '../comments/form.html' %}
     </div>
   </section>
+
+  <div class="spacer"></div>
+  <section class="bg-primary about">
+    <div class="container">
+      
+      <a href="/news" class="btn btn-default">
+        <i class="fa fa-backward"></i>
+        Back to news
+      </a>
+    </div>
+  </section>
+
 {% endblock %}

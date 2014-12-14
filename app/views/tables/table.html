@@ -4,8 +4,9 @@
       {{table.title | title}}
     </div>
     
-      <img class="img-responsive" src="img/game2.jpg">
+      <img class="img-responsive" src="/img/game2.jpg">
       <div class="post-content">
+
         <p>
           Tags: &nbsp;
           {% for tag in table.tags.split(',') %}
@@ -13,20 +14,24 @@
             <a href="{{ '/tags/' + tag }}" class="tag">{{ tag }}</a>
             &nbsp;&nbsp;
           {% endfor %}
-
-
         </p>
-        <p>Players: 
-            <i class="muted fa fa-users"></i>&nbsp;
-
+   
+        <p>
+          Players: 
+          {% for user in table.players %}
+            <i class="fa fa-user fa-lg text-primary"></i>&nbsp;
+          {% endfor %}
         </p>
+   
         <span class="small">Started {{ table.createdAt.toISOString()|date('G:i') }}</span>
       </div>
     <div class="panel-footer">
-      <a href="tables/{{ table.id }}" class="btn btn-primary">
+      
+      <a href="{% if (req.isAuthenticated()) %}tables/{{ table.title }}{% else %}/login{%endif%}" class="btn btn-primary">
         join table
-        <i class="fa fa-play-circle"></i>
+        <i class="fa fa-user"></i>
       </a>
+
     </div>
   </div>
 </div>

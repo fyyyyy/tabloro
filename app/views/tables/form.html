@@ -8,8 +8,11 @@
   {% if table.isNew %}
     {% set action = '/tables' %}
   {% else %}
-    {% set action = '/tables/' + table._id %}
+    {% set action = '/tables/' + table.title %}
   {% endif %}
+  
+  <div class="about"></div>
+
 
   <section class="bg">
     
@@ -41,6 +44,7 @@
                   <input type="radio" id="isPrivate2" name="isPrivate" value="0" checked />
                 </label>
               </div>
+              <p class="help-block">Private rooms are not listed, and can only be found by sharing the link (or guessing the room name).</p>
             </div>
           </div>
 
@@ -54,7 +58,7 @@
 
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-              <button class="btn btn-primary" type="submit">Save</button>
+              <button class="btn btn-primary" type="submit">Create</button>
               &nbsp;
               <a href="/tables" class="btn btn-link">Cancel</a>
             </div>
@@ -64,5 +68,8 @@
       
     </div>
   </section>
+
+<div class="about"></div>
+  
 
 {% endblock %}

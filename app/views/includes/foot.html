@@ -1,3 +1,5 @@
+<script src="/js/jquery.js"></script>
+
 <script src="/js/ramda.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src='/js/jquery.tagsinput.min.js'></script>
@@ -10,34 +12,27 @@
 
 <!-- GOOGLE ANALYTICS -->
 <script>
-  // var _gaq = _gaq || [];
-  // _gaq.push(['_setAccount', 'UA-25468002-1']);
-  // _gaq.push(['_trackPageview']);
+  console.log('GOOGLE ANALYTICS');
 
-  // (function() {
-  //   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-  //   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-  //   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  // })();
 </script>
 
 
 
 <!-- TOGGLE MENU -->
 <script>
-  /*global $, document, browser, location*/
-  "use strict";
+  /*global $*/
+  'use strict';
 
   // Closes the sidebar menu
-  $("#menu-close").click(function (e) {
+  $('#menu-close').click(function (e) {
       e.preventDefault();
-      $("#sidebar-wrapper").toggleClass("active");
+      $('#sidebar-wrapper').toggleClass('active');
   });
 
   // Opens the sidebar menu
-  $("#menu-toggle").click(function (e) {
+  $('#menu-toggle').click(function (e) {
       e.preventDefault();
-      $("#sidebar-wrapper").toggleClass("active");
+      $('#sidebar-wrapper').toggleClass('active');
   });
 </script>
 

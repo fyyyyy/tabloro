@@ -24,11 +24,11 @@ Network.setup = function () {
     //methods defined under "exports" namespace become available in the server side
 
     Network.client.exports.setId = function (id) {
-        log('Network.setId', id, 'for', playerName);
+        log('Network.setId for', playerName);
         Network.myId = id;
         //create() is moved here to make sure nothing is created before uniq id assignation
-        Network.server.handshake(id, cursorId, playerName, gameRoom);
-        log('connecting to room', gameRoom);
+        Network.server.handshake(id, cursorId, playerName, roomName);
+        log('connecting to table', roomName);
 
         create();
         Network.ready = true;
@@ -43,7 +43,7 @@ Network.setup = function () {
             log('killing ', client.name, playerList[client.id]);
             delete playerList[client.id];
 
-            UI.message(client.name, 'said goodbye...');
+            UI.message(client.name, 'left the table...');
             UI.updateNames();
         }
     };
@@ -57,7 +57,7 @@ Network.setup = function () {
         var p = Cursor.new(client);
         playerList[client.id] = p;
 
-        UI.message(client.name, 'joined!');
+        UI.message(client.name, 'joined the table!');
         UI.updateNames();
     };
 
@@ -171,6 +171,14 @@ Network.setup = function () {
 
     Network.client.exports.spin = function(client, diceInGroup, delays, values) {
         Dice.spin(diceInGroup, delays, values);
+    };
+
+
+    /******************* DICE ******************/
+
+    Network.client.exports.receiveChat = function(client, text) {
+        log(client.name, 'says', text);
+        UI.message(client.name, ':', text);
     };
 };
 

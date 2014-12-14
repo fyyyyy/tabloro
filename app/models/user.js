@@ -186,7 +186,7 @@ UserSchema.statics = {
    */
 
   load: function (options, cb) {
-    options.select = options.select || 'name username createdAt selected_cursor';
+    options.select = options.select || 'name username createdAt selected_cursor email';
     this.findOne(options.criteria)
       .select(options.select)
       .exec(cb);

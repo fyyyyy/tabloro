@@ -31,20 +31,16 @@ var players;
 var table;
 var playerList = {};
 var player = {};
-var cursorId;
-var gameRoom;
-var playerName = "unknown";
 
 var stack1;
 var stack2;
 
+var chatInput;
+
 
 function preload() {
     // game is available here
-    playerName = game.net.getQueryString('username') || playerName;
-    cursorId = Number(game.net.getQueryString('selected_cursor')) || 1;
-    gameRoom = game.net.getQueryString('game-room');
-
+    chatInput = document.getElementById('chatInput');
     Assets.preload(game);
 }
 
@@ -114,7 +110,7 @@ function addCards(array, group, stack) {
         cards.push(tile.id);
 
         Controls.target = tile;
-        log('tile created', tile.id);
+        // log('tile created', tile.id);
     })(array);
     // S.updateCards(stack, cards);
     return Controls.target;
@@ -170,12 +166,12 @@ function setupTiles () {
     tokens = game.add.group();
     tokens.z = 16;
     tokens.rotateBy = Math.PI / 2;
-    addTokens(R.repeatN('soldier', 10), 0x303320, 130, 60); // black
-    addTokens(R.repeatN('soldier', 10), 0x33BBFF, 200, 60); // blue
-    addTokens(R.repeatN('soldier', 10), 0xDD3333, 270, 60); // red
-    addTokens(R.repeatN('soldier', 10), 0x22CC22, 340, 60); // green
-    addTokens(R.repeatN('soldier', 10), 0xFFEE22, 410, 60); // purple
-    addTokens(R.repeatN('soldier', 10), 0xFFFFFF, 480, 60); // white
+    addTokens(R.repeatN('soldier', 10), 0x303320, 330, 60); // black
+    addTokens(R.repeatN('soldier', 10), 0x33BBFF, 400, 60); // blue
+    addTokens(R.repeatN('soldier', 10), 0xDD3333, 470, 60); // red
+    addTokens(R.repeatN('soldier', 10), 0x22CC22, 540, 60); // green
+    addTokens(R.repeatN('soldier', 10), 0xFFEE22, 610, 60); // purple
+    addTokens(R.repeatN('soldier', 10), 0xFFFFFF, 680, 60); // white
 
     // dice
     Dice.add(redDice, 0, 0xDD3333);
@@ -221,6 +217,12 @@ function update() {
     else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT))
     {
         game.camera.x += 30;
+    } else if(game.input.keyboard.isDown(Phaser.Keyboard.ENTER)) {
+        if (chatInput.value.length > 0) {
+            var text = chatInput.value;
+            chatInput.value = '';
+            Network.server.chat(text);
+        }
     }
 
 

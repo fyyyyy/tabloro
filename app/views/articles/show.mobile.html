@@ -37,9 +37,9 @@
     </div>
   </div>
 
-  <form action="{{ '/articles/' + article.id }}" method="post" onsubmit="return confirm('Are you sure?')">
+  <form action="{{ '/news/' + article.id }}" method="post" onsubmit="return confirm('Are you sure?')">
     <input type="hidden" name="_csrf" value="{{ csrf_token }}">
-    <a href="{{ '/articles/' + article._id + '/edit' }}" title="edit" class="btn btn-default">
+    <a href="{{ '/news/' + article._id + '/edit' }}" title="edit" class="btn btn-default">
       Edit
     </a>
     &nbsp;

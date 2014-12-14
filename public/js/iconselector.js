@@ -4,6 +4,7 @@ window.onload = function () {
     var iconSelect;
     var selectedText = document.getElementById('cursor-id');
     if (!selectedText) {
+        console.log('no icon selector');
         return;
     }
 
@@ -31,7 +32,6 @@ window.onload = function () {
     });
     iconSelect.refresh(icons);
     iconSelect.setSelectedIndex(Number(selectedText.value) - 1); // index = value -1
-
 
     document.getElementById('my-icon-select').addEventListener('changed', function () {
         selectedText.value = iconSelect.getSelectedValue();

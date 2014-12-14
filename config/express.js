@@ -30,7 +30,7 @@ var env = process.env.NODE_ENV || 'development';
  * Expose
  */
 
-module.exports = function (app, passport) {
+module.exports = function (app, passport, eurecaServer) {
 
   // Compression middleware (should be placed before express.static)
   app.use(compression({
@@ -71,6 +71,10 @@ module.exports = function (app, passport) {
   app.set('views', config.root + '/app/views');
   app.set('view engine', 'html');
 
+  app.use(function (req, res, next) {
+    req.eurecaServer = eurecaServer;
+    return next();
+  });
 
 
   // expose package.json to views

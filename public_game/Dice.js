@@ -5,7 +5,7 @@ var Dice = {};
 
 Dice.add = function (group, num, tint) {
     tint = tint || 0xFFFFFF;
-    var dice = group.create(500, 30 + (num * 70), 'diceWhite');
+    var dice = group.create(800, 30 + (num * 70), 'diceWhite');
 
     dice.animations.add('spin', [0, 1, 2, 3, 4, 5]);
 

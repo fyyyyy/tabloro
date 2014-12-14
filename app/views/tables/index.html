@@ -6,17 +6,16 @@
 
 {% block content %}
 
-  
-
   <div class="text-center">
-    {% if (req.isAuthenticated()) %}
 
-      <a class="btn btn-success" href="/tables/new">
-        <i class="fa fa-plus-circle"></i>
-        Create your own table
-      </a>
-      <hr>
-    {% endif %}
+    <div class="about">
+      {% if (req.isAuthenticated()) %}
+        <a class="btn btn-success" href="/tables/new">
+          <i class="fa fa-plus-circle"></i>
+          Open your own table
+        </a>
+      {% endif %}
+    </div>
 
     {% if (tables.length) %}
       {% for table in tables %}
@@ -30,22 +29,21 @@
           {% endautoescape %}
         </ul>
       {% endif %}
+
     {% else %}
       <h4 class="muted">
         No open tables.&nbsp;
       </h4>
     {% endif %}
+    
+    {% include 'create_table.html' %}
 
-    {% if (req.isAuthenticated()) %}
-      <div class="clearfix"></div>
-      <hr>
-      <a class="btn btn-success" href="/tables/new">
-        <i class="fa fa-plus-circle"></i>
-        Create your own table
-      </a>
-    {% endif %}
+  
+
   </div>
 
+  <div class="clearfix"></div>
+  <div class="about"></div>
 
 
 {% endblock %}

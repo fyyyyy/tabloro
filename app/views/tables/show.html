@@ -15,11 +15,25 @@
     <div class="col-md-7">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h4>Players</h4>
+          <h4>Players at this table</h4>
         </div>
         <div class="panel-body">
-          None
-          <a class="btn btn-primary btn-block" href="/game">Join</a>
+          <ul class="list-group">
+              {% if (players.length) %}
+                  {% for player in players %}
+                      <li class="list-group-item">
+                        <img src="/img/cursors/{{player.cursor}}.png"/>
+                        {{ player.name }}
+                      </li>
+                  {% endfor %}
+              {% endif %}
+          </ul>
+        </div>
+        <div class="panel-footer">
+          <a class="btn btn-primary btn-lg" href="/tables/{{table.title}}/play" target="_blank">
+            PLAY &nbsp;
+            <i class="fa fa-play"></i>
+          </a>
         </div>
       </div>
     </div>
@@ -47,10 +61,10 @@
         {% endif %}
         {% if isAdmin %}
           <li class="list-group-item list-group-item-danger">
-            <form action="{{ '/tables/' + table.id }}" method="post" onsubmit="return confirm('Are you sure?')">
+            <form action="{{ '/tables/' + table.title }}" method="post" onsubmit="return confirm('Are you sure?')">
               <br>
               <input type="hidden" name="_csrf" value="{{ csrf_token }}">
-              <a href="{{ '/tables/' + table._id + '/edit' }}" title="edit" class="btn btn-default">
+              <a href="{{ '/tables/' + table.title + '/edit' }}" title="edit" class="btn btn-default">
                 Edit
               </a>
               &nbsp;
@@ -70,7 +84,10 @@
   <section class="bg-primary about">
     <div class="container">
       
-      <a href="/tables" class="btn btn-default">Back to tables</a>
+      <a href="/tables" class="btn btn-default">
+        <i class="fa fa-backward"></i>
+        Back to tables
+      </a>
     </div>
   </section>
 {% endblock %}
