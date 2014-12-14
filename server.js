@@ -10,6 +10,7 @@
 
 var log = console.log;
 
+log(process.env.NODE_ENV);
 var fs = require('fs');
 var express = require('express');
 var mongoose = require('mongoose');
