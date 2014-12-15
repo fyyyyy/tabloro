@@ -112,7 +112,7 @@ hr.small {
 }
 
 .sidebar-nav li {
-    text-indent: 20px;
+    margin-left: 20px;
     line-height: 40px;
 }
 

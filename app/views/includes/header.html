@@ -5,33 +5,33 @@
         <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
 
         <li class="sidebar-brand">
-            <a href="/#top">Tablemania</a>
+            <a href="/#top">Tabloro</a>
         </li>
 
         <li>
           <a href="/news" title="Latest News">
-            <i class="fa fa-book"></i>&nbsp;
+            <i class="fa fa-book fa-fw"></i>&nbsp;
               News
           </a>
         </li>
 
         <li>
             <a href="/#about">
-              <i class="fa fa-question"></i>&nbsp;
+              <i class="fa fa-question fa-fw"></i>&nbsp;
               About
             </a>
         </li>
 
         <li>
             <a href="/#features">
-              <i class="fa fa-list-ol"></i>&nbsp;
+              <i class="fa fa-list-ol fa-fw"></i>&nbsp;
               Features
             </a>
         </li>
 
         <li>
             <a href="/#current_games">
-              <i class="fa fa-rocket"></i>&nbsp;
+              <i class="fa fa-rocket fa-fw"></i>&nbsp;
               Latest Tables
             </a>
         </li>
@@ -39,7 +39,7 @@
         {% if (req.isAuthenticated()) %}
           <li>
               <a href="/tables">
-                <i class="fa fa-search"></i>&nbsp;
+                <i class="fa fa-search fa-fw"></i>&nbsp;
                 All Tables
               </a>
           </li>
@@ -48,7 +48,7 @@
 
         <li>
             <a href="/#contact">
-            <i class="fa fa-envelope"></i>&nbsp;
+            <i class="fa fa-envelope fa-fw"></i>&nbsp;
             Contact
             </a>
         </li>
@@ -65,21 +65,21 @@
           </li>
           <li>
             <a href="/logout" title="logout">
-              <i class="fa fa-sign-out"></i>&nbsp;
+              <i class="fa fa-sign-out fa-fw"></i>&nbsp;
               Logout
             </a>
           </li>
         {% else %}
           <li class="{% if (isActive('/login')) %}active{% endif %}">
             <a href="/login" title="Login">
-              <i class="fa fa-sign-in"></i>&nbsp;
+              <i class="fa fa-sign-in fa-fw"></i>&nbsp;
               Login
             </a>
           </li>
 
           <li class="{% if (isActive('/signup')) %}active{% endif %}">
             <a href="/signup" title="Signup">
-              <i class="fa fa-plus"></i>&nbsp;
+              <i class="fa fa-plus fa-fw"></i>&nbsp;
               Signup
             </a>
           </li>
