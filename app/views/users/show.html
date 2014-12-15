@@ -9,7 +9,7 @@
     <div class="container text-center">
       <h3>
         <img src={{"/img/cursors/" + (req.user.selected_cursor || 1) + ".png"}}></img>
-        {{user.username|title}}'s user profile
+        {{user.username|title}}'s profile
       </h3>
       <p>Registered: <b>{{ user.createdAt.toISOString()|date('M d, Y') }}</b></p>
       <p><i class="fa fa-skype fa-2x"></i> Skype: <b><a class="skype" href="skype:{{ user.skype }}?call">Call {{ user.skype }}</a></b></p>
