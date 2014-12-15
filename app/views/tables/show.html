@@ -20,10 +20,13 @@
         <div class="panel-body">
           <ul class="list-group">
               {% if (players.length) %}
-                  {% for player in players %}
+                  {% for user in players %}
                       <li class="list-group-item">
-                        <img src="/img/cursors/{{player.cursor}}.png"/>
-                        {{ player.name }}
+                        <img src="/img/cursors/{{user.cursor}}.png"/>
+                        {{ user.name }}
+                        &nbsp;
+                        <a href="skype:{{ user.skype }}?call"> <i class="fa fa-skype"> call with skype</i></a>
+
                       </li>
                   {% endfor %}
               {% endif %}

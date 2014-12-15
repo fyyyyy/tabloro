@@ -347,3 +347,7 @@ button.error:hover,
 button.error:focus {
   color: #D9534F;
 }
+
+a.skype {
+    color: #eee;
+}

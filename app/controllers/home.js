@@ -14,7 +14,7 @@ var R = require('../../public/js/ramda.js');
 
 exports.index = function (req, res){
   var tableOptions = {
-    perPage: 8,
+    perPage: 7,
     criteria: {
       isPrivate: false
     }

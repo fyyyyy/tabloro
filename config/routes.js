@@ -95,8 +95,8 @@ module.exports = function (app, passport) {
   app.get('/tables', tables.index);
   app.get('/tables/new', tableAuth, tables.new);
   app.post('/tables', auth.requiresLogin, tables.create);
-  app.get('/tables/:tableName', tables.show);
-  app.get('/tables/:tableName/play', tables.play);
+  app.get('/tables/:tableName', auth.requiresLogin, tables.show);
+  app.get('/tables/:tableName/play', auth.requiresLogin, tables.play);
 
   // home route
   app.get('/', home.index);

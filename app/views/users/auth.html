@@ -5,9 +5,12 @@
 {% endblock %}
 
 {% block content %}
-  <div class="text-vertical-center container">
 
-    <a href="/auth/facebook">
+  <div class="about"></div>
+
+  <section class="text-center container">
+
+<!--     <a href="/auth/facebook">
       <img src="/img/facebook.png" alt="facebook auth">
     </a>
     <a href="/auth/twitter">
@@ -20,11 +23,12 @@
 
     <br>
     <h2>OR</h2>
-    <br>
+    <br> -->
 
     <div class="login">
       {% block auth %}{% endblock %}
     </div>
-  </div>
+  </section>
   
+  <div class="about"></div>
 {% endblock %}
