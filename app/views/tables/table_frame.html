@@ -1,12 +1,14 @@
 <div class="col-sm-3">
   <div class="panel  {% if table.isPrivate %}panel-warning {% else %} panel-default {% endif %}">
       
-      <img class="img-responsive" src="/img/game2.jpg"></img>
-      <div class="post-content">
-        {% block image %}
-        {% endblock %}
-   
-      </div>
+      <div class="img-overlay">
+        <img class="img-responsive" src="/img/game2.jpg">
+          <div class="post-content">
+            {% block image %}
+            {% endblock %}
+          </div>
+        </div>
+      </img>
 
     <div class="panel-footer">
       
