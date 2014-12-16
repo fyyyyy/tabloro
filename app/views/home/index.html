@@ -1,11 +1,12 @@
 {% extends '../layouts/noHeader.html' %}
 
 {% block main %}
-    <h1>{{title}}<small>beta</small></h1>
+    <h1>{{title}}<small>.com</small></h1>
     <h3>Your online game table in the browser.
     <br>Play your favourite board games with friends &amp family.</h3>
     <br>
     <a href="#current_games" class="btn btn-dark btn-lg">Play now</a>
+    <div class="ribbon-green">alpha 0.1</div>
 
 {% endblock %}
 
@@ -16,6 +17,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
+                
                     <h2>Play <strong>any</strong> board game, <strong>any</strong> time, <strong>any</strong> device. </h2>
                     <p class="lead">Play in your browser, invite friends &amp family, save and resume any time.</p>
                 </div>
@@ -31,7 +33,7 @@
         <div class="container">
             <div class="row text-center">
                 <div class="col-lg-10 col-lg-offset-1">
-                    <h2>Tabloro Features</h2>
+                    <h2>Features</h2>
                     <hr class="small">
                     <div class="row">
 
@@ -67,13 +69,13 @@
                             <div class="service-item">
                                 <span class="fa-stack fa-4x">
                                     <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-video-camera fa-stack-1x text-primary"></i>
-                                    <i class="small fa fa-microphone fa-stack-1x text-default"></i>
+                                    <i class="fa fa-square-o fa-stack-1x text-primary"></i>
+                                    <i class="small fa fa-user fa-stack-1x text-primary"></i>
                                 </span>
                                 <h4>
                                     <strong>Video &amp Audio chat</strong>
                                 </h4>
-                                <p>Built in private peer-to-peer video &amp audio chat or 1-click via <i class="fa fa-skype"></i> Skype.</p>
+                                <p>Built in private peer-to-peer video &amp audio chat and <i class="fa fa-skype">kype</i> support.</p>
                                 <!-- <a href="#" class="btn btn-light">How That ?</a> -->
                             </div>
                         </div>
@@ -127,7 +129,7 @@
                             &nbsp; find more...
                         </a>
                     </h4>
-                    <hr class="">
+                    <br/>
                     <div class="row">
                         {% if (tables.length) %}
                             {% for table in tables %}

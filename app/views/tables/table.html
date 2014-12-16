@@ -1,37 +1,38 @@
-<div class="col-sm-3">
-  <div class="panel  {% if table.isPrivate %}panel-warning {% else %} panel-success {% endif %}">
-    <div class="panel-heading">
-      {{table.title | title}}
-    </div>
-    
-      <img class="img-responsive" src="/img/game2.jpg">
-      <div class="post-content">
+{% extends 'table_frame.html' %}
 
-        <p>
-          Tags: &nbsp;
-          {% for tag in table.tags.split(',') %}
-            <i class="muted fa fa-tag"></i>&nbsp;
-            <a href="{{ '/tags/' + tag }}" class="tag">{{ tag }}</a>
-            &nbsp;&nbsp;
-          {% endfor %}
-        </p>
+
+{% block image %}
+  <h4>{{table.title | title}}</h4>
+
+  <p>
+    {% if table.tags.length %}
+      tags &nbsp;
+      {% for tag in table.tags.split(',') %}
+        <i class="muted fa fa-tag"></i>&nbsp;
+        <a href="{{ '/tags/' + tag }}" class="tag">{{ tag }}</a>
+        &nbsp;&nbsp;
+      {% endfor %}
+    <br/>
+    {% endif %}
+
+    {% if table.players.length === 0 %}
+      <em>no players yet</em>
+    {% else %}
+      players   
+      {% for user in table.players %}
+        <i class="fa fa-user fa-lg text-primary"></i>&nbsp;
+      {% endfor %}
+    {% endif %}
+  </p>
+{% endblock %}
    
-        <p>
-          Players: 
-          {% for user in table.players %}
-            <i class="fa fa-user fa-lg text-primary"></i>&nbsp;
-          {% endfor %}
-        </p>
-   
-        <span class="small">Started {{ table.createdAt.toISOString()|date('G:i') }}</span>
-      </div>
-    <div class="panel-footer">
+
       
-      <a href="{% if (req.isAuthenticated()) %}tables/{{ table.title }}{% else %}/login{%endif%}" class="btn btn-primary">
-        join table
-        <i class="fa fa-user"></i>
-      </a>
+{% block footer %}
+  <span class="small">Started {{ table.createdAt.toISOString()|date('G:i') }}</span>
+  <a href="{% if (req.isAuthenticated()) %}tables/{{ table.title }}{% else %}/login{%endif%}" class="btn btn-primary btn-block">
+    <i class="fa fa-user"></i>&nbsp;
+    join table
+  </a>
+{% endblock %}
 
-    </div>
-  </div>
-</div>

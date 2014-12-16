@@ -1,26 +1,24 @@
-{% if (req.isAuthenticated()) %}
-<div class="col-md-3">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      ...
-    </div>
+{% extends 'table_frame.html' %}
+
+
+  {% block image %}
+
+    <a class="btn btn-success" href="/tables/new">
+      <i class="fa fa-plus fa-4x"></i>
+    </a>
+
+  {% endblock %}
+     
+
+        
+  {% block footer %}
     
-      <img class="img-responsive greyscale" src="/img/game2.jpg">
+    <span class="small">&nbsp;</span><br/>
 
-      <div class="post-content">
-        <a class="btn btn-success" href="/tables/new">
-          <i class="fa fa-plus fa-4x"></i>
-        </a>
-      </div>
+    <a class="btn btn-success" href="/tables/new">
+      <i class="fa fa-plus-circle"></i>
+      Open New Table
+    </a>
 
-    <div class="panel-footer">
+  {% endblock %}
 
-      <a class="btn btn-success" href="/tables/new">
-        <i class="fa fa-plus-circle"></i>
-        Open New Table
-      </a>
-
-    </div>
-  </div>
-</div>
-{% endif %}

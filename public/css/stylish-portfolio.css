@@ -257,12 +257,12 @@ hr.small {
 
 
 .post-content {
-    background: none repeat scroll 0 0 #FFFFFF;
+    background: none repeat scroll 0 0 #321;
     opacity: 0.7;
-    top:30%;
-    left:0;
-    width: 100%;
+    top:15%;
+    width: 90%;
     position: absolute;
+    color: #efefef;
 }
 
 
@@ -351,3 +351,36 @@ button.error:focus {
 a.skype {
     color: #eee;
 }
+
+
+
+
+.ribbon-green {
+  font: bold 15px Sans-Serif;
+  color: #efefef;
+  text-align: center;
+  text-shadow: #321 -1px 2px 0px;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform:    rotate(-45deg);
+  -ms-transform:     rotate(-45deg);
+  -o-transform:      rotate(-45deg);
+  position: absolute;
+  padding: 10px 0px 10px 0px;
+  left: -40px;
+  top: 25px;
+  width: 160px;
+  background-color: #5cb85c;
+  /*background-image: -webkit-gradient(linear, left top, left bottom, from(#BFDC7A), to(#8EBF45)); 
+  background-image: -webkit-linear-gradient(top, #BFDC7A, #8EBF45); 
+  background-image:    -moz-linear-gradient(top, #BFDC7A, #8EBF45); 
+  background-image:     -ms-linear-gradient(top, #BFDC7A, #8EBF45); 
+  background-image:      -o-linear-gradient(top, #BFDC7A, #8EBF45); */
+  color: #eee;
+  -webkit-box-shadow: 3px 3px 0px #321;
+  -moz-box-shadow:    3px 3px 0px #321;
+  box-shadow:         3px 3px 0px #321;
+}
+
+
+
+

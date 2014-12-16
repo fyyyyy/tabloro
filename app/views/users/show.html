@@ -12,7 +12,7 @@
         {{user.username|title}}'s profile
       </h3>
       <p>Registered: <b>{{ user.createdAt.toISOString()|date('M d, Y') }}</b></p>
-      <p><i class="fa fa-skype fa-2x"></i> Skype: <b><a class="skype" href="skype:{{ user.skype }}?call">Call {{ user.skype }}</a></b></p>
+      <p><i class="fa fa-skype fa-2x"></i> Skype: <b><a class="skype btn btn-success" href="skype:{{ user.skype }}?call"><i class="fa fa-phone"></i>&nbsp; Call {{ user.skype }}</a></b></p>
       
     </div>
   </section>

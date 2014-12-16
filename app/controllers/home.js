@@ -32,7 +32,7 @@ exports.index = function (req, res){
         if (err) return res.render('500');
         Article.count().exec(function (err, count) {
           res.render('home/index', {
-            title: 'Tabloro',
+            title: 'tabloro',
             articles: articles,
             tables: tables
           });
