@@ -1,4 +1,4 @@
-/*global Phaser, R, T, G, log, game, Utils, dynamicInvoke, stacks, cards1, Network*/
+/*global Phaser, R, T, G, console, game, Utils, dynamicInvoke, stacks, cards1, Network*/
 "use strict";
 
 var S = {};
@@ -63,14 +63,14 @@ S.assign = R.curry(function (stack, item) {
 // Interaction handlers
 
 S.onDragStack = function (stack) {
-    log('drag stack');
+    console.log('drag stack');
     Network.server.stackDragStart(stack.id);
     Controls.hide();
 };
 
 
 S.onDropStack = function (stack) {
-    log('drop stack');
+    console.log('drop stack');
     var position = stack.position.clone();
     position.width = stack.width;
     position.height = stack.height;
@@ -80,7 +80,7 @@ S.onDropStack = function (stack) {
 
 
 S.onShuffleButton = function (button) {
-    log('shuffle', this);
+    console.log('shuffle', this);
     var stack = this;
     Network.server.shuffleStack(stack.id);
 };
@@ -103,12 +103,12 @@ S.bringToTop = function (tile) {
 
 
 S.tidy = function (stack) {
-    // log('S.tidy stack', stack.id);
+    // console.log('S.tidy stack', stack.id);
     var last;
 
     R.forEach.idx(function (cardId, index) {
         var card = G.findTile(cardId);
-        // log('card', card, 'index', index);
+        // console.log('card', card, 'index', index);
         card.inputEnabled = false;
         Utils.alignPosition(card, S.calculateCardPos(stack, index));
         if (stack.config.hidden) T.hide(card);
@@ -203,7 +203,7 @@ S.updateCards = function (stack, cards) {
                 200, Phaser.Easing.Cubic.In, true, 0, false
             );
             tween.onComplete.add(function () {
-                // log('stack tween complete');
+                // console.log('stack tween complete');
                 S.tidy(stack);
             });
         })(newCardIds);
@@ -219,7 +219,7 @@ S.removeCardFromStacks = function (tileId) {
         stack.cards = R.reject(R.eq(tileId))(stack.cards);
         S.tidy(stack);
     })(stacks.children);
-    // log('removed cardFromStacks', stack1.cards.length, stack2.cards.length);
+    // console.log('removed cardFromStacks', stack1.cards.length, stack2.cards.length);
     return tileId;
 };
 

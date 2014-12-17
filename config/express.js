@@ -39,7 +39,7 @@ module.exports = function (app, passport, eurecaServer) {
 
   // Static files middleware
   app.use(express.static(config.root + '/public'));
-  app.use(express.static(config.root + '/public_game'));
+  app.use(express.static(config.root + '/build'));
 
   // Use winston on production
   var winston_log;

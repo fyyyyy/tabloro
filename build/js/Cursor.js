@@ -1,0 +1,1 @@
+"use strict";var Cursor={};Cursor.new=function(r){var t=players.create(0,0,"cursor"+r.cursor);return t.name=r.name,t.addChild(game.add.text(40,0,r.name,{font:"26px Arial",fill:"#fff"})),Cursor.set(),t},Cursor.set=function(){game.canvas.setAttribute("style","cursor: url(/img/cursors/"+cursorId+".png), auto;")},Cursor.reset=function(r){return r.events.onInputOut.add(Cursor.set),r};

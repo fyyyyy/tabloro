@@ -34,7 +34,7 @@ UI.init = function () {
 
 
 UI.update = function () {
-    log('UI.update');
+    console.log('UI.update');
 
     R.forEach(UI.fixedToCamera(false))(UI.textElements);
     UI.gameText.x = UI.nameText.x = UI.messageText.x = game.canvas.width - 400;

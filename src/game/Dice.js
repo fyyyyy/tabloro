@@ -1,4 +1,4 @@
-/*global Phaser, R, T, G, log, game, Utils, dynamicInvoke, stacks*/
+/*global Phaser, R, T, G, console, game, Utils, dynamicInvoke, stacks*/
 "use strict";
 
 var Dice = {};
@@ -31,10 +31,10 @@ Dice.spin = function spin(diceInGroup, delays, values) {
             delay = delays[index],
             value = values[index];
 
-        log('spin', diceId, delay);
+        console.log('spin', diceId, delay);
         dice.play('spin', 100, true);
         setTimeout(function () {
-            log('dice stop spin');
+            console.log('dice stop spin');
             dice.animations.stop(null, false);
             dice.frame = value; // set dice to number of eyes
         }, delay - 200);
@@ -46,7 +46,7 @@ Dice.spin = function spin(diceInGroup, delays, values) {
 };
 
 Dice.onSpinClicked = function onSpinClicked(tile) {
-    log('onSpinClicked', tile);
+    console.log('onSpinClicked', tile);
     var diceInGroup = R.pluck('id')(tile.parent.children);
     Network.server.spin(diceInGroup);
 };

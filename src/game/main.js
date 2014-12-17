@@ -18,10 +18,6 @@ var game = new Phaser.Game(Screen.x, Screen.y, Phaser.AUTO, 'boardgame', {
 });
 
 
-var log = console.debug.bind(console);
-
-
-
 var redDice;
 var blueDice;
 var cards1;
@@ -110,7 +106,7 @@ function addCards(array, group, stack) {
         cards.push(tile.id);
 
         Controls.target = tile;
-        // log('tile created', tile.id);
+        // console.log('tile created', tile.id);
     })(array);
     // S.updateCards(stack, cards);
     return Controls.target;
@@ -227,7 +223,7 @@ function update() {
 
 
     if (game.input.mouse.event) {
-        // log(game.input.mouse.event)
+        // console.log(game.input.mouse.event)
         if (game.input.mouse.event.wheelDeltaX) {
             game.camera.x -= game.input.mouse.event.wheelDeltaX;
         }
@@ -243,6 +239,6 @@ function update() {
         Network.server.moveCursor(mouseWorldPosition);
         player.lastPosition = mouseWorldPosition;
     }
-        // log('nothign changed');
+        // console.log('nothign changed');
 
 }

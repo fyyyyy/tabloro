@@ -1,4 +1,4 @@
-/*global Phaser, R, game, log*/
+/*global Phaser, R, game, console*/
 "use strict";
 
 var T = {};
@@ -58,7 +58,7 @@ T.rotateable = function (tile) {
 };
 
 T.onRotate = function onRotate() {
-    log('onRotate', Controls.target);
+    console.log('onRotate', Controls.target);
 
     var rotation = Controls.target.parent.rotateBy || Math.PI / 2;
     var position = Controls.target.position.clone();
@@ -88,20 +88,20 @@ T.resetTint = function (tile) {
 };
 
 T.onStartDrag = function (tile) {
-    log('onStartDrag', tile.id);
+    console.log('onStartDrag', tile.id);
     Network.server.tileDragStart(tile.id);
 };
 
 
 T.onStopDrag = function (tile) {
-    log('onStopDrag');
+    console.log('onStopDrag');
     var position = tile.position.clone();
     position.rotation = tile.rotation;
     Network.server.tileDragStop(tile.id, position);
 };
 
 T.onStartDragRotate = function (tile) {
-    log('onStartDragRotate');
+    console.log('onStartDragRotate');
     Controls.target = tile;
     T.show(tile);
     Controls.hide();
@@ -109,7 +109,7 @@ T.onStartDragRotate = function (tile) {
 
 
 T.onStopDragRotate = function (tile) {
-    log('onStopDragRotate');
+    console.log('onStopDragRotate');
     Controls.at(tile);
 };
 

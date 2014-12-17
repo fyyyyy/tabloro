@@ -12,11 +12,12 @@ var log = console.log;
 
 log(process.env.NODE_ENV);
 var fs = require('fs');
-var express = require('express');
 var mongoose = require('mongoose');
+var express = require('express');
 var passport = require('passport');
 var config = require('config');
-var R = require('./public/js/ramda.js');
+var R = require('ramda');
+var EurecaServer = require('eureca.io').EurecaServer;
 
 
 
@@ -24,7 +25,6 @@ var app = express();
 var port = process.env.PORT || 3000;
 var server = require('http').createServer(app);
 
-var EurecaServer = require('eureca.io').EurecaServer;
 
 // create an instance of EurecaServer
 var eurecaServer = new EurecaServer({
@@ -67,7 +67,7 @@ require('./config/express')(app, passport, eurecaServer);
 require('./config/routes')(app, passport);
 
 // Eureca Server config
-require('./eurecaserver')(eurecaServer);
+require('eurecaserver')(eurecaServer);
 
 server.listen(port);
 log('Express app started on port ' + port);
