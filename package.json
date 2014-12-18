@@ -10,10 +10,9 @@
   ],
   "version": "4.0.0",
   "private": false,
-  "author": "Madhusudhan Srinivasa <madhums8@gmail.com> (http://madhums.github.com)",
+  "author": "Frank Tree <frankyyyy@glive.com>",
   "repository": {
-    "type": "git",
-    "url": "https://github.com/madhums/node-express-mongoose-demo.git"
+    "type": "git"
   },
   "engines": {
     "node": "0.11.13"
@@ -37,6 +36,7 @@
     "express-session": "1.8.2",
     "forever": "0.11.1",
     "gulp": "^3.8.10",
+    "gulp-concat": "^2.4.2",
     "gulp-uglify": "^1.0.2",
     "imager": "0.2.7",
     "method-override": "2.2.0",

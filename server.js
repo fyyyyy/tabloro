@@ -1,8 +1,8 @@
 
 /*!
- * nodejs-express-mongoose-demo
- * Copyright(c) 2013 Madhusudhan Srinivasa <madhums8@gmail.com>
- * MIT Licensed
+ * Tabloro
+ * Copyright(c) 2014 Franky Trigub frankyyyy@live.com
+ * 
  */
 /**
  * Module dependencies
