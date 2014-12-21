@@ -33,6 +33,7 @@ Video.init = function () {
     call.answer(window.localStream);
     Video.step3(call);
   });
+
   Video.peer.on('error', function (err) {
     console.error(err.message);
     // Return to step 2 if error occurs
@@ -100,7 +101,7 @@ Video.step1 = function () {
 Video.step2 = function () {
   console.log('step 2');
   $('#step1, #step3').hide();
-  $('#step2').show();
+  if(Video.clientId) $('#step2').show();
 };
 
 Video.step3 = function (call) {
