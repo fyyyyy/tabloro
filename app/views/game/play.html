@@ -1,64 +1,75 @@
-<!doctype html> 
-<html lang="en"> 
-<head> 
-	<meta charset="UTF-8" />
-    <title>{{title}}</title>
-    <link href="/css/game.css" rel="stylesheet">
-    <link href="/css/video.css" rel="stylesheet">
-
-
-    <script type="text/javascript" src="/eureca.js"></script>
-    <script type="text/javascript" src="/js/phaser.js"></script>
-    <script type="text/javascript" src="/js/ramda.js"></script>
-    <script type="text/javascript" src="/js/jquery.js"></script>
-    <script type="text/javascript" src="/js/peer.js"></script>
-
-    {% if process.env.NODE_ENV === 'development' %}
-        <script type="text/javascript" src="/Game.js"></script>
-        <script type="text/javascript" src="/Network.js"></script>
-        <script type="text/javascript" src="/Cursor.js"></script>
-        <script type="text/javascript" src="/UI.js"></script>
-        <script type="text/javascript" src="/Assets.js"></script>
-        <script type="text/javascript" src="/Controls.js"></script>
-        <script type="text/javascript" src="/Dice.js"></script>
-        <script type="text/javascript" src="/Utils.js"></script>
-        <script type="text/javascript" src="/Tile.js"></script>
-        <script type="text/javascript" src="/Stack.js"></script>
-        <script type="text/javascript" src="/Video.js"></script>
-        <script type="text/javascript" src="/main.js"></script>
-    {% else %}
-        <script type="text/javascript" src="/js/compiled.js"></script>
-    {% endif %}
-
-
-    <script type="text/javascript">
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>{{title}}</title>
+        <link href="/css/game.css" rel="stylesheet">
+        <link href="/css/video.css" rel="stylesheet">
+        <link href="/css/bootstrap.css" rel="stylesheet">
+        <script type="text/javascript" src="/eureca.js"></script>
+        <script type="text/javascript" src="/js/phaser.js"></script>
+        <script type="text/javascript" src="/js/ramda.js"></script>
+        <script type="text/javascript" src="/js/jquery.js"></script>
+        <script type="text/javascript" src="/js/peer.js"></script>
+        {% if process.env.NODE_ENV === 'development' %}
+            <script type="text/javascript" src="/Game.js"></script>
+            <script type="text/javascript" src="/Network.js"></script>
+            <script type="text/javascript" src="/Cursor.js"></script>
+            <script type="text/javascript" src="/UI.js"></script>
+            <script type="text/javascript" src="/Assets.js"></script>
+            <script type="text/javascript" src="/Controls.js"></script>
+            <script type="text/javascript" src="/Dice.js"></script>
+            <script type="text/javascript" src="/Utils.js"></script>
+            <script type="text/javascript" src="/Tile.js"></script>
+            <script type="text/javascript" src="/Stack.js"></script>
+            <script type="text/javascript" src="/Video.js"></script>
+            <script type="text/javascript" src="/main.js"></script>
+        {% else %}
+            <script type="text/javascript" src="/js/compiled.js"></script>
+        {% endif %}
+        <script type="text/javascript">
         var playerName = '{{user.username}}';
         var cursorId = Number('{{user.selected_cursor}}') || 1;
         var roomName = '{{table.title}}';
-    </script>
-
-</head>
-
-<body>
-    
-    <!-- Loading message -->
-    <div id="please_wait" style="position: absolute; top: 40%; left:40%">
-        <center style="color: #888;">
+        </script>
+    </head>
+    <body>
+        
+        <!-- Loading message -->
+        <div id="please_wait" style="position: absolute; top: 40%; left:40%">
+            <center style="color: #888;">
             <h1>Please wait while loading '{{table.title}}'. Don't switch tabs...</h1>
             <p>Please do <b>not</b> switch tabs during loading or your game wont start properly. This is an <b>issue</b> we have to fix.</p>
             <p>Loading may take 0-3 <b>minutes</b> depending on your connection.</p>
-        </center>
-    </div>
-    
-    <!-- Video area -->
-    <div class="pure-u-2-3" id="video-container">
-        <video id="my-video" muted="true" autoplay></video>
-        <video id="their-video" autoplay></video>
-        <div class="chat">
-            <textarea type="text" id="chatInput" placeholder="type to chat..."></textarea>
+            </center>
         </div>
-    </div>
-
-</body>
-
+        
+        <!-- Video area -->
+        <div id="video-container">
+            <div class="step" id="step1">
+                <p>Please click `allow` on the top of the screen.</p>
+                <div id="step1-error">
+                    <p>Failed to access the webcam and microphone.</p>
+                    <a href="#" class="btn btn-primary" id="step1-retry">Try again</a>
+                </div>
+            </div>
+            
+            
+            <video id="my-video" muted="true" autoplay></video>
+            
+            <div id="step2">
+                <a href="#" class="btn btn-success" id="make-call">Call</a>
+            </div>
+            
+            <video id="their-video" autoplay></video>
+            
+            <div id="step3">
+                <p><a href="#" class="btn btn-danger" id="end-call">End call</a></p>
+            </div>
+            
+            <div class="chat">
+                <textarea type="text" id="chatInput" placeholder="type to chat..."></textarea>
+            </div>
+        </div>
+    </body>
 </html>

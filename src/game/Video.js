@@ -7,10 +7,13 @@ navigator.getUserMedia = navigator.getUserMedia ||
   navigator.mozGetUserMedia;
 
 
+
 Video.init = function () {
   console.log('VIDEO Connecting ...');
+  $('#step2').hide();
+  $('#step3').hide();
+
   Video.peer = new Peer(Network.myId, {
-    // key: 'lwjd5qra8257b9',
     key: '8z62zmz8keasjor',
     debug: 3,
     'iceServers': [
@@ -34,22 +37,30 @@ Video.init = function () {
     console.error(err.message);
     // Return to step 2 if error occurs
     Video.step2();
+    // Video.peer.reconnect();
   });
 
-  // Video.peer.on('connection', function (conn) {
-  //   console.log('VIDEO peer.connection received connection to other player', conn);
-  //   conn.on('open', function () {
-  //     // Receive messages
-  //     conn.on('data', function (data) {
-  //       console.log('VIDEO Received', data);
-  //     });
 
-  //     // Send messages
-  //     console.log('VIDEO open Send hello');
-  //     conn.send('Hello!');
-  //   });
-  // });
-Video.step1();
+  $(function(){
+      $('#make-call').click(function(){
+        // Initiate a call!
+
+        var call = Video.peer.call(Video.clientId, window.localStream);
+        Video.step3(call);
+      });
+      $('#end-call').click(function(){
+        window.existingCall.close();
+        Video.step2();
+      });
+      // Retry if getUserMedia fails
+      $('#step1-retry').click(function(){
+        $('#step1-error').hide();
+        Video.step1();
+      });
+      // Get things started
+      Video.step1();
+    });
+
 };
 
 Video.connect = function (clientId) {
@@ -58,13 +69,19 @@ Video.connect = function (clientId) {
 
 };
 
-Video.call = function (clientId) {
-  console.log('VIDEO calling', clientId);
-  var call = Video.peer.call(clientId, window.localStream);
-  Video.step3(call);
+Video.newClient = function (clientId, clientName) {
+  console.log('new VIDEO client', clientId);
+  $('#make-call').text('Call ' + clientName);
+  Video.clientId = clientId;
+  Video.step2();
 };
 
 Video.step1 = function () {
+  console.log('step1');
+  $('#their-video').hide();
+  $('#step1-error').hide();
+
+
   // Get audio/video stream
   navigator.getUserMedia({
     audio: true,
@@ -73,30 +90,46 @@ Video.step1 = function () {
     // Set your video displays
     $('#my-video').prop('src', URL.createObjectURL(stream));
     window.localStream = stream;
-    Video.step2();
+    $('#step1').hide();
   }, function () {
-    // $('#step1-error').show();
+    $('#step1-error').show();
     console.error('error setting up video');
   });
 };
 
 Video.step2 = function () {
   console.log('step 2');
+  $('#step1, #step3').hide();
+  $('#step2').show();
 };
 
 Video.step3 = function (call) {
+  console.log('step3');
   // Hang up on an existing call if present
   if (window.existingCall) {
     window.existingCall.close();
   }
+  if (!call) {
+    console.error('no call object', call);
+    return;
+  }
   // Wait for stream on the call, then set peer video display
   call.on('stream', function (stream) {
+    $('#their-video').show();
     $('#their-video').prop('src', URL.createObjectURL(stream));
+  });
+
+  call.on('close', function (stream) {
+    $('#their-video').hide();
+    Video.step2();
+  });
+
+  call.on('error', function (stream) {
+    $('#their-video').hide();
   });
   // UI stuff
   window.existingCall = call;
   // $('#their-id').text(call.peer);
-  call.on('close', Video.step2);
-  // $('#step1, #step2').hide();
-  // $('#step3').show();
+  $('#step1, #step2').hide();
+  $('#step3').show();
 };

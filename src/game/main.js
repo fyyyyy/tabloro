@@ -164,12 +164,12 @@ function setupTiles () {
     tokens = game.add.group();
     tokens.z = 16;
     tokens.rotateBy = Math.PI / 2;
-    addTokens(R.repeatN('soldier', 10), 0x303320, 330, 60); // black
-    addTokens(R.repeatN('soldier', 10), 0x33BBFF, 400, 60); // blue
-    addTokens(R.repeatN('soldier', 10), 0xDD3333, 470, 60); // red
-    addTokens(R.repeatN('soldier', 10), 0x22CC22, 540, 60); // green
-    addTokens(R.repeatN('soldier', 10), 0xFFEE22, 610, 60); // purple
-    addTokens(R.repeatN('soldier', 10), 0xFFFFFF, 680, 60); // white
+    addTokens(R.repeatN('soldier', 7), 0x303320, 330, 60); // black
+    addTokens(R.repeatN('soldier', 7), 0x33BBFF, 400, 60); // blue
+    addTokens(R.repeatN('soldier', 7), 0xDD3333, 470, 60); // red
+    addTokens(R.repeatN('soldier', 7), 0x22CC22, 540, 60); // green
+    addTokens(R.repeatN('soldier', 7), 0xFFEE22, 610, 60); // purple
+    addTokens(R.repeatN('soldier', 7), 0xFFFFFF, 680, 60); // white
 
     // dice
     Dice.add(redDice, 0, 0xDD3333);

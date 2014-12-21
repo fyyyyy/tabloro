@@ -60,12 +60,12 @@ Network.setup = function () {
         UI.message(client.name, 'joined the table!');
         UI.updateNames();
 
-        if(isNewPlayer) {
+        // if(isNewPlayer) {
             console.log('isNewPlayer');
             setTimeout(function() {
-                Video.call(client.id);
+                Video.newClient(client.id, client.name);
             }, 2000);
-        }
+        // }
     };
 
 

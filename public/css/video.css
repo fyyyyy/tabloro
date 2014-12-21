@@ -22,3 +22,8 @@
     top: 50px;
     left: 50px;
 }
+
+.step {
+    padding: 25px;
+    background-color: #fff;
+}
