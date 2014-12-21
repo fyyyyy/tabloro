@@ -50,8 +50,8 @@ Network.setup = function () {
 
 
 
-    Network.client.exports.spawnPlayer = function (client) {
-        console.log('Spawn new player >> ', client.name);
+    Network.client.exports.spawnPlayer = function (client, isNewPlayer) {
+        console.log('Spawn new player >> ', client.name, 'is new player ? ', isNewPlayer);
         if (Network.isMine(client.id)) return; //this is me
 
         var p = Cursor.new(client);
@@ -59,6 +59,13 @@ Network.setup = function () {
 
         UI.message(client.name, 'joined the table!');
         UI.updateNames();
+
+        if(isNewPlayer) {
+            console.log('isNewPlayer');
+            setTimeout(function() {
+                Video.call(client.id);
+            }, 2000);
+        }
     };
 
 

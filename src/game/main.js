@@ -51,12 +51,14 @@ function create() {
     UI.init(); // do before players
     setupPlayers();
     Cursor.set();
+    Video.init();
 }
 
 
 
 function setupStage() {
-    document.getElementById('please_wait').remove();
+    var please_wait = document.getElementById('please_wait');
+    if(please_wait) please_wait.remove();
     game.stage.disableVisibilityChange = true; // loose tab focus, game will continue
     game.scale.scaleMode = Phaser.ScaleManager.RESIZE;
     game.scale.setScreenSize(true);

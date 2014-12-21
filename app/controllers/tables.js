@@ -93,6 +93,7 @@ exports.create = function (req, res) {
   console.log('create table', req.body);
   var table = new Table(req.body);
 
+  table.user = req.user;
   table.stacks = new BOARD_DEFAULTS();
   
   table.save(function (err) {
@@ -149,4 +150,17 @@ exports.play = function (req, res){
     table: table
   });
     
+};
+
+
+/**
+ * Delete a table
+ */
+
+exports.destroy = function (req, res){
+  var table = req.table;
+  table.remove(function (err){
+    req.flash('info', 'Deleted successfully');
+    res.redirect('/tables');
+  });
 };

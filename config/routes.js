@@ -93,10 +93,11 @@ module.exports = function (app, passport) {
   // table routes
   app.param('tableName', tables.load);
   app.get('/tables', tables.index);
-  app.get('/tables/new', tableAuth, tables.new);
+  app.get('/tables/new', auth.requiresLogin, tables.new);
   app.post('/tables', auth.requiresLogin, tables.create);
   app.get('/tables/:tableName', auth.requiresLogin, tables.show);
   app.get('/tables/:tableName/play', auth.requiresLogin, tables.play);
+  app.delete('/tables/:tableName', tableAuth, tables.destroy);
 
   // home route
   app.get('/', home.index);

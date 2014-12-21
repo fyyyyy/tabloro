@@ -47,8 +47,18 @@ exports.article = {
 
 exports.table = {
   hasAuthorization: function (req, res, next) {
-    if (!req.isAuthenticated()) {
-      req.flash('info', 'You are not authorized');
+    var players = req.eurecaServer.getPlayers(req.table.title);
+
+    if (players && players.length) {
+      req.flash('error', 'Unfortunately not possible. Players are currently playing at this table');
+      if (req.table) {
+        return res.redirect('/tables/' + req.table.title);
+      }
+      return res.redirect('/tables/');
+    }
+
+    if (!req.table.user || req.table.user.id != req.user.id) {
+      req.flash('error', 'You are not authorized');
       if (req.table) {
         return res.redirect('/tables/' + req.table.title);
       }

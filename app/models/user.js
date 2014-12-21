@@ -26,6 +26,7 @@ var UserSchema = new Schema({
   username: { type: String, default: '' },
   selected_cursor: { type: String, default: '1'},
   skype: { type: String},
+  firefox: { type: String},
   provider: { type: String, default: '' },
   hashed_password: { type: String, default: '' },
   salt: { type: String, default: '' },
@@ -187,7 +188,7 @@ UserSchema.statics = {
    */
 
   load: function (options, cb) {
-    options.select = options.select || 'name username createdAt selected_cursor email skype';
+    options.select = options.select || 'name username createdAt selected_cursor email skype firefox';
     this.findOne(options.criteria)
       .select(options.select)
       .exec(cb);

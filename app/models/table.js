@@ -36,7 +36,8 @@ var TableSchema = new Schema({
   tags: {type: [], get: getTags, set: setTags},
   createdAt  : {type : Date, default : Date.now},
   tiles: {type: Object, default: {}},
-  stacks: {type: Object, default: {}}
+  stacks: {type: Object, default: {}},
+  user: {type : Schema.ObjectId, ref : 'User'},
 });
 
 /**
@@ -83,6 +84,7 @@ TableSchema.statics = {
   load: function (title, cb) {
     this.findOne({ title : title })
     .populate('users', 'username')
+    .populate('user', 'name username')
     .exec(cb);
   },
 

@@ -28,7 +28,7 @@ gulp.task('scripts:game', function() {
   // with sourcemaps all the way down
   return gulp.src(paths.scripts.game)
     .pipe(changed(DEST + '/js'))
-    .pipe(concat('game.js'))
+    .pipe(concat('compiled.js'))
     .pipe(uglify({
       compress: {
         drop_console: true
