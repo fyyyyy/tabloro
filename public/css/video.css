@@ -24,6 +24,14 @@
 }
 
 .step {
+    float: left;
     padding: 25px;
+}
+
+.video {
+    float: left;
+}
+
+.message {
     background-color: #fff;
 }

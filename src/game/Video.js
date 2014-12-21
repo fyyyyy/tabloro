@@ -37,7 +37,7 @@ Video.init = function () {
     console.error(err.message);
     // Return to step 2 if error occurs
     Video.step2();
-    // Video.peer.reconnect();
+    Video.peer.reconnect();
   });
 
 
