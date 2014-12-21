@@ -15,8 +15,10 @@
 }
 
 #video-container {
-    width: 100%;
-    background-color: #000;
+    width: auto;
     padding: 5px;
-    text-align: center;
+    text-align: left;
+    position: absolute;
+    top: 50px;
+    left: 50px;
 }
