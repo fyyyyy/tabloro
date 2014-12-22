@@ -10,6 +10,7 @@ navigator.getUserMedia = navigator.getUserMedia ||
 
 Video.init = function () {
   console.log('VIDEO Connecting ...');
+  $('#video-container').show();
   $('#step2').hide();
   $('#step3').hide();
 
