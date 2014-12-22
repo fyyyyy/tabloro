@@ -30,6 +30,8 @@ gulp.task('scripts:game', function() {
     .pipe(changed(DEST + '/js'))
     .pipe(concat('compiled.js'))
     .pipe(uglify({
+      mangle: true,
+      toplevel: true,
       compress: {
         drop_console: true
       }

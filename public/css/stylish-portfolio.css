@@ -259,8 +259,10 @@ hr.small {
 .post-content {
     background: none no-repeat scroll 0 0 #321;
     opacity: 0.7;
-    top: 20%;
+    top: 25%;
+    height: 50%;
     width: 100%;
+    padding-top: 5%;
     position: absolute;
     color: #efefef;
 }
@@ -387,4 +389,8 @@ a.skype {
 
 
 
+.form-group.required .control-label:after{
+    content: '*';
+    color: #d43f3a;
+}
 

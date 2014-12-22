@@ -2,7 +2,29 @@
 
 
 {% block image %}
-  <h4><strong>{{table.title | title}}</strong></h4>
+  <h4>
+
+    <strong>{{table.title | title}}</strong>
+
+    
+    {% if (table.rtcAudio) %}
+        &nbsp;
+        <i class="fa fa-microphone text-primary"></i>
+    {% endif %}
+    {% if (table.rtcVideo) %}
+        &nbsp;
+        <i class="fa fa-video-camera text-primary"></i>
+    {% endif %}
+    {% if (table.phone) %}
+        &nbsp;
+        <i class="fa fa-phone text-primary"></i>
+    {% endif %}
+    {% if (table.skype) %}
+        &nbsp;
+        <i class="fa fa-skype text-primary"></i>
+    {% endif %}
+  </h4>
+
 
   <p>
     {% if table.tags.length %}

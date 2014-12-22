@@ -38,8 +38,8 @@
           </a>
           <hr>
           
-          <i class="fa fa-google-plus"></i>
-          <a href="http://hangouts.google.com/onair">Create google hangout</a>
+          <!-- <i class="fa fa-google-plus"></i>
+          <a href="http://hangouts.google.com/onair">Create google hangout</a> -->
         </div>
       </div>
     </div>
@@ -48,11 +48,40 @@
     <div class="col-md-5">
       <ul class="list-group">
         {% if (table.isPrivate) %}
-          <li class="list-group-item list-group-item-warning">Private</li>
+          <li class="list-group-item list-group-item-warning">This Room is Private</li>
         {% else %}
-          <li class="list-group-item list-group-item-success">Public</li>
+          <li class="list-group-item list-group-item-success">This Room is Public</li>
         {% endif %}
-        <li class="list-group-item list-group-item-info">Started {{ table.createdAt.toISOString()|date('M d,  h:i a') }}</li>
+
+
+        {% if (table.rtcVideo) %}
+          <li class="list-group-item list-group-item-default">
+            <i class="fa fa-video-camera fa-fw"></i>
+             built in peer to peer video 
+          </li>
+        {% endif %}
+        {% if (table.rtcAudio) %}
+          <li class="list-group-item list-group-item-default">
+            <i class="fa fa-microphone fa-fw"></i>
+             built in peer to peer audio 
+          </li>
+        {% endif %}
+
+        {% if (table.phone) %}
+          <li class="list-group-item list-group-item-default">
+            <i class="fa fa-phone fa-fw"></i>
+             conference phone: {{table.phone}} (call at your own risk!)
+          </li>
+        {% endif %}
+
+        {% if (table.skype) %}
+          <li class="list-group-item list-group-item-default">
+            <i class="fa fa-skype fa-fw"></i>
+             Skype group <a class="btn btn-success" href="{{table.skype}}">Join</a>
+          </li>
+        {% endif %}
+
+        <li class="list-group-item list-group-item-default">Started {{ table.createdAt.toISOString()|date('M d,  h:i a') }}</li>
         {% if (table.tags) %}
           <li class="list-group-item meta">
             <p>

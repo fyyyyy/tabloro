@@ -1,4 +1,4 @@
-{% extends '../layouts/default.html' %}
+  {% extends '../layouts/default.html' %}
 
 {% block main %}
   <h1>{{ title }}</h1>
@@ -17,7 +17,7 @@
   <section class="bg">
     
     <div class="row container">
-      <div class="col-md-8">
+      <div class="col-md-12">
         <form method="post" action="{{ action }}" role="form" class="form-horizontal">
 
           <input type="hidden" name="_csrf" value="{{ csrf_token }}">
@@ -26,38 +26,105 @@
             <input type="hidden" name="_method" value="PUT">
           {% endif %}
 
-          <div class="form-group">
-            <label for="title" class="col-sm-2 control-label">Table Name</label>
-            <div class="col-sm-10">
-              <input type="text" name="title" value="{{ table.title }}" placeholder="Enter the name of your table" class="form-control" id="title">
+          <div class="form-group required">
+            <label for="title" class="col-sm-3 control-label">Table Name</label>
+            <div class="col-sm-9">
+              <input type="text" name="title" value="{{ table.title }}" placeholder="Enter the name of your table" class="form-control" id="title" required="true">
             </div>
           </div>
 
-          <div class="form-group"> 
-            <label class="col-sm-2 control-label">List in public?</label>
-            <div class="col-sm-10">
-              <div class="btn-group">
-                <label href="#" for="isPrivate1" class="btn btn-xs btn-default" >private
-                  <input type="radio" id="isPrivate1" name="isPrivate" value="1" />
-                </label>
-                <label href="#" for="isPrivate2" class="btn btn-xs btn-success active">public
-                  <input type="radio" id="isPrivate2" name="isPrivate" value="0" checked />
-                </label>
+          <div class="form-group">
+            <label for="password" class="col-sm-3 control-label">Password</label>
+            <div class="col-sm-9">
+              <input type="text" name="password" value="{{ table.password }}" placeholder="Enter password or leave blank" class="form-control" id="password">
+            </div>
+          </div>
+
+
+          <div class="panel panel-default col-sm-offset-3">
+            <div class="panel-heading">
+              <h4><a data-toggle="collapse" data-target="#accordion">Advanced Options</a></h4>
+            </div>
+            
+            <div class="panel-body collapse" id="accordion">
+
+              <div class="form-group"> 
+                <label class="col-sm-3 control-label">List in Public?</label>
+                <div class="col-sm-9">
+                  <div class="btn-group" data-toggle="buttons">
+                    <label href="#" for="isPrivate2" class="btn btn-xs btn-default active">public
+                      <input type="radio" id="isPrivate2" name="isPrivate" value="0" checked />
+                    </label>
+                    <label href="#" for="isPrivate1" class="btn btn-xs btn-default" >private
+                      <input type="radio" id="isPrivate1" name="isPrivate" value="1" />
+                    </label>
+                  </div>
+                  <p class="help-block">Private rooms are not listed, and can only be found by sharing the link (or guessing the room name).</p>
+                </div>
               </div>
-              <p class="help-block">Private rooms are not listed, and can only be found by sharing the link (or guessing the room name).</p>
+
+
+              <div class="form-group"> 
+                <label class="col-sm-3 control-label">Use WebRTC Video</label>
+                <div class="col-sm-9">
+                  <div class="btn-group" data-toggle="buttons">
+                    <label href="#" for="rtcVideo1" class="btn btn-xs btn-default active" >yes
+                      <input type="radio" id="rtcVideo1" name="rtcVideo" value="1" checked />
+                    </label>
+                    <label href="#" for="rtcVideo2" class="btn btn-xs btn-default">no
+                      <input type="radio" id="rtcVideo2" name="rtcVideo" value="0" />
+                    </label>
+                  </div>
+                  <p class="help-block">Use built-in WebRTC peer to peer video chat.</p>
+                </div>
+              </div>
+
+
+
+              <div class="form-group"> 
+                <label class="col-sm-3 control-label">Use WebRTC Audio</label>
+                <div class="col-sm-9">
+                  <div class="btn-group" data-toggle="buttons">
+                    <label href="#" for="rtcAudio1" class="btn btn-xs btn-default active" >yes
+                      <input type="radio" id="rtcAudio1" name="rtcAudio" value="1" checked />
+                    </label>
+                    <label href="#" for="rtcAudio2" class="btn btn-xs btn-default">no
+                      <input type="radio" id="rtcAudio2" name="rtcAudio" value="0" />
+                    </label>
+                  </div>
+                  <p class="help-block">Use built-in WebRTC peer to peer audio chat.</p>
+                </div>
+              </div>
+
+
+            <div class="form-group">
+              <label for="phone" class="col-sm-3 control-label">Phone Conference Number</label>
+              <div class="col-sm-9">
+                <input type="text" name="phone" value="{{ table.phone }}" placeholder="Enter the conference phone number for this table, e.g. +1 123 1234 123" class="form-control" id="phone">
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <label for="skype" class="col-sm-3 control-label">Skype Group Link</label>
+              <div class="col-sm-9">
+                <input type="text" name="skype" value="{{ table.skype }}" placeholder="Enter a skype group link for this table, e.g. skype:?chat&blob=d6e5AV..." class="form-control" id="skype">
+                <p class="help-block"><a href="http://blogs.skype.com/2013/03/08/managing-your-group-chats-like-a-boss/" target="_blank">Create</a> a skype group link</p>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="tags" class="col-sm-3 control-label">Tags</label>
+              <div class="col-sm-9">
+                <input type="text" name="tags" value="{{ table.tags }}" placeholder="Enter the tags separated by , " class="form-control" id="tags">
+                <small>separate tags by ,</small>
+              </div>
             </div>
           </div>
-
-          <div class="form-group">
-            <label for="tags" class="col-sm-2 control-label">Tags</label>
-            <div class="col-sm-10">
-              <input type="text" name="tags" value="{{ table.tags }}" placeholder="Enter the tags separated by , " class="form-control" id="tags">
-              <small>separate tags by ,</small>
             </div>
-          </div>
 
           <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
+            <div class="col-sm-offset-3 col-sm-9">
               <button class="btn btn-primary" type="submit">Create</button>
               &nbsp;
               <a href="/tables" class="btn btn-link">Cancel</a>

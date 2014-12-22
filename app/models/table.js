@@ -31,7 +31,11 @@ var setTags = function (tags) {
 
 var TableSchema = new Schema({
   title: {type : String, trim : true, index: { unique: true } },
+  phone: {type : String, trim : true },
+  skype: {type : String},
   isPrivate: {type : Boolean, default : false},
+  rtcVideo: {type : Boolean, default : true},
+  rtcAudio: {type : Boolean, default : true},
   users: [{type : Schema.ObjectId, ref : 'User', unique: true}],
   tags: {type: [], get: getTags, set: setTags},
   createdAt  : {type : Date, default : Date.now},
