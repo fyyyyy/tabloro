@@ -6,7 +6,11 @@
   border: 1px solid #aea;
 }
 
-#their-video {
+#their-videos {
+  float: left;
+}
+
+#their-videos video {
   width: 140px;
   height: auto;
   max-height: 120px;
@@ -23,10 +27,20 @@
     left: 50px;
 }
 
+.video-group {
+  float: left;
+}
+
 .step {
     float: left;
     padding: 25px;
 }
+
+.step3 {
+    position: absolute;
+    z-index: 1000;
+}
+
 
 .video {
     float: left;

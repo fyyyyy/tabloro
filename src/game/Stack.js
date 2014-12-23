@@ -191,6 +191,10 @@ S.updateCounter = function (stack) {
 
 
 S.updateCards = function (stack, cards) {
+    if (!stack || !cards) {
+        console.error('no stack or cards');
+        return;
+    }
     var newCardIds = R.difference(cards, stack.cards);
     R.forEach(S.removeCardFromStacks)(newCardIds);
     stack.cards = cards;

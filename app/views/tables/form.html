@@ -29,21 +29,33 @@
           <div class="form-group required">
             <label for="title" class="col-sm-3 control-label">Table Name</label>
             <div class="col-sm-9">
-              <input type="text" name="title" value="{{ table.title }}" placeholder="Enter the name of your table" class="form-control" id="title" required="true">
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa fa-asterisk fa-fw"></i>
+                </div>
+                <input type="text" name="title" value="{{ table.title }}" placeholder="Enter the name of your table" class="form-control" id="title" required="true">
+              </div>
             </div>
           </div>
 
           <div class="form-group">
             <label for="password" class="col-sm-3 control-label">Password</label>
             <div class="col-sm-9">
-              <input type="text" name="password" value="{{ table.password }}" placeholder="Enter password or leave blank" class="form-control" id="password">
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa fa-lock fa-fw"></i>
+                </div>
+                <input type="text" name="password" value="{{ table.password }}" placeholder="Enter password or leave blank" class="form-control" id="password">
+              </div>
             </div>
           </div>
 
 
           <div class="panel panel-default col-sm-offset-3">
             <div class="panel-heading">
-              <h4><a data-toggle="collapse" data-target="#accordion">Advanced Options</a></h4>
+              <h4><a data-toggle="collapse" data-target="#accordion">
+              <i class="fa fa-settings"></i>
+              Advanced Options</a></h4>
             </div>
             
             <div class="panel-body collapse" id="accordion">
@@ -98,9 +110,14 @@
 
 
             <div class="form-group">
-              <label for="phone" class="col-sm-3 control-label">Phone Conference Number</label>
+              <label for="phone" class="col-sm-3 control-label"> Phone Conference Number </label>
               <div class="col-sm-9">
-                <input type="text" name="phone" value="{{ table.phone }}" placeholder="Enter the conference phone number for this table, e.g. +1 123 1234 123" class="form-control" id="phone">
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-phone fa-fw"></i>
+                  </div>
+                  <input type="text" name="phone" value="{{ table.phone }}" placeholder="Enter the conference phone number for this table, e.g. +1 123 1234 123" class="form-control" id="phone">
+                </div>
               </div>
             </div>
 
@@ -108,8 +125,31 @@
             <div class="form-group">
               <label for="skype" class="col-sm-3 control-label">Skype Group Link</label>
               <div class="col-sm-9">
-                <input type="text" name="skype" value="{{ table.skype }}" placeholder="Enter a skype group link for this table, e.g. skype:?chat&blob=d6e5AV..." class="form-control" id="skype">
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-skype fa-fw"></i>
+                  </div>
+                  <input type="text" name="skype" value="{{ table.skype }}" placeholder="Enter a skype group link for this table, e.g. skype:?chat&blob=d6e5AV..." class="form-control" id="skype">
+                </div>
                 <p class="help-block"><a href="http://blogs.skype.com/2013/03/08/managing-your-group-chats-like-a-boss/" target="_blank">Create</a> a skype group link</p>
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <label for="rules" class="col-sm-3 control-label">House Rules</label>
+              <div class="col-sm-9">
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-institution fa-fw"></i>
+                  </div>
+                  <input type="text" name="rules" value="{{ table.rules }}" placeholder="Enter custom rules link for this table, e.g. http://myblog.com/rules..." class="form-control" id="rules">
+                </div>
+                <p class="help-block">Find rules 
+                  <a href="http://boardgames.lovetoknow.com/Printable_Instructions_for_Board_Games" target="_blank">1</a>
+                  <a href="http://www.gamingcorner.nl/board-rules.htm" target="_blank">2</a>
+                  <a href="https://www.google.com/?q=board+game+rules" target="_blank">3</a>
+                </p>
               </div>
             </div>
 

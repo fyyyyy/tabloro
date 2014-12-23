@@ -33,6 +33,7 @@ var TableSchema = new Schema({
   title: {type : String, trim : true, index: { unique: true } },
   phone: {type : String, trim : true },
   skype: {type : String},
+  rules: {type : String},
   isPrivate: {type : Boolean, default : false},
   rtcVideo: {type : Boolean, default : true},
   rtcAudio: {type : Boolean, default : true},

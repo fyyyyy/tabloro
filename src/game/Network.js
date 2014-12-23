@@ -46,6 +46,7 @@ Network.setup = function () {
             UI.message(client.name, 'left the table...');
             UI.updateNames();
         }
+        Video.killClient(client.id, client.name);
     };
 
 
@@ -60,12 +61,8 @@ Network.setup = function () {
         UI.message(client.name, 'joined the table!');
         UI.updateNames();
 
-        // if(isNewPlayer) {
-            console.log('isNewPlayer');
-            setTimeout(function() {
-                Video.newClient(client.id, client.name);
-            }, 2000);
-        // }
+        Video.newClient(client.id, client.name);
+        // Video.newClient('asgasgasgasg', 'suzi');
     };
 
 

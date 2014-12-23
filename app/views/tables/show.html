@@ -81,6 +81,13 @@
           </li>
         {% endif %}
 
+        {% if (table.rules) %}
+          <li class="list-group-item list-group-item-default">
+            <i class="fa fa-institution fa-fw"></i>
+            <a href="{{table.rules}}" target="_blank">House Rules</a>
+          </li>
+        {% endif %}
+
         <li class="list-group-item list-group-item-default">Started {{ table.createdAt.toISOString()|date('M d,  h:i a') }}</li>
         {% if (table.tags) %}
           <li class="list-group-item meta">
