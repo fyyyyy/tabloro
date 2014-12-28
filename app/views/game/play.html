@@ -31,6 +31,20 @@
         var playerName = '{{user.username}}';
         var cursorId = Number('{{user.selected_cursor}}') || 1;
         var roomName = '{{table.title}}';
+        var assets = [
+            {
+                method: 'atlasXML',
+                urls: ['diceWhite', '/assets/diceWhite.png', '/assets/diceWhite.xml']
+            },
+            {
+                method: 'image',
+                urls: ['soldier', '/assets/soldier.png']
+            },
+            {
+                method: 'atlasJSONHash',
+                urls: ['tile', '/assets/carcassoneSheet.png', '/assets/carcassone.json']
+            }
+        ];
         </script>
     </head>
     <body>
@@ -47,7 +61,9 @@
         <!-- Video area -->
         <div id="video-container" style="display:none;">
             <div class="step message" id="step1">
-                <p>Please click `allow` on the top of the screen.</p>
+                <p>Please click <a class="btn btn-default" disabled="true">allow</a> on top of your screen for video chat.</p>
+                <p>Built in peer to peer video chat needs <strong>Firefox</strong> or <strong>Chrome</strong> browsers.</p>
+                <p class="small">Safari and Internet Explorer do not support <a href="http://iswebrtcreadyyet.com/" target="_blank" >WebRTC</a> yet.</p>
                 <div id="step1-error">
                     <p>Failed to access the webcam and microphone.</p>
                     <a href="#" class="btn btn-primary" id="step1-retry">Try again</a>

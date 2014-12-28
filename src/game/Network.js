@@ -11,7 +11,8 @@ Network.isMine = function (id) {
 
 Network.setup = function () {
     console.log('Network.setup');
-    //create an instance of eureca.io client
+    
+    // create an instance of eureca.io client
     Network.client = new Eureca.Client();
 
     Network.client.ready(function (proxy) {
@@ -20,8 +21,8 @@ Network.setup = function () {
 
 
 
-
-    //methods defined under "exports" namespace become available in the server side
+    // EXPORTS
+    // methods defined under "exports" namespace become available in the server side
 
     Network.client.exports.setId = function (id) {
         console.log('Network.setId for', playerName);

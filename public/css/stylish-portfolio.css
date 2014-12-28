@@ -45,6 +45,14 @@ body {
     color: #efefef;
 }
 
+.text-default {
+    color: #fff;
+}
+
+.text-default a {
+    color: #fff;
+}
+
 /* Custom Button Styles */
 
 .btn-dark {
@@ -321,12 +329,12 @@ footer {
     text-shadow: 2px 2px 0px #321;
 }
 
-footer .list-unstyled a {
+footer .list-unstyled a {    
     color: #eee;
 }
 
 footer .list-inline a{
-    text-shadow: 15px 15px 0px #321;
+    text-shadow: 6px 6px 0px #321;
 }
 
 

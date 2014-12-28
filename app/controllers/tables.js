@@ -8,18 +8,29 @@ var Table = mongoose.model('Table');
 var utils = require('../../lib/utils');
 var R = require('../../public/js/ramda.js');
 
-var BOARD_DEFAULTS = function () {
+var STACK_DEFAULTS = function () {
     return {
 
         '0': {
             position: {x: 500, y: 300},
-            cards: R.range(2, 49)
+            cards: R.concat(R.range(2, 40), R.range(41,50))
         },
 
         '1': {
             position: {x: 100, y: 300},
             cards: []
         },
+
+    };
+};
+
+var TILE_DEFAULTS = function () {
+    return {
+        '40': {
+            x: 1000,
+            y: 700,
+            rotation: Math.PI
+        }
 
     };
 };
@@ -94,7 +105,8 @@ exports.create = function (req, res) {
   var table = new Table(req.body);
 
   table.user = req.user;
-  table.stacks = new BOARD_DEFAULTS();
+  table.stacks = new STACK_DEFAULTS();
+  table.tiles = new TILE_DEFAULTS();
   
   table.save(function (err) {
     if (!err) {

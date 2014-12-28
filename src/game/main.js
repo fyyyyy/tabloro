@@ -154,12 +154,7 @@ function setupTiles () {
     cards1.rotateBy = Math.PI / 2;
 
 
-    addCards(R.concat(R.range(1, 38), R.range(40, 49)), cards1, stack1);
-
-    var startTile = addCards([39], cards1);
-    startTile.rotation += Math.PI;
-    startTile.x = Screen.x / 2;
-    startTile.y = Screen.y / 2;
+    addCards(R.range(1, 49), cards1, stack1);
 
     tokens = game.add.group();
     tokens.z = 16;
