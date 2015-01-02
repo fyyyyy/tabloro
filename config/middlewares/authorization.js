@@ -10,6 +10,9 @@ exports.requiresLogin = function (req, res, next) {
   res.redirect('/login')
 };
 
+
+
+
 /*
  *  User authorization routing middleware
  */
@@ -23,6 +26,8 @@ exports.user = {
     next();
   }
 };
+
+
 
 /*
  *  Article authorization routing middleware
@@ -41,6 +46,28 @@ exports.article = {
   }
 };
 
+
+
+/*
+ *  Piece authorization routing middleware
+ */
+
+exports.piece = {
+  hasAuthorization: function (req, res, next) {
+    if ( (req.piece.user && req.piece.user.id === req.user.id) || res.locals.isAdmin) {
+      next();
+    } else {
+      req.flash('info', 'You are not authorized');
+      if (req.piece) {
+        return res.redirect('/pieces/' + req.piece.id);
+      }
+      return res.redirect('/pieces/');
+    }
+  }
+};
+
+
+
 /*
  *  Table authorization routing middleware
  */
@@ -57,7 +84,7 @@ exports.table = {
       return res.redirect('/tables/');
     }
 
-    if (!req.table.user || req.table.user.id != req.user.id) {
+    if (!req.table.user || req.table.user.id !== req.user.id) {
       req.flash('error', 'You are not authorized');
       if (req.table) {
         return res.redirect('/tables/' + req.table.title);
@@ -68,6 +95,8 @@ exports.table = {
   }
 };
 
+
+
 /**
  * Comment authorization routing middleware
  */
@@ -77,10 +106,10 @@ exports.comment = {
     // if the current user is comment owner or article owner
     // give them authority to delete
     if (req.user.id === req.comment.user.id || req.user.id === req.article.user.id) {
-      next()
+      next();
     } else {
-      req.flash('info', 'You are not authorized')
-      res.redirect('/news/' + req.article.id)
+      req.flash('info', 'You are not authorized');
+      res.redirect('/news/' + req.article.id);
     }
   }
-}
+};

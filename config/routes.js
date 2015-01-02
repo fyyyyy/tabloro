@@ -10,6 +10,7 @@ var home = require('home');
 var users = require('users');
 var articles = require('articles');
 var tables = require('tables');
+var pieces = require('pieces');
 var comments = require('comments');
 var tags = require('tags');
 var auth = require('./middlewares/authorization');
@@ -20,6 +21,7 @@ var auth = require('./middlewares/authorization');
 
 var articleAuth = [auth.requiresLogin, auth.article.hasAuthorization];
 var tableAuth = [auth.requiresLogin, auth.table.hasAuthorization];
+var pieceAuth = [auth.requiresLogin, auth.piece.hasAuthorization];
 var commentAuth = [auth.requiresLogin, auth.comment.hasAuthorization];
 var userAuth = [auth.requiresLogin, auth.user.hasAuthorization];
 
@@ -98,6 +100,16 @@ module.exports = function (app, passport) {
   app.get('/tables/:tableName', auth.requiresLogin, tables.show);
   app.get('/tables/:tableName/play', auth.requiresLogin, tables.play);
   app.delete('/tables/:tableName', tableAuth, tables.destroy);
+
+  // piece routes
+  app.param('pieceId', pieces.load);
+  app.get('/pieces', pieces.index);
+  app.get('/pieces/new', auth.requiresLogin, pieces.new);
+  app.post('/pieces', auth.requiresLogin, pieces.create);
+  app.get('/pieces/:pieceId', auth.requiresLogin, pieces.show);
+  app.get('/pieces/:pieceId/edit', pieceAuth, pieces.edit);
+  app.put('/pieces/:pieceId', pieceAuth, pieces.update);
+  app.delete('/pieces/:pieceId', pieceAuth, pieces.destroy);
 
   // home route
   app.get('/', home.index);

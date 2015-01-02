@@ -1,0 +1,7 @@
+{% if (piece.atlasjson) %}
+    { json }
+{% elseif (piece.frameWidth) %}
+  <i class="fa fa-th"></i>
+{% else %}
+  <i class="fa fa-photo"></i>
+{% endif %}

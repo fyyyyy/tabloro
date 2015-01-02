@@ -1,6 +1,8 @@
+/*global next*/
 /**
  * Module dependencies.
  */
+
 "use strict";
 
 var mongoose = require('mongoose');
@@ -12,12 +14,18 @@ var STACK_DEFAULTS = function () {
     return {
 
         '0': {
-            position: {x: 500, y: 300},
-            cards: R.concat(R.range(2, 40), R.range(41,50))
+            position: {
+                x: 500,
+                y: 300
+            },
+            cards: R.concat(R.range(2, 40), R.range(41, 50))
         },
 
         '1': {
-            position: {x: 100, y: 300},
+            position: {
+                x: 100,
+                y: 300
+            },
             cards: []
         },
 
@@ -40,46 +48,48 @@ var TILE_DEFAULTS = function () {
  * Load
  */
 
-exports.load = function (req, res, next, title){
-  Table.load(title, function (err, table) {
-    if (err) return next(err);
-    if (!table) return next(new Error('not found'));
-    req.table = table;
-    next();
-  });
+exports.load = function (req, res, next, title) {
+    Table.load(title, function (err, table) {
+        if (err) return next(err);
+        if (!table) return next(new Error('not found'));
+        req.table = table;
+        next();
+    });
 };
 
 /**
  * List
  */
 
-exports.index = function (req, res){
-  var page = (req.param('page') > 0 ? req.param('page') : 1) - 1;
-  var perPage = 30;
-  var options = {
-    perPage: perPage,
-    page: page
-  };
-  options.criteria = res.locals.isAdmin ? {} : { isPrivate: false};
-  
-  // res.render('game/index', {layout: false, title: 'game room'});
+exports.index = function (req, res) {
+    var page = (req.param('page') > 0 ? req.param('page') : 1) - 1;
+    var perPage = 30;
+    var options = {
+        perPage: perPage,
+        page: page
+    };
+    options.criteria = res.locals.isAdmin ? {} : {
+        isPrivate: false
+    };
 
-  Table.list(options, function (err, tables) {
-    if (err) return res.render('500');
+    // res.render('game/index', {layout: false, title: 'game room'});
 
-    R.forEach(function (table) {
-      table.players = req.eurecaServer.getPlayerIds(table.title);
-    })(tables);
+    Table.list(options, function (err, tables) {
+        if (err) return res.render('500');
 
-    Table.count().exec(function (err, count) {
-      res.render('tables/index', {
-        title: 'Public Tables',
-        tables: tables,
-        page: page + 1,
-        pages: Math.ceil(count / perPage),
-      });
+        R.forEach(function (table) {
+            table.players = req.eurecaServer.getPlayerIds(table.title);
+        })(tables);
+
+        Table.count().exec(function (err, count) {
+            res.render('tables/index', {
+                title: 'Public Tables',
+                tables: tables,
+                page: page + 1,
+                pages: Math.ceil(count / perPage),
+            });
+        });
     });
-  });
 };
 
 
@@ -87,11 +97,11 @@ exports.index = function (req, res){
  * New table
  */
 
-exports.new = function (req, res){
-  res.render('tables/new', {
-    title: 'New Table',
-    table: new Table({})
-  });
+exports.new = function (req, res) {
+    res.render('tables/new', {
+        title: 'New Table',
+        table: new Table({})
+    });
 };
 
 
@@ -101,28 +111,26 @@ exports.new = function (req, res){
  */
 
 exports.create = function (req, res) {
-  console.log('create table', req.body);
-  var table = new Table(req.body);
+    console.log('create table', req.body);
+    var table = new Table(req.body);
 
-  table.user = req.user;
-  table.stacks = new STACK_DEFAULTS();
-  table.tiles = new TILE_DEFAULTS();
-  
-  table.save(function (err) {
-    if (!err) {
-      req.flash('success', 'Successfully created table!');
-      return res.redirect('/tables/' + table.title);
-    }
-    console.log(err);
-    res.render('tables/new', {
-      title: 'New Table',
-      table: table,
-      errors: utils.errors(err.errors || err)
+    table.user = req.user;
+    table.stacks = new STACK_DEFAULTS();
+    table.tiles = new TILE_DEFAULTS();
+
+    table.save(function (err) {
+        if (!err) {
+            req.flash('success', 'Successfully created table!');
+            return res.redirect('/tables/' + table.title);
+        }
+        console.log(err);
+        res.render('tables/new', {
+            title: 'New Table',
+            table: table,
+            errors: utils.errors(err.errors || err)
+        });
     });
-  });
 };
-
-
 
 
 
@@ -130,38 +138,63 @@ exports.create = function (req, res) {
  * Show
  */
 
-exports.show = function (req, res){
-  var table = req.table;
-  table.update({$addToSet: {users: req.user}}, function (err) {
-      if (err) {
-        console.log(err);
-        req.flash('error', 'Could not join table!');
-        return res.redirect('/tables');
-      }
+exports.show = function (req, res) {
+    var table = req.table;
+    table.update({
+        $addToSet: {
+            users: req.user
+        }
+    }, function (err) {
+        if (err) {
+            console.log(err);
+            req.flash('error', 'Could not join table!');
+            return res.redirect('/tables');
+        }
 
-      Table.load(table.title, function (err, table) {
-        if (err) return next(err);
-        if (!table) return next(new Error('not found'));
-        req.table = table;
-          res.render('tables/show', {
-            title: 'Table: ' + table.title,
-            table: table,
-            players: req.eurecaServer.getPlayers(table.title)
-          });
-      });
-    
-  });
+        Table.load(table.title, function (err, table) {
+            if (err) return next(err);
+            if (!table) return next(new Error('not found'));
+            req.table = table;
+            res.render('tables/show', {
+                title: 'Table: ' + table.title,
+                table: table,
+                players: req.eurecaServer.getPlayers(table.title)
+            });
+        });
+
+    });
 };
 
-exports.play = function (req, res){
-  var table = req.table;
-  
-  res.render('game/play', {
-    title: 'Play - ' + table.title,
-    user: req.user,
-    table: table
-  });
-    
+exports.play = function (req, res) {
+    var table = req.table;
+
+    var assets = [{
+        method: 'spritesheet',
+        args: ['diceWhite', '/assets/diceWhite.png', 64, 64, 6]
+    }, {
+        method: 'image',
+        args: ['stack1', '/assets/stack1.png']
+    }, {
+        method: 'image',
+        args: ['stack2', '/assets/stack2.png']
+    }, {
+        method: 'image',
+        args: ['soldier', '/assets/soldier.png']
+    }, {
+        method: 'atlasJSONHash',
+        args: ['tile', '/assets/carcassoneSheet.png', '/assets/carcassone.json']
+    }, {
+        method: 'spritesheet',
+        args: ['pieces', '/assets/pieces.png', 64, 64, 19]
+    }];
+
+    res.render('game/play', {
+        title: 'Play - ' + table.title,
+        user: req.user,
+        table: table,
+        assets: assets
+    });
+
 };
 
 
@@ -169,10 +202,14 @@ exports.play = function (req, res){
  * Delete a table
  */
 
-exports.destroy = function (req, res){
-  var table = req.table;
-  table.remove(function (err){
-    req.flash('info', 'Deleted successfully');
-    res.redirect('/tables');
-  });
+exports.destroy = function (req, res) {
+    var table = req.table;
+    table.remove(function (err) {
+        if (err) {
+            req.flash('alert', 'Could not delete table');
+            return;
+        }
+        req.flash('info', 'Deleted successfully');
+        res.redirect('/tables');
+    });
 };

@@ -1,0 +1,255 @@
+{% extends '../layouts/default.html' %}
+
+{% block main %}
+  <h1>{{ title }}</h1>
+{% endblock %}
+
+{% block content %}
+  <section class="container">
+  <div class="spacer"></div>
+
+
+    <div class="col-md-12">
+      <h2>
+        {% include 'type.html' %}
+        {{piece.title | title}}
+      </h2>
+    </div>
+    
+    <div class="col-md-4">
+      <ul class="list-group">
+
+
+        <li class="list-group-item list-group-item-success">
+          Type
+          <strong class="pull-right">
+            {% include 'type.html' %}
+            {{piece.type}}
+            
+          </strong>
+        </li>
+
+
+        {% if (piece.isPrivate) %}
+          <li class="list-group-item list-group-item-warning">Private</li>
+        {% else %}
+          <li class="list-group-item list-group-item-default">Public</li>
+        {% endif %}
+
+        {% if (piece.imageUrl) %}
+          <li class="list-group-item list-group-item-default">
+            Image
+            <a href="{{piece.imageUrl}}" target="_blank" class="pull-right">{{piece.imageUrl}}</a>
+          </li>
+        {% endif %}
+
+        {% if (piece.atlasjson) %}
+          <li class="list-group-item list-group-item-default">
+            Json Atlas
+            <a href="{{piece.atlasjson}}" target="_blank" class="pull-right">{{piece.atlasjson}}</a>
+          </li>
+        {% endif %}
+
+        {% if (piece.frameWidth) %}
+          <li class="list-group-item list-group-item-default">
+            Frame width: <strong class="pull-right">{{piece.frameWidth}} pixel</strong>
+          </li>
+        {% endif %}
+
+        {% if (piece.frameHeight) %}
+          <li class="list-group-item list-group-item-default">
+            Frame height <strong class="pull-right">{{piece.frameHeight}} pixel</strong>
+          </li>
+        {% endif %}
+
+        {% if (piece.maxFrames) %}
+          <li class="list-group-item list-group-item-default">
+            Max Frames <strong class="pull-right">{{piece.maxFrames}}</strong>
+          </li>
+        {% endif %}
+
+
+        <li class="list-group-item list-group-item-default">
+          Created by
+          <strong class="pull-right">{{piece.user.username}}</strong>
+        </li>
+
+        <li class="list-group-item list-group-item-default">Created <strong class="pull-right">{{ piece.createdAt.toISOString()|date('M d,  h:i a') }}</strong></li>
+        {% if (piece.tags) %}
+          <li class="list-group-item meta">
+            <p>
+            Tags: &nbsp;
+            <span class="pull-right">
+              {% for tag in piece.tags.split(',') %}
+                <i class="muted fa fa-tag"></i>&nbsp;
+                <a href="{{ '/tags/' + tag }}" class="tag">{{ tag }}</a>
+                &nbsp;&nbsp;
+              {% endfor %}
+            </span>
+            </p>
+          </li>
+        {% endif %}
+        {% if isAdmin %}
+          <li class="list-group-item list-group-item-danger">
+            <form action="{{ '/pieces/' + piece.title }}" method="post" onsubmit="return confirm('Are you sure?')">
+              <br>
+              <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+              <a href="{{ '/pieces/' + piece.id + '/edit' }}" title="edit" class="btn btn-default">
+                Edit
+              </a>
+              &nbsp;
+              <input type="hidden" name="_method" value="DELETE">
+              <button class="btn btn-danger" type="submit">Delete</button>
+            </form>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+
+
+    <div class="col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4>
+            Image spritesheet
+          </h4>
+        </div>
+        
+        <div class="panel-body">
+          <img id="spritesheet" class="img-responsive max200" src="{{piece.imageUrl}}"></img>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4>
+            Preview of pieces in <strong>{{piece.type}}</strong>
+          </h4>
+        </div>
+        
+        <div class="panel-body smaller">
+          <div id="tiles">
+            
+          </div>
+        </div>
+
+      </div>
+    </div>
+    
+
+    
+  </section>
+
+  <div class="spacer"></div>
+
+  <section class="bg-primary about">
+    <div class="container">
+      
+      <a href="/pieces" class="btn btn-default">
+        <i class="fa fa-backward"></i>
+        Back to pieces
+      </a>
+    </div>
+  </section>
+
+
+<script>
+  var checkImageLoaded;
+  document.addEventListener('DOMContentLoaded', function() { 
+    checkImageLoaded = function (cb) {
+      var image = $('#spritesheet');
+      
+      var theImage = new Image();
+      theImage.src = image.attr("src");
+      var width = theImage.width;
+      
+      if (width) {
+        cb(width);
+      } else {
+        console.log('image not loaded yet');
+        setTimeout(function() {
+          checkImageLoaded(cb);
+        }, 200);
+      }
+    };
+  });
+</script>
+
+{% if (piece.atlasjson) %}
+
+
+
+<script>
+/*globals $, document*/
+
+  document.addEventListener('DOMContentLoaded', function() { 
+    console.log('DOMContentLoaded, atlasjson');
+
+    $.getJSON('{{ piece.atlasjson }}', function (data) {
+      var setImageWidth = function () {
+        var frames = data.frames;
+        console.log('frames', data);
+        for (var i =  0; i < frames.length; i++) {
+          var frame = frames[i].frame;
+          var xOffset = -frame.x;
+          var yOffset = -frame.y;
+          var width = frame.w;
+          var height = frame.h;
+          var style = 'margin: 10px; display: inline-block; width: ' + width + 'px;' +
+                      'height: ' + height + 'px;' +
+                      "background: url('{{piece.imageUrl}}') " + 
+                      xOffset + 'px ' +
+                      yOffset + 'px;';
+          console.log('frame', i, xOffset, yOffset, width, height);
+          $('#tiles').append('<span id="frame-' + i + '" style="' + style + '" title="piece #' + (i + 1) +'"><h3>' + (i + 1) + '</h3></span>');
+        }
+      };
+      
+      checkImageLoaded(setImageWidth);
+    });
+  });
+
+</script>
+
+{% elseif (piece.frameWidth) %}
+
+<script>
+
+  document.addEventListener('DOMContentLoaded', function() { 
+    console.log('DOMContentLoaded, spritesheet');
+
+    var setImageWidth = function (width) {
+      var spacing = {{piece.spacing}};
+      var frameWidth = {{piece.frameWidth}} - spacing;
+      var frameHeight = {{piece.frameHeight}} - spacing;
+      var frames = {{piece.maxFrames}};
+      var columns = width / (frameWidth + 2 * spacing);
+      
+      for (var i = 0; i < frames; i++) {
+        var frame = i;
+        var xOffset = - (frame % columns ) * (frameWidth + 2 * spacing);
+        var yOffset = - Math.floor(frame / columns) * (frameHeight + 2 * spacing);
+        var style = "margin: 10px; display: inline-block; width: {{piece.frameWidth}}px; height: {{piece.frameHeight}}px; background: url('{{piece.imageUrl}}') " + xOffset + "px " + yOffset + "px;"
+        console.debug('frame', frame, 'x', xOffset, 'y', yOffset);
+        $('#tiles').append('<span id="frame-' + i + '" style="' + style + '" title="piece #' + (i + 1) +'"><h3>' + (i + 1) + '</h3></span>');
+
+      };
+    };
+    
+    checkImageLoaded(setImageWidth);
+  });
+
+</script>
+
+{% endif %}
+
+
+{% endblock %}
+
+
+
+
+

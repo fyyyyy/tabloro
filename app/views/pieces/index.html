@@ -1,0 +1,49 @@
+{% extends '../layouts/default.html' %}
+
+{% block main %}
+    <h1>{{ title }}</h1>
+{% endblock %}
+
+{% block content %}
+
+  <div class="text-center">
+
+    <div class="about">
+      {% if (req.isAuthenticated()) %}
+        <a class="btn btn-success" href="/pieces/new">
+          <i class="fa fa-scissors"></i>
+          Add your own gaming pieces
+        </a>
+      {% endif %}
+    </div>
+
+    {% if (pieces.length) %}
+      {% for piece in pieces %}
+        {% include 'piece.html' %}
+      {% endfor %}
+
+      {% if (pages > 1) %}
+        <ul class="pagination">
+          {% autoescape false %}
+            {{ createPagination(pages, page) }}
+          {% endautoescape %}
+        </ul>
+      {% endif %}
+
+    {% else %}
+      <h4 class="muted">
+        No gaming pieces found.&nbsp;
+      </h4>
+    {% endif %}
+    
+    {% include 'create_piece.html' %}
+
+  
+
+  </div>
+
+  <div class="clearfix"></div>
+  <div class="about"></div>
+
+
+{% endblock %}

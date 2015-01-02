@@ -1,0 +1,30 @@
+{% extends 'piece_frame.html' %}
+
+
+{% block image %}
+
+  <p>
+    {% if piece.tags.length %}
+      {% for tag in piece.tags.split(',') %}
+        <i class="muted fa fa-tag"></i>&nbsp;
+        <a href="{{ '/tags/' + tag }}" class="tag">{{ tag }}</a>
+        &nbsp;&nbsp;
+      {% endfor %}
+      <br/>
+    {% endif %}
+
+  </p>
+{% endblock %}
+   
+
+      
+{% block footer %}
+  <a href="{% if (req.isAuthenticated()) %}pieces/{{ piece.id }}{% else %}/login{%endif%}" class="btn btn-primary btn-block btn-square">
+    <span class="pull-left">
+
+    {% include 'type.html' %}
+    </span>
+    <strong>{{piece.title | title}}</strong>
+  </a>
+{% endblock %}
+

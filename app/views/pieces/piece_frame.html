@@ -1,0 +1,18 @@
+<div class="col-sm-3">
+  <div class="panel  {% if piece.isPrivate %}panel-warning {% else %} panel-default {% endif %}">
+      
+      <div class="img-overlay min200 smaller">
+        <img class="img-responsive max200" src="{{piece.imageUrl || '/img/pieces3.jpg'}}">
+          <div class="piece-content">
+            {% block image %}
+            {% endblock %}
+          </div>
+        </div>
+      </img>
+
+      
+      {% block footer %}
+      {% endblock %}
+
+  </div>
+</div>

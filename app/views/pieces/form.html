@@ -1,0 +1,238 @@
+  {% extends '../layouts/default.html' %}
+
+{% block main %}
+  <h1>{{ title }}</h1>
+{% endblock %}
+
+{% block content %}
+  {% if piece.isNew %}
+    {% set action = '/pieces' %}
+  {% else %}
+    {% set action = '/pieces/' + piece.id %}
+  {% endif %}
+  
+  <div class="about"></div>
+
+
+  <section class="bg">
+    
+    <div class="row container">
+      <div class="col-md-12">
+        <form method="post" action="{{ action }}" role="form" class="form-horizontal">
+
+          <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+
+          {% if not piece.isNew %}
+            <input type="hidden" name="_method" value="PUT">
+          {% endif %}
+
+          <div class="form-group required">
+            <label for="title" class="col-sm-3 control-label">Name of Gaming Piece(s)</label>
+            <div class="col-sm-9">
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa fa-asterisk fa-fw"></i>
+                </div>
+                <input type="text" name="title" value="{{ piece.title }}" placeholder="Enter the name of your piece" class="form-control" id="title" required="true">
+              </div>
+            </div>
+          </div>
+
+
+
+            
+<!-- 
+              <div class="form-group"> 
+                <label class="col-sm-3 control-label">List in Public?</label>
+                <div class="col-sm-9">
+                  <div class="btn-group" data-toggle="buttons">
+                    <label href="#" for="isPrivate2" class="btn btn-xs btn-default active">public
+                      <input type="radio" id="isPrivate2" name="isPrivate" value="0" checked />
+                    </label>
+                    <label href="#" for="isPrivate1" class="btn btn-xs btn-default" >private
+                      <input type="radio" id="isPrivate1" name="isPrivate" value="1" />
+                    </label>
+                  </div>
+                  <p class="help-block">Private rooms are not listed, and can only be found by sharing the link (or guessing the room name).</p>
+                </div>
+              </div>
+ -->
+
+            <div class="form-group">
+              <label for="imageUrl" class="col-sm-3 control-label"> Image url </label>
+              <div class="col-sm-9">
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-image fa-fw"></i>
+                  </div>
+                  <input type="text" name="imageUrl" value="{{ piece.imageUrl }}" placeholder="Enter the image url for this piece, e.g. http://www.myserver.com/image.jpg" class="form-control" id="imageUrl">
+                </div>
+                <p class="help-block"><a href="http://tinypic.com/" target="_blank">Upload</a> images</p>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Select type</label>
+              <div class="col-sm-9"> 
+                
+                <ul class="nav nav-tabs" role="tablist">
+                  <li role="presentation" class="active">
+                    <a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">
+                      <i class="fa fa-photo"></i>
+                      Image
+                    </a>
+                  </li>
+                  <li role="presentation">
+                    <a href="#tab4" aria-controls="tab4" role="tab" data-toggle="tab">
+                      <i class="fa fa-th"></i>
+                      Sprite Sheet
+                    </a>
+                  </li>
+                  <li role="presentation">
+                    <a href="#tab3" aria-controls="tab3" role="tab" data-toggle="tab">
+                      { json }
+                      Atlas Json Hash
+                    </a>
+                  </li>
+                </ul>
+                
+                <div class="tab-content well well-lg">
+
+                  <div role="tabpanel" class="tab-pane active" id="tab1">
+                    <p>
+                      A single game piece with an image url. Use .png format for <a href="https://www.youtube.com/watch?v=PLA2FaOXkkg" target="_blank">transparency</a>
+                      , for <a target="_blank" href="/assets/soldier.png">example</a>.
+                      <img style="width:50px;" src="/assets/soldier.png">
+                    </p>
+                    <p class="alert bg-info">
+                      <strong>TIP</strong><br/>
+                      Download <a class="btn btn-primary btn-xs" target="_blank" href="http://shoebox2.software.informer.com/3.4/">ShoeBox 3.4.2</a>
+                      to create transparent images <a target="_blank" href="http://renderhjs.net/shoebox/maskImage.htm">easily</a>.
+                      (Download version <strong>3.4.2</strong>! The latest version of ShoeBox does not have the mask feature)
+                    </p>
+                  </div>
+                  
+
+                  
+
+                  <div role="tabpanel" class="tab-pane" id="tab3">
+                    <p>
+                      If the above image contains multiple game pieces with a corresponding Atlas file in .json Hash format.
+
+                    </p>
+                    <div class="form-group">
+                      <label for="atlasjson" class="col-sm-3 control-label"> Url to your JSON Hash Atlas </label>
+                      <div class="col-sm-9">
+                        <div class="input-group">
+                          <div class="input-group-addon">
+                            url
+                          </div>
+                          <input type="text" name="atlasjson" value="{{ piece.atlasjson }}" placeholder="Enter the atlas url for this piece, e.g. http://www.myserver.com/atlas.json" class="form-control" id="atlasjson">
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <p class="alert bg-info">
+                      <strong>TIP</strong><br/>
+                      This format allows to package pieces of different sizes within a single image.
+                      See example <a href="/assets/carcassoneSheet.png" target="_blank">image</a> & <a href="/assets/carcassone.json" target="_blank">json</a>.
+                      <br/>
+                      To create a json atlas, download <a class="btn btn-primary btn-xs" href="https://www.codeandweb.com/texturepacker/" target="_blank">Texture Packer</a> and select the
+                      <a href="https://cdn.codeandweb.com/blog/2014/12/17/creating-spritesheets-for-phaser-with-texturepacker/texturepacker-choose-phaser.png" target="_blank">Phaser JSON Hash</a> format.
+                      See the export
+                      <a href="https://cdn.codeandweb.com/blog/2014/12/17/creating-spritesheets-for-phaser-with-texturepacker/texturepacker-adding-sprites.png" target="_blank">settings example</a>
+                    </p>
+                  </div>
+                  
+                  <div role="tabpanel" class="tab-pane" id="tab4">
+                    <p>
+                      If the above image contains multiple game pieces as a sprite sheet.
+                    </p>
+                    <p class="alert bg-info">
+                      <strong>TIP</strong><br/>
+                      See example <a target="_blank" href="/assets/diceWhite.png">spritesheet</a>. It would use the settings <em>width: 64, height: 64, number of frames: 6</em>, since each dice face is exactly 64x64 pixels, and there are only 6 faces in this spritesheet image.
+                      <!-- <img class="img-responsive" src="/assets/diceWhite.png"> -->
+                    </p>
+                    <div class="form-group">
+                      <label for="frameWidth" class="col-sm-3 control-label"> Frame Width </label>
+                      <div class="col-sm-9">
+                        <div class="input-group">
+                          <div class="input-group-addon">
+                            <i class="fa fa-arrows-h fa-fw"></i>
+                          </div>
+                          <input type="number" name="frameWidth" value="{{ piece.frameWidth }}" placeholder="Enter the frame width in pixels, e.g. 64" class="form-control" id="frameWidth">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="frameHeight" class="col-sm-3 control-label"> Frame Height </label>
+                      <div class="col-sm-9">
+                        <div class="input-group">
+                          <div class="input-group-addon">
+                            <i class="fa fa-arrows-v fa-fw"></i>
+                          </div>
+                          <input type="number" name="frameHeight" value="{{ piece.frameHeight }}" placeholder="Enter the frame height in pixels, e.g. 64" class="form-control" id="frameHeight">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="maxFrames" class="col-sm-3 control-label"> Number of Frames </label>
+                      <div class="col-sm-9">
+                        <div class="input-group">
+                          <div class="input-group-addon">
+                            <i class="fa fa-table fa-fw"></i>
+                          </div>
+                          <input type="number" name="maxFrames" value="{{ piece.maxFrames }}" placeholder="Enter the number of frames in this spritesheet, e.g. 6" class="form-control" id="maxFrames">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="spacing" class="col-sm-3 control-label"> Spacing </label>
+                      <div class="col-sm-9">
+                        <div class="input-group">
+                          <div class="input-group-addon">
+                            <i class="fa fa-table fa-fw"></i>
+                          </div>
+                          <input type="number" name="spacing" value="{{ piece.spacing || 0 }}" placeholder="Enter the number of frames in this spritesheet, e.g. 6" class="form-control" id="spacing">
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+
+
+
+            <div class="form-group">
+              <label for="tags" class="col-sm-3 control-label">Tags</label>
+              <div class="col-sm-9">
+                <input type="text" name="tags" value="{{ piece.tags }}" placeholder="Enter the tags separated by , " class="form-control" id="tags">
+                <small>separate tags by ,</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-9">
+              <button class="btn btn-primary" type="submit">Create</button>
+              &nbsp;
+              <a href="/pieces" class="btn btn-link">Cancel</a>
+            </div>
+          </div>
+        </form>
+      </div>
+      
+    </div>
+  </section>
+
+<div class="about"></div>
+  
+
+{% endblock %}

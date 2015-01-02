@@ -31,7 +31,7 @@ Dice.spin = function spin(diceInGroup, delays, values) {
             delay = delays[index],
             value = values[index];
 
-        console.log('spin', diceId, delay);
+        console.log('spin', diceId, value);
         dice.play('spin', 100, true);
         setTimeout(function () {
             console.log('dice stop spin');

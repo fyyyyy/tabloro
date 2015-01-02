@@ -1,0 +1,75 @@
+{"frames": [
+
+{
+	"filename": "brick.png",
+	"frame": {"x":2,"y":2,"w":186,"h":164},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":186,"h":164},
+	"sourceSize": {"w":186,"h":164},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "desert.png",
+	"frame": {"x":190,"y":2,"w":186,"h":164},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":186,"h":164},
+	"sourceSize": {"w":186,"h":164},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "field.png",
+	"frame": {"x":378,"y":2,"w":186,"h":164},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":186,"h":164},
+	"sourceSize": {"w":186,"h":164},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "forest.png",
+	"frame": {"x":2,"y":168,"w":186,"h":164},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":186,"h":164},
+	"sourceSize": {"w":186,"h":164},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "mountain.png",
+	"frame": {"x":190,"y":168,"w":186,"h":164},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":186,"h":164},
+	"sourceSize": {"w":186,"h":164},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "sheep.png",
+	"frame": {"x":378,"y":168,"w":186,"h":164},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":186,"h":164},
+	"sourceSize": {"w":186,"h":164},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "water.png",
+	"frame": {"x":2,"y":334,"w":186,"h":164},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":186,"h":164},
+	"sourceSize": {"w":186,"h":164},
+	"pivot": {"x":0.5,"y":0.5}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "catan.png",
+	"format": "RGBA8888",
+	"size": {"w":566,"h":566},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:5e28b248ec2b404b5484f62550bf0164:0b253f35701d361268f4fd925afa3035:75dd5f0272e3445804ea2980313261bc$"
+}
+}

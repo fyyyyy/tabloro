@@ -3,14 +3,17 @@
     <head>
         <meta charset="UTF-8" />
         <title>{{title}}</title>
+
         <link href="/css/game.css" rel="stylesheet">
         <link href="/css/video.css" rel="stylesheet">
         <link href="/css/bootstrap.css" rel="stylesheet">
+
         <script type="text/javascript" src="/eureca.js"></script>
         <script type="text/javascript" src="/js/phaser.js"></script>
         <script type="text/javascript" src="/js/ramda.js"></script>
         <script type="text/javascript" src="/js/jquery.js"></script>
         <script type="text/javascript" src="/js/peer.js"></script>
+
         {% if process.env.NODE_ENV === 'development' %}
             <script type="text/javascript" src="/Game.js"></script>
             <script type="text/javascript" src="/Network.js"></script>
@@ -27,24 +30,12 @@
         {% else %}
             <script type="text/javascript" src="/js/compiled.js"></script>
         {% endif %}
+
         <script type="text/javascript">
-        var playerName = '{{user.username}}';
-        var cursorId = Number('{{user.selected_cursor}}') || 1;
-        var roomName = '{{table.title}}';
-        var assets = [
-            {
-                method: 'atlasXML',
-                urls: ['diceWhite', '/assets/diceWhite.png', '/assets/diceWhite.xml']
-            },
-            {
-                method: 'image',
-                urls: ['soldier', '/assets/soldier.png']
-            },
-            {
-                method: 'atlasJSONHash',
-                urls: ['tile', '/assets/carcassoneSheet.png', '/assets/carcassone.json']
-            }
-        ];
+            var playerName = '{{user.username}}';
+            var cursorId = Number('{{user.selected_cursor}}') || 1;
+            var roomName = '{{table.title}}';
+            var assets = {{ JSON.stringify(assets) }};
         </script>
     </head>
     <body>

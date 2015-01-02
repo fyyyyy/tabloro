@@ -1,13 +1,24 @@
 {% extends '../layouts/noHeader.html' %}
 
 {% block main %}
-    <h1>{{title}}<small>.com</small></h1>
-    <h3>Your online game table in the browser.
-    <br>Play your favourite board games with friends &amp family.</h3>
-    <br>
-    <a href="#current_games" class="btn btn-dark btn-lg">Play now</a>
-    <div class="ribbon-green">alpha 0.1</div>
+    <div class="page-title">
+        <h1>
+            &nbsp;
+            <!-- {{title}}<small>.com</small> -->
+        </h1>
+    </div>
 
+    <div class="page-sub-title">
+        <h3>
+            Your board game table in the browser.
+            <br>
+            Play your favourite games with friends &amp family.
+        </h3>
+        <a href="#current_games" class="btn btn-primary btn-lg">
+            <i class="fa fa-heart"></i>
+            Play now
+        </a>
+    </div>
 {% endblock %}
 
 

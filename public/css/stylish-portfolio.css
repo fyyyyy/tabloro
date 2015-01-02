@@ -32,14 +32,15 @@ body {
     vertical-align: middle;
 }
 
-.text-vertical-center h1 {
+.header h1 {
     margin: 0;
     padding: 0;
     font-size: 8.5em;
     font-weight: 700;
 
 }
-.text-vertical-center h1 small {
+
+.header h1 small {
     font-size: 0.2em;
     text-shadow: 3px 3px 0px #321;
     color: #efefef;
@@ -275,10 +276,49 @@ hr.small {
     color: #efefef;
 }
 
+.piece-content {
+    background: none no-repeat scroll 0 0 #321;
+    opacity: 0.7;
+    top: 86%;
+    height: 14%;
+    width: 100%;
+    padding-top: 5px;
+    position: absolute;
+    color: #efefef;
+    font-size: 70%;
+}
+
+.page-title {
+    padding: 10px;
+    width: auto;
+}
+.page-sub-title {
+    background-color: rgba(0,0,0,0.5);
+    padding: 10px;
+}
+
+
+.btn-square {
+    border-radius: 0px;
+}
+
+
+
 .img-overlay {
     position: relative;
 }
 
+.min100 {
+    min-height: 100px;
+}
+
+.min200 {
+    min-height: 200px;
+}
+
+.max200 {
+    max-height: 200px;
+}
 
 .table {
     height: 160px;
@@ -370,6 +410,7 @@ a.skype {
 
 
 .ribbon-green {
+  z-index: 2000;
   font: bold 15px Sans-Serif;
   color: #efefef;
   text-align: center;
@@ -384,6 +425,7 @@ a.skype {
   top: 25px;
   width: 160px;
   background-color: #5cb85c;
+  background-color: #428bca;
   /*background-image: -webkit-gradient(linear, left top, left bottom, from(#BFDC7A), to(#8EBF45)); 
   background-image: -webkit-linear-gradient(top, #BFDC7A, #8EBF45); 
   background-image:    -moz-linear-gradient(top, #BFDC7A, #8EBF45); 
