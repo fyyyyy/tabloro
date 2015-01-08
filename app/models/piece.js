@@ -4,9 +4,15 @@
 
 var mongoose = require('mongoose');
 
+var Imager = require('imager');
+var config = require('config');
+var imagerConfig = require(config.root + '/config/imager.js');
+
 var Schema = mongoose.Schema;
 var User = require('../models/user.js');
 mongoose.model('User');
+
+
 
 /**
  * Getters
@@ -36,13 +42,12 @@ var PieceSchema = new Schema({
       unique: true
     }
   },
+  description: {
+    type: String
+  },
   type: {
     type: String,
     trim: true
-  },
-  imageUrl: {
-    type: String,
-    trim: false
   },
   atlasjson: {
     type: String,
@@ -61,6 +66,14 @@ var PieceSchema = new Schema({
     type: Number,
     default: 0
   },
+  rotateBy: {
+    type: Number,
+    default: 0
+  },
+  isDice: {
+    type: Boolean,
+    default: false
+  },
   isPrivate: {
     type: Boolean,
     default: false
@@ -70,14 +83,18 @@ var PieceSchema = new Schema({
     get: getTags,
     set: setTags
   },
-  createdAt: {
-    type: Date,
-    default: Date.now
+  image: {
+    cdnUri: String,
+    files: []
   },
   user: {
     type: Schema.ObjectId,
     ref: 'User'
   },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
 });
 
 /**
@@ -114,11 +131,58 @@ PieceSchema.pre('save', function (next) {
 });
 
 
+
+PieceSchema.pre('remove', function (next) {
+  var imager = new Imager(imagerConfig, 'S3');
+  var files = this.image.files;
+
+  // if there are files associated with the item, remove from the cloud too
+  imager.remove(files, function (err) {
+    if (err) return next(err);
+  }, 'piece');
+
+  next();
+});
+
+
+
 /**
  * Methods
  */
 
 PieceSchema.methods = {
+
+  /**
+   * Save piece and upload image
+   *
+   * @param {Object} images
+   * @param {Function} cb
+   * @api private
+   */
+
+  uploadAndSave: function (images, cb) {
+    if (!images || !images.length) return this.save(cb);
+
+    var imager = new Imager(imagerConfig, 'S3');
+    var self = this;
+
+    this.validate(function (err) {
+      if (err) {
+        console.error('Validation error', err);
+        return cb(err);
+      } 
+      imager.upload(images, function (err, cdnUri, files) {
+        if (err) {
+          console.error('upload error', err);
+          return cb(err);
+        }
+        if (files.length) {
+          self.image = { cdnUri : cdnUri, files : files };
+        }
+        self.save(cb);
+      }, 'piece');
+    });
+  },
 
 };
 

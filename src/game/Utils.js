@@ -179,6 +179,15 @@ var Utils = {
         return deg;
     },
 
+    deg2Rad: function (deg) {
+        if (deg < 0) {
+            deg += 360;
+        }
+        var rad = deg / 180 * Math.PI;
+
+        return rad;
+    },
+
     addProperties: function (obj, configObject) {
         R.forEach(
             function (arg) {

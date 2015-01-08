@@ -1,0 +1,23 @@
+{% extends '../pieces/piece_count_frame.html' %}
+
+
+{% block image %}
+
+  <span class="text-center">
+    &nbsp;
+    {% include '../pieces/type.html' %}
+    <a href="/pieces/{{ piece.id }}" target="_blank" class="text-center">
+      {{piece.title | title}}
+    </a>
+  </span>
+
+{% endblock %}
+   
+
+      
+{% block footer %}
+
+  {% set editCount = true %}
+  {% include '../pieces/sprite_script.html' with editCount %}
+{% endblock %}
+

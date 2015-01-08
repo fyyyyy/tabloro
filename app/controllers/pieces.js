@@ -77,10 +77,11 @@ exports.new = function (req, res) {
 exports.create = function (req, res) {
     console.log('create piece', req.body);
     var piece = new Piece(req.body);
+    var images = req.files.image ? [req.files.image] : undefined;
 
     piece.user = req.user;
 
-    piece.save(function (err) {
+    piece.uploadAndSave(images, function (err) {
         if (!err) {
             req.flash('success', 'Successfully created piece!');
             return res.redirect('/pieces/' + piece.id);
@@ -114,9 +115,7 @@ exports.edit = function (req, res) {
 
 exports.update = function (req, res){
   var piece = req.piece;
-  var images = req.files.image
-    ? [req.files.image]
-    : undefined;
+  var images = req.files.image ? [req.files.image] : undefined;
 
   // make sure no one changes the user
   delete req.body.user;
@@ -124,7 +123,7 @@ exports.update = function (req, res){
 
 
 
-  piece.save(function (err) {
+  piece.uploadAndSave(images, function (err) {
     if (!err) {
       return res.redirect('/pieces/' + piece._id);
     }
@@ -135,18 +134,7 @@ exports.update = function (req, res){
       errors: utils.errors(err.errors || err)
     });
   });  
-
-  // piece.uploadAndSave(images, function (err) {
-  //   if (!err) {
-  //     return res.redirect('/pieces/' + piece._id);
-  //   }
-
-  //   res.render('pieces/edit', {
-  //     title: 'Edit Piece(s)',
-  //     piece: piece,
-  //     errors: utils.errors(err.errors || err)
-  //   });
-  // });
+  
 };
 
 

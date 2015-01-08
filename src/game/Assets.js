@@ -20,5 +20,6 @@ Assets.preload = function (game) {
 
     R.forEach(function (asset) {
         game.load[asset.method].apply(game.load, asset.args);
+        console.log('loading', asset.method, asset.args);
     })(assets);
 };

@@ -1,28 +1,42 @@
-<div class="article">
-  <h2>
-    <a href="{{ '/news/' + article._id }}" title="{{ article.title }}">
-      {{ article.title }}
-    </a>
-  </h2>
-  <p>{{ article.body }}</p>
+<div class="article col-md-12">
+  
+  <div class="col-md-2">
+  </div>
+  
+  <div class="col-md-2">
+      {% if (!article.isNew && article.image && article.image.files && article.image.files.length) %}
+        <img src="{{ article.image.cdnUri + '/mini_' + article.image.files[0] }}" alt=""/>
+      {% endif %}
+  </div>
 
-  <span class="muted">{{ article.createdAt.toISOString()|date('M d, Y  h:i a') }}</span>
+  <div class="col-md-8">
+    <h2>
+      <a href="{{ '/news/' + article._id }}" title="{{ article.title }}">
+        {{ article.title }}
+      </a>
+    </h2>
+    <p>{{ article.body }}</p>
 
-  {% if (article.user) %}
-    &nbsp; - &nbsp;
-    <span>Author: </span>
-    <a href="{{ '/users/' + article.user._id }}">
-      {{ article.user.name || article.user.username }}
-    </a>
-  {% endif %}
+    <span class="muted">{{ article.createdAt.toISOString()|date('M d, Y  h:i a') }}</span>
 
-  {% if (article.tags) %}
-    &nbsp; - &nbsp;
-    <span>Tags: </span>
-    {% for tag in article.tags.split(',') %}
-      <i class="muted fa fa-tag"></i>&nbsp;
-      <a href="{{ '/tags/' + tag }}" class="tag">{{ tag }}</a>
-      &nbsp;&nbsp;
-    {% endfor %}
-  {% endif %}
+    {% if (article.user) %}
+      &nbsp; - &nbsp;
+      <span>Author: </span>
+      <a href="{{ '/users/' + article.user._id }}">
+        {{ article.user.name || article.user.username }}
+      </a>
+    {% endif %}
+
+    {% if (article.tags) %}
+      &nbsp; - &nbsp;
+      <span>Tags: </span>
+      {% for tag in article.tags.split(',') %}
+        <i class="muted fa fa-tag"></i>&nbsp;
+        <a href="{{ '/tags/' + tag }}" class="tag">{{ tag }}</a>
+        &nbsp;&nbsp;
+      {% endfor %}
+    {% endif %}
+  </div>
+
+
 </div>

@@ -1,0 +1,177 @@
+{% extends '../layouts/default.html' %}
+
+{% block main %}
+  <h1>{{ title }}</h1>
+{% endblock %}
+
+{% block content %}
+  <section class="container">
+  <div class="spacer"></div>
+
+
+    <div class="col-md-4">
+      <ul class="list-group">
+
+
+        <li class="list-group-item list-group-item-success">
+          Type
+          <strong class="pull-right">
+            {{box.gameType}}
+          </strong>
+        </li>
+
+
+        {% if (box.isPrivate) %}
+          <li class="list-group-item list-group-item-warning">Private</li>
+        {% else %}
+          <li class="list-group-item list-group-item-default">Public</li>
+        {% endif %}
+
+
+        <li class="list-group-item list-group-item-default">
+          Created by
+          <strong class="pull-right">{{box.user.username}}</strong>
+        </li>
+
+        <li class="list-group-item list-group-item-default">Created <strong class="pull-right">{{ box.createdAt.toISOString()|date('M d,  h:i a') }}</strong></li>
+        {% if (box.tags) %}
+          <li class="list-group-item meta">
+            <p>
+            Tags: &nbsp;
+            <span class="pull-right">
+              {% for tag in box.tags.split(',') %}
+                <i class="muted fa fa-tag"></i>&nbsp;
+                <a href="{{ '/tags/' + tag }}" class="tag">{{ tag }}</a>
+                &nbsp;&nbsp;
+              {% endfor %}
+            </span>
+            </p>
+          </li>
+        {% endif %}
+        {% if isOwner %}
+          <li class="list-group-item list-group-item-warning">
+              <a href="{{ '/boxes/' + box.id + '/edit' }}" title="edit" class="btn btn-warning">
+                Edit Box
+              </a>
+              <a href="{{ '/boxes/' + box.id + '/count' }}" title="count" class="btn btn-info">
+                Change number of pieces
+              </a>
+          </li>
+          
+          <li class="list-group-item list-group-item-danger">
+            <form action="{{ '/boxes/' + box.title }}" method="post" onsubmit="return confirm('Are you sure?')">
+              <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+              <input type="hidden" name="_method" value="DELETE">
+              <button class="btn btn-danger" type="submit">Delete Box</button>
+            </form>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+
+
+    <div class="col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4>
+            {{box.title | title}}
+          </h4>
+        </div>
+        
+        <div class="panel-body">
+
+          <div class="col-md-7">
+            {% if (!box.isNew && box.image && box.image.files && box.image.files.length) %}
+              <img class="img-responsive" src="{{ box.image.cdnUri + '/detail_' + box.image.files[0] }}" alt="">
+            {% endif %}
+          </div>
+
+          <div class="col-md-5">
+            <h4>Description</h4>
+            <p>{{box.description}}</p>
+            <a href="/boxes/{{box.id}}/test" class="btn btn-info" >
+              <i class="fa fa-play-circle fa-fw"></i>
+              Test Box contents
+            </a>
+            <a href="/boxes/{{box.id}}/setups/new" class="btn btn-success" >
+              <i class="fa fa-sitemap fa-fw"></i>
+              Create game setup / layout
+            </a>
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4>
+            Contents of Game Box ({{boxPieces.length}} piece sets)
+          </h4>
+        </div>
+        
+        <div class="dark-brown">
+          {% for piece in boxPieces %}
+              {% include 'remove_piece.html' %}
+          {% endfor %}
+        </div>
+
+      </div>
+    </div>
+    
+    {% if isOwner %}
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4>
+              <button data-toggle="collapse" data-target="#accordion" class="btn btn-success">
+                <i class="fa fa-plus-circle"></i>
+                Add Pieces to Game Box
+              </button>
+            </h4>
+          </div>
+          
+          <div class="panel-body collapse" id="accordion">
+            {% for piece in pieces %}
+              {% include 'add_piece.html' %}
+            {% endfor %}
+
+            {% if (pages > 1) %}
+              <ul class="pagination">
+                {% autoescape false %}
+                  {{ createPagination(pages, page) }}
+                {% endautoescape %}
+              </ul>
+            {% endif %}
+          </div>
+
+        </div>
+      </div>
+    {% endif %}
+    
+  </section>
+
+  <div class="spacer"></div>
+
+  <section class="bg-primary about">
+    <div class="container">
+      
+      <a href="/boxes" class="btn btn-default">
+        <i class="fa fa-backward"></i>
+        Back to boxes
+      </a>
+    </div>
+  </section>
+
+{% include '../pieces/sprite_script.html' %}
+
+
+{% endblock %}
+
+
+
+
+

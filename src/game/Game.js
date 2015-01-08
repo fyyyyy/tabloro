@@ -3,6 +3,26 @@
 
 var G = {};
 
+G._groups = {};
+
+G.groups = {
+    add: function (groupName, index, rotateBy) {
+        index = index || 0;
+        rotateBy = rotateBy || 0;
+
+        G._groups[groupName] = game.add.group();
+        G._groups[groupName].z = index;
+        G._groups[groupName].rotateBy = rotateBy;
+    },
+    get: function (groupName) {
+        return G._groups[groupName];
+    },
+    all: function () {
+        return G._groups;
+    }
+};
+
+
 G.init = function (game) {
     G.button = R.converge(
         game.add.button,
@@ -52,14 +72,18 @@ G.removeUpdatePosition = function (target) {
 
 G.findTile = function (tileId) {
     tileId = Number(tileId);
-    var tile = R.find(R.propEq('id', tileId))(cards1.children);
-    tile = tile || R.find(R.propEq('id', tileId))(tokens.children);
-    tile = tile || R.find(R.propEq('id', tileId))(redDice.children);
-    if (!tile) {
+    var foundTile;
+
+    // TODO: optimize lookup
+    R.mapObj(function (group) {
+        foundTile = R.find(R.propEq('id', tileId))(group.children) || foundTile;        
+    })(G.groups.all());
+
+    if (!foundTile) {
         console.error('tile not found', tileId);
         return {};
     }
-    return tile;
+    return foundTile;
 };
 
 G.findStack = function (stackId) {
@@ -70,4 +94,10 @@ G.findStack = function (stackId) {
         return {};
     }
     return stack;
+};
+
+
+G.saveSetup = function saveSetup() {
+    console.log('saving Game Setup');
+    Network.server.saveSetup();
 };

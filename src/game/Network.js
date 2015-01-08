@@ -28,7 +28,7 @@ Network.setup = function () {
         console.log('Network.setId for', playerName);
         Network.myId = id;
         //create() is moved here to make sure nothing is created before uniq id assignation
-        Network.server.handshake(id, cursorId, playerName, roomName);
+        Network.server.handshake(id, cursorId, playerName, roomName, mode);
         console.log('connecting to table', roomName);
 
         create();
@@ -63,7 +63,6 @@ Network.setup = function () {
         UI.updateNames();
 
         Video.newClient(client.id, client.name);
-        // Video.newClient('asgasgasgasg', 'suzi');
     };
 
 
@@ -176,6 +175,7 @@ Network.setup = function () {
 
     Network.client.exports.spin = function(client, diceInGroup, delays, values) {
         Dice.spin(diceInGroup, delays, values);
+        UI.message('Spinning', diceInGroup.length, 'dice');
     };
 
 

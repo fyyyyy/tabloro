@@ -13,21 +13,21 @@ var R = require('../../public/js/ramda.js');
 var STACK_DEFAULTS = function () {
     return {
 
-        '0': {
-            position: {
-                x: 500,
-                y: 300
-            },
-            cards: R.concat(R.range(2, 40), R.range(41, 50))
-        },
+        // '0': {
+        //     position: {
+        //         x: 500,
+        //         y: 300
+        //     },
+        //     cards: R.concat(R.range(2, 40), R.range(41, 50))
+        // },
 
-        '1': {
-            position: {
-                x: 100,
-                y: 300
-            },
-            cards: []
-        },
+        // '1': {
+        //     position: {
+        //         x: 100,
+        //         y: 300
+        //     },
+        //     cards: []
+        // },
 
     };
 };

@@ -1,0 +1,25 @@
+<div class="col-sm-3">
+  <div class="panel panel-default">
+      
+      <div class="img-overlay min200">
+        <center>
+          {% if (!box.isNew && box.image && box.image.files && box.image.files.length) %}
+            <img class="img-responsive max200" src="{{ box.image.cdnUri + '/mini_' + box.image.files[0] }}">
+          {% else %}
+            <img class="img-responsive max200" src="/img/gamebox.png">
+          {% endif %}
+
+            <div class="box-content">
+              {% block image %}
+              {% endblock %}
+            </div>
+          </img>
+        </center>
+      </div>
+
+      
+      {% block footer %}
+      {% endblock %}
+
+  </div>
+</div>

@@ -1,0 +1,45 @@
+{% extends 'setup_frame.html' %}
+
+
+{% block image %}
+
+  <h4>
+
+    <strong>{{setup.title | title}}</strong>
+
+    <span class="text-primary">
+      {% if (setup.description) %}
+          &nbsp;
+          <i class="fa fa-align-left" title="Description Available"></i>
+      {% endif %}
+    </span>
+  </h4>
+
+
+  <p>
+    {% if setup.tags.length %}
+      <span class="small">
+        tags &nbsp;
+        {% for tag in setup.tags.split(',') %}
+          <i class="muted fa fa-tag"></i>&nbsp;
+          <a href="{{ '/tags/' + tag }}" class="tag">{{ tag }}</a>
+          &nbsp;&nbsp;
+        {% endfor %}
+      </span>
+    <br/>
+    {% endif %}
+
+     <i class="fa fa-cube fa-lg text-primary">Box</i>&nbsp;<a href="/boxes/{{setup.box.id}}">{{setup.box.title}}</a>
+    
+  </p>
+{% endblock %}
+   
+
+      
+{% block footer %}
+  <a href="{% if (req.isAuthenticated()) %}/boxes/{{setup.box.id}}/setups/{{ setup.title }}{% else %}/login{%endif%}" class="btn btn-primary btn-block btn-square">
+    <i class="fa fa-sitemap"></i>&nbsp;
+    show setup
+  </a>
+{% endblock %}
+

@@ -2,18 +2,20 @@
 
 
 {% block image %}
+  {% if piece.tags.length %}
+    <div class="piece-content">
 
-  <p>
-    {% if piece.tags.length %}
-      {% for tag in piece.tags.split(',') %}
-        <i class="muted fa fa-tag"></i>&nbsp;
-        <a href="{{ '/tags/' + tag }}" class="tag">{{ tag }}</a>
-        &nbsp;&nbsp;
-      {% endfor %}
-      <br/>
-    {% endif %}
+      <p>
+          {% for tag in piece.tags.split(',') %}
+            <i class="muted fa fa-tag"></i>&nbsp;
+            <a href="{{ '/tags/' + tag }}" class="tag">{{ tag }}</a>
+            &nbsp;&nbsp;
+          {% endfor %}
+          <br/>
+      </p>
 
-  </p>
+    </div>
+  {% endif %}
 {% endblock %}
    
 

@@ -67,9 +67,7 @@ exports.new = function (req, res){
 
 exports.create = function (req, res) {
   var article = new Article(req.body);
-  var images = req.files.image
-    ? [req.files.image]
-    : undefined;
+  var images = req.files.image ? [req.files.image] : undefined;
 
   article.user = req.user;
   article.uploadAndSave(images, function (err) {
@@ -103,10 +101,9 @@ exports.edit = function (req, res) {
 
 exports.update = function (req, res){
   var article = req.article;
-  var images = req.files.image
-    ? [req.files.image]
-    : undefined;
-
+  var images = req.files.image ? [req.files.image] : undefined;
+  
+  console.log('images', images);
   // make sure no one changes the user
   delete req.body.user;
   article = extend(article, req.body);

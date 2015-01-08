@@ -2,6 +2,8 @@
 
 
 {% block image %}
+  <span class="small absolute-left text-primary">Started {{ table.createdAt.toISOString()|date('G:i') }}</span>
+
   <h4>
 
     <strong>{{table.title | title}}</strong>
@@ -33,12 +35,14 @@
 
   <p>
     {% if table.tags.length %}
-      tags &nbsp;
-      {% for tag in table.tags.split(',') %}
-        <i class="muted fa fa-tag"></i>&nbsp;
-        <a href="{{ '/tags/' + tag }}" class="tag">{{ tag }}</a>
-        &nbsp;&nbsp;
-      {% endfor %}
+      <span class="small">
+        tags &nbsp;
+        {% for tag in table.tags.split(',') %}
+          <i class="muted fa fa-tag"></i>&nbsp;
+          <a href="{{ '/tags/' + tag }}" class="tag">{{ tag }}</a>
+          &nbsp;&nbsp;
+        {% endfor %}
+      </span>
     <br/>
     {% endif %}
 
@@ -50,14 +54,14 @@
         <i class="fa fa-user fa-lg text-primary"></i>&nbsp;
       {% endfor %}
     {% endif %}
+    
   </p>
 {% endblock %}
    
 
       
 {% block footer %}
-  <span class="small">Started {{ table.createdAt.toISOString()|date('G:i') }}</span>
-  <a href="{% if (req.isAuthenticated()) %}tables/{{ table.title }}{% else %}/login{%endif%}" class="btn btn-primary btn-block">
+  <a href="{% if (req.isAuthenticated()) %}tables/{{ table.title }}{% else %}/login{%endif%}" class="btn btn-primary btn-block btn-square">
     <i class="fa fa-user"></i>&nbsp;
     join table
   </a>

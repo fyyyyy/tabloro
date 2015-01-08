@@ -1,0 +1,196 @@
+<script>
+
+  (function () {
+    /*globals $, R, Image, document*/
+
+    var piece = JSON.parse('{{JSON.stringify(piece)}}');
+    var editCount = '{{editCount}}';
+    var showCount = '{{showCount}}';
+    var pieceCounts;
+    if (editCount || showCount) {
+      pieceCounts = JSON.parse('[{{box.counts[piece.id] || ""}}]');
+    }
+    console.log('editCount', editCount, 'showCount', showCount, pieceCounts);
+
+
+    var checkImageLoaded;
+    var appendTiles;
+    var image = document.getElementById('spritesheet-' + piece._id);
+
+    var setStyle = function (width, height, xOffset, yOffset) {
+      // console.log('set style', width, height, xOffset, yOffset);
+
+      var margin = 'margin: 20px;';
+      if (editCount) {
+        margin = 'margin: 20px; margin-right: 40px; margin-bottom: 60px;';
+      }
+
+      return margin + ' display: inline-block; ' + 
+                        'width: ' + width + 'px; ' + 
+                        'height: ' + height + 'px; ' +
+                        'background: url(' + piece.image.cdnUri + '/original_' + piece.image.files[0] + ') ' +
+                        xOffset + 'px ' +
+                        yOffset + 'px;';
+    };
+
+
+    document.addEventListener('DOMContentLoaded', function() { 
+      
+      appendTiles = function (i, style) {
+        console.log('appending', piece._id);
+
+        var numberDom;
+        
+        if (editCount) {
+          numberDom = (piece.isDice  && i > 0) ?
+            '<span class="piece-count"></span>'
+            :
+            '<span class="piece-count">' +
+              '<div class="form-group">' +
+                '<div class="input-group">' +
+                  '<input type="number" name="' + piece._id + '" value="' + (pieceCounts[i] || 1) + '" class="form-control input-lg"/>' +
+                  '<div class="input-group-addon">' +
+                    '<button type="button" class="btn btn-success btn-xs btn-square" id="inc-' + piece._id + '-' + i + '">+</button>' +
+                    '<button type="button" class="btn btn-default btn-xs btn-square" id="dec-' + piece._id + '-' + i + '">-</button>' +
+                  '</div>' +
+                '</div>' +
+              '</div>' +
+            '</span>';
+        } else if (showCount) {
+          numberDom = (piece.isDice  && i > 0) ?
+            '<span class="piece-number">' +
+              '<a href="#" class="btn">' +
+              '</a>' +
+            '</span>'
+            :    
+            '<span class="piece-number">' +
+              '<a href="/boxes/{{box.id}}/count#tiles-' + piece._id + '" class="btn btn-primary btn-xs">' +
+                 (pieceCounts[i] || 1) +
+                '<i class="fa fa-times"></i>' +
+              '</a>' +
+            '</span>';
+        } else {
+          numberDom =       
+            '<span class="piece-number">' +
+              '<span class="fa fa-stack small">' +
+                '<i class="fa fa-circle text-primary fa-stack-2x"></i>' +
+                '<span class="fa fa-stack-1x">' +
+                     (i + 1) +
+                '.</span>' +
+              '</span>' +
+            '</span>';
+        }
+
+        var newDom = 
+          '<span class="img-overlay">' +
+            '<span id="frame-' + i + '" style="' + style + '" title="piece #' + (i + 1) +'">' +
+                numberDom +
+            '</span>' +
+          '</span>';
+
+
+        $('#tiles-' + piece._id).append(newDom);
+
+        if (editCount) {
+          $('button#inc-' + piece._id + '-' + i).on('click', function (e) {
+            var input = e.target.parentElement.parentElement.firstElementChild;
+            input.value = Number(input.value) + 1;
+          });
+
+          $('button#dec-' + piece._id + '-' + i).on('click', function (e) {
+            var input = e.target.parentElement.parentElement.firstElementChild;
+            input.value = Number(input.value) - 1;
+          });
+        }
+      };
+
+      
+      
+      checkImageLoaded = function (cb) {
+        console.log('image', image);
+        if (image) {
+          var theImage = new Image();
+          var source = R.path('attributes.src.value')(image);
+          console.log('source', source);
+          if (source) theImage.src = source;
+          var width = theImage.width;
+          var height = theImage.height;
+          
+          if (width) {
+            cb(width, height);
+          } else {
+            console.log('image not loaded yet');
+            setTimeout(function() {
+              checkImageLoaded(cb);
+            }, 200);
+          }
+        }
+      };
+
+    });
+
+    if (piece.atlasjson) {
+      document.addEventListener('DOMContentLoaded', function() { 
+        console.log('DOMContentLoaded, atlasjson');
+
+        $.getJSON(piece.atlasjson, function (data) {
+          var setImageWidth = function () {
+            var frames = data.frames;
+            // console.log('frames', data);
+
+            for (var i =  0; i < frames.length; i++) {
+              var frame = frames[i].frame;
+              var xOffset = - frame.x;
+              var yOffset = - frame.y;
+              var width = frame.w;
+              var height = frame.h;
+              appendTiles(i, setStyle(width, height, xOffset, yOffset));
+            }
+          };
+          
+          checkImageLoaded(setImageWidth);
+        });
+      });
+      
+    } else if (piece.frameWidth) {
+      document.addEventListener('DOMContentLoaded', function() { 
+        console.log('DOMContentLoaded, spritesheet');
+
+        var setImageWidth = function (imageWidth, imageHeight) {
+          console.log('imageWidth', imageWidth, imageHeight);
+          var spacing = piece.spacing;
+          var width = piece.frameWidth - spacing;
+          var height = piece.frameHeight;
+          var frames = piece.maxFrames;
+          var columns = imageWidth / (width + spacing);
+          
+          for (var i = 0; i < frames; i++) {
+            var xOffset = - (i % columns ) * (width +  spacing);
+            var yOffset = - Math.floor(i / columns) * (height + spacing);
+            appendTiles(i, setStyle(width, height, xOffset, yOffset));
+          }
+        };
+        
+        checkImageLoaded(setImageWidth);
+      });
+      
+    } else {
+      document.addEventListener('DOMContentLoaded', function() { 
+        console.log('DOMContentLoaded, image');
+
+        var setImageWidth = function (imageWidth, imageHeight) {
+          console.log('imageWidth', imageWidth, imageHeight);
+          appendTiles(0, setStyle(imageWidth, imageHeight, 0, 0));
+        };
+        
+        checkImageLoaded(setImageWidth);
+
+      });
+    }
+  }());
+
+
+
+
+</script>
+

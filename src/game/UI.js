@@ -8,7 +8,7 @@ UI.lines = [];
 UI.init = function () {
 
     //  The score
-    UI.gameText = game.add.text(0, 0, 'C A R C A S S O N E', {
+    UI.gameText = game.add.text(0, 0, gameName.split('').join(' '), {
         font: 'bold 32px Times',
         fill: '#ccc'
     });
@@ -70,7 +70,7 @@ UI.message = function () {
 };
 
 UI.setNames = function (names) {
-    UI.nameText.setText(R.join('-', new Array(41)) + '\nTable: ' + roomName + '\n' + R.join('\n')(names));
+    UI.nameText.setText(R.join('-', new Array(gameName.length * 3)) + '\nTable: ' + roomName + '\n' + R.join('\n')(names));
 };
 
 UI.updateNames = function () {

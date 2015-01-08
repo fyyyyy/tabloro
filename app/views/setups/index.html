@@ -1,0 +1,49 @@
+{% extends '../layouts/default.html' %}
+
+{% block main %}
+    <h1>{{ title }}</h1>
+{% endblock %}
+
+{% block content %}
+
+  <div class="text-center">
+
+    <div class="about">
+      {% if (req.isAuthenticated()) %}
+        <a class="btn btn-success" href="/setups/new">
+          <i class="fa fa-plus-circle"></i>
+          Create a game setup
+        </a>
+      {% endif %}
+    </div>
+
+    {% if (setups.length) %}
+      {% for setup in setups %}
+        {% include 'setup.html' %}
+      {% endfor %}
+
+      {% if (pages > 1) %}
+        <ul class="pagination">
+          {% autoescape false %}
+            {{ createPagination(pages, page) }}
+          {% endautoescape %}
+        </ul>
+      {% endif %}
+
+    {% else %}
+      <h4 class="muted">
+        No game setups yet.&nbsp;
+      </h4>
+    {% endif %}
+    
+    {% include 'create_setup.html' %}
+
+  
+
+  </div>
+
+  <div class="clearfix"></div>
+  <div class="about"></div>
+
+
+{% endblock %}

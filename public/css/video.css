@@ -27,6 +27,15 @@
     left: 50px;
 }
 
+#edit-container {
+    width: auto;
+    padding: 5px;
+    text-align: right;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
 .video-group {
   float: left;
 }

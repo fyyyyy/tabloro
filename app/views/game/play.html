@@ -35,10 +35,13 @@
             var playerName = '{{user.username}}';
             var cursorId = Number('{{user.selected_cursor}}') || 1;
             var roomName = '{{table.title}}';
-            var assets = {{ JSON.stringify(assets) }};
+            var gameName = '{{game.title}}';
+            var assets = JSON.parse('{{ JSON.stringify(assets) }}');
+            var mode = 'play';
         </script>
     </head>
-    <body>
+  
+    <body style="cursor : url(/img/cursors/{{user.selected_cursor}}.png), auto;">
         
         <!-- Loading message -->
         <div id="please_wait" style="position: absolute; top: 40%; left:40%">

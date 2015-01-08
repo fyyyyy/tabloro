@@ -118,17 +118,17 @@ TableSchema.statics = {
   */
 
   eurecaUpdate: function (name, tiles, stacks){
-    var table = this.findOne({title: name});
-    table.update({tiles: tiles, stacks: stacks}, function (err) {
-        if (err) {
-          console.log(err);
-          console.error('error', 'Could not update table!');
-        }
+    this.findOneAndUpdate({title: name}, {tiles: tiles, stacks: stacks}, function (err, table) {
+      if (err || !table) {
+        console.error('error', err, 'Could not update table!', table);
+        return;
+      }
 
-        console.log('updated table', name);
-      
+      console.log('updated table', table);
     });
   }
+
+
 };
 
 mongoose.model('Table', TableSchema);

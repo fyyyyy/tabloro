@@ -1,0 +1,90 @@
+{% extends '../layouts/default.html' %}
+
+{% block main %}
+  <h1>{{ title }}</h1>
+{% endblock %}
+
+{% block content %}
+  <section class="container">
+    <div class="spacer"></div>
+    
+    <div class="col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4>{{setup.title | title}}</h4>
+        </div>
+        <div class="panel-body">
+          <p>
+            This is a <strong>Game Setup</strong> for the box &nbsp;
+            <a href="/boxes/{{box.id}}" class="btn btn-default">{{box.title}}</a>
+          </p>
+          {% if (setup.description) %}
+            <hr>
+            <h4>Description</h4>
+            <p>{{setup.description}}</p>
+          {% endif %}
+        </div>
+        <div class="panel-footer">
+          <a class="btn btn-primary btn-lg" href="/setups/{{setup.title}}/test" target="_blank">
+            TEST PLAY &nbsp;
+            <i class="fa fa-play"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+
+    <div class="col-md-4">
+      <ul class="list-group">
+        {% if (setup.isPrivate) %}
+          <li class="list-group-item list-group-item-warning">This Game Setup is Private</li>
+        {% else %}
+          <li class="list-group-item list-group-item-success">This Game Setup is Public</li>
+        {% endif %}
+
+
+        <li class="list-group-item list-group-item-default">Created {{ setup.createdAt.toISOString()|date('M d,  h:i a') }}</li>
+        {% if (setup.tags) %}
+          <li class="list-group-item meta">
+            <p>
+            Tags: &nbsp;
+            {% for tag in setup.tags.split(',') %}
+              <i class="muted fa fa-tag"></i>&nbsp;
+              <a href="{{ '/tags/' + tag }}" class="tag">{{ tag }}</a>
+              &nbsp;&nbsp;
+            {% endfor %}
+            </p>
+          </li>
+        {% endif %}
+        {% if isAdmin %}
+          <li class="list-group-item list-group-item-warning">
+            <a href="{{ '/setups/' + setup.title + '/edit' }}" title="edit" class="btn btn-warning">
+              Edit Game Setup
+            </a>
+          </li>
+          <li class="list-group-item list-group-item-danger">
+            <form action="{{ '/setups/' + setup.title }}" method="post" onsubmit="return confirm('Are you sure?')">
+              <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+              <input type="hidden" name="_method" value="DELETE">
+              <button class="btn btn-danger" type="submit">Delete Game Setup</button>
+            </form>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+
+    
+  </section>
+
+  <div class="spacer"></div>
+
+  <section class="bg-primary about">
+    <div class="container">
+      
+      <a href="/setups" class="btn btn-default">
+        <i class="fa fa-backward"></i>
+        Back to setups
+      </a>
+    </div>
+  </section>
+{% endblock %}

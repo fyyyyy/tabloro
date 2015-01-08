@@ -1,0 +1,27 @@
+{% extends '../pieces/piece_frame.html' %}
+
+
+{% block image %}
+  <div class="piece-content">
+    &nbsp;
+    {% include '../pieces/type.html' %}
+    {{piece.title | title}}
+    <a href="/pieces/{{ piece.id }}" target="_blank" class="btn btn-default btn-xs btn-square nomargin pull-right">
+      Click to show
+    </a>
+  </div>
+{% endblock %}
+   
+
+      
+{% block footer %}
+<form method="post" action="/boxes/{{box.id}}/add/{{piece.id}}" role="form" class="form-horizontal">
+  <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+  <input type="hidden" name="_method" value="PUT">
+
+  <button type="submit" class="btn btn-success btn-square btn-block">
+    <strong><i class="fa fa-plus-circle"></i> Add set to Box</strong>
+  </button>
+</form>
+{% endblock %}
+

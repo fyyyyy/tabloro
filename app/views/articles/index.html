@@ -8,13 +8,18 @@
 <div class="about"></div>
 
   
-  <div class="col-md-3">
+  <div class="">
     {% if (req.isAuthenticated()) %}
-      <a class="btn btn-primary" href="/news/new">Add news</a>
+      <a class="btn btn-primary" href="/news/new">
+        <i class="fa fa-plus-circle"></i>
+        Add news
+      </a>
     {% endif %}
   </div>
 
-  <div class="col-md-6">
+  <div class="spacer"></div>
+
+  <div class="row">
     {% if (articles.length) %}
       {% for article in articles %}
         {% include 'article.html' %}
@@ -34,7 +39,6 @@
     {% endif %}
   </div>
 
-  <div class="col-md-3"></div>
 
 <div class="clearfix"></div>
 <div class="about"></div>

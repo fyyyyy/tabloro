@@ -1,0 +1,100 @@
+  {% extends '../layouts/default.html' %}
+
+{% block main %}
+  <h1>{{ title }}</h1>
+{% endblock %}
+
+{% block content %}
+  {% if setup.isNew %}
+    {% set action = '/boxes/' + box.id + '/setups' %}
+  {% else %}
+    {% set action = '/boxes/' + box.id + /setups/' + setup.title %}
+  {% endif %}
+  
+  <div class="about"></div>
+
+
+  <section class="bg">
+    
+    <div class="row container">
+      <div class="col-md-12">
+        <form method="post" action="{{ action }}" role="form" class="form-horizontal">
+
+          <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+
+          {% if not setup.isNew %}
+            <input type="hidden" name="_method" value="PUT">
+          {% endif %}
+
+          <div class="col-sm-9 col-sm-offset-3">
+            <h2>New Game Setup for Box: {{box.title}}</h2>
+          </div>
+
+          <div class="form-group required">
+            <label for="title" class="col-sm-3 control-label">Game Setup Name</label>
+            <div class="col-sm-9">
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa fa-asterisk fa-fw"></i>
+                </div>
+                <input type="text" name="title" value="{{ setup.title }}" placeholder="Enter the name of your game setup" class="form-control" id="title" required="true">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="description" class="col-sm-3 control-label">Description</label>
+            <div class="col-sm-9">
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa fa-list fa-fw"></i>
+                </div>
+                <textarea name="description" placeholder="Enter a description for your game setup" class="form-control" id="description" >{{ setup.description }}</textarea>
+              </div>
+            </div>
+          </div>
+
+          
+
+       <!--    <div class="form-group"> 
+            <label class="col-sm-3 control-label">List in Public?</label>
+            <div class="col-sm-9">
+              <div class="btn-group" data-toggle="buttons">
+                <label href="#" for="isPrivate2" class="btn btn-xs btn-default active">public
+                  <input type="radio" id="isPrivate2" name="isPrivate" value="0" checked />
+                </label>
+                <label href="#" for="isPrivate1" class="btn btn-xs btn-default" >private
+                  <input type="radio" id="isPrivate1" name="isPrivate" value="1" />
+                </label>
+              </div>
+              <p class="help-block">Private rooms are not listed, and can only be found by sharing the link (or guessing the room name).</p>
+            </div>
+          </div> -->
+
+
+            
+          <div class="form-group">
+            <label for="tags" class="col-sm-3 control-label">Tags</label>
+            <div class="col-sm-9">
+              <input type="text" name="tags" value="{{ setup.tags }}" placeholder="Enter the tags separated by , " class="form-control" id="tags">
+              <small>separate tags by ,</small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-9">
+              <button class="btn btn-primary" type="submit">Create</button>
+              &nbsp;
+              <a href="/setups" class="btn btn-link">Cancel</a>
+            </div>
+          </div>
+        </form>
+      </div>
+      
+    </div>
+  </section>
+
+<div class="about"></div>
+  
+
+{% endblock %}

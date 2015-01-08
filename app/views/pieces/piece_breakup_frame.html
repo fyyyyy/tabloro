@@ -1,0 +1,21 @@
+<div class="piece">
+  <div class="panel blackBorder panel-default">
+      
+      <div class="img-overlay wooden">
+          <div style="display:none;">          
+            <img src="{{ piece.image.cdnUri + '/original_' + piece.image.files[0] }}" id="spritesheet-{{piece.id}}"></img>
+          </div>
+
+          <div id="tiles-{{piece.id}}">
+          </div>
+
+            {% block image %}
+            {% endblock %}
+      </div>
+
+      
+      {% block footer %}
+      {% endblock %}
+
+  </div>
+</div>

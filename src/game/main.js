@@ -11,7 +11,7 @@ Screen.y = window.innerHeight *  window.devicePixelRatio;
 
 console.log('Screen size', Screen);
 
-var game = new Phaser.Game(Screen.x, Screen.y, Phaser.AUTO, 'boardgame', {
+var game = new Phaser.Game(Screen.x, Screen.y, Phaser.CANVAS, 'boardgame', {
     preload: preload,
     create: Network.setup,
     update: update
@@ -19,10 +19,7 @@ var game = new Phaser.Game(Screen.x, Screen.y, Phaser.AUTO, 'boardgame', {
 
 
 var redDice;
-var blueDice;
-var cards1;
 var stacks;
-var tokens;
 var players;
 var table;
 var playerList = {};
@@ -32,6 +29,10 @@ var stack1;
 var stack2;
 
 var chatInput;
+
+var screenShot = function () {
+    window.open(game.canvas.toDataURL());
+};
 
 
 function preload() {
@@ -45,7 +46,11 @@ function create() {
     setupStage();
     setupTable();
 
-    setupTiles();
+    if (mode === 'test') {
+        setupAssets(assets);
+    } else {
+        setupTiles();
+    }
     Controls.add(); // on top of tiles
 
     UI.init(); // do before players
@@ -95,35 +100,50 @@ function setupTable() {
 }
 
 
-
-function addCards(array, group, stack) {
-    var cards = [];
-    R.forEach(function (n) {
-        var tile = group.create(100, 100, 'tile', n);
-        tile.defaultFrame = n;
-        if (stack && stack.config.hidden) T.hide(tile);
-        T.scale(0.5, tile);
-        T.setDefaultTint(0xEEEEEE, tile);
-        R.compose(T.setId, Cursor.reset, T.networkAble, T.stackable, T.rotateable, T.draggable, T.centerAnchor)(tile);
-        cards.push(tile.id);
-
-        Controls.target = tile;
-        // console.log('tile created', tile.id);
-    })(array);
-    // S.updateCards(stack, cards);
-    return Controls.target;
+function buildAssetArray (asset, maxFrames) {
+    var assetArray = [];
+    for (var i = 0; i < maxFrames; i++) {
+        R.times(function (n) {
+            assetArray.push(i);
+        })(asset.counts[i] || 1);
+    }
+    return assetArray;
 }
 
+function setupAssets (gameAssets) {
+    var yOffset = 200;
+    var maxFrames = 1;
+    G.groups.add('tokens');
+
+    R.forEach(function (asset) {
+        yOffset += 150;
+
+        var groupName = asset.args[0];
+        console.log('adding asset group', groupName);
+        G.groups.add(groupName, 0, Utils.deg2Rad(asset.rotateBy));
 
 
-function addTokens(which, tint, x, y) {
-    R.forEach.idx(function (n, idx) {
-        var token = tokens.create(x + idx, y - (idx * 2), n);
-        T.setId(token);
-        T.scale(0.6, token);
-        T.setDefaultTint(tint, token);
-        R.compose(Cursor.reset, T.networkAble, T.rotateable, T.draggable, T.centerAnchor)(token);
-    })(which);
+        if (asset.method === 'atlasJSONHash') {
+            maxFrames = game.cache.getFrameCount(groupName);
+            addCards(groupName, yOffset, buildAssetArray(asset, maxFrames), G.groups.get(groupName));
+        }
+
+        if (asset.method === 'image') {
+            addTokens(R.repeatN(groupName, asset.counts || maxFrames), G.groups.get(groupName), 100, yOffset);
+        }
+
+        if (asset.method === 'spritesheet') {
+            maxFrames = asset.args[4];
+            if (asset.isDice) {
+                console.log('adding dice', asset.counts[0]);
+                R.times(function () {
+                    Dice.add(groupName, G.groups.get(groupName), maxFrames);
+                })(asset.counts[0] || 1);
+            } else {
+                addCards(groupName, yOffset, buildAssetArray(asset, maxFrames), G.groups.get(groupName));
+            }
+        }
+    })(gameAssets);
 }
 
 
@@ -131,7 +151,6 @@ function addTokens(which, tint, x, y) {
 function setupTiles () {
     stacks = game.add.group();
     redDice = game.add.group();
-    blueDice = game.add.group();
 
     G.init(game);
     stack1 = S.create({
@@ -149,27 +168,65 @@ function setupTiles () {
         hidden: false
     });
 
-    cards1 = game.add.group();
-    cards1.z = 15;
-    cards1.rotateBy = Math.PI / 2;
+    G.groups.add('cards1', 15);
 
+    addCards('tile', 500, R.range(1, 49), G.groups.get('cards1'), stack1, 0.5);
 
-    addCards(R.range(1, 49), cards1, stack1);
-
-    tokens = game.add.group();
-    tokens.z = 16;
-    tokens.rotateBy = Math.PI / 2;
-    addTokens(R.repeatN('soldier', 7), 0x303320, 330, 60); // black
-    addTokens(R.repeatN('soldier', 7), 0x33BBFF, 400, 60); // blue
-    addTokens(R.repeatN('soldier', 7), 0xDD3333, 470, 60); // red
-    addTokens(R.repeatN('soldier', 7), 0x22CC22, 540, 60); // green
-    addTokens(R.repeatN('soldier', 7), 0xFFEE22, 610, 60); // purple
-    addTokens(R.repeatN('soldier', 7), 0xFFFFFF, 680, 60); // white
+    G.groups.add('tokens', 16, Math.PI / 2);
+    
+    addTokens(R.repeatN('soldier', 7), G.groups.get('tokens'), 330, 60, 0x303320, 0.6); // black
+    addTokens(R.repeatN('soldier', 7), G.groups.get('tokens'), 400, 60, 0x33BBFF, 0.6); // blue
+    addTokens(R.repeatN('soldier', 7), G.groups.get('tokens'), 470, 60, 0xDD3333, 0.6); // red
+    addTokens(R.repeatN('soldier', 7), G.groups.get('tokens'), 540, 60, 0x22CC22, 0.6); // green
+    addTokens(R.repeatN('soldier', 7), G.groups.get('tokens'), 610, 60, 0xFFEE22, 0.6); // purple
+    addTokens(R.repeatN('soldier', 7), G.groups.get('tokens'), 680, 60, 0xFFFFFF, 0.6); // white
 
     // dice
-    Dice.add(redDice, 0, 0xDD3333);
-    Dice.add(redDice, 1, 0xDD3333);
-    // Dice.add(blueDice, 2, 0x3399AA);
+    Dice.add('diceWhite', redDice, 6, 0xDD3333);
+    Dice.add('diceWhite', redDice, 6, 0xDD3333);
+}
+
+function addCards(title, yOffset, array, group, stack, scale) {
+    scale = scale || 1.0;
+    var cards = [];
+    var last;
+    var tempOffset = 0;
+
+    R.forEach(function (n) {
+        if (n === last) {
+            tempOffset -= 3;
+        } else {
+            tempOffset = 0;
+        }
+        var tile = group.create(100 + (n * 120), yOffset + tempOffset, title, n);
+        tile.defaultFrame = n;
+        if (stack && stack.config.hidden) T.hide(tile);
+        T.scale(scale, tile);
+        T.setDefaultTint(0xEEEEEE, tile);
+        R.compose(T.setId, Cursor.reset, T.networkAble, T.stackable, T.rotateable(group.rotateBy), T.draggable, T.centerAnchor)(tile);
+        cards.push(tile.id);
+        Controls.target = tile;
+        last = n;
+        // console.log('tile created', tile.id);
+    })(array);
+    // S.updateCards(stack, cards);
+    return Controls.target;
+}
+
+
+
+function addTokens(which, group, x, y, tint, scale) {
+    tint = tint || 0xFFFFFF;
+    x = x || 100;
+    y = y || 300;
+    scale = scale || 1.0;
+    R.forEach.idx(function (n, idx) {
+        var token = group.create(x + idx, y - (idx * 3), n);
+        T.setId(token);
+        T.scale(scale, token);
+        T.setDefaultTint(tint, token);
+        R.compose(Cursor.reset, T.networkAble, T.rotateable(group.rotateBy), T.draggable, T.centerAnchor)(token);
+    })(which);
 }
 
 
@@ -185,7 +242,7 @@ function setupPlayers () {
 
 function update() {
     if (Network.ready === false) return;
-    S.update();
+    if(mode === 'play') S.update();
     G.update();
 
 

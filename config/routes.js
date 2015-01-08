@@ -11,6 +11,8 @@ var users = require('users');
 var articles = require('articles');
 var tables = require('tables');
 var pieces = require('pieces');
+var boxes = require('boxes');
+var setups = require('setups');
 var comments = require('comments');
 var tags = require('tags');
 var auth = require('./middlewares/authorization');
@@ -22,6 +24,8 @@ var auth = require('./middlewares/authorization');
 var articleAuth = [auth.requiresLogin, auth.article.hasAuthorization];
 var tableAuth = [auth.requiresLogin, auth.table.hasAuthorization];
 var pieceAuth = [auth.requiresLogin, auth.piece.hasAuthorization];
+var boxAuth = [auth.requiresLogin, auth.box.hasAuthorization];
+var setupAuth = [auth.requiresLogin, auth.setup.hasAuthorization];
 var commentAuth = [auth.requiresLogin, auth.comment.hasAuthorization];
 var userAuth = [auth.requiresLogin, auth.user.hasAuthorization];
 
@@ -34,7 +38,7 @@ var userAuth = [auth.requiresLogin, auth.user.hasAuthorization];
 
 module.exports = function (app, passport) {
 
-  // user routes
+  // User
   app.get('/login', users.login);
   app.get('/signup', users.signup);
   app.get('/logout', users.logout);
@@ -82,7 +86,7 @@ module.exports = function (app, passport) {
 
   app.param('userId', users.load);
 
-  // article routes
+  // Article
   app.param('articleId', articles.load);
   app.get('/news', articles.index);
   app.get('/news/new', articleAuth, articles.new);
@@ -92,7 +96,7 @@ module.exports = function (app, passport) {
   app.put('/news/:articleId', articleAuth, articles.update);
   app.delete('/news/:articleId', articleAuth, articles.destroy);
 
-  // table routes
+  // Table
   app.param('tableName', tables.load);
   app.get('/tables', tables.index);
   app.get('/tables/new', auth.requiresLogin, tables.new);
@@ -101,7 +105,7 @@ module.exports = function (app, passport) {
   app.get('/tables/:tableName/play', auth.requiresLogin, tables.play);
   app.delete('/tables/:tableName', tableAuth, tables.destroy);
 
-  // piece routes
+  // Piece
   app.param('pieceId', pieces.load);
   app.get('/pieces', pieces.index);
   app.get('/pieces/new', auth.requiresLogin, pieces.new);
@@ -111,16 +115,43 @@ module.exports = function (app, passport) {
   app.put('/pieces/:pieceId', pieceAuth, pieces.update);
   app.delete('/pieces/:pieceId', pieceAuth, pieces.destroy);
 
-  // home route
+  // Box
+  app.param('boxId', boxes.load);
+  app.get('/boxes', boxes.index);
+  app.get('/boxes/new', auth.requiresLogin, boxes.new);
+  app.post('/boxes', auth.requiresLogin, boxes.create);
+  app.get('/boxes/:boxId', auth.requiresLogin, boxes.show);
+  app.get('/boxes/:boxId/test', auth.requiresLogin, boxes.test);
+    // auth
+    app.get('/boxes/:boxId/count', auth.requiresLogin, boxes.count);
+    app.put('/boxes/:boxId/count/update', auth.requiresLogin, boxes.count_update);
+    app.get('/boxes/:boxId/edit', boxAuth, boxes.edit);
+    app.put('/boxes/:boxId', boxAuth, boxes.update);
+    app.put('/boxes/:boxId/add/:pieceId', boxAuth, boxes.add);
+    app.put('/boxes/:boxId/remove/:pieceId', boxAuth, boxes.remove);
+    app.delete('/boxes/:boxId', boxAuth, boxes.destroy);
+
+
+  // Setup
+  app.param('setupName', setups.load);
+  app.get('/setups', setups.index);
+  app.get('/boxes/:boxId/setups/new', auth.requiresLogin, setups.new);
+  app.post('/boxes/:boxId/setups', auth.requiresLogin, setups.create);
+  app.get('/boxes/:boxId/setups/:setupName', auth.requiresLogin, setups.show);
+  app.get('/setups/:setupName/test', auth.requiresLogin, setups.test);
+  app.delete('/setups/:setupName', setupAuth, setups.destroy);
+
+
+  // Home
   app.get('/', home.index);
 
-  // comment routes
+  // Comment
   app.param('commentId', comments.load);
   app.post('/news/:articleId/comments', auth.requiresLogin, comments.create);
   app.get('/news/:articleId/comments', auth.requiresLogin, comments.create);
   app.delete('/news/:articleId/comments/:commentId', commentAuth, comments.destroy);
 
-  // tag routes
+  // Tag
   app.get('/tags/:tag', tags.index);
 
 

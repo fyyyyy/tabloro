@@ -1,14 +1,17 @@
-<div class="col-sm-3">
-  <div class="panel  {% if piece.isPrivate %}panel-warning {% else %} panel-default {% endif %}">
+<div class="piece">
+  <div class="panel blackBorder panel-default">
       
-      <div class="img-overlay min200 smaller">
-        <img class="img-responsive max200" src="{{piece.imageUrl || '/img/pieces3.jpg'}}">
-          <div class="piece-content">
-            {% block image %}
-            {% endblock %}
-          </div>
-        </div>
-      </img>
+      <div class="img-overlay wooden">
+        {% if (!piece.isNew && piece.image && piece.image.files && piece.image.files.length) %}
+          <img class="img-responsive max200" src="{{  piece.image.cdnUri + '/mini_' + piece.image.files[0] }}" alt="">
+        {% else %}
+          <img class="img-responsive max200" src="/img/pieces3.jpg" alt="">
+        {% endif %}
+
+          {% block image %}
+          {% endblock %}
+        </img>
+      </div>
 
       
       {% block footer %}

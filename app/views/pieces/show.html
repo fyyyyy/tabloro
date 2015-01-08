@@ -36,12 +36,21 @@
           <li class="list-group-item list-group-item-default">Public</li>
         {% endif %}
 
-        {% if (piece.imageUrl) %}
-          <li class="list-group-item list-group-item-default">
-            Image
-            <a href="{{piece.imageUrl}}" target="_blank" class="pull-right">{{piece.imageUrl}}</a>
+        {% if (piece.isDice) %}
+          <li class="list-group-item list-group-item-warning">Dice
+            <i class="fa fa-random pull-right"></i>
           </li>
         {% endif %}
+
+
+        {% if (!piece.isNew && piece.image && piece.image.files && piece.image.files.length) %}
+          <li class="list-group-item list-group-item-default">
+            Image
+            <a href="{{ piece.image.cdnUri + '/original_' + piece.image.files[0] }}" target="_blank" class="pull-right">load full size</a>
+          </li>        
+        {% endif %}
+
+
 
         {% if (piece.atlasjson) %}
           <li class="list-group-item list-group-item-default">
@@ -68,6 +77,15 @@
           </li>
         {% endif %}
 
+        {% if (piece.spacing) %}
+          <li class="list-group-item list-group-item-default">
+            Spacing <strong class="pull-right">{{piece.spacing}}</strong>
+          </li>
+        {% endif %}
+
+        <li class="list-group-item list-group-item-default">
+          Rotation <strong class="pull-right">{{piece.rotateBy}}°</strong>
+        </li>
 
         <li class="list-group-item list-group-item-default">
           Created by
@@ -116,11 +134,14 @@
         </div>
         
         <div class="panel-body">
-          <img id="spritesheet" class="img-responsive max200" src="{{piece.imageUrl}}"></img>
+          {% if (!piece.isNew && piece.image && piece.image.files && piece.image.files.length) %}
+            <img class="img-responsive" src="{{ piece.image.cdnUri + '/detail_' + piece.image.files[0] }}" alt="">
+          {% endif %}
         </div>
 
       </div>
     </div>
+
 
     <div class="col-md-12">
       <div class="panel panel-default">
@@ -131,7 +152,12 @@
         </div>
         
         <div class="panel-body smaller">
-          <div id="tiles">
+          <div style="display: none;">
+            {% if (!piece.isNew && piece.image && piece.image.files && piece.image.files.length) %}
+              <img id="spritesheet-{{piece.id}}" class="img-responsive" src="{{ piece.image.cdnUri + '/original_' + piece.image.files[0] }}" alt="">
+            {% endif %}
+          </div>
+          <div id="tiles-{{piece.id}}">
             
           </div>
         </div>
@@ -155,96 +181,7 @@
     </div>
   </section>
 
-
-<script>
-  var checkImageLoaded;
-  document.addEventListener('DOMContentLoaded', function() { 
-    checkImageLoaded = function (cb) {
-      var image = $('#spritesheet');
-      
-      var theImage = new Image();
-      theImage.src = image.attr("src");
-      var width = theImage.width;
-      
-      if (width) {
-        cb(width);
-      } else {
-        console.log('image not loaded yet');
-        setTimeout(function() {
-          checkImageLoaded(cb);
-        }, 200);
-      }
-    };
-  });
-</script>
-
-{% if (piece.atlasjson) %}
-
-
-
-<script>
-/*globals $, document*/
-
-  document.addEventListener('DOMContentLoaded', function() { 
-    console.log('DOMContentLoaded, atlasjson');
-
-    $.getJSON('{{ piece.atlasjson }}', function (data) {
-      var setImageWidth = function () {
-        var frames = data.frames;
-        console.log('frames', data);
-        for (var i =  0; i < frames.length; i++) {
-          var frame = frames[i].frame;
-          var xOffset = -frame.x;
-          var yOffset = -frame.y;
-          var width = frame.w;
-          var height = frame.h;
-          var style = 'margin: 10px; display: inline-block; width: ' + width + 'px;' +
-                      'height: ' + height + 'px;' +
-                      "background: url('{{piece.imageUrl}}') " + 
-                      xOffset + 'px ' +
-                      yOffset + 'px;';
-          console.log('frame', i, xOffset, yOffset, width, height);
-          $('#tiles').append('<span id="frame-' + i + '" style="' + style + '" title="piece #' + (i + 1) +'"><h3>' + (i + 1) + '</h3></span>');
-        }
-      };
-      
-      checkImageLoaded(setImageWidth);
-    });
-  });
-
-</script>
-
-{% elseif (piece.frameWidth) %}
-
-<script>
-
-  document.addEventListener('DOMContentLoaded', function() { 
-    console.log('DOMContentLoaded, spritesheet');
-
-    var setImageWidth = function (width) {
-      var spacing = {{piece.spacing}};
-      var frameWidth = {{piece.frameWidth}} - spacing;
-      var frameHeight = {{piece.frameHeight}} - spacing;
-      var frames = {{piece.maxFrames}};
-      var columns = width / (frameWidth + 2 * spacing);
-      
-      for (var i = 0; i < frames; i++) {
-        var frame = i;
-        var xOffset = - (frame % columns ) * (frameWidth + 2 * spacing);
-        var yOffset = - Math.floor(frame / columns) * (frameHeight + 2 * spacing);
-        var style = "margin: 10px; display: inline-block; width: {{piece.frameWidth}}px; height: {{piece.frameHeight}}px; background: url('{{piece.imageUrl}}') " + xOffset + "px " + yOffset + "px;"
-        console.debug('frame', frame, 'x', xOffset, 'y', yOffset);
-        $('#tiles').append('<span id="frame-' + i + '" style="' + style + '" title="piece #' + (i + 1) +'"><h3>' + (i + 1) + '</h3></span>');
-
-      };
-    };
-    
-    checkImageLoaded(setImageWidth);
-  });
-
-</script>
-
-{% endif %}
+{% include 'sprite_script.html' %}
 
 
 {% endblock %}

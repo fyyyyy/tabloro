@@ -1,7 +1,11 @@
 {% if (piece.atlasjson) %}
     { json }
 {% elseif (piece.frameWidth) %}
-  <i class="fa fa-th"></i>
+  {% if (piece.isDice) %}
+    <i class="fa fa-random"></i> DICE
+  {% else %}
+    <i class="fa fa-th"></i>
+  {% endif %}
 {% else %}
   <i class="fa fa-photo"></i>
 {% endif %}

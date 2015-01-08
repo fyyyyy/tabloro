@@ -202,10 +202,41 @@ hr.small {
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
-
 }
+
+
 .smaller h1 {
-    font-size: 4em;
+    font-size: 7em;
+}
+.frame {
+    padding: 5px;
+}
+.wooden {
+    width: 100%;
+    background: url(/assets/table_low.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.wooden-follow {
+    width: 100%;
+    background: url(/assets/table_low.jpg) no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+
+.dark-brown {
+    background-color: #321;
+    margin: 0;
+}
+
+.darker {
+    background-color: rgba(0,0,0,0.5);
 }
 
 .spacer {
@@ -265,27 +296,66 @@ hr.small {
 }
 
 
+.box-content {
+    background: none no-repeat scroll 0 0 #321;
+    opacity: 0.7;
+    top: 75%;
+    height: 25%;
+    width: 100%;
+    padding-top: 0;
+    position: absolute;
+    color: #efefef;
+}
+
 .post-content {
     background: none no-repeat scroll 0 0 #321;
     opacity: 0.7;
     top: 25%;
     height: 50%;
     width: 100%;
-    padding-top: 5%;
+    padding-top: 0;
     position: absolute;
     color: #efefef;
 }
 
+.blackBorder {
+    border: 1px solid #543;
+    border-radius: 0px;
+}
+
+.piece {
+    display: inline-block;
+    margin: 10px;
+}
+
 .piece-content {
+    position: absolute;
     background: none no-repeat scroll 0 0 #321;
     opacity: 0.7;
-    top: 86%;
-    height: 14%;
+    top: 0;
+    height: auto%;
     width: 100%;
-    padding-top: 5px;
-    position: absolute;
+    margin: 0;
     color: #efefef;
     font-size: 70%;
+}
+
+.piece-number {
+    color: #fff;
+    text-shadow: 2px 1px 1px #321;
+    font-size: 1.5em;
+    left: 0;
+    margin: 0;
+}
+
+.piece-count {
+    position: absolute;
+    z-index: 1000;
+    bottom: -20px;
+    width: 100%;
+    margin-top: 40px;
+    margin-bottom: 20px;
+
 }
 
 .page-title {
@@ -297,6 +367,11 @@ hr.small {
     padding: 10px;
 }
 
+.absolute-left {
+    position: absolute;
+    left: 0;
+}
+
 
 .btn-square {
     border-radius: 0px;
@@ -306,6 +381,10 @@ hr.small {
 
 .img-overlay {
     position: relative;
+}
+
+.nomargin {
+    margin: 0;
 }
 
 .min100 {

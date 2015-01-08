@@ -69,6 +69,47 @@ exports.piece = {
 
 
 /*
+ *  Box authorization routing middleware
+ */
+
+exports.box = {
+  hasAuthorization: function (req, res, next) {
+    if ( (req.box.user && req.box.user.id === req.user.id) || res.locals.isAdmin) {
+      next();
+    } else {
+      req.flash('info', 'You are not authorized');
+      if (req.box) {
+        return res.redirect('/boxes/' + req.box.id);
+      }
+      return res.redirect('/boxes/');
+    }
+  }
+};
+
+
+
+/*
+ *  Setup authorization routing middleware
+ */
+
+exports.setup = {
+  hasAuthorization: function (req, res, next) {
+    if ( (req.setup.user && req.setup.user.id === req.user.id) || res.locals.isAdmin) {
+      next();
+    } else {
+      req.flash('info', 'You are not authorized');
+      if (req.setup) {
+        return res.redirect('/boxes/' + req.box.id + '/setups/' + req.setup.id);
+      }
+      return res.redirect('/setups/');
+    }
+  }
+};
+
+
+
+
+/*
  *  Table authorization routing middleware
  */
 

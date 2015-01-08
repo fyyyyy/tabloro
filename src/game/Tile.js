@@ -50,17 +50,24 @@ T.resetRotation = function (tile) {
 };
 
 
-T.rotateable = function (tile) {
-    tile.rotateable = true;
-    tile.events.onInputDown.add(T.onStartDragRotate);
-    tile.events.onInputUp.add(T.onStopDragRotate);
-    return tile;
+T.rotateable = function (rotateable) {
+    if (!rotateable) { return R.I;}
+    return function (tile) {
+        tile.rotateable = true;
+        tile.events.onInputDown.add(T.onStartDragRotate);
+        tile.events.onInputUp.add(T.onStopDragRotate);
+        return tile;
+    };
 };
 
 T.onRotate = function onRotate() {
     console.log('onRotate', Controls.target);
 
-    var rotation = Controls.target.parent.rotateBy || Math.PI / 2;
+    var rotation = Controls.target.parent.rotateBy;
+    if (!rotation) {
+        console.log('tile not rotateable');
+        return;
+    }
     var position = Controls.target.position.clone();
     position.rotation = Controls.target.rotation + rotation;
 
@@ -89,6 +96,7 @@ T.resetTint = function (tile) {
 
 T.onStartDrag = function (tile) {
     console.log('onStartDrag', tile.id);
+    Controls.hide();
     Network.server.tileDragStart(tile.id);
 };
 

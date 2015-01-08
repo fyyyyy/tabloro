@@ -1,0 +1,49 @@
+{% extends '../layouts/default.html' %}
+
+{% block main %}
+    <h1>{{ title }}</h1>
+{% endblock %}
+
+{% block content %}
+
+  <div class="text-center">
+
+    <div class="about">
+      {% if (req.isAuthenticated()) %}
+        <a class="btn btn-success" href="/boxes/new">
+          <i class="fa fa-cube"></i>
+          Add your own game box
+        </a>
+      {% endif %}
+    </div>
+
+    {% if (boxes.length) %}
+      {% for box in boxes %}
+        {% include 'box.html' %}
+      {% endfor %}
+
+      {% if (pages > 1) %}
+        <ul class="pagination">
+          {% autoescape false %}
+            {{ createPagination(pages, page) }}
+          {% endautoescape %}
+        </ul>
+      {% endif %}
+
+    {% else %}
+      <h4 class="muted">
+        No game boxes found.&nbsp;
+      </h4>
+    {% endif %}
+    
+    {% include 'create_box.html' %}
+
+  
+
+  </div>
+
+  <div class="clearfix"></div>
+  <div class="about"></div>
+
+
+{% endblock %}

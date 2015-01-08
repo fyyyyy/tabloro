@@ -18,7 +18,7 @@
     
     <div class="row container">
       <div class="col-md-12">
-        <form method="post" action="{{ action }}" role="form" class="form-horizontal">
+        <form method="post" action="{{ action }}" enctype="multipart/form-data" role="form" class="form-horizontal">
 
           <input type="hidden" name="_csrf" value="{{ csrf_token }}">
 
@@ -40,6 +40,17 @@
 
 
 
+          <div class="form-group">
+            <label for="file" class="col-sm-3 control-label">Image</label>
+            <div class="col-sm-9">
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa fa-image fa-fw"></i>
+                </div>
+                <input type="file" name="image" class="form-control" id="file">
+              </div>
+            </div>
+          </div>
             
 <!-- 
               <div class="form-group"> 
@@ -58,16 +69,18 @@
               </div>
  -->
 
+
+
             <div class="form-group">
-              <label for="imageUrl" class="col-sm-3 control-label"> Image url </label>
+              <label for="rotateBy" class="col-sm-3 control-label">Rotation</label>
               <div class="col-sm-9">
                 <div class="input-group">
                   <div class="input-group-addon">
-                    <i class="fa fa-image fa-fw"></i>
+                    <i class="fa fa-repeat fa-fw"></i>
                   </div>
-                  <input type="text" name="imageUrl" value="{{ piece.imageUrl }}" placeholder="Enter the image url for this piece, e.g. http://www.myserver.com/image.jpg" class="form-control" id="imageUrl">
+                  <input type="number" name="rotateBy" value="{{ piece.rotateBy }}" placeholder="Enter how many degrees the piece shall rotate on every click. Enter 0 if the piece shall not rotate." class="form-control" id="rotateBy">
                 </div>
-                <p class="help-block"><a href="http://tinypic.com/" target="_blank">Upload</a> images</p>
+                <p class="help-block">If pieces shall be rotateable when clicking on them. Rotation is in degrees. 0 means no rotation.</p>
               </div>
             </div>
 
@@ -198,6 +211,21 @@
                           </div>
                           <input type="number" name="spacing" value="{{ piece.spacing || 0 }}" placeholder="Enter the number of frames in this spritesheet, e.g. 6" class="form-control" id="spacing">
                         </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group"> 
+                      <label class="col-sm-3 control-label">Is Dice?</label>
+                      <div class="col-sm-9">
+                        <div class="btn-group" data-toggle="buttons">
+                          <label href="#" for="isDice2" class="btn btn-xs btn-default {% if (!piece.isDice) %} active {% endif %}">no
+                            <input type="radio" id="isDice2" name="isDice" value="0"  />
+                          </label>
+                          <label href="#" for="isDice1" class="btn btn-xs btn-default {% if (piece.isDice) %} active {% endif %}" >yes
+                            <input type="radio" id="isDice1" name="isDice" value="1"  />
+                          </label>
+                        </div>
+                        <p class="help-block">If spritesheet shall work like a gaming dice, showing a random frame when clicked.</p>
                       </div>
                     </div>
 

@@ -93,9 +93,15 @@ ArticleSchema.methods = {
     var self = this;
 
     this.validate(function (err) {
-      if (err) return cb(err);
+      if (err) {
+        console.error('Validation error', err);
+        return cb(err);
+      } 
       imager.upload(images, function (err, cdnUri, files) {
-        if (err) return cb(err);
+        if (err) {
+          console.error('upload error', err);
+          return cb(err);
+        }
         if (files.length) {
           self.image = { cdnUri : cdnUri, files : files };
         }

@@ -1,0 +1,32 @@
+{% extends 'box_frame.html' %}
+
+
+{% block image %}
+
+  <p>
+    {% if box.tags.length %}
+      <span class="small">
+          
+        {% for tag in box.tags.split(',') %}
+          <i class="muted fa fa-tag"></i>&nbsp;
+          <a href="{{ '/tags/' + tag }}" class="tag">{{ tag }}</a>
+          &nbsp;&nbsp;
+        {% endfor %}
+      </span>
+    {% endif %}
+    {{box.gameType}}
+
+  </p>
+{% endblock %}
+   
+
+      
+{% block footer %}
+  <a href="{% if (req.isAuthenticated()) %}boxes/{{ box.id }}{% else %}/login{%endif%}" class="btn btn-primary btn-block btn-square">
+    <span class="pull-left">
+
+    </span>
+    <strong>{{box.title | title}}</strong>
+  </a>
+{% endblock %}
+

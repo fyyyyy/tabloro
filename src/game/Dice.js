@@ -3,15 +3,16 @@
 
 var Dice = {};
 
-Dice.add = function (group, num, tint) {
+Dice.add = function (assetName, group, numSides, tint) {
     tint = tint || 0xFFFFFF;
-    var dice = group.create(800, 30 + (num * 70), 'diceWhite');
+    var dice = group.create(100 + 80 * group.children.length, 100, assetName);
+    group.numSides = numSides;
 
-    dice.animations.add('spin', [0, 1, 2, 3, 4, 5]);
+    dice.animations.add('spin', R.range(0, numSides));
 
     // seed value
     dice.play('spin', 30);
-    dice.animations.currentAnim.setFrame(num, true);
+    dice.animations.currentAnim.setFrame(0, true);
 
     T.draggable(dice);
 
@@ -26,6 +27,7 @@ Dice.add = function (group, num, tint) {
 
 
 Dice.spin = function spin(diceInGroup, delays, values) {
+    console.log('diceInGroup', diceInGroup);
     R.forEach.idx(function (diceId, index) {
         var dice = G.findTile(diceId),
             delay = delays[index],
@@ -48,7 +50,19 @@ Dice.spin = function spin(diceInGroup, delays, values) {
 Dice.onSpinClicked = function onSpinClicked(tile) {
     console.log('onSpinClicked', tile);
     var diceInGroup = R.pluck('id')(tile.parent.children);
-    Network.server.spin(diceInGroup);
+
+    if (mode === 'test') {
+        var delays = R.map(function () {
+            return Math.floor(300 + 567 * Math.random());
+        })(diceInGroup);
+
+        var values = R.map(function () {
+            return Math.floor(Math.random() * tile.parent.numSides);
+        })(diceInGroup);
+        Dice.spin(diceInGroup, delays, values);
+    } else {
+        Network.server.spin(diceInGroup, tile.parent.numSides);
+    }
 };
 
 

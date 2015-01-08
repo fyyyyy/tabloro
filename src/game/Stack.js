@@ -1,4 +1,4 @@
-/*global Phaser, R, T, G, console, game, Utils, dynamicInvoke, stacks, cards1, Network*/
+/*global Phaser, R, T, G, console, game, Utils, dynamicInvoke, stacks, Network*/
 "use strict";
 
 var S = {};
@@ -222,7 +222,7 @@ S.removeCardFromStacks = function (tileId) {
     R.forEach(function (stack) {
         stack.cards = R.reject(R.eq(tileId))(stack.cards);
         S.tidy(stack);
-    })(stacks.children);
+    })(stacks && stacks.children || []);
     // console.log('removed cardFromStacks', stack1.cards.length, stack2.cards.length);
     return tileId;
 };
