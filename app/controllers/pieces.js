@@ -88,7 +88,7 @@ exports.create = function (req, res) {
         }
         console.log(err);
         res.render('pieces/new', {
-            title: 'New Piece',
+            title: 'New Gaming Piece(s)',
             piece: piece,
             errors: utils.errors(err.errors || err)
         });
