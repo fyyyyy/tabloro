@@ -7,41 +7,10 @@
 
 var mongoose = require('mongoose');
 var Table = mongoose.model('Table');
+var Setup = mongoose.model('Setup');
+var Piece = mongoose.model('Piece');
 var utils = require('../../lib/utils');
 var R = require('../../public/js/ramda.js');
-
-var STACK_DEFAULTS = function () {
-    return {
-
-        // '0': {
-        //     position: {
-        //         x: 500,
-        //         y: 300
-        //     },
-        //     cards: R.concat(R.range(2, 40), R.range(41, 50))
-        // },
-
-        // '1': {
-        //     position: {
-        //         x: 100,
-        //         y: 300
-        //     },
-        //     cards: []
-        // },
-
-    };
-};
-
-var TILE_DEFAULTS = function () {
-    return {
-        '40': {
-            x: 1000,
-            y: 700,
-            rotation: Math.PI
-        }
-
-    };
-};
 
 
 /**
@@ -72,6 +41,7 @@ exports.index = function (req, res) {
         isPrivate: false
     };
 
+
     // res.render('game/index', {layout: false, title: 'game room'});
 
     Table.list(options, function (err, tables) {
@@ -98,9 +68,11 @@ exports.index = function (req, res) {
  */
 
 exports.new = function (req, res) {
+    var table = new Table({});
+    table.setupName = req.query.setupName;
     res.render('tables/new', {
         title: 'New Table',
-        table: new Table({})
+        table: table
     });
 };
 
@@ -113,23 +85,31 @@ exports.new = function (req, res) {
 exports.create = function (req, res) {
     console.log('create table', req.body);
     var table = new Table(req.body);
+    var setupName = req.body.setupName;
 
     table.user = req.user;
-    table.stacks = new STACK_DEFAULTS();
-    table.tiles = new TILE_DEFAULTS();
+    table.stacks = {};
 
-    table.save(function (err) {
-        if (!err) {
-            req.flash('success', 'Successfully created table!');
-            return res.redirect('/tables/' + table.title);
-        }
-        console.log(err);
-        res.render('tables/new', {
-            title: 'New Table',
-            table: table,
-            errors: utils.errors(err.errors || err)
+    Setup.findOne({title: setupName}).exec(function (err, setup) {
+        table.setup = setup;
+        table.tiles = setup.tiles || {};
+
+        console.log('setup', setup, setupName);
+        table.save(function (err) {
+            if (!err) {
+                req.flash('success', 'Successfully created table!');
+                return res.redirect('/tables/' + table.title);
+            }
+            console.log(err);
+            res.render('tables/new', {
+                title: 'New Table',
+                table: table,
+                errors: utils.errors(err.errors || err)
+            });
         });
     });
+
+
 };
 
 
@@ -167,32 +147,25 @@ exports.show = function (req, res) {
 
 exports.play = function (req, res) {
     var table = req.table;
+    var setup = table.setup;
 
-    var assets = [{
-        method: 'spritesheet',
-        args: ['diceWhite', '/assets/diceWhite.png', 64, 64, 6]
-    }, {
-        method: 'image',
-        args: ['stack1', '/assets/stack1.png']
-    }, {
-        method: 'image',
-        args: ['stack2', '/assets/stack2.png']
-    }, {
-        method: 'image',
-        args: ['soldier', '/assets/soldier.png']
-    }, {
-        method: 'atlasJSONHash',
-        args: ['tile', '/assets/carcassoneSheet.png', '/assets/carcassone.json']
-    }, {
-        method: 'spritesheet',
-        args: ['pieces', '/assets/pieces.png', 64, 64, 19]
-    }];
+    Piece.list({ criteria: {'_id': {$in: setup.pieces }}}, function (err, unsortedPieces) {
+        if (err) {
+            req.flash('alert', 'Cannot test game stup!');
+            return res.redirect('/boxes/' + box._id + '/setups/' + setup.id);
+        }
 
-    res.render('game/play', {
-        title: 'Play - ' + table.title,
-        user: req.user,
-        table: table,
-        assets: assets
+        var assets = utils.generateAssets(setup, unsortedPieces);
+        console.log('assets', assets);
+        
+        res.render('game/play', {
+            title: 'Play - ' + table.title,
+            game: table,
+            table: table,
+            user: req.user,
+            assets: assets
+        });
+
     });
 
 };

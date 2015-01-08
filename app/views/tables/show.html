@@ -6,16 +6,15 @@
 
 {% block content %}
   <section class="container">
-    <div class="col-md-12">
-      <div class="panel">
-        <h2>{{table.title | title}}</h2>
-      </div>
-    </div>
+
+    <div class="spacer"></div>
     
     <div class="col-md-7">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h4>Players at this table</h4>
+          <h2>{{table.title | title}}</h2>
+
+          <p>Players at this table</p>
         </div>
         <div class="panel-body">
           <ul class="list-group">
@@ -36,7 +35,6 @@
             PLAY &nbsp;
             <i class="fa fa-play"></i>
           </a>
-          <hr>
           
           <!-- <i class="fa fa-google-plus"></i>
           <a href="http://hangouts.google.com/onair">Create google hangout</a> -->
@@ -53,6 +51,13 @@
           <li class="list-group-item list-group-item-success">This Room is Public</li>
         {% endif %}
 
+        <li class="list-group-item list-group-item-default">
+          <i class="fa fa-sitemap fa-fw"></i>
+           Game setup:
+           <a href="/setups" class="btn btn-primary">
+            {{table.setup.title}}
+           </a>
+        </li>
 
         {% if (table.rtcVideo) %}
           <li class="list-group-item list-group-item-default">
@@ -73,6 +78,7 @@
              conference phone: {{table.phone}} (call at your own risk!)
           </li>
         {% endif %}
+
 
         {% if (table.skype) %}
           <li class="list-group-item list-group-item-default">

@@ -6,8 +6,8 @@
 var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
-var User = require('../models/user.js');
-mongoose.model('User');
+// var User = require('../models/user.js');
+// mongoose.model('User');
 
 /**
  * Getters
@@ -43,6 +43,7 @@ var TableSchema = new Schema({
   tiles: {type: Object, default: {}},
   stacks: {type: Object, default: {}},
   user: {type : Schema.ObjectId, ref : 'User'},
+  setup: {type : Schema.ObjectId, ref : 'Setup'},
 });
 
 /**
@@ -90,6 +91,7 @@ TableSchema.statics = {
     this.findOne({ title : title })
     .populate('users', 'username')
     .populate('user', 'name username')
+    .populate('setup', 'title pieces counts')
     .exec(cb);
   },
 
