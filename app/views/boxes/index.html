@@ -9,10 +9,10 @@
   <div class="text-center">
 
     <div class="about">
-      {% if (req.isAuthenticated()) %}
+      {% if (req.isAuthenticated()) && !pick %}
         <a class="btn btn-success" href="/boxes/new">
           <i class="fa fa-cube"></i>
-          Add your own game box
+          Assemble your own game box
         </a>
       {% endif %}
     </div>
@@ -35,8 +35,10 @@
         No game boxes found.&nbsp;
       </h4>
     {% endif %}
-    
-    {% include 'create_box.html' %}
+
+    {% if !pick %}
+      {% include 'create_box.html' %}
+    {% endif %}
 
   
 

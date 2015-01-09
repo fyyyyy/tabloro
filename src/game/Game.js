@@ -100,4 +100,6 @@ G.findStack = function (stackId) {
 G.saveSetup = function saveSetup() {
     console.log('saving Game Setup');
     Network.server.saveSetup();
+    UI.message('Saved setup', gameName);
+
 };

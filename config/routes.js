@@ -144,6 +144,7 @@ module.exports = function (app, passport) {
 
   // Home
   app.get('/', home.index);
+  app.get('/create', home.create);
 
   // Comment
   app.param('commentId', comments.load);

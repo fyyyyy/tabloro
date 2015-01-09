@@ -30,18 +30,21 @@
         </li>
 
         <li>
-            <a href="/#about">
-              <i class="fa fa-question fa-fw"></i>&nbsp;
-              About
-            </a>
+          <a href="/create" title="Create your own games!">
+            <i class="fa fa-scissors fa-fw"></i>&nbsp;
+              Create Games
+          </a>
         </li>
 
-        <li>
-            <a href="/#features">
-              <i class="fa fa-list-ol fa-fw"></i>&nbsp;
-              Features
-            </a>
-        </li>
+
+        {% if (!req.isAuthenticated()) %}
+          <li>
+              <a href="/#features">
+                <i class="fa fa-list-ol fa-fw"></i>&nbsp;
+                Features
+              </a>
+          </li>
+        {% endif %}
 
         <li>
             <a href="/#current_games">
@@ -80,6 +83,12 @@
             </li>
         {% endif %}
         
+        <li>
+            <a href="/#about">
+              <i class="fa fa-question fa-fw"></i>&nbsp;
+              About
+            </a>
+        </li>
 
         <li>
             <a href="/#contact">

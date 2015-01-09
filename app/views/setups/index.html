@@ -9,8 +9,9 @@
   <div class="text-center">
 
     <div class="about">
-      {% if (req.isAuthenticated()) %}
-        <a class="btn btn-success" href="/setups/new">
+      <h2>{{subtitle}}</h2>
+      {% if (!pick && req.isAuthenticated()) %}
+        <a class="btn btn-success" href="/boxes?pick=setup">
           <i class="fa fa-plus-circle"></i>
           Create a game setup
         </a>
@@ -36,7 +37,9 @@
       </h4>
     {% endif %}
     
-    {% include 'create_setup.html' %}
+    {% if (!pick) %}
+      {% include 'create_setup.html' %}
+    {% endif %}
 
   
 

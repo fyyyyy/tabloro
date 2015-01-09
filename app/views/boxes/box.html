@@ -23,10 +23,8 @@
       
 {% block footer %}
   <a href="{% if (req.isAuthenticated()) %}boxes/{{ box.id }}{% else %}/login{%endif%}" class="btn btn-primary btn-block btn-square">
-    <span class="pull-left">
-
-    </span>
-    <strong>{{box.title | title}}</strong>
+    <i class="fa fa-cube"></i>
+    <strong>{% if (pick) %}Pick {% else %}Show {% endif %}{{box.title | title}}</strong>
   </a>
 {% endblock %}
 

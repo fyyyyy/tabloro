@@ -40,5 +40,11 @@ exports.index = function (req, res){
       });
     });
   });
+};
 
+
+exports.create = function (req, res) {
+  res.render('home/create', {
+    title: 'Create your own games'
+  });
 };

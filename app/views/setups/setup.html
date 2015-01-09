@@ -39,7 +39,7 @@
 {% block footer %}
   <a href="{% if (req.isAuthenticated()) %}/boxes/{{setup.box.id}}/setups/{{ setup.title }}{% else %}/login{%endif%}" class="btn btn-primary btn-block btn-square">
     <i class="fa fa-sitemap"></i>&nbsp;
-    show setup
+    {% if pick %}pick{% else %}show{% endif %} setup
   </a>
 {% endblock %}
 

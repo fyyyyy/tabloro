@@ -42,12 +42,13 @@
           </li>
         {% endif %}
 
-
-        {% if (!piece.isNew && piece.image && piece.image.files && piece.image.files.length) %}
-          <li class="list-group-item list-group-item-default">
-            Image
-            <a href="{{ piece.image.cdnUri + '/original_' + piece.image.files[0] }}" target="_blank" class="pull-right">load full size</a>
-          </li>        
+        {% if (isOwner || isAdmin) %}
+          {% if (!piece.isNew && piece.image && piece.image.files && piece.image.files.length) %}
+            <li class="list-group-item list-group-item-default">
+              Image
+              <a href="{{ piece.image.cdnUri + '/original_' + piece.image.files[0] }}" target="_blank" class="pull-right">load full size</a>
+            </li>        
+          {% endif %}
         {% endif %}
 
 
@@ -107,7 +108,7 @@
             </p>
           </li>
         {% endif %}
-        {% if isAdmin %}
+        {% if isOwner || isAdmin %}
           <li class="list-group-item list-group-item-danger">
             <form action="{{ '/pieces/' + piece.title }}" method="post" onsubmit="return confirm('Are you sure?')">
               <br>

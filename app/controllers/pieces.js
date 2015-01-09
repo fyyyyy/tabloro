@@ -77,6 +77,7 @@ exports.new = function (req, res) {
 exports.create = function (req, res) {
     console.log('create piece', req.body);
     var piece = new Piece(req.body);
+    piece.user = req.user;
     var images = req.files.image ? [req.files.image] : undefined;
 
     piece.user = req.user;
@@ -152,7 +153,8 @@ exports.show = function (req, res) {
         req.piece = piece;
         res.render('pieces/show', {
             title: 'Piece: ' + piece.title,
-            piece: piece
+            piece: piece,
+            isOwner: piece.user.id === req.user.id
         });
     });
 };

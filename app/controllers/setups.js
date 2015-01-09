@@ -55,10 +55,12 @@ exports.index = function (req, res) {
 
         Setup.count().exec(function (err, count) {
             res.render('setups/index', {
-                title: 'Game Setups',
+                title: req.query.pick ? 'Pick game setup' : 'Game Setups',
+                subtitle: req.query.pick ? 'Pick a game setup for your ' + req.query.pick : '',
                 setups: setups,
                 page: page + 1,
                 pages: Math.ceil(count / perPage),
+                pick: req.query.pick
             });
         });
     });
@@ -135,7 +137,8 @@ exports.show = function (req, res) {
             res.render('setups/show', {
                 title: 'Game Setup',
                 setup: setup,
-                box: req.box
+                box: req.box,
+                isOwner: setup.user.id === req.user.id
             });
         });
 

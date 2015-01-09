@@ -48,7 +48,8 @@ exports.index = function (req, res) {
 
         Box.count().exec(function (err, count) {
             res.render('boxes/index', {
-                title: 'Game Boxes',
+                title: req.query.pick ? 'Pick a box' : 'Game Boxes',
+                pick: req.query.pick,
                 boxes: boxes,
                 page: page + 1,
                 pages: Math.ceil(count / perPage),
