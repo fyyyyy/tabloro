@@ -26,10 +26,15 @@
         </div>
         <div class="panel-footer">
           {% if (isOwner) %}
-          <a class="btn btn-success btn-lg" href="/setups/{{setup.title}}/test" target="_blank">
-            Position Game Tiles &nbsp;
-            <i class="fa fa-sitemap"></i>
-          </a>
+            <a class="btn btn-success btn-lg" href="/setups/{{setup.title}}/test" target="_blank">
+              Position Game Tiles &nbsp;
+              <i class="fa fa-sitemap"></i>
+            </a>
+          {% else %}
+            <a class="btn btn-info btn-lg" href="/setups/{{setup.title}}/test" target="_blank">
+              Test &nbsp;
+              <i class="fa fa-sitemap"></i>
+            </a>          
           {% endif %}
           <a class="btn btn-primary btn-lg" href="/tables/new/?setupName={{setup.title}}">
             Create Table &nbsp;
