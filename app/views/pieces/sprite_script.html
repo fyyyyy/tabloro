@@ -65,7 +65,7 @@
             :    
             '<span class="piece-number">' +
               '<a href="/boxes/{{box.id}}/count#tiles-' + piece._id + '" class="btn btn-primary btn-xs">' +
-                 (pieceCounts[i] || 1) +
+                 (isNaN(pieceCounts[i]) ? 1 : pieceCounts[i]) +
                 '<i class="fa fa-times"></i>' +
               '</a>' +
             '</span>';
@@ -73,11 +73,12 @@
           numberDom =       
             '<span class="piece-number">' +
               '<span class="fa fa-stack small">' +
-                '<i class="fa fa-circle text-primary fa-stack-2x"></i>' +
+                '<i class="fa fa-circle text-' + (piece.flipable && i=== 0 ? 'primary' : 'success') + ' fa-stack-2x"></i>' +
                 '<span class="fa fa-stack-1x">' +
-                     (i + 1) +
+                     (i + 1) + 
                 '.</span>' +
               '</span>' +
+              (piece.flipable && i=== 0 ? '<center>background (flipable)</center>' : '') +
             '</span>';
         }
 

@@ -117,7 +117,7 @@ function setupAssets (gameAssets) {
 
         var groupName = asset.args[0];
         console.log('adding asset group', groupName);
-        G.groups.add(groupName, 0, Utils.deg2Rad(asset.rotateBy));
+        G.groups.add(groupName, 0, Utils.deg2Rad(asset.rotateBy), asset.flipable);
 
 
         if (asset.method === 'atlasJSONHash') {
@@ -199,8 +199,8 @@ function addCards(title, yOffset, array, group, stack, scale) {
         tile.defaultFrame = n;
         if (stack && stack.config.hidden) T.hide(tile);
         T.scale(scale, tile);
-        T.setDefaultTint(0xEEEEEE, tile);
-        R.compose(T.setId, Cursor.reset, T.networkAble, T.stackable, T.rotateable(group.rotateBy), T.draggable, T.centerAnchor)(tile);
+        R.compose(T.setId, Cursor.reset, T.networkAble, T.stackable, T.flipable(group.flipable), T.rotateable(group.rotateBy), T.draggable, T.centerAnchor)(tile);
+
         cards.push(tile.id);
         Controls.target = tile;
         last = n;
@@ -221,7 +221,6 @@ function addTokens(which, group, x, y, tint, scale) {
         var token = group.create(x + idx, y - (idx * 3), n);
         T.setId(token);
         T.scale(scale, token);
-        T.setDefaultTint(tint, token);
         R.compose(Cursor.reset, T.networkAble, T.rotateable(group.rotateBy), T.draggable, T.centerAnchor)(token);
     })(which);
 }

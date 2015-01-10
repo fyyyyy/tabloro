@@ -6,13 +6,14 @@ var G = {};
 G._groups = {};
 
 G.groups = {
-    add: function (groupName, index, rotateBy) {
+    add: function (groupName, index, rotateBy, flipable) {
         index = index || 0;
         rotateBy = rotateBy || 0;
 
         G._groups[groupName] = game.add.group();
         G._groups[groupName].z = index;
         G._groups[groupName].rotateBy = rotateBy;
+        G._groups[groupName].flipable = flipable;
     },
     get: function (groupName) {
         return G._groups[groupName];

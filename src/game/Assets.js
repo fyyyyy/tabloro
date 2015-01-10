@@ -12,7 +12,7 @@ Assets.preload = function (game) {
     })(GameCursors);
 
     // game.load.image('save', '/assets/save.png');
-    // game.load.image('move', '/assets/move.png');
+    game.load.image('flip', '/assets/flip.png');
     // game.load.image('load', '/assets/load.png');
     game.load.image('table', '/assets/table_low.jpg');
     game.load.image('rotate', '/assets/rotate.png');

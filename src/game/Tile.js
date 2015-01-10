@@ -1,4 +1,4 @@
-/*global Phaser, R, game, console*/
+/*global Phaser, R, game, console, Controls*/
 "use strict";
 
 var T = {};
@@ -53,46 +53,50 @@ T.resetRotation = function (tile) {
 T.rotateable = function (rotateable) {
     if (!rotateable) { return R.I;}
     return function (tile) {
+        if (!tile.parent.rotateBy) { return R.I;}
         tile.rotateable = true;
-        tile.events.onInputDown.add(T.onStartDragRotate);
-        tile.events.onInputUp.add(T.onStopDragRotate);
+        tile.events.onInputDown.add(T.onDragRotateable);
+        tile.events.onInputUp.add(T.onStopDragRotateable);
         return tile;
     };
 };
 
 T.onRotate = function onRotate() {
-    console.log('onRotate', Controls.target);
+    var tile = Controls.target;
+    console.log('onRotate', tile);
 
-    var rotation = Controls.target.parent.rotateBy;
-    if (!rotation) {
-        console.log('tile not rotateable');
-        return;
-    }
-    var position = Controls.target.position.clone();
-    position.rotation = Controls.target.rotation + rotation;
+    var rotation = tile.parent.rotateBy;
 
-    Network.server.tileDragStop(Controls.target.id,position);
+    var position = tile.position.clone();
+    position.rotation = tile.rotation + rotation;
 
-    game.add.tween(Controls.target).to({
+    Network.server.tileDragStop(tile.id,position);
+
+    game.add.tween(tile).to({
         rotation: '+' + rotation
     }, 50, Phaser.Easing.Linear.None, true, 0, false);
 };
 
-
-T.defaultTint = function (tile) {
-    tile.tint = tile.defaultTint;
-    return tile;
+T.flipable = function (flipable) {
+    if (!flipable) { return R.I;}
+    return function (tile) {
+        tile.flipable = true;
+        tile.events.onInputDown.add(T.onDragRotateable);
+        tile.events.onInputUp.add(T.onStopDragRotateable);
+        return tile;
+    };
 };
 
-T.setDefaultTint = function (tint, tile) {
-    tile.defaultTint = tile.tint = tint;
-    return tile;
+
+T.onFlip = function () {
+    var tile = Controls.target;
+    console.log('onFlip', tile.flipable, tile.id);
+    if (!tile.flipable) { return R.I; }
+    T.flip(tile);
 };
 
-T.resetTint = function (tile) {
-    tile.tint += 0x333333;
-    return tile;
-};
+
+
 
 T.onStartDrag = function (tile) {
     console.log('onStartDrag', tile.id);
@@ -108,16 +112,16 @@ T.onStopDrag = function (tile) {
     Network.server.tileDragStop(tile.id, position);
 };
 
-T.onStartDragRotate = function (tile) {
-    console.log('onStartDragRotate');
+T.onDragRotateable = function (tile) {
+    console.log('onDragRotateable');
     Controls.target = tile;
-    T.show(tile);
+    // T.show(tile);
     Controls.hide();
 };
 
 
-T.onStopDragRotate = function (tile) {
-    console.log('onStopDragRotate');
+T.onStopDragRotateable = function (tile) {
+    console.log('onStopDragRotateable');
     Controls.at(tile);
 };
 
@@ -125,6 +129,15 @@ T.onStopDragRotate = function (tile) {
 T.enableInput = function (tile) {
     tile.inputEnabled = true;
     return tile;
+};
+
+T.flip = function (tile) {
+    console.log('flip', tile.id);
+    if (tile.frame === tile.defaultFrame) {
+        tile.frame = 0;
+    } else {
+        tile.frame = tile.defaultFrame;
+    }
 };
 
 T.show = function (tile) {

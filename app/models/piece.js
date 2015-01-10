@@ -70,6 +70,10 @@ var PieceSchema = new Schema({
     type: Number,
     default: 0
   },
+  flipable: {
+    type: Boolean,
+    default: false
+  }, 
   isDice: {
     type: Boolean,
     default: false

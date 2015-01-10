@@ -47,7 +47,7 @@
                 <div class="input-group-addon">
                   <i class="fa fa-image fa-fw"></i>
                 </div>
-                <input type="file" name="image" class="form-control" id="file" required="true">
+                <input type="file" name="image" class="form-control" id="file" {% if (piece.isNew) %}required="true"{% endif %}>
               </div>
             </div>
           </div>
@@ -144,6 +144,21 @@
                         </div>
                       </div>
                     </div>
+
+                    <div class="form-group"> 
+                      <label class="col-sm-3 control-label">Flipable ?</label>
+                      <div class="col-sm-9">
+                        <div class="btn-group" data-toggle="buttons">
+                          <label href="#" for="flipable2" class="btn btn-xs btn-default {% if (!piece.flipable) %} active {% endif %}">no
+                            <input type="radio" id="flipable2" name="flipable" value="0"  />
+                          </label>
+                          <label href="#" for="flipable1" class="btn btn-xs btn-default {% if (piece.flipable) %} active {% endif %}" >yes
+                            <input type="radio" id="flipable1" name="flipable" value="1"  />
+                          </label>
+                        </div>
+                        <p class="help-block">If tiles are flipable, showing their backside when flipped around. The first tile of the set (with index 0) is used as the background image.</p>
+                      </div>
+                    </div>
                     
                     <p class="alert bg-info">
                       <strong>TIP</strong><br/>
@@ -213,6 +228,23 @@
                         </div>
                       </div>
                     </div>
+
+
+                    <div class="form-group"> 
+                      <label class="col-sm-3 control-label">Flipable ?</label>
+                      <div class="col-sm-9">
+                        <div class="btn-group" data-toggle="buttons">
+                          <label href="#" for="flipable2" class="btn btn-xs btn-default {% if (!piece.flipable) %} active {% endif %}">no
+                            <input type="radio" id="flipable2" name="flipable" value="0"  />
+                          </label>
+                          <label href="#" for="flipable1" class="btn btn-xs btn-default {% if (piece.flipable) %} active {% endif %}" >yes
+                            <input type="radio" id="flipable1" name="flipable" value="1"  />
+                          </label>
+                        </div>
+                        <p class="help-block">If tiles are flipable, showing their backside when flipped around. The first tile of the set (with index 0) is used as the background image.</p>
+                      </div>
+                    </div>
+
 
                     <div class="form-group"> 
                       <label class="col-sm-3 control-label">Is Dice?</label>

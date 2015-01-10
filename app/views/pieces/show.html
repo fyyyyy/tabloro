@@ -42,6 +42,7 @@
           </li>
         {% endif %}
 
+
         {% if (isOwner || isAdmin) %}
           {% if (!piece.isNew && piece.image && piece.image.files && piece.image.files.length) %}
             <li class="list-group-item list-group-item-default">
@@ -51,6 +52,11 @@
           {% endif %}
         {% endif %}
 
+        {% if (piece.flipable) %}
+          <li class="list-group-item list-group-item-info">Flipable
+            <i class="fa fa-retweet pull-right"></i>
+          </li>
+        {% endif %}
 
 
         {% if (piece.atlasjson) %}
