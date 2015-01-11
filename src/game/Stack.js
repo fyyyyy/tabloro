@@ -4,7 +4,7 @@
 var S = {};
 
 S.offsetX = 1.2;
-S.offsetY = -1;
+S.offsetY = -2;
 
 S.create = function (config) {
     var stack = T.centerAnchor(stacks.create(0, 0, config.image));
@@ -42,15 +42,14 @@ S.align = R.curry(function (stack, item) {
 });
 
 
-S.assignRelativePosition = function (stack, item) {
-    if (item.relativePosition) {
+S.assignRelativePosition = function (target) {
+    return function (item) {
+        item.relativePosition = {
+            x: item.x - target.x,
+            y: item.y - target.y
+        };
         return item;
-    }
-    item.relativePosition = {
-        x: item.x - stack.x,
-        y: item.y - stack.y
     };
-    return item;
 };
 
 
@@ -92,6 +91,10 @@ S.onFlipButton = function (button) {
     Network.server.flipStack(stack.id);
 };
 
+S.onTidy = function () {
+    S.tidy(Controls.selected);
+};
+
 
 
 S.bringToTop = function (tile) {
@@ -102,25 +105,49 @@ S.bringToTop = function (tile) {
 
 
 
-S.tidy = function (stack) {
-    // console.log('S.tidy stack', stack.id);
-    var last;
+S.tidy = function (tiles) {
+    console.log('S.tidy stack', tiles.length);
+    var types = {};
+    var counts = {};
+    var offsetX = - tiles[0].width; // compensate
+    var startPosition = Controls.target.position.clone();
 
-    R.forEach.idx(function (cardId, index) {
-        var card = G.findTile(cardId);
-        // console.log('card', card, 'index', index);
-        card.inputEnabled = false;
-        Utils.alignPosition(card, S.calculateCardPos(stack, index));
-        if (stack.config.hidden) T.hide(card);
-        if (card) last = card;
-        S.bringToTop(card);
-    })(stack.cards);
+    R.forEach.idx(function (tile, index) {
+        // console.log('tile', tile, 'index', index);
 
-    if (last) last.inputEnabled = true;
-    if (last) UI.handCursor(last);
+        if (!types[tile.key]) {
+            var obj = {};
+            offsetX += tile.width + 20;
+            obj[tile.defaultFrame] = offsetX;
+            types[tile.key] = obj;
 
-    S.alignElements(stack);
-    return S.updateCounter(stack);
+            var c = {};
+            c[tile.defaultFrame] = 1;
+            counts[tile.key] = c;
+            
+            console.log('new types', tile.frame, types[tile.key][tile.defaultFrame]);
+        } else if (R.contains(tile.defaultFrame.toString())(R.keys(types[tile.key]))) {
+            console.log('found types',tile.frame,  types[tile.key][tile.defaultFrame]);
+            counts[tile.key][tile.defaultFrame] += 1;
+        } else {
+            offsetX += tile.width + 20;
+            types[tile.key][tile.defaultFrame] = offsetX;
+            counts[tile.key][tile.defaultFrame] = 1;
+            console.log('added types',tile.frame,  types[tile.key][tile.defaultFrame]);
+        }
+
+        tile.rotation = 0;
+        if (tile.defaultFrame) tile.frame = tile.defaultFrame;
+        var newPosition = S.calculateCardPos(startPosition, counts[tile.key][tile.defaultFrame], types[tile.key][tile.defaultFrame]);
+        console.log('newPosition', newPosition);
+        Utils.alignPosition(tile, newPosition);
+        // console.log('index', index, tile);
+        S.bringToTop(tile);
+    })(tiles);
+
+    console.log('types', types);
+
+    return;
 };
 
 
@@ -141,38 +168,20 @@ S.flipCards = function (stack) {
 };
 
 
-S.update = function () {
-    stacks.forEach(function (stack) {
-        if (stack.input.isDragged || stack.remoteDragged) {
-            S.alignElements(stack);
-            S.alignStackCards(stack);
-        }
-    });
-};
 
 
-S.calculateCardPos = function (position, index) {
+S.calculateCardPos = function (position, index, offsetX) {
     return {
-        x: position.x + (S.offsetX * index),
+        x: position.x + (S.offsetX * index) + (offsetX || 0),
         y: position.y + (S.offsetY * index)
     };
 };
 
-S.alignStackCards = function (stack) {
-    R.forEach.idx(function (cardId, index) {
-        var card = G.findTile(cardId);
-        card.inputEnabled = false;
-        Utils.alignPosition(card, S.calculateCardPos(stack, index));
-    })(stack.cards);
-};
 
-S.alignElements = function (stack) {
-    R.forEach(S.moveRelativeTo(stack))(stack.align);
-};
 
 
 S.moveRelativeTo = R.curry(function (target, tile) {
-    if (!tile.relativePosition) {
+    if (!tile.relativePosition || target === tile) {
         return tile;
     }
 

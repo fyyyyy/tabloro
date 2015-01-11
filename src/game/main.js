@@ -89,8 +89,12 @@ function setupStage() {
 function setupTable() {
     table = game.add.tileSprite(0, 0, World.width, World.height, 'table');
     // table.scale.set(1.5);
-    // table.interactive = false;
-    // table.buttonMode = true;
+    table.inputEnabled = true;
+    table.interactive = true;
+    table.buttonMode = true;
+    table.events.onInputDown.add(Controls.onStartSelection);
+    table.events.onInputUp.add(Controls.onStopSelection);
+
 
     // vignette.scale.set(6);
     // vignette.fixedToCamera = true;
@@ -144,45 +148,6 @@ function setupAssets (gameAssets) {
 }
 
 
-
-// function setupTiles () {
-//     stacks = game.add.group();
-//     redDice = game.add.group();
-
-//     G.init(game);
-//     stack1 = S.create({
-//         image: 'stack1',
-//         x: 400,
-//         y: 300,
-//         shuffle: true,
-//         hidden: true
-//     });
-//     stack2 = S.create({
-//         image: 'stack2',
-//         x: 100,
-//         y: 300,
-//         shuffle: true,
-//         hidden: false
-//     });
-
-//     G.groups.add('cards1', 15);
-
-//     addCards('tile', 500, R.range(1, 49), G.groups.get('cards1'), stack1, 0.5);
-
-//     G.groups.add('tokens', 16, Math.PI / 2);
-    
-//     addTokens(R.repeatN('soldier', 7), G.groups.get('tokens'), 330, 60, 0x303320, 0.6); // black
-//     addTokens(R.repeatN('soldier', 7), G.groups.get('tokens'), 400, 60, 0x33BBFF, 0.6); // blue
-//     addTokens(R.repeatN('soldier', 7), G.groups.get('tokens'), 470, 60, 0xDD3333, 0.6); // red
-//     addTokens(R.repeatN('soldier', 7), G.groups.get('tokens'), 540, 60, 0x22CC22, 0.6); // green
-//     addTokens(R.repeatN('soldier', 7), G.groups.get('tokens'), 610, 60, 0xFFEE22, 0.6); // purple
-//     addTokens(R.repeatN('soldier', 7), G.groups.get('tokens'), 680, 60, 0xFFFFFF, 0.6); // white
-
-//     // dice
-//     Dice.add('diceWhite', redDice, 6, 0xDD3333);
-//     Dice.add('diceWhite', redDice, 6, 0xDD3333);
-// }
-
 function addCards(title, yOffset, array, group, stack, scale) {
     scale = scale || 1.0;
     var cards = [];
@@ -212,8 +177,7 @@ function addCards(title, yOffset, array, group, stack, scale) {
 
 
 
-function addTokens(which, group, x, y, tint, scale) {
-    tint = tint || 0xFFFFFF;
+function addTokens(which, group, x, y, scale) {
     x = x || 100;
     y = y || 300;
     scale = scale || 1.0;
@@ -238,8 +202,8 @@ function setupPlayers () {
 
 function update() {
     if (Network.ready === false) return;
-    if(false) S.update(); // TODO: outdated
     G.update();
+    Controls.update();
 
 
     var mouseWorldPosition = {

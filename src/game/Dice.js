@@ -3,8 +3,7 @@
 
 var Dice = {};
 
-Dice.add = function (assetName, group, numSides, tint) {
-    tint = tint || 0xFFFFFF;
+Dice.add = function (assetName, group, numSides) {
     var dice = group.create(100 + 80 * group.children.length, 100, assetName);
     group.numSides = numSides;
 
@@ -16,7 +15,6 @@ Dice.add = function (assetName, group, numSides, tint) {
 
     T.draggable(dice);
 
-    dice.tint = tint;
     Dice.spinnable(dice);
     Cursor.reset(dice);
     T.setId(dice);

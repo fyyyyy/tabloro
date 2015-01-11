@@ -1,4 +1,4 @@
-/*global Phaser, R, console, game, Eureca, playerList, players, UI*/
+/*global R, G, Controls, console, Eureca, playerList, UI*/
 "use strict";
 
 var Network = {};
@@ -78,42 +78,65 @@ Network.setup = function () {
     /******************* TILES ******************/
 
 
-    Network.client.exports.dragTile = function (client, tileId) {
-        console.log(client.name  + ' drags tile ', tileId);
-        if (Network.isMine(client.id)) return; // this is me //////////////
-        var tile = G.findTile(tileId);
-        if(tile.defaultFrame) T.show(tile);
-        Controls.hide(tile);
-        G.addUpdatePosition({follower: tile, target: playerList[client.id]});
+    Network.client.exports.dragTiles = function (client, selected, relativePositions) {
+        console.log(client.name  + ' drags tiles ', selected);
+        
+        // this is me //////////////
+        if (Network.isMine(client.id)) return;
+        
+        if (selected.length) {
+            var tiles = G.findTiles(selected);
+            R.forEach.idx(function (tile, index) {
+                Controls.hide(tile);
+                tile.relativePosition = relativePositions[index];
+                console.log('follow tile', tile.id, tile.relativePosition);
+                G.addUpdatePosition({follower: tile, target: playerList[client.id]});
+            })(tiles);
+            return;
+        }
     };
 
     Network.client.exports.positionTile = function (client, tileId, newPosition) {
-        console.log('Initial positioning of tile ', tileId);
         if (! Network.isMine(client.id)) return; // this is NOT me ////////
+        console.log('Initial positioning of tile ', tileId);
         
         var tile = G.findTile(tileId);
         Controls.hide(tile);
         
         R.compose(T.enableInput, T.show)(tile);
         
-        Utils.alignPosRot(tile, newPosition);
+        Utils.syncTile(tile, newPosition);
         UI.message('Positioning tile', tileId);
     };
 
 
     Network.client.exports.dropTile = function (client, tileId, newPosition) {
-        console.log(client.name + ' drops tile ', tileId, 'at', newPosition);
-        var tile = G.findTile(tileId);
-        S.removeCardFromStacks(tileId);
-
         if (Network.isMine(client.id)) return; // this is me //////////////
+
+        console.log(client.name + ' drops tile ', tileId, 'at', newPosition);
         
+        var tile = G.findTile(tileId);
         Controls.hide(tile);
         
-        UI.message(client.name, 'moved tile', tile.id);
         G.removeUpdatePosition(playerList[client.id]);
+        delete tile.relativePosition;
+
+        Utils.syncTile(tile, newPosition);
+        UI.message(client.name, 'moved tile', tile.id);
+
+    };
+
+
+    Network.client.exports.flipTile = function (client, tileId, newFrame) {
+        if (Network.isMine(client.id)) return; // this is me //////////////
+        console.log(client.name + ' flips tile ', tileId, 'to', newFrame);
         
-        Utils.alignPosRot(tile, newPosition);
+        var tile = G.findTile(tileId);
+        Controls.hide(tile);
+        
+        tile.frame = newFrame;
+        UI.message(client.name, 'flipped tile', tile.id);
+        
     };
 
 
@@ -135,7 +158,7 @@ Network.setup = function () {
         G.removeUpdatePosition(playerList[client.id]);
         stack.remoteDragged = false;
 
-        Utils.alignPosRot(stack, newPosition);
+        Utils.syncTile(stack, newPosition);
 
         S.tidy(stack);
         UI.message(client.name, 'moved stack', stackId);
@@ -147,7 +170,7 @@ Network.setup = function () {
         if (!Network.isMine(client.id)) return; //this is NOT me
         
         var stack = G.findStack(stackId);
-        Utils.alignPosRot(stack, stackData.position);
+        Utils.syncTile(stack, stackData.position);
         console.log('adding', stackData.cards, 'to stack', stackId);
         S.updateCards(stack, stackData.cards);
 

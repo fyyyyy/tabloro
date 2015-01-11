@@ -58,6 +58,10 @@ G.updatePositions = [];
 
 G.update = function () {
     R.forEach(function (obj) {
+        if (obj.follower.relativePosition) {
+            Utils.alignRelativePosition(obj.follower, obj.target);
+            return;
+        }
         Utils.alignPosition(obj.follower, obj.target);
     })(G.updatePositions);
 };
@@ -86,6 +90,16 @@ G.findTile = function (tileId) {
     }
     return foundTile;
 };
+
+
+
+G.findTiles = function (tileIds) {
+    return R.map(function (tileId) {
+        return G.findTile(tileId);
+    })(tileIds);
+};
+
+
 
 G.findStack = function (stackId) {
     stackId = Number(stackId);

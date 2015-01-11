@@ -26,16 +26,16 @@ var port = process.env.PORT || 3000;
 var server = require('http').createServer(app);
 
 
-// create an instance of EurecaServer
 var eurecaServer = new EurecaServer({
-  allow: [
+  allow: [ // Network client methods
     'setId', 'spawnPlayer', 'kill', 'updateCursor',
-    'positionTile', 'dropTile', 'dragTile',
+    'positionTile', 'dropTile', 'dragTiles', 'flipTile',
     'dragStack', 'dropStack', 'positionStack', 'updateStackCards', 'flipStack',
     'spin',
     'receiveChat'
   ]
 });
+
 log('attach eurecaServer', eurecaServer.version);
 // attach eureca.io to our http server
 eurecaServer.attach(server);

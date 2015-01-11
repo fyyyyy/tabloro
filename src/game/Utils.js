@@ -95,12 +95,28 @@ var Utils = {
         } else console.error('alignPosition', a, b);
     },
 
-    alignPosRot: function (a, b) {
+    alignRelativePosition: function (a, b) {
+        if (a && b && a.relativePosition) {
+            a.x = b.x + a.relativePosition.x;
+            a.y = b.y + a. relativePosition.y;
+        } else console.error('alignRelativePosition', a, b);
+    },
+
+    syncTile: function (a, b) {
         if (a && b) {
             a.x = b.x;
             a.y = b.y;
             a.rotation = b.rotation;
+            a.frame = b.frame;
         } else console.error('alignPosition', a, b);
+    },
+
+    alignRelativePosRot: function (a, b) {
+        if (a && b && a.relativePosition) {
+            a.x = b.x + a.relativePosition.x;
+            a.y = b.y + a.relativePosition.y;
+            a.rotation = b.rotation;
+        } else console.error('alignRelativePosRot', a, b);
     },
 
     toCorner: function (a, b) {
