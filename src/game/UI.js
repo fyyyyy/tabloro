@@ -9,19 +9,19 @@ UI.init = function () {
 
     //  The score
     UI.gameText = game.add.text(0, 0, gameName.split('').join(' '), {
-        font: 'bold 32px Times',
+        font: 'bold 22px Times',
         fill: '#ccc'
     });
 
     UI.nameText = game.add.text(0, 0, '----------------\nNAME:' + playerName, {
-        font: 'bold 22px Times',
+        font: 'bold 18px Times',
         fill: '#ccc'
     });
     UI.nameText.align = 'right';
 
 
     UI.messageText = game.add.text(0, 0, 'Messages:', {
-        font: '22px Times',
+        font: '18px Times',
         fill: '#ccc'
     });
     UI.messageText.align = 'right';
@@ -50,7 +50,7 @@ UI.update = function () {
 
     R.forEach(UI.fixedToCamera(false))(UI.textElements);
     UI.gameText.x = UI.nameText.x = UI.messageText.x = 16;
-    UI.gameText.y = 0;
+    UI.gameText.y = 5;
     UI.nameText.y = 40;
     UI.messageText.y = 280;
     R.forEach(UI.fixedToCamera(true))(UI.textElements);
