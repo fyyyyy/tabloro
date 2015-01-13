@@ -12,12 +12,14 @@ UI.init = function () {
         font: 'bold 22px Times',
         fill: '#ccc'
     });
+    UI.gameText.alpha = 0.7;
 
     UI.nameText = game.add.text(0, 0, '----------------\nNAME:' + playerName, {
         font: 'bold 18px Times',
         fill: '#ccc'
     });
     UI.nameText.align = 'right';
+    UI.nameText.alpha = 0.7;
 
 
     UI.messageText = game.add.text(0, 0, 'Messages:', {
