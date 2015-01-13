@@ -16,7 +16,7 @@
         <div class="panel-body">
           <p>
             This is a <strong>Game Setup</strong> for the box &nbsp;
-            <a href="/boxes/{{box.id}}">{{box.title}}</a>
+            <a href="/boxes/{{box.id ||  setup.box.id }}">{{box.title || setup.box.title}}</a>
           </p>
           {% if (setup.description) %}
             <hr>
@@ -36,8 +36,8 @@
               <i class="fa fa-sitemap"></i>
             </a>          
           {% endif %}
-          <a class="btn btn-primary btn-lg" href="/tables/new/?setupName={{setup.title}}">
-            Create Table &nbsp;
+          <a class="btn btn-primary btn-lg pull-right" href="/tables/new/?setupName={{setup.title}}">
+            Create New Table &nbsp;
             <i class="fa fa-user"></i>
           </a>
         </div>

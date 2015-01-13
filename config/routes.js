@@ -138,6 +138,7 @@ module.exports = function (app, passport) {
   app.get('/boxes/:boxId/setups/new', auth.requiresLogin, setups.new);
   app.post('/boxes/:boxId/setups', auth.requiresLogin, setups.create);
   app.get('/boxes/:boxId/setups/:setupName', auth.requiresLogin, setups.show);
+  app.get('/setups/:setupName', auth.requiresLogin, setups.show);
   app.get('/setups/:setupName/test', auth.requiresLogin, setups.test);
   app.delete('/setups/:setupName', setupAuth, setups.destroy);
 

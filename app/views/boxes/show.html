@@ -9,6 +9,49 @@
   <div class="spacer"></div>
 
 
+
+
+
+    <div class="col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4>
+            {{box.title | title}}
+          </h4>
+        </div>
+        
+        <div class="panel-body">
+
+          <div class="col-md-7">
+            {% if (!box.isNew && box.image && box.image.files && box.image.files.length) %}
+              <img class="img-responsive" src="{{ box.image.cdnUri + '/detail_' + box.image.files[0] }}" alt="">
+            {% endif %}
+          </div>
+
+          <div class="col-md-5">
+            <h4>Description</h4>
+            <p>{{box.description}}</p>
+            <a href="/boxes/{{box.id}}/test" class="btn btn-info btn-block" >
+              <i class="fa fa-play-circle fa-fw"></i>
+              Test Box contents
+            </a>
+            <a href="/boxes/{{box.id}}/setups/new" class="btn btn-success btn-lg" >
+              <i class="fa fa-sitemap fa-fw"></i>
+              Create game setup / layout
+            </a>
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+
+
     <div class="col-md-4">
       <ul class="list-group">
 
@@ -70,40 +113,7 @@
     </div>
 
 
-    <div class="col-md-8">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h4>
-            {{box.title | title}}
-          </h4>
-        </div>
-        
-        <div class="panel-body">
 
-          <div class="col-md-7">
-            {% if (!box.isNew && box.image && box.image.files && box.image.files.length) %}
-              <img class="img-responsive" src="{{ box.image.cdnUri + '/detail_' + box.image.files[0] }}" alt="">
-            {% endif %}
-          </div>
-
-          <div class="col-md-5">
-            <h4>Description</h4>
-            <p>{{box.description}}</p>
-            <a href="/boxes/{{box.id}}/test" class="btn btn-info" >
-              <i class="fa fa-play-circle fa-fw"></i>
-              Test Box contents
-            </a>
-            <a href="/boxes/{{box.id}}/setups/new" class="btn btn-success" >
-              <i class="fa fa-sitemap fa-fw"></i>
-              Create game setup / layout
-            </a>
-          </div>
-
-
-        </div>
-
-      </div>
-    </div>
 
     <div class="col-md-12">
       <div class="panel panel-default">

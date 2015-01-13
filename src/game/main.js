@@ -53,7 +53,7 @@ function create() {
     UI.init(); // do before players
     setupPlayers();
     Cursor.set();
-    Video.init();
+    if(mode === 'play') Video.init();
     H.init();
 }
 
