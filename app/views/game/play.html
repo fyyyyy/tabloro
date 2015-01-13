@@ -25,6 +25,7 @@
             <script type="text/javascript" src="/Utils.js"></script>
             <script type="text/javascript" src="/Tile.js"></script>
             <script type="text/javascript" src="/Stack.js"></script>
+            <script type="text/javascript" src="/Hand.js"></script>
             <script type="text/javascript" src="/Video.js"></script>
             <script type="text/javascript" src="/main.js"></script>
         {% else %}
@@ -34,10 +35,10 @@
         <script type="text/javascript">
             var playerName = '{{user.username}}';
             var cursorId = Number('{{user.selected_cursor}}') || 1;
-            var roomName = '{{table.title}}';
+            var mode = '{{mode}}';
+            var roomName = '{{room.title}}';
             var gameName = '{{game.title}}';
             var assets = JSON.parse('{{ JSON.stringify(assets) }}');
-            var mode = 'play';
         </script>
     </head>
   

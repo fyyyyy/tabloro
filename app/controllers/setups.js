@@ -165,9 +165,11 @@ exports.test = function (req, res) {
         
         res.render('game/test', {
             title: 'Test Game Setup: ' + setup.title,
-            game: setup,
+            game: setup.box,
+            room: setup,
             user: req.user,
-            assets: assets
+            assets: assets,
+            mode: 'setup'
         });
 
     });

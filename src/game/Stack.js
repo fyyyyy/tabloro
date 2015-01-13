@@ -25,7 +25,7 @@ S.create = function (config) {
 
     // Buttons
     var setupStackButton = R.compose(Cursor.reset, S.align(stack), Utils.aboveCorner(stack), S.assign(stack), T.scale(0.4));
-    if (config.shuffle) R.compose(setupStackButton, G.addText('SHUFFLE'))(UI.handCursor(G.button(S.onShuffleButton, stack)));
+    if (config.shuffle) R.compose(setupStackButton, G.addText('SHUFFLE'))(UI.handCursor(G.button(S.onShuffle, stack)));
     // if (!config.tidy)       R.compose(setupStackButton, G.addText('TIDY'))      (UI.handCursor(G.button(S.tidy)));
     if (!config.hidden) R.compose(setupStackButton, G.addText('FLIP'))(UI.handCursor(G.button(S.onFlipButton, stack)));
 
@@ -78,10 +78,10 @@ S.onDropStack = function (stack) {
 };
 
 
-S.onShuffleButton = function (button) {
-    console.log('shuffle', this);
-    var stack = this;
-    Network.server.shuffleStack(stack.id);
+S.onShuffle = function () {
+    console.log('onShuffle');
+    Network.server.shuffleStack(T.getSelectedIds());
+
 };
 
 
@@ -103,17 +103,30 @@ S.bringToTop = function (tile) {
 };
 
 
+S.shuffle = function (tiles) {
+    console.log('S.suffle', tiles.length);
+
+    R.forEach.idx(function (tile, index) {
+        tile.rotation = 0;
+        if (tile.defaultFrame) tile.frame = 0;
+        var newPosition = S.calculateCardPos(Controls.target.position, index, 0);
+        Utils.alignPosition(tile, newPosition);
+        S.bringToTop(tile);
+    })(tiles);
+
+    return;
+};
+
 
 
 S.tidy = function (tiles) {
-    console.log('S.tidy stack', tiles.length);
+    console.log('S.tidy', tiles.length);
     var types = {};
     var counts = {};
     var offsetX = - tiles[0].width; // compensate
     var startPosition = Controls.target.position.clone();
 
     R.forEach.idx(function (tile, index) {
-        // console.log('tile', tile, 'index', index);
 
         if (!types[tile.key]) {
             var obj = {};
@@ -141,7 +154,6 @@ S.tidy = function (tiles) {
         var newPosition = S.calculateCardPos(startPosition, counts[tile.key][tile.defaultFrame], types[tile.key][tile.defaultFrame]);
         console.log('newPosition', newPosition);
         Utils.alignPosition(tile, newPosition);
-        // console.log('index', index, tile);
         S.bringToTop(tile);
     })(tiles);
 

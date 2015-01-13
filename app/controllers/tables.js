@@ -160,10 +160,11 @@ exports.play = function (req, res) {
         
         res.render('game/play', {
             title: 'Play - ' + table.title,
-            game: table,
-            table: table,
+            game: table.setup,
+            room: table,
             user: req.user,
-            assets: assets
+            assets: assets,
+            mode: 'play'
         });
 
     });

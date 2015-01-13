@@ -25,6 +25,18 @@ UI.init = function () {
         fill: '#ccc'
     });
     UI.messageText.align = 'right';
+    UI.messageText.alpha = 0.7;
+
+    // UI.graphics = game.add.graphics(0, 0);
+    // UI.graphics.lineStyle(5, 0x888888, 1);
+    // UI.graphics.beginFill(0x333222111, 1);
+    // UI.graphics.drawRect(
+    //     Screen.x / 4,
+    //     Screen.y / 4,
+    //     Screen.x / 4,
+    //     Screen.y / 4
+    // );
+
 
     UI.textElements = [UI.gameText, UI.nameText, UI.messageText];
 
@@ -37,10 +49,10 @@ UI.update = function () {
     console.log('UI.update');
 
     R.forEach(UI.fixedToCamera(false))(UI.textElements);
-    UI.gameText.x = UI.nameText.x = UI.messageText.x = game.canvas.width - 400;
-    UI.gameText.y = 16;
-    UI.nameText.y = 46;
-    UI.messageText.y = 260;
+    UI.gameText.x = UI.nameText.x = UI.messageText.x = 16;
+    UI.gameText.y = 0;
+    UI.nameText.y = 40;
+    UI.messageText.y = 280;
     R.forEach(UI.fixedToCamera(true))(UI.textElements);
 };
 
@@ -70,7 +82,8 @@ UI.message = function () {
 };
 
 UI.setNames = function (names) {
-    UI.nameText.setText(R.join('-', new Array(gameName.length * 3)) + '\nTable: ' + roomName + '\n' + R.join('\n')(names));
+    UI.nameText.setText('Table: ' + roomName + '\n' + R.join('\n')(names));
+    // UI.nameText.setText(R.join('-', new Array(gameName.length * 3)) + '\nTable: ' + roomName + '\n' + R.join('\n')(names));
 };
 
 UI.updateNames = function () {

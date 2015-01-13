@@ -54,6 +54,7 @@ function create() {
     setupPlayers();
     Cursor.set();
     Video.init();
+    H.init();
 }
 
 
@@ -152,15 +153,18 @@ function addCards(title, yOffset, array, group, stack, scale) {
     scale = scale || 1.0;
     var cards = [];
     var last;
-    var tempOffset = 0;
+    var tempOffsetX = 0;
+    var tempOffsetY = 0;
 
     R.forEach(function (n) {
         if (n === last) {
-            tempOffset -= 3;
+            tempOffsetY += S.offsetY;
+            tempOffsetX += S.offsetX;
         } else {
-            tempOffset = 0;
+            tempOffsetX = 0;
+            tempOffsetY = 0;
         }
-        var tile = group.create(100 + (n * 120), yOffset + tempOffset, title, n);
+        var tile = group.create(100 + (n * 120) + tempOffsetX, yOffset + tempOffsetY, title, n);
         tile.defaultFrame = n;
         if (stack && stack.config.hidden) T.hide(tile);
         T.scale(scale, tile);
@@ -182,7 +186,7 @@ function addTokens(which, group, x, y, scale) {
     y = y || 300;
     scale = scale || 1.0;
     R.forEach.idx(function (n, idx) {
-        var token = group.create(x + idx, y - (idx * 3), n);
+        var token = group.create(x + (S.offsetX * idx), y + (S.offsetY * idx ), n);
         T.setId(token);
         T.scale(scale, token);
         R.compose(Cursor.reset, T.networkAble, T.rotateable(group.rotateBy), T.draggable, T.centerAnchor)(token);

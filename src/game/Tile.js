@@ -144,6 +144,7 @@ T.onStartDrag = function (tile) {
 T.onStopDrag = function (tile) {
     T.dragging = false;
     console.log('onStopDrag');
+    H.check(tile);
     Network.server.tileDragStop(T.getSelectedIds(tile), T.getPositions(tile));
 };
 

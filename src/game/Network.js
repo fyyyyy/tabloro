@@ -179,11 +179,10 @@ Network.setup = function () {
     };
 
 
-    Network.client.exports.updateStackCards = function (client, stackId, cards) {
-        console.log('updateCards', cards, 'toStack', stackId);
-        G.removeUpdatePosition(playerList[client.id]);
-        var updatedStack = G.findStack(stackId);
-        S.updateCards(updatedStack, cards);
+    Network.client.exports.updateStackCards = function (client, tiles) {
+        console.log('updateCards', tiles);
+        
+        S.shuffle(G.findTiles(tiles));
     };
 
     Network.client.exports.flipStack = function(client, stackId) {

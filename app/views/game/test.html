@@ -25,6 +25,7 @@
             <script type="text/javascript" src="/Utils.js"></script>
             <script type="text/javascript" src="/Tile.js"></script>
             <script type="text/javascript" src="/Stack.js"></script>
+            <script type="text/javascript" src="/Hand.js"></script>
             <script type="text/javascript" src="/Video.js"></script>
             <script type="text/javascript" src="/main.js"></script>
         {% else %}
@@ -34,10 +35,10 @@
         <script type="text/javascript">
             var playerName = '{{user.username}}';
             var cursorId = Number('{{user.selected_cursor}}') || 1;
-            var roomName = '{{game.title}}';
+            var mode = '{{mode}}';
+            var roomName = '{{room.title}}';
             var gameName = '{{game.title}}';
             var assets = JSON.parse('{{ JSON.stringify(assets) }}');
-            var mode = 'test';
         </script>
     </head>
     <body style="cursor: url(/img/cursors/{{user.selected_cursor}}.png), auto;">
@@ -51,14 +52,15 @@
             </center>
         </div>
 
-        <div id="edit-container">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                {{game.title}}
+        {% if (mode === 'setup') %}
+            <div id="edit-container">
                 <button onclick="G.saveSetup()" class="btn btn-success">Save Setup</button>
-                </div>
             </div>
-        </div>
+        {% else %}
+            <div id="edit-container">
+                <a href="{{backUrl}}" class="btn btn-danger">End Test</a>
+            </div>
+        {% endif %}
         
         
     </body>

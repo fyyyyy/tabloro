@@ -344,8 +344,11 @@ exports.test = function (req, res) {
         res.render('game/test', {
             title: 'Test Box: ' + box.title,
             game: box,
+            room: box,
             user: req.user,
-            assets: assets
+            assets: assets,
+            mode: 'test',
+            backUrl: '/boxes/' + box._id
         });
 
     });

@@ -1,4 +1,4 @@
-/*global Phaser, R, T, G, Utils, game*/
+/*global R, T, G, Utils, game*/
 "use strict";
 
 var Controls = {};
@@ -20,14 +20,17 @@ Controls.add = function () {
     Controls.rotationControls = Controls.controls.create(0, 0, 'rotate');
     Controls.flipControls = Controls.controls.create(50, 0, 'flip');
     Controls.stackControls = Controls.controls.create(100, 0, 'stack');
+    Controls.shuffleControls = Controls.controls.create(150, 0, 'shuffle');
     
     Controls.rotationControls.scale.set(0.7);
     Controls.flipControls.scale.set(1.0);
     Controls.stackControls.scale.set(1.0);
+    Controls.shuffleControls.scale.set(1.0);
     
     T.centerAnchor(Controls.rotationControls);
     T.centerAnchor(Controls.flipControls);
     T.centerAnchor(Controls.stackControls);
+    T.centerAnchor(Controls.shuffleControls);
     
     Controls.rotationControls.inputEnabled = true;
     Controls.rotationControls.input.useHandCursor = true;
@@ -41,9 +44,14 @@ Controls.add = function () {
     Controls.stackControls.input.useHandCursor = true;
     Controls.stackControls.events.onInputUp.add(S.onTidy);
     
+    Controls.shuffleControls.inputEnabled = true;
+    Controls.shuffleControls.input.useHandCursor = true;
+    Controls.shuffleControls.events.onInputUp.add(S.onShuffle);
+    
     Cursor.reset(Controls.rotationControls);
     Cursor.reset(Controls.flipControls);
     Cursor.reset(Controls.stackControls);
+    Cursor.reset(Controls.shuffleControls);
 
     Controls.graphics = game.add.graphics(0, 0);
     Controls.graphics.lineStyle(10, 0xFFFFFF, 0.8);
