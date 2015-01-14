@@ -7,16 +7,17 @@
         <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
 
         <li class="sidebar-brand">
-            <a href="/#top">tabloro</a>
+            <a href="/#top">tabloro.com</a>
         </li>
+
 
         {% if (req.isAuthenticated()) %}
             <li class="{% if (isActive('/users/' + req.user.id )) %}active{% endif %}">
                 <a href="{{ '/users/' + req.user.id }}" title="Profile">
-                  <img class="" src={{"/img/cursors/" + (req.user.selected_cursor || 1) + ".png"}}></img>
+                  <img class="" src={{"/img/cursors/" + (req.user.selected_cursor || 1) + ".png"}} width="18"></img>
                   {{req.user.username}}
                   {% if isAdmin %}
-                    ADMIN
+                    (ADMIN)
                   {% endif %}
                 </a>
             </li>
@@ -29,12 +30,7 @@
           </a>
         </li>
 
-        <li>
-          <a href="/create" title="Create your own games!">
-            <i class="fa fa-scissors fa-fw"></i>&nbsp;
-              Create Games
-          </a>
-        </li>
+
 
 
         {% if (!req.isAuthenticated()) %}
@@ -60,29 +56,47 @@
                     All Tables
                 </a>
             </li>
-            
-            <li>
-                <a href="/pieces">
-                    <i class="fa fa-puzzle-piece fa-fw"></i>&nbsp;
-                    Gaming Pieces
-                </a>
-            </li>
-            
-            <li>
-                <a href="/boxes">
-                    <i class="fa fa-cube fa-fw"></i>&nbsp;
-                    Game Boxes
-                </a>
-            </li>
-
-            <li>
-                <a href="/setups">
-                    <i class="fa fa-sitemap fa-fw"></i>&nbsp;
-                    Game Setups
-                </a>
-            </li>
         {% endif %}
-        
+
+
+        <p class="navbar-text">--------------------------------------</p>
+        <div class="clearfix"></div>
+
+          <li>
+            <a href="/create" title="Create your own games!">
+              <i class="fa fa-scissors fa-fw"></i>&nbsp;
+                Create Games
+            </a>
+            
+              {% if (req.isAuthenticated()) %}
+                <ul class="list-unstyled">
+                  <li>
+                      <a href="/pieces">
+                          <i class="fa fa-puzzle-piece fa-fw"></i>&nbsp;
+                          Gaming Pieces
+                      </a>
+                  </li>
+                  
+                  <li>
+                      <a href="/boxes">
+                          <i class="fa fa-cube fa-fw"></i>&nbsp;
+                          Game Boxes
+                      </a>
+                  </li>
+
+                  <li>
+                      <a href="/setups">
+                          <i class="fa fa-sitemap fa-fw"></i>&nbsp;
+                          Game Setups
+                      </a>
+                  </li>
+                </ul>
+              {% endif %}
+        </li>
+
+        <p class="navbar-text">--------------------------------------</p>
+        <div class="clearfix"></div>
+
         <li>
             <a href="/#about">
               <i class="fa fa-question fa-fw"></i>&nbsp;
