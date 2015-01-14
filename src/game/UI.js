@@ -27,7 +27,7 @@ UI.init = function () {
         fill: '#ccc'
     });
     UI.messageText.align = 'right';
-    UI.messageText.alpha = 0.7;
+    UI.messageText.alpha = 0.5;
 
     // UI.graphics = game.add.graphics(0, 0);
     // UI.graphics.lineStyle(5, 0x888888, 1);
@@ -76,7 +76,7 @@ UI.message = function () {
 
     UI.lines = R.concat(text, UI.lines);
 
-    if (UI.lines.length > 15) {
+    if (UI.lines.length > 5) {
         UI.lines.pop();
     }
 
