@@ -58,7 +58,7 @@
                 <div class="input-group-addon">
                   <i class="fa fa-sitemap fa-fw"></i>
                 </div>
-                <input type="text" name="setupName" value="{{ table.setupName }}" placeholder="Enter the name of the game setup for this table" class="form-control" id="setupName" required="true">
+                <input type="text" name="setupName" value="{{ table.setupName || table.setup.title }}" placeholder="Enter the name of the game setup for this table" class="form-control" id="setupName" required="true">
               </div>
             </div>
           </div>

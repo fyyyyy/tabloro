@@ -2,8 +2,11 @@
   <div class="panel  {% if table.isPrivate %}panel-warning {% else %} panel-default {% endif %}">
       
       <div class="img-overlay">
-        <img class="img-responsive" src="/img/game2.jpg">
+        <img class="img-responsive" src="{{ table.box.image.cdnUri + '/detail_' + table.box.image.files[0] }}" alt="">
+
+
           <div class="post-content">
+            {{JSON.stringify(table.box.image.c)}}
             {% block image %}
             {% endblock %}
           </div>

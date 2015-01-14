@@ -44,6 +44,7 @@ var TableSchema = new Schema({
   stacks: {type: Object, default: {}},
   user: {type : Schema.ObjectId, ref : 'User'},
   setup: {type : Schema.ObjectId, ref : 'Setup'},
+  box: {type : Schema.ObjectId, ref : 'Box'},
 });
 
 /**
@@ -107,6 +108,7 @@ TableSchema.statics = {
     var criteria = options.criteria || {};
 
     this.find(criteria)
+      .populate('box', 'title image')
       // .populate('user', 'name username')
       .sort({'createdAt': -1}) // sort by date
       .limit(options.perPage)

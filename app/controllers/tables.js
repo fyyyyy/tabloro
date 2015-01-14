@@ -10,6 +10,8 @@ var Table = mongoose.model('Table');
 var Setup = mongoose.model('Setup');
 var Piece = mongoose.model('Piece');
 var utils = require('../../lib/utils');
+var extend = require('util')._extend;
+
 var R = require('../../public/js/ramda.js');
 
 
@@ -92,6 +94,7 @@ exports.create = function (req, res) {
 
     Setup.findOne({title: setupName}).exec(function (err, setup) {
         table.setup = setup;
+        table.box = setup.box;
         table.tiles = setup.tiles || {};
 
         console.log('setup', setup, setupName);
@@ -144,6 +147,50 @@ exports.show = function (req, res) {
 
     });
 };
+
+/**
+ * Edit a table
+ */
+
+exports.edit = function (req, res) {
+  res.render('tables/edit', {
+    title: 'Edit ' + req.table.title,
+    table: req.table
+  });
+};
+
+
+
+/**
+ * Update table
+ */
+
+exports.update = function (req, res){
+  var table = req.table;
+
+  // make sure no one changes the user
+  delete req.body.user;
+  table = extend(table, req.body);
+
+
+  table.update(function (err) {
+    if (!err) {
+      return res.redirect('/tables/' + table.title);
+    }
+    console.error(err);
+    res.render('tables/edit', {
+        title: 'Edit ' + req.table.title,
+        table: table,
+        errors: utils.errors(err.errors || err)
+    });
+  });  
+  
+};
+
+
+
+
+
 
 exports.play = function (req, res) {
     var table = req.table;
