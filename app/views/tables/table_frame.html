@@ -2,7 +2,11 @@
   <div class="panel  {% if table.isPrivate %}panel-warning {% else %} panel-default {% endif %}">
       
       <div class="img-overlay">
+      {% if (table.box) %}
         <img class="img-responsive" src="{{ table.box.image.cdnUri + '/detail_' + table.box.image.files[0] }}" alt="">
+      {% else %}
+        <img class="img-responsive" src="/img/game4.jpg" alt="">
+      {% endif %}
 
 
           <div class="post-content">
