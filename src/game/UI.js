@@ -8,14 +8,14 @@ UI.lines = [];
 UI.init = function () {
 
     //  The score
-    UI.gameText = game.add.text(0, 0, gameName.split('').join(' '), {
-        font: 'bold 22px Times',
+    UI.gameText = game.add.text(0, 0, 'table > '  + roomName, {
+        font: 'bold 22px Arial',
         fill: '#ccc'
     });
     UI.gameText.alpha = 0.7;
 
     UI.nameText = game.add.text(0, 0, '----------------\nNAME:' + playerName, {
-        font: 'bold 18px Times',
+        font: 'bold 18px Arial',
         fill: '#ccc'
     });
     UI.nameText.align = 'right';
@@ -23,7 +23,7 @@ UI.init = function () {
 
 
     UI.messageText = game.add.text(0, 0, 'Messages:', {
-        font: '18px Times',
+        font: '18px Arial',
         fill: '#ccc'
     });
     UI.messageText.align = 'right';
@@ -71,20 +71,26 @@ UI.handCursor = function (button) {
 };
 
 UI.message = function () {
+    UI.messageText.alpha = 0.5;
     var text = R.join(' ', slice(arguments));
     text = text.match(/.{1,30}/g); // split string every 30 characters
 
     UI.lines = R.concat(text, UI.lines);
 
-    if (UI.lines.length > 5) {
+    if (UI.lines.length > 10) {
         UI.lines.pop();
     }
 
     UI.messageText.setText('-> ' + R.join('\n')(UI.lines) + '\n...');
+    setTimeout(function() {
+        game.add.tween(UI.messageText).to({
+            alpha: 0
+        }, 2000, Phaser.Easing.Linear.None, true);
+    }, 2000);
 };
 
 UI.setNames = function (names) {
-    UI.nameText.setText('Table: ' + roomName + '\n' + R.join('\n')(names));
+    UI.nameText.setText(R.join('\n')(names));
     // UI.nameText.setText(R.join('-', new Array(gameName.length * 3)) + '\nTable: ' + roomName + '\n' + R.join('\n')(names));
 };
 

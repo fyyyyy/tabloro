@@ -92,7 +92,8 @@ TableSchema.statics = {
     this.findOne({ title : title })
     .populate('users', 'username')
     .populate('user', 'name username')
-    .populate('setup', 'title pieces counts')
+    .populate('setup', 'title pieces counts box')
+    .populate('box', 'title')
     .exec(cb);
   },
 

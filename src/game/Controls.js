@@ -78,9 +78,25 @@ Controls.at = function (tile) {
 };
 
 Controls.show = function (tile) {
+    Controls.positionX = 0;  
+
     Controls.controls.visible = true;
-    Controls.flipControls.visible = tile.flipable || false;
-    Controls.rotationControls.visible = tile.rotateable || false;
+    // single tile
+    Controls.position(Controls.flipControls, tile.flipable);
+    Controls.position(Controls.rotationControls, tile.rotateable && !Controls.selected.length);
+    // multi selection
+    Controls.position(Controls.stackControls, Controls.selected.length);
+    Controls.position(Controls.shuffleControls, Controls.selected.length);
+};
+
+Controls.position = function (controlButton, condition) {
+    if (condition) {
+        controlButton.visible = true;
+        controlButton.x = Controls.positionX;
+        Controls.positionX += controlButton.width;
+    } else {
+        controlButton.visible = false;
+    }
 };
 
 
