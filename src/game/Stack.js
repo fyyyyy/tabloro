@@ -108,7 +108,7 @@ S.shuffle = function (tiles) {
 
     R.forEach.idx(function (tile, index) {
         tile.rotation = 0;
-        if (tile.flipable && tile.defaultFrame) tile.frame = 0;
+        T.hide(tile);
         var newPosition = S.calculateCardPos(Controls.target.position, index, 0);
         Utils.alignPosition(tile, newPosition);
         S.bringToTop(tile);
@@ -150,7 +150,7 @@ S.tidy = function (tiles) {
         }
 
         tile.rotation = 0;
-        if (tile.flipable && tile.defaultFrame) tile.frame = tile.defaultFrame;
+        T.show(tile);
         var newPosition = S.calculateCardPos(startPosition, counts[tile.key][tile.defaultFrame], types[tile.key][tile.defaultFrame]);
         console.log('newPosition', newPosition);
         Utils.alignPosition(tile, newPosition);

@@ -21,16 +21,15 @@ Controls.add = function () {
     Controls.flipControls = Controls.controls.create(50, 0, 'flip');
     Controls.stackControls = Controls.controls.create(100, 0, 'stack');
     Controls.shuffleControls = Controls.controls.create(150, 0, 'shuffle');
+    Controls.handControls = Controls.controls.create(150, 0, 'hand');
     
     Controls.rotationControls.scale.set(0.7);
-    Controls.flipControls.scale.set(1.0);
-    Controls.stackControls.scale.set(1.0);
-    Controls.shuffleControls.scale.set(1.0);
     
     T.centerAnchor(Controls.rotationControls);
     T.centerAnchor(Controls.flipControls);
     T.centerAnchor(Controls.stackControls);
     T.centerAnchor(Controls.shuffleControls);
+    T.centerAnchor(Controls.handControls);
     
     Controls.rotationControls.inputEnabled = true;
     Controls.rotationControls.input.useHandCursor = true;
@@ -47,11 +46,16 @@ Controls.add = function () {
     Controls.shuffleControls.inputEnabled = true;
     Controls.shuffleControls.input.useHandCursor = true;
     Controls.shuffleControls.events.onInputUp.add(S.onShuffle);
+
+    Controls.handControls.inputEnabled = true;
+    Controls.handControls.input.useHandCursor = true;
+    Controls.handControls.events.onInputUp.add(T.onTake);
     
     Cursor.reset(Controls.rotationControls);
     Cursor.reset(Controls.flipControls);
     Cursor.reset(Controls.stackControls);
     Cursor.reset(Controls.shuffleControls);
+    Cursor.reset(Controls.handControls);
 
     Controls.graphics = game.add.graphics(0, 0);
     Controls.graphics.lineStyle(10, 0xFFFFFF, 0.8);
@@ -84,6 +88,7 @@ Controls.show = function (tile) {
     // single tile
     Controls.position(Controls.flipControls, tile.flipable);
     Controls.position(Controls.rotationControls, tile.rotateable && !Controls.selected.length);
+    Controls.position(Controls.handControls, tile.handable && !Controls.selected.length);
     // multi selection
     Controls.position(Controls.stackControls, Controls.selected.length);
     Controls.position(Controls.shuffleControls, Controls.selected.length);

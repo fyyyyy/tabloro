@@ -51,7 +51,23 @@
               </div>
             </div>
           </div>
-            
+
+
+          <div class="form-group"> 
+            <label class="col-sm-3 control-label">Take to Hand ?</label>
+            <div class="col-sm-9">
+              <div class="btn-group" data-toggle="buttons">
+                <label href="#" for="handable2" class="btn btn-xs btn-default {% if (!piece.handable) %} active {% endif %}">no
+                  <input type="radio" id="handable2" name="handable" value="0"  />
+                </label>
+                <label href="#" for="handable1" class="btn btn-xs btn-default {% if (piece.handable) %} active {% endif %}" >yes
+                  <input type="radio" id="handable1" name="handable" value="1"  />
+                </label>
+              </div>
+              <p class="help-block">If players can take these pieces on their hands. Tiles on a player's hand can't be seen by other players.</p>
+            </div>
+          </div>
+  
 <!-- 
               <div class="form-group"> 
                 <label class="col-sm-3 control-label">List in Public?</label>

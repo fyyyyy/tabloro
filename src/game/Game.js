@@ -6,7 +6,7 @@ var G = {};
 G._groups = {};
 
 G.groups = {
-    add: function (groupName, index, rotateBy, flipable) {
+    add: function (groupName, index, rotateBy, flipable, handable) {
         index = index || 0;
         rotateBy = rotateBy || 0;
 
@@ -14,6 +14,7 @@ G.groups = {
         G._groups[groupName].z = index;
         G._groups[groupName].rotateBy = rotateBy;
         G._groups[groupName].flipable = flipable;
+        G._groups[groupName].handable = handable;
     },
     get: function (groupName) {
         return G._groups[groupName];

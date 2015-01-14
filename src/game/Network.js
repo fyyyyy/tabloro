@@ -106,7 +106,16 @@ Network.setup = function () {
         R.compose(T.enableInput, T.show)(tile);
         
         Utils.syncTile(tile, newPosition);
+
         UI.message('Positioning tile', tileId);
+
+        if (!newPosition.hand) { return; }
+        
+        if (newPosition.hand === playerName) {
+            H.add(tile);
+        } else {
+            tile.visible = false;
+        }
     };
 
 
@@ -117,6 +126,7 @@ Network.setup = function () {
         
         var tile = G.findTile(tileId);
         Controls.hide(tile);
+        tile.visible = true;
         
         G.removeUpdatePosition(playerList[client.id]);
         delete tile.relativePosition;
@@ -139,6 +149,27 @@ Network.setup = function () {
         
     };
 
+
+    Network.client.exports.toHand = function (client, tileId) {
+        if (Network.isMine(client.id)) return; // this is me //////////////
+        console.log(client.name + ' takes tile ', tileId, 'to Hand');
+        
+        var tile = G.findTile(tileId);
+        Controls.hide(tile);
+        tile.visible = false;
+        
+        UI.message(client.name, 'took tile', tile.id, 'to hand');
+    };
+
+    Network.client.exports.fromHand = function (client, tileId) {
+        if (Network.isMine(client.id)) return; // this is me //////////////
+        console.log(client.name + ' plays tile ', tileId, 'from Hand');
+        
+        var tile = G.findTile(tileId);
+        tile.visible = true;
+        
+        UI.message(client.name, 'plays tile', tile.id, 'from hand');
+    };
 
     /******************* STACKS ******************/
 

@@ -129,7 +129,7 @@ TableSchema.statics = {
         return;
       }
 
-      console.log('updated table', table);
+      console.log('updated table', table.id);
     });
   }
 

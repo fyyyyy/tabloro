@@ -86,7 +86,7 @@ UI.message = function () {
         game.add.tween(UI.messageText).to({
             alpha: 0
         }, 2000, Phaser.Easing.Linear.None, true);
-    }, 2000);
+    }, 4000);
 };
 
 UI.setNames = function (names) {
@@ -95,5 +95,5 @@ UI.setNames = function (names) {
 };
 
 UI.updateNames = function () {
-    UI.setNames(R.concat(['* ' + playerName + ' *'], R.pluck('name', R.values(playerList))));
+    UI.setNames(R.concat(['* ' + playerName], R.pluck('name', R.values(playerList))));
 };

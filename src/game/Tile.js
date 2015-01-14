@@ -1,4 +1,4 @@
-/*global Phaser, R, game, console, Controls*/
+/*global Phaser, R, H, game, console, Controls*/
 "use strict";
 
 var T = {};
@@ -88,6 +88,14 @@ T.flipable = function (flipable) {
     };
 };
 
+T.handable = function (handable) {
+    if (!handable) { return R.I;}
+    return function (tile) {
+        tile.handable = true;
+        return tile;
+    };
+};
+
 
 T.onFlip = function () {
     var tile = Controls.target;
@@ -105,6 +113,13 @@ T.nextFlipStates = function (tile) {
         }
         return t.defaultFrame;
     })(Controls.getSelected(tile));
+};
+
+T.onTake = function () {
+    console.log('onTake');
+    var tile = Controls.target;
+    H.add(tile);
+    Network.server.toHand(tile.id);
 };
 
 
@@ -132,6 +147,8 @@ T.onStartDrag = function (tile) {
     T.dragging = true;
     console.log('onStartDrag', tile.id);
 
+    H.release(tile);
+
     Controls.verifySelection(tile);
     
     var relativePositions = Controls.selected.length && R.pluck('relativePosition')(Controls.selected) || [{x: 0, y: 0}];
@@ -144,7 +161,6 @@ T.onStartDrag = function (tile) {
 T.onStopDrag = function (tile) {
     T.dragging = false;
     console.log('onStopDrag');
-    H.check(tile);
     Network.server.tileDragStop(T.getSelectedIds(tile), T.getPositions(tile));
 };
 
@@ -184,12 +200,12 @@ T.flip = function (tile) {
 
 
 T.show = function (tile) {
-    tile.frame = tile.defaultFrame;
+    if (tile.flipable && tile.defaultFrame) tile.frame = tile.defaultFrame;
     return tile;
 };
 
 T.hide = function (tile) {
-    tile.frame = 0;
+    if (tile.flipable && tile.defaultFrame) tile.frame = 0;
     return tile;
 };
 

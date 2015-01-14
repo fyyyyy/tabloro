@@ -59,6 +59,13 @@
         {% endif %}
 
 
+
+        {% if (piece.handable) %}
+          <li class="list-group-item list-group-item-info">Take to Hand
+            <i class="fa fa-hand-o-up pull-right"></i>
+          </li>
+        {% endif %}
+
         {% if (piece.atlasjson) %}
           <li class="list-group-item list-group-item-default">
             Json Atlas

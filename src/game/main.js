@@ -122,7 +122,7 @@ function setupAssets (gameAssets) {
 
         var groupName = asset.args[0];
         console.log('adding asset group', groupName);
-        G.groups.add(groupName, 0, Utils.deg2Rad(asset.rotateBy), asset.flipable);
+        G.groups.add(groupName, 0, Utils.deg2Rad(asset.rotateBy), asset.flipable, asset.handable);
 
 
         if (asset.method === 'atlasJSONHash') {
@@ -168,7 +168,7 @@ function addCards(title, yOffset, array, group, stack, scale) {
         tile.defaultFrame = n;
         if (stack && stack.config.hidden) T.hide(tile);
         T.scale(scale, tile);
-        R.compose(T.setId, Cursor.reset, T.networkAble, T.stackable, T.flipable(group.flipable), T.rotateable(group.rotateBy), T.draggable, T.centerAnchor)(tile);
+        R.compose(T.setId, Cursor.reset, T.networkAble, T.stackable, T.flipable(group.flipable), T.rotateable(group.rotateBy), T.handable(group.handable),  T.draggable, T.centerAnchor)(tile);
 
         cards.push(tile.id);
         Controls.target = tile;
@@ -189,7 +189,7 @@ function addTokens(which, group, x, y, scale) {
         var token = group.create(x + (S.offsetX * idx), y + (S.offsetY * idx ), n);
         T.setId(token);
         T.scale(scale, token);
-        R.compose(Cursor.reset, T.networkAble, T.rotateable(group.rotateBy), T.draggable, T.centerAnchor)(token);
+        R.compose(Cursor.reset, T.networkAble, T.rotateable(group.rotateBy), T.handable(group.handable), T.draggable, T.centerAnchor)(token);
     })(which);
 }
 
@@ -208,6 +208,7 @@ function update() {
     if (Network.ready === false) return;
     G.update();
     Controls.update();
+    H.update();
 
 
     var mouseWorldPosition = {
