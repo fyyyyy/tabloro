@@ -28,8 +28,12 @@
       </span>
     <br/>
     {% endif %}
-
-     <i class="fa fa-cube fa-lg text-primary">Box</i>&nbsp;<a href="/boxes/{{setup.box.id}}">{{setup.box.title}}</a>
+    
+     <a href="/boxes/{{setup.box.id}}">
+      belongs to {{setup.box.title}}
+      <i class="fa fa-cube text-primary">(box)</i>&nbsp;
+      
+      </a>
     
   </p>
 {% endblock %}
@@ -38,8 +42,8 @@
       
 {% block footer %}
   <a href="{% if (req.isAuthenticated()) %}/boxes/{{setup.box.id}}/setups/{{ setup.title }}{% else %}/login{%endif%}" class="btn btn-primary btn-block btn-square">
-    <i class="fa fa-sitemap"></i>&nbsp;
-    {% if pick %}pick{% else %}show{% endif %} setup
+    {% if pick %}pick{% else %}show{% endif %}
+    <i class="fa fa-sitemap"> (setup)</i>&nbsp;
   </a>
 {% endblock %}
 

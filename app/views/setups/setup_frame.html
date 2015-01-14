@@ -2,7 +2,12 @@
   <div class="panel  {% if table.isPrivate %}panel-warning {% else %} panel-default {% endif %}">
       
       <div class="img-overlay">
-        <img class="img-responsive" src="/img/game2.jpg">
+
+        {% if (setup.box) %}
+          <img class="img-responsive max200 min200" src="{{ setup.box.image.cdnUri + '/detail_' + setup.box.image.files[0] }}" alt="">
+        {% else %}
+          <img class="img-responsive wooden" style="height: 200px;" alt="">
+        {% endif %}
           <div class="post-content">
             {% block image %}
             {% endblock %}
