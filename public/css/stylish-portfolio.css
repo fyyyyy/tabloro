@@ -10,21 +10,27 @@ html,
 body {
     width: 100%;
     height: 100%;
+
 }
 
 h1 {
     text-shadow: 6px 6px 0px #321;
-    color: #efefef;
+    color: #FcFaF7;
 }
 
 h3 {
     text-shadow: 2px 1px 1px #321;
-    color: #efefef;
+    color: #fefdfc;
 }
 
 body {
     font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
+
+.content, .about {
+    background: #fefdfc;
+    
+}    
 
 .text-vertical-center {
     display: table-cell;
@@ -43,34 +49,34 @@ body {
 .header h1 small {
     font-size: 0.2em;
     text-shadow: 3px 3px 0px #321;
-    color: #efefef;
+    color: #fefdfc;
 }
 
 .text-default {
-    color: #fff;
+    color: #fefdfc;
 }
 
 .text-default a {
-    color: #fff;
+    color: #fefdfc;
 }
 
 /* Custom Button Styles */
 
 .btn-dark {
     border-radius: 0;
-    color: #fff;
+    color: #fefdfc;
     background-color: rgba(0,0,0,0.4);
 }
 .btn-blue {
     border-radius: 0;
-    color: #fff;
+    color: #fefdfc;
     background-color: #42abea;
 }
 
 .btn-dark:hover,
 .btn-dark:focus,
 .btn-dark:active {
-    color: #fff;
+    color: #fefdfc;
     background-color: rgba(0,0,0,0.7);
 }
 
@@ -103,7 +109,7 @@ hr.small {
     height: 100%;
     margin-right: -250px;
     overflow-y: auto;
-    background: #222;
+    background: #272020;
     -webkit-transition: all 0.4s ease 0s;
     -moz-transition: all 0.4s ease 0s;
     -ms-transition: all 0.4s ease 0s;
@@ -135,7 +141,7 @@ hr.small {
 
 .sidebar-nav li a:hover {
     text-decoration: none;
-    color: #fff;
+    color: #fefdfc;
     background: rgba(255,255,255,0.2);
 }
 
@@ -151,11 +157,11 @@ hr.small {
 }
 
 .sidebar-nav > .sidebar-brand a {
-    color: #999;
+    color: #987;
 }
 
 .sidebar-nav > .sidebar-brand a:hover {
-    color: #fff;
+    color: #fefdfc;
     background: none;
 }
 
@@ -262,7 +268,7 @@ hr.small {
 }
 
 .service-item a{
-    color: #fff;
+    color: #fefdfc;
 }
 
 /* Callout */
@@ -271,7 +277,7 @@ hr.small {
     display: table;
     width: 100%;
     height: 400px;
-    color: #fff;
+    color: #fefdfc;
     background: url(../img/example4.jpg) no-repeat center center scroll;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -310,7 +316,7 @@ hr.small {
     width: 100%;
     padding-top: 0;
     position: absolute;
-    color: #efefef;
+    color: #fefdfc;
 }
 
 .post-content {
@@ -321,7 +327,7 @@ hr.small {
     width: 100%;
     padding-top: 0;
     position: absolute;
-    color: #efefef;
+    color: #fefdfc;
 }
 
 .blackBorder {
@@ -342,12 +348,12 @@ hr.small {
     height: auto%;
     width: 100%;
     margin: 0;
-    color: #efefef;
+    color: #fefdfc;
     font-size: 70%;
 }
 
 .piece-number {
-    color: #fff;
+    color: #fefdfc;
     text-shadow: 2px 1px 1px #321;
     font-size: 1.5em;
     left: 0;
@@ -497,7 +503,7 @@ a.skype {
 .ribbon-green {
   z-index: 2000;
   font: bold 15px Sans-Serif;
-  color: #efefef;
+  color: #fefdfc;
   text-align: center;
   text-shadow: #321 -1px 2px 0px;
   -webkit-transform: rotate(-45deg);
