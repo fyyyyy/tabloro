@@ -2,11 +2,9 @@
 
 
 {% block image %}
-  <span class="small absolute-left text-primary">Started {{ table.createdAt.toISOString()|date('G:i') }}</span>
+  <span class="text-center small text-primary">Started {{ table.createdAt.toISOString()|date('G:i') }}</span>
 
-  <h4>
-
-    <strong>{{table.title | title}}</strong>
+  <br>
 
     <span class="text-primary">
       {% if (table.rtcAudio) %}
@@ -30,7 +28,6 @@
           <i class="fa fa-institution fa-fw"></i>
     {% endif %}
     </span>
-  </h4>
 
 
   <p>
@@ -62,8 +59,8 @@
       
 {% block footer %}
   <a href="{% if (req.isAuthenticated()) %}tables/{{ table.title }}{% else %}/login{%endif%}" class="btn btn-primary btn-block btn-square">
-    <i class="fa fa-user"></i>&nbsp;
-    join table
+    <i class="fa fa-play"></i>&nbsp;
+    <strong>{{table.title | title}}</strong>
   </a>
 {% endblock %}
 
