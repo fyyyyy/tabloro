@@ -30,7 +30,6 @@
     </span>
 
 
-  <p>
     {% if table.tags.length %}
       <span class="small">
         tags &nbsp;
@@ -45,14 +44,12 @@
 
     {% if table.players.length === 0 %}
       <!-- <em>no players yet</em> -->
-    {% else %}
-      players   
+    {% else %}   
       {% for user in table.players %}
-        <i class="fa fa-user fa-lg text-primary"></i>&nbsp;
+        &nbsp;<i class="fa fa-user fa-lg" style="color: #7F9"></i>
       {% endfor %}
     {% endif %}
     
-  </p>
 {% endblock %}
    
 
