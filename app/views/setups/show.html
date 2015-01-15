@@ -1,7 +1,10 @@
 {% extends '../layouts/default.html' %}
 
 {% block main %}
-  <h1>{{ title }}</h1>
+  <h1>
+
+    {{ title }}
+  </h1>
 {% endblock %}
 
 {% block content %}
@@ -11,7 +14,10 @@
     <div class="col-md-8">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h4>{{setup.title | title}}</h4>
+          <h4>
+            <i class="fa fa-sitemap pull-left muted"><span class="small"> setup</span></i>
+            {{setup.title | title}}
+          </h4>
         </div>
         <div class="panel-body">
           <p>

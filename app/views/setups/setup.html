@@ -31,7 +31,6 @@
       
       </a>
   <br>
-  <i class="fa fa-sitemap"> (setup)</i>&nbsp;
 
 {% endblock %}
    
@@ -39,7 +38,8 @@
       
 {% block footer %}
   <a href="{% if (req.isAuthenticated()) %}/boxes/{{setup.box.id}}/setups/{{ setup.title }}{% else %}/login{%endif%}" class="btn btn-primary btn-block btn-square">
-    {% if pick %}pick{% else %}show{% endif %}
+  <i class="fa fa-sitemap pull-left"><span class="small"> setup</span></i>
+    {% if pick %}pick{% endif %}
     
     <strong>{{setup.title | title}}</strong>
 
