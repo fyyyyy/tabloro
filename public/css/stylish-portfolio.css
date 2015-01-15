@@ -309,7 +309,7 @@ hr.small {
 
 
 .box-content {
-    background: none no-repeat scroll 0 0 #321;
+    background: none no-repeat scroll 0 0 #222;
     opacity: 0.7;
     top: 75%;
     height: 25%;
@@ -320,7 +320,7 @@ hr.small {
 }
 
 .post-content {
-    background: none no-repeat scroll 0 0 #321;
+    background: none no-repeat scroll 0 0 #222;
     opacity: 0.8;
     top: 75%;
     height: 25%;
@@ -342,7 +342,7 @@ hr.small {
 
 .piece-content {
     position: absolute;
-    background: none no-repeat scroll 0 0 #321;
+    background: none no-repeat scroll 0 0 #222;
     opacity: 0.7;
     top: 0;
     height: auto%;
