@@ -3,13 +3,13 @@
   <div class="col-md-2">
   </div>
   
-  <div class="col-md-2">
+  <div class="col-md-3">
       {% if (!article.isNew && article.image && article.image.files && article.image.files.length) %}
         <img src="{{ article.image.cdnUri + '/mini_' + article.image.files[0] }}" alt=""/>
       {% endif %}
   </div>
 
-  <div class="col-md-8">
+  <div class="col-md-7">
     <h2>
       <a href="{{ '/news/' + article._id }}" title="{{ article.title }}">
         {{ article.title }}

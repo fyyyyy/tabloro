@@ -9,7 +9,7 @@
 
   
   <div class="">
-    {% if (req.isAuthenticated()) %}
+    {% if (isAdmin) %}
       <a class="btn btn-primary" href="/news/new">
         <i class="fa fa-plus-circle"></i>
         Add news
