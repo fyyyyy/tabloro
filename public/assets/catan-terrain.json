@@ -1,0 +1,84 @@
+{"frames": [
+
+{
+	"filename": "background.png",
+	"frame": {"x":2,"y":315,"w":175,"h":151},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":6,"y":6,"w":175,"h":151},
+	"sourceSize": {"w":186,"h":164},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "brick.png",
+	"frame": {"x":180,"y":2,"w":175,"h":155},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":5,"w":175,"h":155},
+	"sourceSize": {"w":186,"h":164},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "desert.png",
+	"frame": {"x":2,"y":160,"w":175,"h":153},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":5,"w":175,"h":153},
+	"sourceSize": {"w":186,"h":164},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "field.png",
+	"frame": {"x":179,"y":316,"w":174,"h":155},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":5,"w":174,"h":155},
+	"sourceSize": {"w":186,"h":164},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "forest.png",
+	"frame": {"x":2,"y":2,"w":176,"h":156},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":4,"w":176,"h":156},
+	"sourceSize": {"w":186,"h":164},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "mountain.png",
+	"frame": {"x":2,"y":468,"w":174,"h":154},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":6,"y":6,"w":174,"h":154},
+	"sourceSize": {"w":186,"h":164},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "sheep.png",
+	"frame": {"x":180,"y":159,"w":175,"h":155},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":4,"w":175,"h":155},
+	"sourceSize": {"w":186,"h":164},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "water.png",
+	"frame": {"x":178,"y":473,"w":171,"h":151},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":8,"y":6,"w":171,"h":151},
+	"sourceSize": {"w":186,"h":164},
+	"pivot": {"x":0.5,"y":0.5}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "catan-terrain.png",
+	"format": "RGBA8888",
+	"size": {"w":512,"h":1024},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:964b29160da206935694c75d544b68af:f05e26add1b410dc30a53aa4e59aa191:6f0ca64669b983c8dd27bf5f6131e956$"
+}
+}
