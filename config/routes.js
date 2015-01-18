@@ -103,7 +103,7 @@ module.exports = function (app, passport) {
   app.get('/tables', tables.index);
   app.get('/tables/new', auth.requiresLogin, tables.new);
   app.post('/tables', auth.requiresLogin, tables.create);
-  app.get('/tables/:tableName', auth.requiresLogin, tables.show);
+  app.get('/tables/:tableName', tables.show);
   app.get('/tables/:tableName/edit', tableAuth, tables.edit);
   app.put('/tables/:tableName', tableAuth, tables.update);
   app.get('/tables/:tableName/play', auth.requiresLogin, tables.play);

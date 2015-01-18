@@ -130,8 +130,8 @@ exports.show = function (req, res) {
     }, function (err) {
         if (err) {
             console.log(err);
-            req.flash('error', 'Could not join table!');
-            return res.redirect('/tables');
+            req.flash('warning', 'Could not join table! Please register');
+            // return res.redirect('/tables');
         }
 
         Table.load(table.title, function (err, table) {
