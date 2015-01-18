@@ -24,8 +24,11 @@
       {% for piece in pieces %}
         {% include 'piece.html' %}
       {% endfor %}
+      {% include 'create_piece.html' %}
 
       {% if (pages > 1) %}
+        <div class="clearfix"></div>
+        
         <ul class="pagination">
           {% autoescape false %}
             {{ createPagination(pages, page) }}
@@ -37,9 +40,9 @@
       <h4 class="muted">
         No gaming pieces found.&nbsp;
       </h4>
+      {% include 'create_piece.html' %}
     {% endif %}
     
-    {% include 'create_piece.html' %}
 
   
 

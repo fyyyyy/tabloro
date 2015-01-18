@@ -151,6 +151,8 @@
             {% endfor %}
 
             {% if (pages > 1) %}
+              <div class="clearfix"></div>
+              
               <ul class="pagination">
                 {% autoescape false %}
                   {{ createPagination(pages, page) }}

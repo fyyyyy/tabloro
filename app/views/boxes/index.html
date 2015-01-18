@@ -16,7 +16,7 @@
         </a>
       {% endif %}
       <a class="btn btn-info" href="http://www.instructables.com/id/How-to-make-your-board-card-games-playable-in-the-/" target="_blank" >Show the Instructable Guide</a>
-      
+
     </div>
 
     {% if (boxes.length) %}
@@ -24,7 +24,12 @@
         {% include 'box.html' %}
       {% endfor %}
 
+      {% if !pick %}
+        {% include 'create_box.html' %}
+      {% endif %}
+      
       {% if (pages > 1) %}
+        <div class="clearfix"></div>
         <ul class="pagination">
           {% autoescape false %}
             {{ createPagination(pages, page) }}
@@ -36,11 +41,9 @@
       <h4 class="muted">
         No game boxes found.&nbsp;
       </h4>
-    {% endif %}
-
-    {% if !pick %}
       {% include 'create_box.html' %}
     {% endif %}
+
 
   
 
