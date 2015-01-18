@@ -1,0 +1,38 @@
+{% extends '../layouts/default.html' %}
+
+{% block main %}
+    <h1>{{ title }}</h1>
+{% endblock %}
+
+{% block content %}
+
+  <div class="spacer"></div>
+
+  <div class="row">
+    {% if (users.length) %}
+      {% for user in users %}
+        {% include 'user.html' %}
+      {% endfor %}
+
+      {% if (pages > 1) %}
+        <div class="clearfix"></div>
+        <center>
+          <ul class="pagination">
+            {% autoescape false %}
+              {{ createPagination(pages, page) }}
+            {% endautoescape %}
+          </ul>
+        </center>
+      {% endif %}
+    {% else %}
+      <h4 class="muted">
+        No users.&nbsp;
+      </h4>
+    {% endif %}
+  </div>
+
+
+  <div class="clearfix"></div>
+  <div class="about"></div>
+
+{% endblock %}

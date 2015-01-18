@@ -14,6 +14,20 @@ exports.requiresLogin = function (req, res, next) {
 
 
 /*
+ *  Admin authorization routing middleware
+ */
+
+exports.admin = {
+  hasAuthorization: function (req, res, next) {
+    if (!res.locals.isAdmin) {
+      return res.redirect('/');
+    }
+    next();
+  }
+};
+
+
+/*
  *  User authorization routing middleware
  */
 

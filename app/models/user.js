@@ -192,6 +192,26 @@ UserSchema.statics = {
     this.findOne(options.criteria)
       .select(options.select)
       .exec(cb);
+  },
+
+
+    /**
+   * List articles
+   *
+   * @param {Object} options
+   * @param {Function} cb
+   * @api private
+   */
+
+  list: function (options, cb) {
+    var criteria = options.criteria || {};
+
+    this.find(criteria)
+      // .populate('user', 'name username')
+      .sort({'createdAt': -1}) // sort by date
+      .limit(options.perPage)
+      .skip(options.perPage * options.page)
+      .exec(cb);
   }
 };
 

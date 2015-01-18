@@ -4,6 +4,7 @@
 var UI = {};
 
 UI.lines = [];
+UI.timeout = null;
 
 UI.init = function () {
 
@@ -27,7 +28,7 @@ UI.init = function () {
         fill: '#ccc'
     });
     UI.messageText.align = 'right';
-    UI.messageText.alpha = 0.5;
+    UI.messageText.alpha = 0.7;
 
     // UI.graphics = game.add.graphics(0, 0);
     // UI.graphics.lineStyle(5, 0x888888, 1);
@@ -71,7 +72,7 @@ UI.handCursor = function (button) {
 };
 
 UI.message = function () {
-    UI.messageText.alpha = 0.5;
+    UI.messageText.alpha = 0.7;
     var text = R.join(' ', slice(arguments));
     text = text.match(/.{1,30}/g); // split string every 30 characters
 
@@ -82,11 +83,12 @@ UI.message = function () {
     }
 
     UI.messageText.setText('-> ' + R.join('\n')(UI.lines) + '\n...');
-    setTimeout(function() {
+    clearTimeout(UI.timeout);
+    UI.timeout = setTimeout(function() {
         game.add.tween(UI.messageText).to({
             alpha: 0
         }, 2000, Phaser.Easing.Linear.None, true);
-    }, 4000);
+    }, 10000);
 };
 
 UI.setNames = function (names) {

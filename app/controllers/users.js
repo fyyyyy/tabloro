@@ -25,6 +25,32 @@ exports.load = function (req, res, next, id) {
   });
 };
 
+
+/**
+ * List
+ */
+
+exports.index = function (req, res){
+  var page = (req.param('page') > 0 ? req.param('page') : 1) - 1;
+  var perPage = 30;
+  var options = {
+    perPage: perPage,
+    page: page
+  };
+
+  User.list(options, function (err, users) {
+    if (err) return res.render('500');
+    User.count().exec(function (err, count) {
+      res.render('users/index', {
+        title: 'Users',
+        users: users,
+        page: page + 1,
+        pages: Math.ceil(count / perPage)
+      });
+    });
+  });
+};
+
 /**
  * Create user
  */

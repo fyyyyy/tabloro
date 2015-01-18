@@ -1,0 +1,33 @@
+<div class="col-md-2">
+  <div class="panel panel-default" style="height: 160px;">
+    <div class="panel-body">
+      
+      
+<!--       {% if (!user.isNew && user.image && user.image.files && user.image.files.length) %}
+        <img src="{{ user.image.cdnUri + '/mini_' + user.image.files[0] }}" alt=""/>
+      {% endif %} -->
+      
+      <p>
+        <a href="{{ '/users/' + user._id }}" title="{{ user.name }}">
+        {{ user.username }}
+        </a>
+        <img src={{"/img/cursors/" + (user.selected_cursor || 1) + ".png"}} width="32px;"></img>
+      </p>
+      
+      {% if user.skype %}
+      <p>
+        <i class="fa fa-skype"></i> Skype:
+          <a class="skype btn btn-success btn-xs" href="skype:{{ user.skype }}?call"><i class="fa fa-phone"></i>&nbsp; Call {{ user.skype }}</a></b>
+      </p>
+      {% endif %}
+      
+      <p>
+        <i class="fa fa-envelope"></i>
+        <a href="mailto:{{user.email}}">{{ user.email }}</a>
+      </p>
+      
+      <span class="muted">{{ user.createdAt.toISOString()|date('M d, Y  h:i a') }}</span>
+
+    </div>
+  </div>
+</div>
