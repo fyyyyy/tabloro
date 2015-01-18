@@ -15,9 +15,14 @@
 
       {# Opengraph tags #}
       <meta property="fb:app_id" content="">
-      <meta property="og:title" content="tabloro">
-      <meta property="og:description" content="Play ANY board & card game online. Upload your own game. Invite friends &amp family, save and resume any time.">
-      <meta property="og:url" content="http://www.tabloro.com">
+      <meta property="og:title" content="tabloro.com - play any board game in the browser.">
+      {% if table %}
+        <meta property="og:description" content="Lets play '{{table.box.title}}' on tabloro.com">
+        <meta property="og:url" content="http://www.tabloro.com/tables/{{table.title}}">
+      {% else %}
+        <meta property="og:description" content="Play ANY board & card game online. Upload your own game. Invite friends &amp family, save and resume any time.">
+        <meta property="og:url" content="http://www.tabloro.com">
+      {% endif %}
       <meta property="og:site_name" content="Tabloro.com Your game table in the browser.">
       <meta property="fb:admins" content="">
       
