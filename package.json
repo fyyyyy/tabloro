@@ -1,6 +1,6 @@
 {
   "name": "Tabloro",
-  "description": "A demo app illustrating the usage of express, mongoose, passportjs, swig and other modules in nodejs",
+  "description": "Tabloro. Play ANY board & card game online. Upload your own game. Invite friends &amp family, save and resume any time.",
   "keywords": [
     "express",
     "mongoose",

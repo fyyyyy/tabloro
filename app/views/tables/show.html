@@ -25,7 +25,9 @@
                         <img src="/img/cursors/{{user.cursor}}.png"/>
                         {{ user.name }}
                         &nbsp;
-                        <a class="btn btn-success" href="skype:{{ user.skype }}?call"> <i class="fa fa-phone"></i> call with <i class="fa fa-skype">kype</i></a>
+                        {% if (user.skype) %}
+                          <a class="btn btn-success" href="skype:{{ user.skype }}?call"> <i class="fa fa-phone"></i> call with <i class="fa fa-skype">kype</i></a>
+                        {% endif %}
                       </li>
                   {% endfor %}
               {% endif %}
