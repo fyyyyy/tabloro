@@ -22,6 +22,7 @@ Controls.add = function () {
     Controls.stackControls = Controls.controls.create(100, 0, 'stack');
     Controls.shuffleControls = Controls.controls.create(150, 0, 'shuffle');
     Controls.handControls = Controls.controls.create(150, 0, 'hand');
+    Controls.lockControls = Controls.controls.create(150, 0, 'lock');
     
     Controls.rotationControls.scale.set(0.7);
     
@@ -30,6 +31,7 @@ Controls.add = function () {
     T.centerAnchor(Controls.stackControls);
     T.centerAnchor(Controls.shuffleControls);
     T.centerAnchor(Controls.handControls);
+    T.centerAnchor(Controls.lockControls);
     
     Controls.rotationControls.inputEnabled = true;
     Controls.rotationControls.input.useHandCursor = true;
@@ -50,12 +52,17 @@ Controls.add = function () {
     Controls.handControls.inputEnabled = true;
     Controls.handControls.input.useHandCursor = true;
     Controls.handControls.events.onInputUp.add(T.onTake);
+
+    Controls.lockControls.inputEnabled = true;
+    Controls.lockControls.input.useHandCursor = true;
+    Controls.lockControls.events.onInputUp.add(T.onLock);
     
     Cursor.reset(Controls.rotationControls);
     Cursor.reset(Controls.flipControls);
     Cursor.reset(Controls.stackControls);
     Cursor.reset(Controls.shuffleControls);
     Cursor.reset(Controls.handControls);
+    Cursor.reset(Controls.lockControls);
 
     Controls.graphics = game.add.graphics(0, 0);
     Controls.graphics.lineStyle(10, 0xFFFFFF, 0.8);
@@ -89,6 +96,13 @@ Controls.show = function (tile) {
     Controls.position(Controls.flipControls, tile.flipable);
     Controls.position(Controls.rotationControls, tile.rotateable && !Controls.selected.length);
     Controls.position(Controls.handControls, tile.handable && !Controls.selected.length);
+    console.log('lockable check');
+    Controls.position(Controls.lockControls, tile.lockable && !Controls.selected.length);
+    if (tile.input.draggable) {
+        Controls.lockControls.tint = 0xFFFFFF;
+    } else {
+        Controls.lockControls.tint = 0xFF3366;
+    }
     // multi selection
     Controls.position(Controls.stackControls, Controls.selected.length && !tile.isDice);
     Controls.position(Controls.shuffleControls, Controls.selected.length && !tile.isDice);
@@ -168,7 +182,7 @@ Controls.findSelectedTiles = function (rect) {
     R.mapObj(function (group) {
         R.forEach(function (child) {
            var found = Utils.pointIntersection(child, rect);
-           if (found) {
+           if (found && child.input.draggable) {
                 T.select(child);
                 selected.push(child);
            } else {

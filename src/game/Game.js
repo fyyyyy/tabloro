@@ -6,7 +6,7 @@ var G = {};
 G._groups = {};
 
 G.groups = {
-    add: function (groupName, index, rotateBy, flipable, handable) {
+    add: function (groupName, index, rotateBy, flipable, handable, lockable) {
         index = index || 0;
         rotateBy = rotateBy || 0;
 
@@ -15,6 +15,7 @@ G.groups = {
         G._groups[groupName].rotateBy = rotateBy;
         G._groups[groupName].flipable = flipable;
         G._groups[groupName].handable = handable;
+        G._groups[groupName].lockable = lockable;
     },
     get: function (groupName) {
         return G._groups[groupName];
@@ -59,11 +60,13 @@ G.updatePositions = [];
 
 G.update = function () {
     R.forEach(function (obj) {
-        if (obj.follower.relativePosition) {
-            Utils.alignRelativePosition(obj.follower, obj.target);
-            return;
+        if (obj.follower.input.draggable) {
+            if (obj.follower.relativePosition) {
+                Utils.alignRelativePosition(obj.follower, obj.target);
+                return;
+            }
+            Utils.alignPosition(obj.follower, obj.target);
         }
-        Utils.alignPosition(obj.follower, obj.target);
     })(G.updatePositions);
 };
 

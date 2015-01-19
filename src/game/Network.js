@@ -109,6 +109,12 @@ Network.setup = function () {
 
         UI.message('Positioning tile', tileId);
 
+        if (newPosition.lock) {
+            T.lock(tile);
+        } else {
+            T.unlock(tile);
+        }
+
         if (!newPosition.hand) { return; }
         
         if (newPosition.hand === playerName) {
@@ -171,6 +177,24 @@ Network.setup = function () {
         UI.message(client.name, 'plays tile', tile.id, 'from hand');
     };
 
+
+    Network.client.exports.lock = function (client, tileId) {
+        console.log(client.name + ' locks tile ', tileId);
+        
+        var tile = G.findTile(tileId);
+        T.lock(tile);
+        
+        UI.message(client.name, 'locks tile', tile.id);
+    };
+
+    Network.client.exports.unlock = function (client, tileId) {
+        console.log(client.name + ' unlocks tile ', tileId);
+        
+        var tile = G.findTile(tileId);
+        T.unlock(tile);
+        
+        UI.message(client.name, 'unlocks tile', tile.id);
+    };
     /******************* STACKS ******************/
 
     Network.client.exports.dragStack = function (client, stackId) {

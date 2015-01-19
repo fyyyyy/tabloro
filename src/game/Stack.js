@@ -80,7 +80,6 @@ S.onDropStack = function (stack) {
 
 S.onShuffle = function () {
     console.log('onShuffle');
-    
     Network.server.shuffleStack(T.getSelectedIds());
 
 };
@@ -194,7 +193,7 @@ S.calculateCardPos = function (position, index, offsetX) {
 
 
 S.moveRelativeTo = R.curry(function (target, tile) {
-    if (!tile.relativePosition || target === tile) {
+    if (!tile.relativePosition || !tile.input.draggable || target === tile) {
         return tile;
     }
 

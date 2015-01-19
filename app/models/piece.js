@@ -74,6 +74,10 @@ var PieceSchema = new Schema({
     type: Boolean,
     default: false
   },
+  lockable: {
+    type: Boolean,
+    default: false
+  },
   handable: {
     type: Boolean,
     default: false

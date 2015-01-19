@@ -34,6 +34,37 @@ T.stackable = function (tile) {
     return tile;
 };
 
+T.lockable = function (lockable) {
+    return function (tile) {
+        tile.lockable = lockable;
+        return tile;
+    };
+};
+
+T.onLock = function () {
+    var tile = Controls.target;
+
+    console.log('lock', tile);
+    Network.server.tileLock(tile.id);
+    return tile;
+};
+
+T.lock = function ( tile) {
+    if (tile.lockable) {
+        Controls.lockControls.tint = 0xFF3366;
+        tile.input.disableDrag();
+        tile.input.useHandCursor = false;
+    }
+    return tile;
+};
+
+T.unlock = function ( tile) {
+    Controls.lockControls.tint = 0xFFFFFF;
+    tile.input.enableDrag(false, true);
+    tile.input.useHandCursor = true;
+    return tile;
+};
+
 T.scale = R.curry(function (scale, tile) {
     tile.scale.set(scale);
     return tile;
@@ -51,10 +82,8 @@ T.resetRotation = function (tile) {
 
 
 T.rotateable = function (rotateable) {
-    if (!rotateable) { return R.I;}
     return function (tile) {
-        if (!tile.parent.rotateBy) { return R.I;}
-        tile.rotateable = true;
+        tile.rotateable = (rotateable && tile.parent.rotateBy) || false;
         tile.events.onInputDown.add(T.onDragControllable);
         tile.events.onInputUp.add(T.onStopDragControllable);
         return tile;

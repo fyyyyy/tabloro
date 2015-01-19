@@ -70,6 +70,13 @@
           </li>
         {% endif %}
 
+
+        {% if (piece.lockable) %}
+          <li class="list-group-item list-group-item-default">Can be locked
+            <i class="fa fa-lock pull-right"></i>
+          </li>
+        {% endif %}
+
         {% if (piece.atlasjson) %}
           <li class="list-group-item list-group-item-default">
             Json Atlas

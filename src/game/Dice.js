@@ -49,16 +49,6 @@ Dice.onSpinReleased = function onSpinReleased(tile) {
     
     console.log('selectedDice', selectedDice);
 
-    // if (mode === 'test') {
-    //     var delays = R.map(function () {
-    //         return Math.floor(300 + 567 * Math.random());
-    //     })(selectedDice);
-
-    //     var values = R.map(function () {
-    //         return Math.floor(Math.random() * tile.parent.numSides);
-    //     })(selectedDice);
-    //     Dice.spin(selectedDice, delays, values);
-    // } else {
     Network.server.spin(selectedDice, tile.parent.numSides);
 };
 
