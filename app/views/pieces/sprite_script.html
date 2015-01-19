@@ -6,6 +6,7 @@
     var piece = JSON.parse('{{JSON.stringify(piece)}}');
     var editCount = JSON.parse('{{editCount}}' || 'false');
     var showCount = JSON.parse('{{showCount}}' || 'false');
+    var owner = JSON.parse('{{owner}}' || 'false');
     var pieceCounts;
     if (editCount || showCount) {
       pieceCounts = JSON.parse('[{{box.counts[piece.id] || ""}}]');
@@ -57,6 +58,10 @@
               '</div>' +
             '</span>';
         } else if (showCount) {
+          var counts = (isNaN(pieceCounts[i]) ? 1 : pieceCounts[i]) + '<i class="fa fa-times"></i>';
+          var link = owner ? '<a href="/boxes/{{box.id}}/count#tiles-' + piece._id  + '" class="btn btn-primary btn-xs">' + counts + '</a>'
+                 : 
+                 '<span class="text-primary">' + counts + '</span>';
           numberDom = (piece.isDice  && i > 0) ?
             '<span class="piece-number">' +
               '<a href="#" class="btn">' +
@@ -64,10 +69,7 @@
             '</span>'
             :    
             '<span class="piece-number">' +
-              '<a href="/boxes/{{box.id}}/count#tiles-' + piece._id + '" class="btn btn-primary btn-xs">' +
-                 (isNaN(pieceCounts[i]) ? 1 : pieceCounts[i]) +
-                '<i class="fa fa-times"></i>' +
-              '</a>' +
+              link +
             '</span>';
         } else {
           numberDom =       

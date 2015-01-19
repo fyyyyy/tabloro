@@ -217,7 +217,7 @@ exports.show = function (req, res) {
     var globalPiecesCount;
 
     var page = (req.param('page') > 0 ? req.param('page') : 1) - 1;
-    var perPage = 30;
+    var perPage = 9;
     var options = {
         perPage: perPage,
         page: page

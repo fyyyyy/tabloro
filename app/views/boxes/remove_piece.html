@@ -46,7 +46,8 @@
     {% endif %}
   {% endif %}
 
-  {% set showCount = isOwner %}
-  {% include '../pieces/sprite_script.html' with showCount %}
+  {% set showCount = true %}
+  {% set owner = isOwner %}
+  {% include '../pieces/sprite_script.html' with showCount; owner only %}
 {% endblock %}
 

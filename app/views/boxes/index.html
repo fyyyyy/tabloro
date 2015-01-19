@@ -21,7 +21,7 @@
 
     {% if (boxes.length) %}
       {% for box in boxes %}
-        {% if (box.user.id === req.user.id || !box.isPrivate) %}
+        {% if (box.user.id === req.user.id || !box.isPrivate || isAdmin) %}
           {% include 'box.html' %}
         {% endif %}
       {% endfor %}
