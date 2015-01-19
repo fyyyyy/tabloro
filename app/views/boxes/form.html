@@ -58,7 +58,7 @@
                 <div class="col-sm-9">
                   <div class="btn-group" data-toggle="buttons">
                     <label href="#" for="isPrivate2" class="btn btn-xs btn-default {% if (!box.isPrivate) %} active {% endif %}">public
-                      <input type="radio" id="isPrivate2" name="isPrivate" value="0" checked />
+                      <input type="radio" id="isPrivate2" name="isPrivate" value="0" />
                     </label>
                     <label href="#" for="isPrivate1" class="btn btn-xs btn-default {% if (box.isPrivate) %} active {% endif %}" >private
                       <input type="radio" id="isPrivate1" name="isPrivate" value="1" />
@@ -84,19 +84,19 @@
               <label class="col-sm-3 control-label">Select Game type</label>
               <div class="col-sm-9"> 
                 <div class="btn-group" data-toggle="buttons">
-                  <label href="#" for="gameType1" class="btn btn-xs btn-default active" >Classic Game &lt; 1950
-                    <input type="radio" id="gameType1" name="gameType" value="Classic Game" checked />
+                  <label href="#" for="gameType1" class="btn btn-xs btn-default {% if (box.gameType === 'Classic Game') %} active {% endif %}" >Classic Game &lt; 1950
+                    <input type="radio" id="gameType1" name="gameType" value="Classic Game" />
                   </label>
-                  <label href="#" for="gameType2" class="btn btn-xs btn-default">Modern Game &gt; 1950
+                  <label href="#" for="gameType2" class="btn btn-xs btn-default {% if (box.gameType === 'Modern Game') %} active {% endif %}">Modern Game &gt; 1950
                     <input type="radio" id="gameType2" name="gameType" value="Modern Game" />
                   </label>
-                  <label href="#" for="gameType3" class="btn btn-xs btn-default">Card Game
+                  <label href="#" for="gameType3" class="btn btn-xs btn-default {% if (box.gameType === 'Card Game') %} active {% endif %}">Card Game
                     <input type="radio" id="gameType3" name="gameType" value="Card Game" />
                   </label>
-                  <label href="#" for="gameType4" class="btn btn-xs btn-default">Dice Game
+                  <label href="#" for="gameType4" class="btn btn-xs btn-default {% if (box.gameType === 'Dice Game') %} active {% endif %}">Dice Game
                     <input type="radio" id="gameType4" name="gameType" value="Dice Game" />
                   </label>
-                  <label href="#" for="gameType5" class="btn btn-xs btn-default">Selfmade Game
+                  <label href="#" for="gameType5" class="btn btn-xs btn-default {% if (box.gameType === 'Selfmade Game') %} active {% endif %}">Selfmade Game
                     <input type="radio" id="gameType5" name="gameType" value="Selfmade Game" />
                   </label>
                 </div>
