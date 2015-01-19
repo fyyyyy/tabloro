@@ -45,13 +45,7 @@
     <body style="cursor : url(/img/cursors/{{user.selected_cursor}}.png), auto;">
         
         <!-- Loading message -->
-        <div id="please_wait" style="position: absolute; top: 40%; left:40%">
-            <center style="color: #888;">
-            <h1>Please wait while loading '{{table.title}}'. Don't switch tabs...</h1>
-            <p>Please do <b>not</b> switch tabs during loading or your game wont start properly. This is an <b>issue</b> we have to fix.</p>
-            <p>Loading may take 0-3 <b>minutes</b> depending on your connection.</p>
-            </center>
-        </div>
+        {% include '../includes/please_wait.html' %}
         
         <!-- Video area -->
         <div id="video-container" style="display:none;">

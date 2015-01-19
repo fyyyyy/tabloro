@@ -80,6 +80,7 @@ S.onDropStack = function (stack) {
 
 S.onShuffle = function () {
     console.log('onShuffle');
+    
     Network.server.shuffleStack(T.getSelectedIds());
 
 };

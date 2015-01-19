@@ -11,6 +11,7 @@
         <img src={{"/img/cursors/" + (user.selected_cursor || 1) + ".png"}}></img>
         {{user.username|title}}'s profile
       </h3>
+      Your profile is <strong>private</strong>
       <p>Registered: <b>{{ user.createdAt.toISOString()|date('M d, Y') }}</b></p>
       
         <p>

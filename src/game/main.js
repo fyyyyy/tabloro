@@ -88,15 +88,19 @@ function setupStage() {
 
 
 function setupTable() {
+    var backgroundInput = game.add.image(0,0);
+    backgroundInput.opacity = 0.0;
+    backgroundInput.width = World.width;
+    backgroundInput.height = World.height;
+    backgroundInput.inputEnabled = true;
+    backgroundInput.interactive = true;
+    backgroundInput.buttonMode = true;
+    backgroundInput.events.onInputDown.add(Controls.onStartSelection);
+    backgroundInput.events.onInputUp.add(Controls.onStopSelection);
+
+
     table = game.add.tileSprite(0, 0, World.width, World.height, 'table');
-    // table.scale.set(1.5);
-    table.inputEnabled = true;
-    table.interactive = true;
-    table.buttonMode = true;
-    table.events.onInputDown.add(Controls.onStartSelection);
-    table.events.onInputUp.add(Controls.onStopSelection);
-
-
+    // table.scale.set(0.5);
     // vignette.scale.set(6);
     // vignette.fixedToCamera = true;
 }

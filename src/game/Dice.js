@@ -24,33 +24,47 @@ Dice.add = function (assetName, group, numSides) {
     return dice;
 };
 
-
 Dice.onSpinClicked = function onSpinClicked(tile) {
     console.log('onSpinClicked', tile);
-    var diceInGroup = R.compose(
+    tile.dragTimeout = setTimeout(function() {
+        tile.wasDragged = true;
+    }, 300);
+};
+
+Dice.onSpinReleased = function onSpinReleased(tile) {
+    console.log('onSpinReleased', tile);
+
+    if (tile.wasDragged) {
+        console.log('dice was dragged');
+        delete tile.wasDragged;
+        return;
+    }
+    clearTimeout(tile.dragTimeout);
+
+
+    var selectedDice = R.compose(
         R.pluck('id'),
         R.filter(R.propEq('isDice', true))
     )(Controls.getSelected(tile));
     
-    console.log('diceInGroup', diceInGroup);
+    console.log('selectedDice', selectedDice);
 
-    if (mode === 'test') {
-        var delays = R.map(function () {
-            return Math.floor(300 + 567 * Math.random());
-        })(diceInGroup);
+    // if (mode === 'test') {
+    //     var delays = R.map(function () {
+    //         return Math.floor(300 + 567 * Math.random());
+    //     })(selectedDice);
 
-        var values = R.map(function () {
-            return Math.floor(Math.random() * tile.parent.numSides);
-        })(diceInGroup);
-        Dice.spin(diceInGroup, delays, values);
-    } else {
-        Network.server.spin(diceInGroup, tile.parent.numSides);
-    }
+    //     var values = R.map(function () {
+    //         return Math.floor(Math.random() * tile.parent.numSides);
+    //     })(selectedDice);
+    //     Dice.spin(selectedDice, delays, values);
+    // } else {
+    Network.server.spin(selectedDice, tile.parent.numSides);
 };
 
 
-Dice.spin = function spin(diceInGroup, delays, values) {
-    console.log('diceInGroup', diceInGroup);
+Dice.spin = function spin(selectedDice, delays, values) {
+    console.log('selectedDice', selectedDice);
     R.forEach.idx(function (diceId, index) {
         var dice = G.findTile(diceId),
             delay = delays[index],
@@ -67,12 +81,13 @@ Dice.spin = function spin(diceInGroup, delays, values) {
         game.add.tween(dice).to({
             rotation: delay / 20
         }, delay, Phaser.Easing.Cubic.Out, true, 0, false);
-    })(diceInGroup);
+    })(selectedDice);
 };
 
 
 
 Dice.spinnable = function (tile) {
     tile.anchor.set(0.4);
-    tile.events.onInputUp.add(Dice.onSpinClicked, this);
+    tile.events.onInputDown.add(Dice.onSpinClicked, this);
+    tile.events.onInputUp.add(Dice.onSpinReleased, this);
 };
