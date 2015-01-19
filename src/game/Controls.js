@@ -90,8 +90,8 @@ Controls.show = function (tile) {
     Controls.position(Controls.rotationControls, tile.rotateable && !Controls.selected.length);
     Controls.position(Controls.handControls, tile.handable && !Controls.selected.length);
     // multi selection
-    Controls.position(Controls.stackControls, Controls.selected.length);
-    Controls.position(Controls.shuffleControls, Controls.selected.length);
+    Controls.position(Controls.stackControls, Controls.selected.length && !tile.isDice);
+    Controls.position(Controls.shuffleControls, Controls.selected.length && !tile.isDice);
 };
 
 Controls.position = function (controlButton, condition) {

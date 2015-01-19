@@ -13,12 +13,13 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           <h2>{{table.title | title}}</h2>
-
-          <iframe height="30px;" src="//www.facebook.com/plugins/share_button.php?href=http%3A%2F%2Fwww.tabloro.com%2Ftables%2F{{table.title}}%2F&amp;layout=button_count" scrolling="no" frameborder="0" style="border:none; overflow:hidden;" allowTransparency="true"></iframe>
-          <p>Players at this table</p>
+          <h4>Share this table to invite players
+            <iframe height="20px;" src="//www.facebook.com/plugins/share_button.php?href=http%3A%2F%2Fwww.tabloro.com%2Ftables%2F{{table.title}}%2F&amp;layout=button_count" scrolling="no" frameborder="0" style="border:none; overflow:hidden;" allowTransparency="true"></iframe>
+          </h4>
         </div>
         <div class="panel-body">
           <ul class="list-group">
+            <p>Players at this table</p>
               {% if (players.length) %}
                   {% for user in players %}
                       <li class="list-group-item">

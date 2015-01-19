@@ -46,9 +46,9 @@ exports.index = function (req, res) {
         perPage: perPage,
         page: page
     };
-    options.criteria = res.locals.isAdmin ? {} : {
-        isPrivate: false
-    };
+    // options.criteria = res.locals.isAdmin ? {} : {
+    //     isPrivate: false
+    // };
 
     Setup.list(options, function (err, setups) {
         if (err) return res.render('500');
@@ -96,6 +96,7 @@ exports.create = function (req, res) {
     setup.tiles = new TILE_DEFAULTS();
     setup.counts = box.counts;
     setup.pieces = box.pieces;
+    setup.isPrivate = box.isPrivate;
 
     setup.save(function (err) {
         if (!err) {
@@ -119,30 +120,20 @@ exports.create = function (req, res) {
 
 exports.show = function (req, res) {
     var setup = req.setup;
-    setup.update({
-        $addToSet: {
-            users: req.user
-        }
-    }, function (err) {
-        if (err) {
-            console.log(err);
-            req.flash('error', 'Could not join setup!');
-            return res.redirect('/setups');
-        }
 
-        Setup.load(setup.title, function (err, setup) {
-            if (err) return next(err);
-            if (!setup) return next(new Error('not found'));
-            req.setup = setup;
-            res.render('setups/show', {
-                title: 'Game Setup',
-                setup: setup,
-                box: req.box,
-                isOwner: setup.user.id === req.user.id
-            });
+
+    Setup.load(setup.title, function (err, setup) {
+        if (err) return next(err);
+        if (!setup) return next(new Error('not found'));
+        req.setup = setup;
+        res.render('setups/show', {
+            title: 'Game Setup',
+            setup: setup,
+            box: req.box,
+            isOwner: setup.user.id === req.user.id
         });
-
     });
+
 };
 
 

@@ -77,6 +77,14 @@ exports.piece = {
       }
       return res.redirect('/pieces/');
     }
+  },
+  canShow: function (req, res, next) {
+    if ( !req.piece.isPrivate || (req.piece.user && req.piece.user.id === req.user.id) || res.locals.isAdmin) {
+      next();
+    } else {
+      req.flash('info', 'You are not authorized');
+      return res.redirect('/pieces/');
+    }
   }
 };
 
@@ -97,6 +105,14 @@ exports.box = {
       }
       return res.redirect('/boxes/');
     }
+  },
+  canShow: function (req, res, next) {
+    if ( !req.box.isPrivate || (req.box.user && req.box.user.id === req.user.id) || res.locals.isAdmin) {
+      next();
+    } else {
+      req.flash('info', 'You are not authorized');
+      return res.redirect('/boxes/');
+    }
   }
 };
 
@@ -115,6 +131,14 @@ exports.setup = {
       if (req.setup) {
         return res.redirect('/boxes/' + req.box.id + '/setups/' + req.setup.id);
       }
+      return res.redirect('/setups/');
+    }
+  },
+  canShow: function (req, res, next) {
+    if ( !req.setup.isPrivate || (req.setup.user && req.setup.user.id === req.user.id) || res.locals.isAdmin) {
+      next();
+    } else {
+      req.flash('info', 'You are not authorized');
       return res.redirect('/setups/');
     }
   }

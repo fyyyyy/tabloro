@@ -14,15 +14,15 @@
           <i class="fa fa-scissors"></i>
           Add your own gaming pieces
         </a>
-
-
       {% endif %}
-      <a class="btn btn-info" href="http://www.instructables.com/id/How-to-make-your-board-card-games-playable-in-the-/" target="_blank" >Show the Instructable Guide</a>
+      <a class="btn btn-info" href="http://www.instructables.com/id/How-to-make-your-board-card-games-playable-in-the-/" target="_blank" ><i class="fa fa-info"></i> Show the Instructable Guide</a>
     </div>
 
     {% if (pieces.length) %}
       {% for piece in pieces %}
-        {% include 'piece.html' %}
+        {% if (piece.user.id === req.user.id || !piece.isPrivate) %}
+          {% include 'piece.html' %}
+        {% endif %}
       {% endfor %}
       {% include 'create_piece.html' %}
 

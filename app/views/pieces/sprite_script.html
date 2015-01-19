@@ -4,8 +4,8 @@
     /*globals $, R, Image, document*/
 
     var piece = JSON.parse('{{JSON.stringify(piece)}}');
-    var editCount = '{{editCount}}';
-    var showCount = '{{showCount}}';
+    var editCount = JSON.parse('{{editCount}}' || 'false');
+    var showCount = JSON.parse('{{showCount}}' || 'false');
     var pieceCounts;
     if (editCount || showCount) {
       pieceCounts = JSON.parse('[{{box.counts[piece.id] || ""}}]');

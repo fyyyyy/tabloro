@@ -28,6 +28,7 @@
 
           <div class="col-sm-9 col-sm-offset-3">
             <h2>New Game Setup for Box: {{box.title}}</h2>
+            This setup will be <strong> {% if (box.isPrivate) %} Private {% else %} Public {% endif %} </strong> as it belongs to the box '{{ box.title }}' which is  {% if (box.isPrivate) %} private {% else %} public {% endif %} 
           </div>
 
           <div class="form-group required">

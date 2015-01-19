@@ -38,9 +38,9 @@ exports.index = function (req, res) {
         perPage: perPage,
         page: page
     };
-    options.criteria = res.locals.isAdmin ? {} : {
-        isPrivate: false
-    };
+    // options.criteria = (res.locals.isAdmin) ? {} : {
+    //     isPrivate: false
+    // };
 
     Piece.list(options, function (err, pieces) {
         if (err) return res.render('500');

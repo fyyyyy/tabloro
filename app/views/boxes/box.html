@@ -22,8 +22,11 @@
 
       
 {% block footer %}
-  <a href="{% if (req.isAuthenticated()) %}boxes/{{ box.id }}{% else %}/login{%endif%}" class="btn btn-primary btn-block btn-square">
+  <a href="{% if (req.isAuthenticated()) %}/boxes/{{ box.id }}{% else %}/login{%endif%}" class="btn {% if (box.isPrivate) %}btn-warning{% else %}btn-primary{% endif %} btn-block btn-square">
     <i class="fa fa-cube pull-left">box</i>
+    {% if (box.isPrivate) %}
+      <i class="fa fa-key"></i>
+    {% endif %}
     <strong>{% if (pick) %}Pick {% endif %}{{box.title | title}}</strong>
   </a>
 {% endblock %}

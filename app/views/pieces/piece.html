@@ -21,10 +21,14 @@
 
       
 {% block footer %}
-  <a href="{% if (req.isAuthenticated()) %}pieces/{{ piece.id }}{% else %}/login{%endif%}" class="btn btn-primary btn-block btn-square">
+  <a href="{% if (req.isAuthenticated()) %}/pieces/{{ piece.id }}{% else %}/login{%endif%}" class="btn {% if (piece.isPrivate) %}btn-warning{% else %}btn-primary{% endif %} btn-block btn-square">
+    
     <span class="pull-left">
+      {% include 'type.html' %}
+      {% if (piece.isPrivate) %}
+        <i class="fa fa-key"></i>
+      {% endif %}
 
-    {% include 'type.html' %}
     </span>
     <strong>{{piece.title | title}}</strong>
   </a>

@@ -45,7 +45,8 @@ exports.index = function (req, res){
         title: 'Users',
         users: users,
         page: page + 1,
-        pages: Math.ceil(count / perPage)
+        pages: Math.ceil(count / perPage),
+        count: count
       });
     });
   });

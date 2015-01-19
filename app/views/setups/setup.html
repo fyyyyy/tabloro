@@ -37,8 +37,12 @@
 
       
 {% block footer %}
-  <a href="{% if (req.isAuthenticated()) %}/boxes/{{setup.box.id}}/setups/{{ setup.title }}{% else %}/login{%endif%}" class="btn btn-primary btn-block btn-square">
-  <i class="fa fa-sitemap pull-left"><span class="small"> setup</span></i>
+  <a href="{% if (req.isAuthenticated()) %}/boxes/{{setup.box.id}}/setups/{{ setup.title }}{% else %}/login{%endif%}" class="btn {% if setup.isPrivate %}btn-warning{% else %}btn-primary{% endif %} btn-block btn-square">
+  <i class="fa fa-sitemap pull-left"><span class="small"> setup</span>
+    {% if (setup.isPrivate) %}
+      <i class="fa fa-key"></i>
+    {% endif %}
+  </i>
     {% if pick %}pick{% endif %}
     
     <strong>{{setup.title | title}}</strong>

@@ -179,6 +179,7 @@ BoxSchema.statics = {
     var criteria = options.criteria || {};
 
     this.find(criteria)
+      .populate('user', 'name username')
       .sort({
         'createdAt': -1
       }) // sort by date

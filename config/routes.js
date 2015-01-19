@@ -25,8 +25,11 @@ var adminAuth = [auth.requiresLogin, auth.admin.hasAuthorization];
 var articleAuth = [auth.requiresLogin, auth.article.hasAuthorization];
 var tableAuth = [auth.requiresLogin, auth.table.hasAuthorization];
 var pieceAuth = [auth.requiresLogin, auth.piece.hasAuthorization];
+var pieceView = [auth.requiresLogin, auth.piece.canShow];
 var boxAuth = [auth.requiresLogin, auth.box.hasAuthorization];
+var boxView = [auth.requiresLogin, auth.box.canShow];
 var setupAuth = [auth.requiresLogin, auth.setup.hasAuthorization];
+var setupView = [auth.requiresLogin, auth.setup.canShow];
 var commentAuth = [auth.requiresLogin, auth.comment.hasAuthorization];
 var userAuth = [auth.requiresLogin, auth.user.hasAuthorization];
 
@@ -114,7 +117,7 @@ module.exports = function (app, passport) {
   app.get('/pieces', pieces.index);
   app.get('/pieces/new', auth.requiresLogin, pieces.new);
   app.post('/pieces', auth.requiresLogin, pieces.create);
-  app.get('/pieces/:pieceId', auth.requiresLogin, pieces.show);
+  app.get('/pieces/:pieceId', pieceView, pieces.show);
   app.get('/pieces/:pieceId/edit', pieceAuth, pieces.edit);
   app.put('/pieces/:pieceId', pieceAuth, pieces.update);
   app.delete('/pieces/:pieceId', pieceAuth, pieces.destroy);
@@ -124,7 +127,7 @@ module.exports = function (app, passport) {
   app.get('/boxes', boxes.index);
   app.get('/boxes/new', auth.requiresLogin, boxes.new);
   app.post('/boxes', auth.requiresLogin, boxes.create);
-  app.get('/boxes/:boxId', auth.requiresLogin, boxes.show);
+  app.get('/boxes/:boxId', boxView, boxes.show);
   app.get('/boxes/:boxId/test', auth.requiresLogin, boxes.test);
     // auth
     app.get('/boxes/:boxId/count', auth.requiresLogin, boxes.count);
@@ -141,7 +144,7 @@ module.exports = function (app, passport) {
   app.get('/setups', setups.index);
   app.get('/boxes/:boxId/setups/new', auth.requiresLogin, setups.new);
   app.post('/boxes/:boxId/setups', auth.requiresLogin, setups.create);
-  app.get('/boxes/:boxId/setups/:setupName', auth.requiresLogin, setups.show);
+  app.get('/boxes/:boxId/setups/:setupName', setupView, setups.show);
   app.get('/setups/:setupName', auth.requiresLogin, setups.show);
   app.get('/setups/:setupName/test', auth.requiresLogin, setups.test);
   app.delete('/setups/:setupName', setupAuth, setups.destroy);

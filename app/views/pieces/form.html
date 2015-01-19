@@ -27,9 +27,7 @@
           {% endif %}
 
 
-          <div class="col-sm-9 col-sm-offset-3">
-            <p class="bg-danger">Note: All uploaded pieces are <strong>public</strong> for now. We are working on the <strong>private</strong> upload.</p>
-          </div>
+
           <div class="form-group required">
             <label for="title" class="col-sm-3 control-label">Name of Gaming Piece(s)</label>
             <div class="col-sm-9">
@@ -77,12 +75,12 @@
                 <label class="col-sm-3 control-label">List in Public?</label>
                 <div class="col-sm-9">
                   <div class="btn-group" data-toggle="buttons">
-                    <label href="#" for="isPrivate2" class="btn btn-xs btn-default active">public
+                    <label href="#" for="isPrivate2" class="btn btn-xs btn-default {% if (!piece.isPrivate) %} active {% endif %}">public
                       <input type="radio" id="isPrivate2" name="isPrivate" value="0" checked />
                     </label>
-  <!--                   <label href="#" for="isPrivate1" class="btn btn-xs btn-default" >private
+                    <label href="#" for="isPrivate1" class="btn btn-xs btn-default {% if (piece.isPrivate) %} active {% endif %}" >private
                       <input type="radio" id="isPrivate1" name="isPrivate" value="1" />
-                    </label> -->
+                    </label>
                   </div>
                   <!-- <p class="help-block">Private rooms are not listed, and can only be found by sharing the link (or guessing the room name).</p> -->
                 </div>

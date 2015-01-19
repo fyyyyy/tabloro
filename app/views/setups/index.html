@@ -15,14 +15,16 @@
           <i class="fa fa-plus-circle"></i>
           Create a game setup
         </a>
+        <a class="btn btn-info" href="http://www.instructables.com/id/How-to-make-your-board-card-games-playable-in-the-/" target="_blank" ><i class="fa fa-info"></i> Show the Instructable Guide</a>
       {% endif %}
-      <a class="btn btn-info" href="http://www.instructables.com/id/How-to-make-your-board-card-games-playable-in-the-/" target="_blank" >Show the Instructable Guide</a>
       
     </div>
 
     {% if (setups.length) %}
       {% for setup in setups %}
-        {% include 'setup.html' %}
+        {% if (!setup.isPrivate || setup.user.id === req.user.id) %}
+          {% include 'setup.html' %}
+        {% endif %}
       {% endfor %}
 
       {% if (pages > 1) %}

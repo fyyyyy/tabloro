@@ -31,9 +31,13 @@
 
 
         {% if (piece.isPrivate) %}
-          <li class="list-group-item list-group-item-warning">Private</li>
+          <li class="list-group-item list-group-item-warning"><strong>Private</strong> 
+              <span class="pull-right">Can only be seen by you</span>
+          </li>
         {% else %}
-          <li class="list-group-item list-group-item-default">Public</li>
+          <li class="list-group-item list-group-item-success"><strong>Public</strong>
+              <span class="pull-right">Can be seen by anyone</span>
+          </li>
         {% endif %}
 
         {% if (piece.isDice) %}

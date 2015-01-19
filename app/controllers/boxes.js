@@ -39,9 +39,9 @@ exports.index = function (req, res) {
         perPage: perPage,
         page: page
     };
-    options.criteria = res.locals.isAdmin ? {} : {
-        isPrivate: false
-    };
+    // options.criteria = res.locals.isAdmin ? {} : {
+    //     isPrivate: false
+    // };
 
     Box.list(options, function (err, boxes) {
         if (err) return res.render('500');
@@ -222,9 +222,9 @@ exports.show = function (req, res) {
         perPage: perPage,
         page: page
     };
-    options.criteria = res.locals.isAdmin ? {} : {
-        isPrivate: false
-    };
+    // options.criteria = res.locals.isAdmin ? {} : {
+    //     isPrivate: false
+    // };
 
     Piece.list({ criteria: {'_id': {$in: box.pieces }}}, function (err, unsortedPieces) {
         var boxPieces = [];

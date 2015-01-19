@@ -7,6 +7,10 @@
     {% include '../pieces/type.html' %}
     {{piece.title | title}}
     <a href="/pieces/{{ piece.id }}" target="_blank" class="btn btn-default btn-xs btn-square nomargin pull-right">
+      {% if (piece.isPrivate) %}
+        <i class="fa fa-key"></i>
+      {% endif %}
+
       Click to show
     </a>
   </div>
@@ -19,7 +23,10 @@
   <input type="hidden" name="_csrf" value="{{ csrf_token }}">
   <input type="hidden" name="_method" value="PUT">
 
-  <button type="submit" class="btn btn-success btn-square btn-block">
+  <button type="submit" class="btn {% if (piece.isPrivate) %}btn-warning{% else %}btn-success{% endif %} btn-square btn-block">
+    {% if (piece.isPrivate) %}
+      <i class="fa fa-key"></i>
+    {% endif %}
     <strong><i class="fa fa-plus-circle"></i> Add set to Box</strong>
   </button>
 </form>

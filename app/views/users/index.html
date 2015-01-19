@@ -8,7 +8,7 @@
 
   <div class="spacer"></div>
 
-  <div class="row">
+    <p>Total: {{count}}</p>
     {% if (users.length) %}
       {% for user in users %}
         {% include 'user.html' %}
@@ -29,7 +29,6 @@
         No users.&nbsp;
       </h4>
     {% endif %}
-  </div>
 
 
   <div class="clearfix"></div>

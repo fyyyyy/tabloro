@@ -102,6 +102,7 @@ SetupSchema.statics = {
     var criteria = options.criteria || {};
 
     this.find(criteria)
+      .populate('user', 'name username')
       .populate('box', 'id title image')
       .sort({'createdAt': -1}) // sort by date
       .limit(options.perPage)

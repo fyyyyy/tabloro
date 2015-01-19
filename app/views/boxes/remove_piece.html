@@ -9,6 +9,10 @@
         {{piece.title | title}}
         
         <a href="/pieces/{{ piece.id }}" target="_blank" class="btn btn-default btn-xs btn-square nomargin pull-right">
+          {% if (piece.isPrivate) %}
+            <i class="fa fa-key"></i>
+          {% endif %}
+
           Click to show
         </a>
     </div>
@@ -25,14 +29,24 @@
       <input type="hidden" name="_method" value="PUT">
 
       <button type="submit" class="btn btn-danger btn-square btn-block">
+        {% if (piece.isPrivate) %}
+          <i class="fa fa-key"></i>
+        {% endif %}
         <strong><i class="fa fa-minus-circle"></i> Remove set from Box</strong>
       </button>
     </form>
   {% else %}
-    <strong><a href="/pieces/{{ piece.id }}" target="_blank" class="btn btn-primary btn-square btn-block">{{piece.title}}</a></strong>
+    {% if (piece.user.id === req.user.id || !piece.isPrivate) %}
+      <strong><a href="/pieces/{{ piece.id }}" target="_blank" class="btn btn-primary btn-square btn-block">{{piece.title}}</a></strong>
+    {% else %}
+      <strong><a href="#" target="_blank" class="btn btn-warning btn-square btn-block">
+        <i class="fa fa-key"></i>
+        private</a>
+      </strong>
+    {% endif %}
   {% endif %}
 
-  {% set showCount = true %}
+  {% set showCount = isOwner %}
   {% include '../pieces/sprite_script.html' with showCount %}
 {% endblock %}
 

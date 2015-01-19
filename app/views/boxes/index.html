@@ -14,14 +14,16 @@
           <i class="fa fa-cube"></i>
           Assemble your own game box
         </a>
+        <a class="btn btn-info" href="http://www.instructables.com/id/How-to-make-your-board-card-games-playable-in-the-/" target="_blank" ><i class="fa fa-info"></i> Show the Instructable Guide</a>
       {% endif %}
-      <a class="btn btn-info" href="http://www.instructables.com/id/How-to-make-your-board-card-games-playable-in-the-/" target="_blank" >Show the Instructable Guide</a>
 
     </div>
 
     {% if (boxes.length) %}
       {% for box in boxes %}
-        {% include 'box.html' %}
+        {% if (box.user.id === req.user.id || !box.isPrivate) %}
+          {% include 'box.html' %}
+        {% endif %}
       {% endfor %}
 
       {% if !pick %}
