@@ -142,14 +142,14 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             <h4>
-              <button data-toggle="collapse" data-target="#accordion" class="btn btn-success">
+              <!-- <button data-toggle="collapse" data-target="#accordion" class="btn btn-success"> -->
                 <i class="fa fa-plus-circle"></i>
                 Add Pieces to Game Box
-              </button>
+              <!-- </button> -->
             </h4>
           </div>
           
-          <div class="panel-body collapse" id="accordion">
+          <div class="panel-body" id="accordion">
             {% for piece in pieces %}
               {% if (piece.user.id === req.user.id || !piece.isPrivate) %}
                 {% include 'add_piece.html' %}

@@ -252,7 +252,8 @@ exports.show = function (req, res) {
                         pieces: globalPieces,
                         boxPieces: boxPieces,
                         count: globalPiecesCount,
-                        isOwner: box.user.id === req.user.id
+                        isOwner: box.user.id === req.user.id,
+                        pages: Math.ceil(count / perPage)
                     });
                 });
             });

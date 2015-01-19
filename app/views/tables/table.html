@@ -55,8 +55,11 @@
 
       
 {% block footer %}
-  <a href="{% if (req.isAuthenticated()) %}/tables/{{ table.title }}{% else %}/login{%endif%}" class="btn btn-primary btn-block btn-square">
+  <a href="{% if (req.isAuthenticated()) %}/tables/{{ table.title }}{% else %}/login{%endif%}" class="btn {% if (table.isPrivate) %}btn-warning{% else %}btn-primary{% endif %} btn-block btn-square">
     <i class="fa fa-play"></i>&nbsp;
+    {% if (table.isPrivate) %}
+      <i class="fa fa-key"></i>
+    {% endif %}
     <strong>{{table.title | title}}</strong>
   </a>
 {% endblock %}
