@@ -93,7 +93,7 @@ TableSchema.statics = {
     .populate('users', 'username')
     .populate('user', 'name username')
     .populate('setup', 'title pieces counts box')
-    .populate('box', 'title image')
+    .populate('box', 'title image description')
     .exec(cb);
   },
 
