@@ -36,14 +36,25 @@
           <div class="col-md-5">
             <h4>Description</h4>
             <p>{{box.description}}</p>
-            <a href="/boxes/{{box.id}}/test" class="btn btn-info btn-lg" >
+
+            {% if isOwner %}
+              <a href="/boxes/{{box.id}}/add" class="btn btn-success btn-lg">
+                <i class="fa fa-plus fa-fw"></i>
+              
+                Add Pieces to Box
+              </a>
+            {% endif %}
+
+            <a href="/boxes/{{box.id}}/test" class="btn btn-warning btn-lg" >
               <i class="fa fa-play-circle fa-fw"></i>
               Test Box contents
             </a>
+
             <a href="/boxes/{{box.id}}/setups/new" class="btn btn-success btn-lg" >
               <i class="fa fa-sitemap fa-fw"></i>
               Create game setup / layout
             </a>
+
           </div>
 
 
@@ -140,40 +151,7 @@
 
       </div>
     </div>
-    
-    {% if isOwner %}
-      <div class="col-md-12">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h4>
-              <!-- <button data-toggle="collapse" data-target="#accordion" class="btn btn-success"> -->
-                <i class="fa fa-plus-circle"></i>
-                Add Pieces to Game Box
-              <!-- </button> -->
-            </h4>
-          </div>
-          
-          <div class="panel-body" id="accordion">
-            {% for piece in pieces %}
-              {% if (piece.user.id === req.user.id || !piece.isPrivate) %}
-                {% include 'add_piece.html' %}
-              {% endif %}
-            {% endfor %}
 
-            {% if (pages > 1) %}
-              <div class="clearfix"></div>
-              
-              <ul class="pagination">
-                {% autoescape false %}
-                  {{ createPagination(pages, page) }}
-                {% endautoescape %}
-              </ul>
-            {% endif %}
-          </div>
-
-        </div>
-      </div>
-    {% endif %}
     
   </section>
 

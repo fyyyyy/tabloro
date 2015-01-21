@@ -142,7 +142,51 @@ exports.update = function (req, res){
 
 };
 
+/**
+ * Show pieces to add
+ */
 
+
+exports.addList = function (req, res) {
+    var box = req.box;
+    var globalPieces;
+    var globalPiecesCount;
+
+    var page = (req.param('page') > 0 ? req.param('page') : 1) - 1;
+    var perPage = 27;
+    var options = {
+        perPage: perPage,
+        page: page
+    };
+    // options.criteria = res.locals.isAdmin ? {} : {
+    //     isPrivate: false
+    // };
+
+
+    Piece.list(options, function (err, pieces) {
+        if (err) return res.render('500');
+
+        Piece.count().exec(function (err, count) {
+            globalPieces = pieces;
+            globalPiecesCount = count;
+        
+            Box.load(box.id, function (err, box) {
+                if (err) return next(err);
+                if (!box) return next(new Error('box not found'));
+                req.box = box;
+                res.render('boxes/add_to_box', {
+                    title: 'Add pieces to box',
+                    box: box,
+                    pieces: globalPieces,
+                    count: globalPiecesCount,
+                    isOwner: box.user.id === req.user.id,
+                    pages: Math.ceil(count / perPage)
+                });
+            });
+        });
+    });
+
+};
 
 /**
  * Add piece
@@ -154,15 +198,20 @@ exports.add = function (req, res){
   // make sure no one changes the user
   delete req.body.user;
   box = extend(box, req.body);
+  var ref = req.header('Referer');
+  var refPage = ref.match(/\?page=(\d+)/) && ref.match(/\?page=(\d+)/)[1];
+  var pageKeeper = refPage ? '?page=' + refPage : '';
 
   box.update({
         $addToSet: {
             pieces: req.piece
         }
     }, function (err) {
+
+    
     if (!err) {
-        req.flash('info', 'Added pieces to box');
-        return res.redirect('/boxes/' + box._id);
+        req.flash('info', 'Added pieces :::' + req.piece.title + '::: to box');
+        return res.redirect('/boxes/' + box._id + '/add' + pageKeeper);
     }
 
     req.flash('alert', 'Could not add pieces to box');
@@ -192,7 +241,7 @@ exports.remove = function (req, res){
         }
     }, function (err) {
     if (!err) {
-        req.flash('info', 'Removed piece from box');
+        req.flash('info', 'Removed piece :::' + req.piece.title + '::: from box');
         return res.redirect('/boxes/' + box._id);
     }
 
@@ -213,8 +262,6 @@ exports.remove = function (req, res){
 
 exports.show = function (req, res) {
     var box = req.box;
-    var globalPieces;
-    var globalPiecesCount;
 
     var page = (req.param('page') > 0 ? req.param('page') : 1) - 1;
     var perPage = 9;
@@ -235,27 +282,16 @@ exports.show = function (req, res) {
             boxPieces[idx] = piece;
         })(unsortedPieces);
 
-        Piece.list(options, function (err, pieces) {
-            if (err) return res.render('500');
-
-            Piece.count().exec(function (err, count) {
-                globalPieces = pieces;
-                globalPiecesCount = count;
             
-                Box.load(box.id, function (err, box) {
-                    if (err) return next(err);
-                    if (!box) return next(new Error('box not found'));
-                    req.box = box;
-                    res.render('boxes/show', {
-                        title: 'Box: ' + box.title,
-                        box: box,
-                        pieces: globalPieces,
-                        boxPieces: boxPieces,
-                        count: globalPiecesCount,
-                        isOwner: box.user.id === req.user.id,
-                        pages: Math.ceil(count / perPage)
-                    });
-                });
+        Box.load(box.id, function (err, box) {
+            if (err) return next(err);
+            if (!box) return next(new Error('box not found'));
+            req.box = box;
+            res.render('boxes/show', {
+                title: 'Box: ' + box.title,
+                box: box,
+                boxPieces: boxPieces,
+                isOwner: box.user.id === req.user.id
             });
         });
 

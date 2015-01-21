@@ -1,0 +1,56 @@
+{% extends '../layouts/default.html' %}
+
+{% block main %}
+  <h1>{{ title }}</h1>
+{% endblock %}
+
+{% block content %}
+
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4>
+          <!-- <button data-toggle="collapse" data-target="#accordion" class="btn btn-success"> -->
+            <i class="fa fa-plus-circle"></i>
+            Add Pieces to Game Box <strong><a href="/boxes/{{box.id}}">{{box.title}}</a></strong>
+          <!-- </button> -->
+        </h4>
+      </div>
+      
+      <div class="panel-body" id="accordion">
+
+        {% if (pages > 1) %}
+          
+          <center>
+            <ul class="pagination">
+              {% autoescape false %}
+                {{ createPagination(pages, page) }}
+              {% endautoescape %}
+            </ul>
+          </center>
+          <div class="clearfix"></div>
+        {% endif %}
+
+        {% for piece in pieces %}
+          {% if (piece.user.id === req.user.id || !piece.isPrivate) %}
+            {% include 'add_piece.html' %}
+          {% endif %}
+        {% endfor %}
+
+        {% if (pages > 1) %}
+          <div class="clearfix"></div>
+          
+          <center>
+            <ul class="pagination">
+              {% autoescape false %}
+                {{ createPagination(pages, page) }}
+              {% endautoescape %}
+            </ul>
+          </center>
+
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+{% endblock %}

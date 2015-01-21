@@ -134,6 +134,7 @@ module.exports = function (app, passport) {
     app.put('/boxes/:boxId/count/update', auth.requiresLogin, boxes.count_update);
     app.get('/boxes/:boxId/edit', boxAuth, boxes.edit);
     app.put('/boxes/:boxId', boxAuth, boxes.update);
+    app.get('/boxes/:boxId/add/', boxAuth, boxes.addList);
     app.put('/boxes/:boxId/add/:pieceId', boxAuth, boxes.add);
     app.put('/boxes/:boxId/remove/:pieceId', boxAuth, boxes.remove);
     app.delete('/boxes/:boxId', boxAuth, boxes.destroy);

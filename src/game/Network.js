@@ -20,6 +20,20 @@ Network.setup = function () {
     });
 
 
+    Network.client.onConnectionLost(function () {
+        console.log('onConnectionLost');
+        UI.message('Connection to server lost!!!');
+    });
+
+    Network.client.onDisconnect(function () {
+        console.log('onDisconnect');
+        UI.message('Disconnected from server!!!');
+    });
+    Network.client.onConnectionRetry(function () {
+        console.log('onConnectionRetry');
+        UI.message('Retry connection to  server...');
+    });
+
 
     // EXPORTS
     // methods defined under "exports" namespace become available in the server side
@@ -31,7 +45,9 @@ Network.setup = function () {
         Network.server.handshake(id, cursorId, playerName, roomName, mode);
         console.log('connecting to table', roomName);
 
+
         create();
+        UI.message( playerName + ' connected to server');
         Network.ready = true;
     };
 

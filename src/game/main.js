@@ -43,6 +43,10 @@ function preload() {
 
 
 function create() {
+    if (G.created) {
+        return;
+    }
+    G.created = true;
     setupStage();
     setupTable();
 
