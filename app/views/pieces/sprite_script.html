@@ -58,8 +58,8 @@
               '</div>' +
             '</span>';
 
-        } else if (showCount) { // circle count
-          var counts = (isNaN(pieceCounts[i]) ? 1 : pieceCounts[i]) + '<i class="fa fa-times"></i>';
+        } else if (showCount) { //  count x
+          var counts = (isNaN(pieceCounts[i]) ? 1 : pieceCounts[i]) + 'x';
           var link = owner ? '<a href="/boxes/{{box.id}}/count#tiles-' + piece._id  + '" class="btn btn-primary btn-xs">' + counts + '</a>'
                  : 
                  '<span class="text-primary">' + counts + '</span>';
