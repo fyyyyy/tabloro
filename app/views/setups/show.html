@@ -60,6 +60,13 @@
         {% endif %}
 
 
+        <li class="list-group-item list-group-item-default">
+          Created by
+          <strong class="pull-right">{{setup.user.username}}</strong>
+        </li>
+
+
+
         <li class="list-group-item list-group-item-default">Created {{ setup.createdAt.toISOString()|date('M d,  h:i a') }}</li>
         {% if (setup.tags) %}
           <li class="list-group-item meta">

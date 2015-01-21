@@ -20,7 +20,7 @@
 
     {% if (pieces.length) %}
       {% for piece in pieces %}
-        {% if (piece.user.id === req.user.id || !piece.isPrivate) %}
+        {% if (piece.user.id === req.user.id || !piece.isPrivate || isAdmin) %}
           {% include 'piece.html' %}
         {% endif %}
       {% endfor %}

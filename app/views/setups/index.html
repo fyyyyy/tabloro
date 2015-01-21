@@ -22,7 +22,7 @@
 
     {% if (setups.length) %}
       {% for setup in setups %}
-        {% if (!setup.isPrivate || setup.user.id === req.user.id) %}
+        {% if (!setup.isPrivate || setup.user.id === req.user.id || isAdmin) %}
           {% include 'setup.html' %}
         {% endif %}
       {% endfor %}
