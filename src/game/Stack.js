@@ -105,13 +105,16 @@ S.bringToTop = function (tile) {
 
 S.shuffle = function (tiles) {
     console.log('S.suffle', tiles.length);
+    var startPosition = Controls.target.position.clone();
+
 
     R.forEach.idx(function (tile, index) {
+        console.log('shuffle', index);
         tile.rotation = 0;
         T.hide(tile);
-        var newPosition = S.calculateCardPos(Controls.target.position, index, 0);
-        Utils.alignPosition(tile, newPosition);
         S.bringToTop(tile);
+        var newPosition = S.calculateCardPos(startPosition, index, 0);
+        Utils.alignPosition(tile, newPosition);
     })(tiles);
 
     return;
