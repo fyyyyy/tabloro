@@ -141,7 +141,8 @@ exports.show = function (req, res) {
             res.render('tables/show', {
                 title: 'Table: ' + table.title,
                 table: table,
-                players: req.eurecaServer.getPlayers(table.title)
+                players: req.eurecaServer.getPlayers(table.title),
+                isOwner: table.user.id === req.user.id
             });
         });
 

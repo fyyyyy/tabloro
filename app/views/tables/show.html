@@ -12,12 +12,17 @@
     <div class="col-md-7">
       <div class="panel panel-default">
         <div class="panel-heading">
+          {% if (isOwner) %}
+            {% include '../includes/get_help.html' %}
+          {% endif %}
           <p>
-          <a HREF="mailto:?subject=Lets play '{{table.box.title}}' together&body=Hey, I opened a table and thought we could play this game together. It's in the browser, with video and audio chat.
-           http://www.tabloro.com/tables/{{table.title}}/"><i class="fa fa-envelope"></i> Invite a friend via mail</a>
+            <a HREF="mailto:?subject=Lets play '{{table.box.title}}' together&body=Hey, I opened a table and thought we could play this game together. It's in the browser, with video and audio chat.
+             http://www.tabloro.com/tables/{{table.title}}/"><i class="fa fa-envelope"></i> Invite a friend via mail</a>
           </p>
+          <p>
             Invite via facebook
             <iframe height="20px;" src="//www.facebook.com/plugins/share_button.php?href=http%3A%2F%2Fwww.tabloro.com%2Ftables%2F{{table.title}}%2F&amp;layout=button_count" scrolling="no" frameborder="0" style="border:none; overflow:hidden;" allowTransparency="true"></iframe>
+          </p>
         </div>
         <div class="panel-body">
           <ul class="list-group">
