@@ -42,22 +42,23 @@
 
         var numberDom;
         
-        if (editCount) {
+        if (editCount) { // button
           numberDom = (piece.isDice  && i > 0) ?
-            '<span class="piece-count"></span>'
+            '<span class="piece-input"></span>'
             :
-            '<span class="piece-count">' +
+            '<span class="piece-input">' +
               '<div class="form-group">' +
                 '<div class="input-group">' +
-                  '<input type="number" name="' + piece._id + '" value="' + (pieceCounts[i] || 1) + '" class="form-control input-lg"/>' +
-                  '<div class="input-group-addon">' +
-                    '<button type="button" class="btn btn-success btn-xs btn-square" id="inc-' + piece._id + '-' + i + '">+</button>' +
-                    '<button type="button" class="btn btn-default btn-xs btn-square" id="dec-' + piece._id + '-' + i + '">-</button>' +
-                  '</div>' +
+                  '<input type="number" name="' + piece._id + '" value="' + (isNaN(pieceCounts[i]) ? 1 : pieceCounts[i]) + '" class="form-control input-lg"/>' +
+                  // '<div class="input-group-addon">' +
+                  //   '<button type="button" class="btn btn-success btn-xs btn-square" id="inc-' + piece._id + '-' + i + '">+</button>' +
+                  //   '<button type="button" class="btn btn-default btn-xs btn-square" id="dec-' + piece._id + '-' + i + '">-</button>' +
+                  // '</div>' +
                 '</div>' +
               '</div>' +
             '</span>';
-        } else if (showCount) {
+
+        } else if (showCount) { // circle count
           var counts = (isNaN(pieceCounts[i]) ? 1 : pieceCounts[i]) + '<i class="fa fa-times"></i>';
           var link = owner ? '<a href="/boxes/{{box.id}}/count#tiles-' + piece._id  + '" class="btn btn-primary btn-xs">' + counts + '</a>'
                  : 
@@ -71,14 +72,15 @@
             '<span class="piece-number">' +
               link +
             '</span>';
-        } else {
+
+        } else { // number in collection
           numberDom =       
             '<span class="piece-number">' +
               '<span class="fa fa-stack small">' +
-                '<i class="fa fa-circle text-' + (piece.flipable && i=== 0 ? 'primary' : 'success') + ' fa-stack-2x"></i>' +
+                '<i class="fa fa-circle text-' + (piece.flipable && i=== 0 ? 'primary' : 'success') + ' fa-stack-1x"></i>' +
                 '<span class="fa fa-stack-1x">' +
                      (i + 1) + 
-                '.</span>' +
+                '</span>' +
               '</span>' +
               (piece.flipable && i=== 0 ? '<center>background (flipable)</center>' : '') +
             '</span>';
