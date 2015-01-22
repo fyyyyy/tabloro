@@ -121,6 +121,8 @@ module.exports = function (app, passport) {
   app.get('/pieces/:pieceId/edit', pieceAuth, pieces.edit);
   app.put('/pieces/:pieceId', pieceAuth, pieces.update);
   app.delete('/pieces/:pieceId', pieceAuth, pieces.destroy);
+  app.get('/pieces/:pieceId/test', auth.requiresLogin, pieces.test);
+
 
   // Box
   app.param('boxId', boxes.load);

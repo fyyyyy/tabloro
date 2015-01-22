@@ -160,6 +160,29 @@ exports.show = function (req, res) {
 };
 
 
+/**
+ * Test a piece
+ */
+
+exports.test = function (req, res) {
+    var piece = req.piece;
+
+
+
+        var assets = utils.generateAssets({counts: 1, pieces: [piece.id]}, [piece]);
+        
+        
+        res.render('game/test', {
+            title: 'Test Piece: ' + piece.title,
+            game: piece,
+            room: piece,
+            user: req.user,
+            assets: assets,
+            mode: 'test',
+            backUrl: '/pieces/' + piece._id
+        });
+
+};
 
 
 /**
