@@ -144,11 +144,12 @@ function setupAssets (gameAssets) {
 
         if (asset.method === 'spritesheet') {
             maxFrames = asset.args[4];
+
             if (asset.isDice) {
-                console.log('adding dice', asset.counts[0]);
+                console.log('adding dice', R.head(R.of(asset.counts)));
                 R.times(function () {
                     Dice.add(groupName, G.groups.get(groupName), maxFrames);
-                })(asset.counts[0] || 1);
+                })(R.head(R.of(asset.counts)) || 1);
             } else {
                 addCards(groupName, yOffset, buildAssetArray(asset, maxFrames), G.groups.get(groupName));
             }
