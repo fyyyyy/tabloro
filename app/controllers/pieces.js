@@ -176,6 +176,7 @@ exports.test = function (req, res) {
             title: 'Test Piece: ' + piece.title,
             game: piece,
             room: piece,
+            roomName: 'Piece test: ' + piece.title,
             user: req.user,
             assets: assets,
             mode: 'test',

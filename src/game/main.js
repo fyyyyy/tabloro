@@ -169,15 +169,15 @@ function addCards(title, yOffset, array, group, stack, scale) {
     var offsetX = 0;
 
     R.forEach(function (n) {
-        if (n === last) {
+        if (n === last) { // same frame
             tempOffsetY += S.offsetY;
             tempOffsetX += S.offsetX;
         } else {
+            nOffsetX++;
             tempOffsetX = 0;
             tempOffsetY = 0;
         }
         offsetX = 100 + (nOffsetX * 120) + tempOffsetX;
-        nOffsetX++;
         if (offsetX >= World.width) {
             nOffsetX = 0;
             nOffsetY+= 100;
