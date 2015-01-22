@@ -87,11 +87,11 @@
         }
 
         var newDom = 
-          '<span class="img-overlay">' +
+          '<div class="img-overlay" style="float:left;">' +
             '<span id="frame-' + i + '" style="' + style + '" title="piece #' + (i + 1) +'">' +
                 numberDom +
             '</span>' +
-          '</span>';
+          '</div>';
 
 
         $('#tiles-' + piece._id).append(newDom);
@@ -130,6 +130,8 @@
             }, 200);
           }
         }
+        $('.img-overlay').draggable();
+
       };
 
     });
@@ -174,6 +176,7 @@
             var yOffset = - Math.floor(i / columns) * (height + spacing);
             appendTiles(i, setStyle(width, height, xOffset, yOffset));
           }
+
         };
         
         checkImageLoaded(setImageWidth);
@@ -188,10 +191,12 @@
           appendTiles(0, setStyle(imageWidth, imageHeight, 0, 0));
         };
         
+        
         checkImageLoaded(setImageWidth);
 
       });
     }
+    
   }());
 
 

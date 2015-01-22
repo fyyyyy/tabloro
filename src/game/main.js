@@ -121,7 +121,7 @@ function buildAssetArray (asset, maxFrames) {
 }
 
 function setupAssets (gameAssets) {
-    var yOffset = 200;
+    var yOffset = 100;
     var maxFrames = 1;
     G.groups.add('tokens');
 
@@ -164,6 +164,9 @@ function addCards(title, yOffset, array, group, stack, scale) {
     var last;
     var tempOffsetX = 0;
     var tempOffsetY = 0;
+    var nOffsetX = 0;
+    var nOffsetY = 0;
+    var offsetX = 0;
 
     R.forEach(function (n) {
         if (n === last) {
@@ -173,7 +176,13 @@ function addCards(title, yOffset, array, group, stack, scale) {
             tempOffsetX = 0;
             tempOffsetY = 0;
         }
-        var tile = group.create(100 + (n * 120) + tempOffsetX, yOffset + tempOffsetY, title, n);
+        offsetX = 100 + (nOffsetX * 120) + tempOffsetX;
+        nOffsetX++;
+        if (offsetX >= World.width) {
+            nOffsetX = 0;
+            nOffsetY+= 100;
+        }
+        var tile = group.create(offsetX, yOffset + tempOffsetY + nOffsetY, title, n);
         tile.defaultFrame = n;
         if (stack && stack.config.hidden) T.hide(tile);
         T.scale(scale, tile);
