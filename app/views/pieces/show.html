@@ -31,9 +31,18 @@
         </div>
         
         <div class="panel-body">
+          <a class="btn btn-success" href="/pieces/new">
+            <i class="fa fa-plus-circle"></i>
+            Create a new piece
+          </a> 
+          
+          <div class="spacer"></div>
+          
           {% if (!piece.isNew && piece.image && piece.image.files && piece.image.files.length) %}
             <img class="img-responsive" src="{{ piece.image.cdnUri + '/detail_' + piece.image.files[0] }}" alt="">
           {% endif %}
+
+          
         </div>
 
       </div>
@@ -204,7 +213,7 @@
   <section class="bg-primary about">
     <div class="container">
       
-      <a href="/pieces" class="btn btn-default">
+      <a href="/pieces" class="btn btn-info">
         <i class="fa fa-backward"></i>
         Back to pieces
       </a>
