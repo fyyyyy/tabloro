@@ -154,7 +154,7 @@ Network.setup = function () {
         delete tile.relativePosition;
 
         Utils.syncTile(tile, newPosition);
-        UI.message(client.name, 'moved tile', tile.id);
+        UI.message(client.name, 'moved a tile', tile.id);
 
     };
 
@@ -180,7 +180,7 @@ Network.setup = function () {
         Controls.hide(tile);
         tile.visible = false;
         
-        UI.message(client.name, 'took tile', tile.id, 'to hand');
+        UI.message(client.name, 'took a tile to hand');
     };
 
     Network.client.exports.fromHand = function (client, tileId) {
@@ -190,7 +190,7 @@ Network.setup = function () {
         var tile = G.findTile(tileId);
         tile.visible = true;
         
-        UI.message(client.name, 'plays tile', tile.id, 'from hand');
+        UI.message(client.name, 'plays tile from hand');
     };
 
 
@@ -213,53 +213,39 @@ Network.setup = function () {
     };
     /******************* STACKS ******************/
 
-    Network.client.exports.dragStack = function (client, stackId) {
-        console.log(client.name  + ' drags stack ', stackId);
-        if (Network.isMine(client.id)) return; //this is me
-        var stack = G.findStack(stackId);
-        stack.remoteDragged = true;
-        G.addUpdatePosition({follower: stack, target: playerList[client.id]});
+    // Network.client.exports.dragStack = function (client, stackId) {
+    //     console.log(client.name  + ' drags stack ', stackId);
+    //     if (Network.isMine(client.id)) return; //this is me
+    //     var stack = G.findStack(stackId);
+    //     stack.remoteDragged = true;
+    //     G.addUpdatePosition({follower: stack, target: playerList[client.id]});
+    // };
+
+
+    // Network.client.exports.dropStack = function (client, stackId, newPosition) {
+    //     console.log(client.name + ' moved stack ', stackId);
+    //     if (Network.isMine(client.id)) return; //this is me
+    //     var stack = G.findStack(stackId);
+    //     G.removeUpdatePosition(playerList[client.id]);
+    //     stack.remoteDragged = false;
+
+    //     Utils.syncTile(stack, newPosition);
+
+    //     S.tidy(stack);
+    //     UI.message(client.name, 'moved stack', stackId);
+    // };
+
+
+
+    Network.client.exports.updateStackCards = function (client, method, tiles, position) {
+        console.log('updateCards', method, tiles);
+        S[method](G.findTiles(tiles), position);
     };
 
-
-    Network.client.exports.dropStack = function (client, stackId, newPosition) {
-        console.log(client.name + ' moved stack ', stackId);
-        if (Network.isMine(client.id)) return; //this is me
-        var stack = G.findStack(stackId);
-        G.removeUpdatePosition(playerList[client.id]);
-        stack.remoteDragged = false;
-
-        Utils.syncTile(stack, newPosition);
-
-        S.tidy(stack);
-        UI.message(client.name, 'moved stack', stackId);
-    };
-
-
-    Network.client.exports.positionStack = function (client, stackId, stackData) {
-        console.log(client.name + ' moved stack ', stackId);
-        if (!Network.isMine(client.id)) return; //this is NOT me
-        
-        var stack = G.findStack(stackId);
-        Utils.syncTile(stack, stackData.position);
-        console.log('adding', stackData.cards, 'to stack', stackId);
-        S.updateCards(stack, stackData.cards);
-
-        S.alignElements(stack);
-        UI.message('Positioning stack', stackId);
-    };
-
-
-    Network.client.exports.updateStackCards = function (client, tiles) {
-        console.log('updateCards', tiles);
-        
-        S.shuffle(G.findTiles(tiles));
-    };
-
-    Network.client.exports.flipStack = function(client, stackId) {
-        var stack = G.findStack(stackId);
-        S.flipCards(stack);
-    };
+    // Network.client.exports.flipStack = function(client, stackId) {
+    //     var stack = G.findStack(stackId);
+    //     S.flipCards(stack);
+    // };
 
 
 

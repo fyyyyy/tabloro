@@ -30,7 +30,7 @@ var eurecaServer = new EurecaServer({
   allow: [ // Network client methods
     'setId', 'spawnPlayer', 'kill', 'updateCursor',
     'positionTile', 'dropTile', 'dragTiles', 'flipTile', 'toHand', 'fromHand', 'lock', 'unlock',
-    'dragStack', 'dropStack', 'positionStack', 'updateStackCards', 'flipStack',
+    'updateStackCards', 'flipStack',
     'spin',
     'receiveChat'
   ]

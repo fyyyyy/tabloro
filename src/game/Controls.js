@@ -118,6 +118,10 @@ Controls.position = function (controlButton, condition) {
     }
 };
 
+Controls.cloneTargetPos = function () {
+    return Controls.target && Controls.target.position.clone();
+};
+
 
 
 Controls.hide = function (tile) {

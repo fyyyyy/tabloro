@@ -184,7 +184,6 @@ function addCards(title, yOffset, array, group, stack, scale) {
         last = n;
         // console.log('tile created', tile.id);
     })(array);
-    // S.updateCards(stack, cards);
     return Controls.target;
 }
 
