@@ -2,10 +2,11 @@
 
 
 {% block image %}
-  {% if isOwner %}
     <div class="piece-content">
+      {% include '../pieces/type.html' %}
+    
+      {% if isOwner || !piece.isPrivate %}
         &nbsp;
-        {% include '../pieces/type.html' %}
         {{piece.title | title}}
         
         <a href="/pieces/{{ piece.id }}" target="_blank" class="btn btn-default btn-xs btn-square nomargin pull-right">
@@ -15,8 +16,8 @@
 
           Click to show
         </a>
+      {% endif %}
     </div>
-  {% endif %}
 
 {% endblock %}
    
@@ -36,13 +37,16 @@
       </button>
     </form>
   {% else %}
+    <!-- frame size hack -->
+    <span style="opacity: 0;" selectable="false"><button></button></span>
+
     {% if (piece.user.id === req.user.id || !piece.isPrivate) %}
-      <strong><a href="/pieces/{{ piece.id }}" target="_blank" class="btn btn-primary btn-square btn-block">{{piece.title}}</a></strong>
+      <a href="/pieces/{{ piece.id }}" target="_blank" class="btn btn-primary btn-square btn-block">{{piece.title}}</a>
     {% else %}
-      <strong><a href="/pieces/{{ piece.id }}" target="_blank" class="btn btn-warning btn-square btn-block" {%if (!isAdmin)%}disabled="true" {%endif%}>
-        <i class="fa fa-key"></i>
-        private</a>
-      </strong>
+        <a href="/pieces/{{ piece.id }}" target="_blank" class="btn btn-warning btn-square btn-block" {%if (!isAdmin)%}disabled="true" {%endif%}>
+          <i class="fa fa-key"></i>
+          private
+        </a>
     {% endif %}
   {% endif %}
 

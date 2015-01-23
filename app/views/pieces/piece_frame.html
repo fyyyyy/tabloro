@@ -1,7 +1,7 @@
 <div class="piece">
-  <div class="panel blackBorder panel-default">
+  <div class="panel blackBorder panel-default wooden">
       
-      <div class="img-overlay wooden">
+      <div class="img-overlay">
         {% if (!piece.isNew && piece.image && piece.image.files && piece.image.files.length) %}
           <img class="img-responsive max200" src="{{  piece.image.cdnUri + '/mini_' + piece.image.files[0] }}" alt="">
         {% else %}

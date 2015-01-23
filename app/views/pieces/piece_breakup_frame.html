@@ -1,16 +1,16 @@
 <div class="piece">
-  <div class="panel blackBorder panel-default">
+  <div class="panel blackBorder panel-default wooden">
       
-      <div class="img-overlay wooden min100" style="padding-top: 15px;">
+      <div class="img-overlay  min100" style="padding-top: 15px;">
           <div style="display:none;">          
             <img src="{{ piece.image.cdnUri + '/original_' + piece.image.files[0] }}" id="spritesheet-{{piece.id}}"></img>
           </div>
 
           <div id="tiles-{{piece.id}}">
-          </div>
 
-            {% block image %}
-            {% endblock %}
+          {% block image %}
+          {% endblock %}
+          </div>
       </div>
 
       
