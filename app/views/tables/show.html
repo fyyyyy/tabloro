@@ -49,7 +49,9 @@
           <hr>
           
           <p class="muted min200">
-            <img style="opacity: 0.5;" class="img-responsive max200 min200 pull-right" src="{{ table.box.image.cdnUri + '/detail_' + table.box.image.files[0] }}" alt="">
+            {% if (table.box.image.cdnUri) %}
+              <img style="opacity: 0.5;" class="img-responsive max200 min200 pull-right" src="{{ table.box.image.cdnUri + '/detail_' + table.box.image.files[0] }}" alt="">
+            {% endif %}
             {{table.box.description}}
           </p>
           
