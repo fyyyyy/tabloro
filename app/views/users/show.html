@@ -21,6 +21,17 @@
           {% endif %}
         </p>
 
+
+        {% if (isOwner) %}
+        <p>
+          <a class="btn btn-default" href="/users/{{user.id}}/pieces">My Pieces</a>
+          <a class="btn btn-default" href="/users/{{user.id}}/boxes">My Boxes</a>
+          <a class="btn btn-default" href="/users/{{user.id}}/setups">My Setups</a>
+          <a class="btn btn-default" href="/users/{{user.id}}/tables">My Tables</a>
+        </p>
+        {% endif %}
+
+
 <!--         <p>
           <i class="fa fa-fire fa-2x"></i> Firefox Hello: <b>
           {% if user.firefox %}

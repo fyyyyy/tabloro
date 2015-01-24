@@ -53,7 +53,7 @@ module.exports = function (app, passport) {
       failureRedirect: '/login',
       failureFlash: 'Invalid email or password.'
     }), users.session);
-  app.get('/users/:userId', users.show);
+  app.get('/users/:userId', userAuth, users.show);
   app.get('/users/:userId/edit', userAuth, users.edit);
   app.put('/users/:userId', userAuth, users.update);
 
@@ -104,6 +104,7 @@ module.exports = function (app, passport) {
   // Table
   app.param('tableName', tables.load);
   app.get('/tables', tables.index);
+  app.get('/users/:userId/tables', userAuth, tables.index);
   app.get('/tables/new', auth.requiresLogin, tables.new);
   app.post('/tables', auth.requiresLogin, tables.create);
   app.get('/tables/:tableName', tables.show);
@@ -115,6 +116,7 @@ module.exports = function (app, passport) {
   // Piece
   app.param('pieceId', pieces.load);
   app.get('/pieces', pieces.index);
+  app.get('/users/:userId/pieces', userAuth, pieces.index);
   app.get('/pieces/new', auth.requiresLogin, pieces.new);
   app.post('/pieces', auth.requiresLogin, pieces.create);
   app.get('/pieces/:pieceId', pieceView, pieces.show);
@@ -127,6 +129,7 @@ module.exports = function (app, passport) {
   // Box
   app.param('boxId', boxes.load);
   app.get('/boxes', boxes.index);
+  app.get('/users/:userId/boxes', userAuth, boxes.index);
   app.get('/boxes/new', auth.requiresLogin, boxes.new);
   app.post('/boxes', auth.requiresLogin, boxes.create);
   app.get('/boxes/:boxId', boxView, boxes.show);
@@ -145,6 +148,7 @@ module.exports = function (app, passport) {
   // Setup
   app.param('setupName', setups.load);
   app.get('/setups', setups.index);
+  app.get('/users/:userId/setups', userAuth, setups.index);
   app.get('/boxes/:boxId/setups/new', auth.requiresLogin, setups.new);
   app.post('/boxes/:boxId/setups', auth.requiresLogin, setups.create);
   app.get('/boxes/:boxId/setups/:setupName', setupView, setups.show);

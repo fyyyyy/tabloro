@@ -84,7 +84,8 @@ exports.show = function (req, res) {
   var user = req.profile;
   res.render('users/show', {
     title: 'User: ' + user.username,
-    user: user
+    user: user,
+    isOwner: user.id === req.user.id
   });
 };
 

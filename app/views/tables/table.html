@@ -60,6 +60,9 @@
     {% if (table.isPrivate) %}
       <i class="fa fa-key"></i>
     {% endif %}
+    {% if (table.user.id === req.user.id) %}
+      <i class="fa fa-home" title="Yours"></i>
+    {% endif %}
     <strong>{{table.title | title}}</strong>
   </a>
 {% endblock %}

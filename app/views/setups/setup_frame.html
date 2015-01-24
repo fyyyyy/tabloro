@@ -3,7 +3,7 @@
       
       <div class="img-overlay">
 
-        {% if (setup.box) %}
+        {% if (setup.box && setup.box.image.cdnUri) %}
           <img class="img-responsive max200 min200" src="{{ setup.box.image.cdnUri + '/detail_' + setup.box.image.files[0] }}" alt="">
         {% else %}
           <img class="img-responsive wooden" style="height: 200px;" alt="">

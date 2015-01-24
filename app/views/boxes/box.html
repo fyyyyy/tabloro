@@ -27,6 +27,9 @@
     {% if (box.isPrivate) %}
       <i class="fa fa-key"></i>
     {% endif %}
+    {% if (box.user.id === req.user.id) %}
+      <i class="fa fa-home" title="Yours"></i>
+    {% endif %}
     <strong>{% if (pick) %}Pick {% endif %}{{box.title | title}}</strong>
   </a>
 {% endblock %}

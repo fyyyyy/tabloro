@@ -110,7 +110,7 @@ TableSchema.statics = {
 
     this.find(criteria)
       .populate('box', 'title image')
-      // .populate('user', 'name username')
+      .populate('user')
       .sort({'createdAt': -1}) // sort by date
       .limit(options.perPage)
       .skip(options.perPage * options.page)

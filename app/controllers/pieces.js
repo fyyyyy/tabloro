@@ -38,16 +38,19 @@ exports.index = function (req, res) {
         perPage: perPage,
         page: page
     };
-    // options.criteria = (res.locals.isAdmin) ? {} : {
-    //     isPrivate: false
-    // };
+    
+    if (req.param('userId')) {
+        options.criteria = {
+            user: req.user
+        };
+    }
 
     Piece.list(options, function (err, pieces) {
         if (err) return res.render('500');
 
         Piece.count().exec(function (err, count) {
             res.render('pieces/index', {
-                title: 'Gaming Pieces',
+                title: req.param('userId') ? 'Your Gaming Pieces' : 'Gaming Pieces',
                 pieces: pieces,
                 page: page + 1,
                 pages: Math.ceil(count / perPage),

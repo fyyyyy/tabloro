@@ -46,16 +46,19 @@ exports.index = function (req, res) {
         perPage: perPage,
         page: page
     };
-    // options.criteria = res.locals.isAdmin ? {} : {
-    //     isPrivate: false
-    // };
+
+    if (req.param('userId')) {
+        options.criteria = {
+            user: req.user
+        };
+    }
 
     Setup.list(options, function (err, setups) {
         if (err) return res.render('500');
 
         Setup.count().exec(function (err, count) {
             res.render('setups/index', {
-                title: req.query.pick ? 'Pick game setup' : 'Game Setups',
+                title: req.query.pick ? 'Pick game setup' : req.param('userId') ? 'Your Setups': 'Game Setups',
                 subtitle: req.query.pick ? 'Pick a game setup for your ' + req.query.pick : '',
                 setups: setups,
                 page: page + 1,

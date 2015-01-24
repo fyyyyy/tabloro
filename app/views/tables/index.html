@@ -14,12 +14,17 @@
           <i class="fa fa-plus-circle"></i>
           Open your own table
         </a>
+        {% set model = 'tables' %}
+        {% set icon = 'fa-play' %}
+        {% include '../includes/yours_all.html' with model; icon all %}
       {% endif %}
     </div>
 
     {% if (tables.length) %}
       {% for table in tables %}
-        {% include 'table.html' %}
+        {% if (table.user.id === req.user.id || !table.isPrivate || isAdmin) %}
+          {% include 'table.html' %}
+        {% endif %}
       {% endfor %}
       
       {% include 'create_table.html' %}

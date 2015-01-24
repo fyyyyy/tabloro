@@ -39,9 +39,13 @@ exports.index = function (req, res) {
         perPage: perPage,
         page: page
     };
-    options.criteria = res.locals.isAdmin ? {} : {
-        isPrivate: false
-    };
+
+
+    if (req.param('userId')) {
+        options.criteria = {
+            user: req.user
+        };
+    }
 
 
     // res.render('game/index', {layout: false, title: 'game room'});
@@ -55,7 +59,7 @@ exports.index = function (req, res) {
 
         Table.count().exec(function (err, count) {
             res.render('tables/index', {
-                title: 'Public Tables',
+                title: req.param('userId') ? 'Your Tables' : 'Public Tables',
                 tables: tables,
                 page: page + 1,
                 pages: Math.ceil(count / perPage),

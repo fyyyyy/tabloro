@@ -39,16 +39,19 @@ exports.index = function (req, res) {
         perPage: perPage,
         page: page
     };
-    // options.criteria = res.locals.isAdmin ? {} : {
-    //     isPrivate: false
-    // };
+
+    if (req.param('userId')) {
+        options.criteria = {
+            user: req.user
+        };
+    }
 
     Box.list(options, function (err, boxes) {
         if (err) return res.render('500');
 
         Box.count().exec(function (err, count) {
             res.render('boxes/index', {
-                title: req.query.pick ? 'Pick a box' : 'Game Boxes',
+                title: req.query.pick ? 'Pick a box' : req.param('userId') ? 'Your Boxes' : 'Game Boxes',
                 pick: req.query.pick,
                 boxes: boxes,
                 page: page + 1,

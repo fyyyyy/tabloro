@@ -14,6 +14,10 @@
           <i class="fa fa-scissors"></i>
           Add your own gaming pieces
         </a>
+        
+        {% set model = 'pieces' %}
+        {% set icon = 'fa-puzzle-piece' %}
+        {% include '../includes/yours_all.html' with model; icon all %}
       {% endif %}
       <a class="btn btn-info" href="http://www.instructables.com/id/How-to-make-your-board-card-games-playable-in-the-/" target="_blank" ><i class="fa fa-info"></i> Show the Instructable Guide</a>
     </div>

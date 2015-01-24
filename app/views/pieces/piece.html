@@ -28,6 +28,10 @@
       {% if (piece.isPrivate) %}
         <i class="fa fa-key"></i>
       {% endif %}
+      
+      {% if (piece.user.id === req.user.id) %}
+        <i class="fa fa-home" title="Yours"></i>
+      {% endif %}
 
     </span>
     <strong>{{piece.title | title}}</strong>

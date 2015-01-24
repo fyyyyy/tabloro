@@ -38,10 +38,14 @@
       
 {% block footer %}
   <a href="{% if (req.isAuthenticated()) %}/boxes/{{setup.box.id}}/setups/{{ setup.title }}{% else %}/login{%endif%}" class="btn {% if setup.isPrivate %}btn-warning{% else %}btn-primary{% endif %} btn-block btn-square">
-  <i class="fa fa-sitemap pull-left"><span class="small"> setup</span>
+  <i class="fa fa-sitemap pull-left"><span class="small"></span>
     {% if (setup.isPrivate) %}
       <i class="fa fa-key"></i>
     {% endif %}
+
+    {% if (setup.user.id === req.user.id) %}
+        <i class="fa fa-home" title="Yours"></i>
+      {% endif %}
   </i>
     {% if pick %}pick{% endif %}
     
