@@ -32,6 +32,9 @@
         {% endif %}
       {% endfor %}
 
+      {% if (!pick) %}
+        {% include 'create_setup.html' %}
+      {% endif %}
       {% if (pages > 1) %}
         <div class="clearfix"></div>
         <ul class="pagination">
@@ -45,11 +48,11 @@
       <h4 class="muted">
         No game setups yet.&nbsp;
       </h4>
+      {% if (!pick) %}
+        {% include 'create_setup.html' %}
+      {% endif %}
     {% endif %}
     
-    {% if (!pick) %}
-      {% include 'create_setup.html' %}
-    {% endif %}
 
   
 
