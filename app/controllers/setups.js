@@ -56,7 +56,7 @@ exports.index = function (req, res) {
     Setup.list(options, function (err, setups) {
         if (err) return res.render('500');
 
-        Setup.count(options).exec(function (err, count) {
+        Setup.count(options.criteria).exec(function (err, count) {
             res.render('setups/index', {
                 title: req.query.pick ? 'Pick game setup' : req.param('userId') ? 'Your Setups': 'Game Setups',
                 subtitle: req.query.pick ? 'Pick a game setup for your ' + req.query.pick : '',

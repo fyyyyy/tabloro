@@ -33,7 +33,7 @@ exports.load = function (req, res, next, id) {
 
 exports.index = function (req, res) {
     var page = (req.param('page') > 0 ? req.param('page') : 1) - 1;
-    var perPage = 20;
+    var perPage = 30;
     var options = {
         perPage: perPage,
         page: page
@@ -48,7 +48,8 @@ exports.index = function (req, res) {
     Piece.list(options, function (err, pieces) {
         if (err) return res.render('500');
 
-        Piece.count(options).exec(function (err, count) {
+        Piece.count(options.criteria).exec(function (err, count) {
+            console.log('count', count);
             res.render('pieces/index', {
                 title: req.param('userId') ? 'Your Gaming Pieces' : 'Gaming Pieces',
                 pieces: pieces,
