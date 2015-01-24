@@ -57,7 +57,7 @@ exports.index = function (req, res) {
             table.players = req.eurecaServer.getPlayerIds(table.title);
         })(tables);
 
-        Table.count().exec(function (err, count) {
+        Table.count(options).exec(function (err, count) {
             res.render('tables/index', {
                 title: req.param('userId') ? 'Your Tables' : 'Public Tables',
                 tables: tables,

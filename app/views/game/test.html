@@ -46,7 +46,7 @@
         {% include '../includes/please_wait.html' %}
        
 
-        {% if (mode === 'setup') %}
+        {% if (mode === 'setup' && isOwner) %}
             <div id="edit-container">
                 <button onclick="G.saveSetup()" class="btn btn-success">Save Setup</button>
             </div>

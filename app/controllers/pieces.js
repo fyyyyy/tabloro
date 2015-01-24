@@ -48,7 +48,7 @@ exports.index = function (req, res) {
     Piece.list(options, function (err, pieces) {
         if (err) return res.render('500');
 
-        Piece.count().exec(function (err, count) {
+        Piece.count(options).exec(function (err, count) {
             res.render('pieces/index', {
                 title: req.param('userId') ? 'Your Gaming Pieces' : 'Gaming Pieces',
                 pieces: pieces,

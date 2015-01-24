@@ -49,7 +49,7 @@ exports.index = function (req, res) {
     Box.list(options, function (err, boxes) {
         if (err) return res.render('500');
 
-        Box.count().exec(function (err, count) {
+        Box.count(options).exec(function (err, count) {
             res.render('boxes/index', {
                 title: req.query.pick ? 'Pick a box' : req.param('userId') ? 'Your Boxes' : 'Game Boxes',
                 pick: req.query.pick,
