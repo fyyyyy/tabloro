@@ -9,14 +9,14 @@ UI.timeout = null;
 UI.init = function () {
 
     //  The score
-    UI.gameText = game.add.text(0, 0, 'table > '  + roomName, {
-        font: 'bold 22px Arial',
+    UI.gameText = game.add.text(0, 0, 'Table ||| '  + roomName, {
+        font: '22px Arial',
         fill: '#ccc'
     });
     UI.gameText.alpha = 0.7;
 
     UI.nameText = game.add.text(0, 0, '----------------\nNAME:' + playerName, {
-        font: 'bold 18px Arial',
+        font: '18px Arial',
         fill: '#ccc'
     });
     UI.nameText.align = 'right';
@@ -97,5 +97,5 @@ UI.setNames = function (names) {
 };
 
 UI.updateNames = function () {
-    UI.setNames(R.concat(['* ' + playerName], R.pluck('name', R.values(playerList))));
+    UI.setNames(R.concat([':you: ' + playerName], R.pluck('name', R.values(playerList))));
 };

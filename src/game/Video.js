@@ -8,6 +8,16 @@ navigator.getUserMedia = navigator.getUserMedia ||
   navigator.mozGetUserMedia;
 
 
+Video.init = function () {
+  console.log('VIDEO Connecting ...');
+  $('#video-container').show();
+  $('#step1').hide();
+  $('#start-video').click(function () {
+    Video.start();
+  });
+};
+
+
 Video.newPeerServerConnection = function () {
     Video.peer = new Peer(Network.myId, {
     key: '8z62zmz8keasjor',
@@ -19,9 +29,10 @@ Video.newPeerServerConnection = function () {
   });
 };
 
-Video.init = function () {
-  console.log('VIDEO Connecting ...');
-  $('#video-container').show();
+Video.start = function () {
+  Video.started = true;
+  $('#start-video').hide();
+  $('#step1').show();
 
 
   Video.newPeerServerConnection();
@@ -105,6 +116,9 @@ Video.killClient = function (clientId, clientName) {
 
 
 Video.addVideo = function (id) {
+  if (!Video.started) {
+    return;
+  }
   $('#their-videos').append(
     '<div class="video-group" id="' + id + '">' +
       '<div class="step3">' +
