@@ -6,8 +6,8 @@
 
 // retina display scaling
 var Screen = {}, World = {width: 4000, height: 2000};
-Screen.x = window.innerWidth *  window.devicePixelRatio;
-Screen.y = window.innerHeight *  window.devicePixelRatio;
+Screen.x = window.innerWidth;
+Screen.y = window.innerHeight;
 
 console.log('Screen size', Screen);
 
@@ -68,7 +68,6 @@ function setupStage() {
     if(please_wait) please_wait.remove();
     game.stage.disableVisibilityChange = true; // loose tab focus, game will continue
     game.scale.scaleMode = Phaser.ScaleManager.RESIZE;
-    game.scale.setScreenSize(true);
     game.scale.onResize = UI.update;
     var canvas = game.canvas;
 
@@ -86,7 +85,15 @@ function setupStage() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
     //  A simple background for our game
+    
     game.world.setBounds(0, 0, World.width, World.height);
+    game.scale.setScreenSize(true);
+
+    var scale = 'scale(1.0)';
+document.body.style.webkitTransform =  scale;    // Chrome, Opera, Safari
+ document.body.style.msTransform =   scale;       // IE 9
+ document.body.style.transform = scale;  ;
+
 }
 
 

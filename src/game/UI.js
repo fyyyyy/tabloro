@@ -52,7 +52,8 @@ UI.update = function () {
     console.log('UI.update');
 
     R.forEach(UI.fixedToCamera(false))(UI.textElements);
-    UI.gameText.x = UI.nameText.x = UI.messageText.x = 16;
+    UI.messageText.x = game.camera.width - 200;
+    UI.gameText.x = UI.nameText.x = 16;
     UI.gameText.y = 5;
     UI.nameText.y = 40;
     UI.messageText.y = 280;
@@ -74,7 +75,7 @@ UI.handCursor = function (button) {
 UI.message = function () {
     UI.messageText.alpha = 0.7;
     var text = R.join(' ', slice(arguments));
-    text = text.match(/.{1,30}/g); // split string every 30 characters
+    text = text.match(/.{1,19}/g); // split string every 30 characters
 
     UI.lines = R.concat(text, UI.lines);
 
@@ -82,7 +83,7 @@ UI.message = function () {
         UI.lines.pop();
     }
 
-    UI.messageText.setText('-> ' + R.join('\n')(UI.lines) + '\n...');
+    UI.messageText.setText(R.join('\n')(UI.lines) + '\n...');
     clearTimeout(UI.timeout);
     UI.timeout = setTimeout(function() {
         game.add.tween(UI.messageText).to({

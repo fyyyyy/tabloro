@@ -49,6 +49,7 @@ Network.setup = function () {
         create();
         UI.message( playerName + ' connected to server');
         Network.ready = true;
+
     };
 
 
@@ -188,6 +189,7 @@ Network.setup = function () {
         console.log(client.name + ' plays tile ', tileId, 'from Hand');
         
         var tile = G.findTile(tileId);
+        T.hide(tile);
         tile.visible = true;
         
         UI.message(client.name, 'plays tile from hand');
@@ -262,7 +264,7 @@ Network.setup = function () {
 
     Network.client.exports.receiveChat = function(client, text) {
         console.log(client.name, 'says', text);
-        UI.message(client.name, ':', text);
+        UI.message(client.name.toUpperCase(), ':', text);
     };
 };
 
