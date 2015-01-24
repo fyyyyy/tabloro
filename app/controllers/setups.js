@@ -110,6 +110,7 @@ exports.create = function (req, res) {
         res.render('setups/new', {
             title: 'New Game Setup',
             setup: setup,
+            box: req.box,
             errors: utils.errors(err.errors || err)
         });
     });
