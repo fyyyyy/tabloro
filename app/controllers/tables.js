@@ -146,7 +146,7 @@ exports.show = function (req, res) {
                 title: 'Table: ' + table.title,
                 table: table,
                 players: req.eurecaServer.getPlayers(table.title),
-                isOwner: table.user.id === req.user.id
+                isOwner: req.user && table.user.id === req.user.id
             });
         });
 
