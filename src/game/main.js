@@ -134,11 +134,15 @@ function setupAssets (gameAssets) {
         yOffset += 150;
 
         var groupName = asset.args[0];
+        var icon = 'fa-photo';
+
         console.log('adding asset group', groupName);
+
         G.groups.add(groupName, 0, Utils.deg2Rad(asset.rotateBy), asset.flipable, asset.handable, asset.lockable);
 
 
         if (asset.method === 'atlasJSONHash') {
+            icon = 'fa-cube';
             maxFrames = game.cache.getFrameCount(groupName);
             addCards(groupName, yOffset, buildAssetArray(asset, maxFrames), G.groups.get(groupName));
         }
@@ -148,9 +152,13 @@ function setupAssets (gameAssets) {
         }
 
         if (asset.method === 'spritesheet') {
+            icon = 'fa-th';
+
             maxFrames = asset.args[4];
 
             if (asset.isDice) {
+                icon = 'fa-random';
+
                 console.log('adding dice', R.head(R.of(asset.counts)));
                 R.times(function () {
                     Dice.add(groupName, G.groups.get(groupName), maxFrames);
@@ -159,8 +167,24 @@ function setupAssets (gameAssets) {
                 addCards(groupName, yOffset, buildAssetArray(asset, maxFrames), G.groups.get(groupName));
             }
         }
+
+        $('#layers').append(
+            '<li>' + 
+                '<a href="#" onclick="onArrangeLayer(\'' + groupName + '\')">' + 
+                    '<i class="fa ' + icon + ' fa-fw"></i>&nbsp;' + 
+                    groupName + 
+                '</a>' +
+        '</li>');
     })(gameAssets);
 }
+
+function onArrangeLayer (groupName) {
+    console.log('arrangeLayers', groupName);
+    Network.server.arrangeLayer(groupName);
+}
+
+
+
 
 
 function addCards(title, yOffset, array, group, stack, scale) {
@@ -255,6 +279,7 @@ function update() {
     {
         game.camera.x += 30;
     } else if(!G.enterDelay && game.input.keyboard.isDown(Phaser.Keyboard.ENTER)) {
+        console.log('ENTER pressed');
         if (chatFrame.style.getPropertyValue('display') !== 'none') {
             if (chatInput.value.length > 0) {
                 var text = chatInput.value;
@@ -263,7 +288,8 @@ function update() {
             }
             chatFrame.style.setProperty('display', 'none');
         } else {
-            chatFrame.style.setProperty('display', null);
+            console.log('showChat');
+            chatFrame.style.setProperty('display', '');
             chatInput.focus();
                 
         }

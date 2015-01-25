@@ -104,10 +104,11 @@ UI.message = function () {
     }, 10000);
 };
 
-UI.chat = function (name, text) {
-    UI.message(name +  ': ' + text);
+UI.chat = function (userName, text) {
+    UI.messageText.clearColors();
+    UI.message(userName +  ': ' + text);
     UI.messageText.addColor('#5cb85c', 0);
-    UI.messageText.addColor('#cccccc', name.length);
+    UI.messageText.addColor('#cccccc', userName.length + 1);
 };
 
 UI.setNames = function (names) {

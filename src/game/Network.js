@@ -266,5 +266,14 @@ Network.setup = function () {
         console.log(client.name, 'says', text);
         UI.chat(client.name.toUpperCase(), text);
     };
+
+    /******************* LAYERS ******************/
+
+    Network.client.exports.arrangeLayer = function(client, groupName) {
+        console.log(client.name, 'arrangeLayer', groupName);
+        game.world.setChildIndex(G.groups.all()[groupName], game.world.children.length -1);
+        UI.chat(client.name.toUpperCase(), 'arranged layer ' + groupName);
+    };
+
 };
 

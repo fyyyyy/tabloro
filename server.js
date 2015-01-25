@@ -32,7 +32,7 @@ var eurecaServer = new EurecaServer({
     'positionTile', 'dropTile', 'dragTiles', 'flipTile', 'toHand', 'fromHand', 'lock', 'unlock',
     'updateStackCards', 'flipStack',
     'spin',
-    'receiveChat'
+    'receiveChat', 'arrangeLayer'
   ]
 });
 
