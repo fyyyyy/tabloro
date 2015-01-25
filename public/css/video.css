@@ -24,7 +24,7 @@
     text-align: left;
     position: absolute;
     top: 10px;
-    right: 16px;
+    right: 2px;
 }
 
 #edit-container {
@@ -57,4 +57,19 @@
 
 .message {
     background-color: #fff;
+}
+
+.chat {
+  position: absolute;
+  left: 0px;
+  top: 50%;
+    background-color: rgba(0,0,0,0.4);
+    width: 100%;
+  text-align: center;
+  padding: 10px;
+
+}
+
+.chat input {
+  width: 300px;
 }

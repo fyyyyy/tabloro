@@ -1,4 +1,4 @@
-/*global R, G, Controls, console, Eureca, playerList, UI*/
+/*global R, G, S, Controls, console, Eureca, playerList, UI*/
 "use strict";
 
 var Network = {};
@@ -264,7 +264,7 @@ Network.setup = function () {
 
     Network.client.exports.receiveChat = function(client, text) {
         console.log(client.name, 'says', text);
-        UI.message(client.name.toUpperCase(), ':', text);
+        UI.chat(client.name.toUpperCase(), text);
     };
 };
 

@@ -29,6 +29,7 @@ var stack1;
 var stack2;
 
 var chatInput;
+var chatFrame;
 
 var screenShot = function () {
     window.open(game.canvas.toDataURL());
@@ -38,6 +39,7 @@ var screenShot = function () {
 function preload() {
     // game is available here
     chatInput = document.getElementById('chatInput');
+    chatFrame = document.getElementById('chatFrame');
     Assets.preload(game);
 }
 
@@ -89,10 +91,6 @@ function setupStage() {
     game.world.setBounds(0, 0, World.width, World.height);
     game.scale.setScreenSize(true);
 
-    var scale = 'scale(1.0)';
-document.body.style.webkitTransform =  scale;    // Chrome, Opera, Safari
- document.body.style.msTransform =   scale;       // IE 9
- document.body.style.transform = scale;  ;
 
 }
 
@@ -256,12 +254,21 @@ function update() {
     else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT))
     {
         game.camera.x += 30;
-    } else if(game.input.keyboard.isDown(Phaser.Keyboard.ENTER)) {
-        if (chatInput.value.length > 0) {
-            var text = chatInput.value;
-            chatInput.value = '';
-            Network.server.chat(text);
+    } else if(!G.enterDelay && game.input.keyboard.isDown(Phaser.Keyboard.ENTER)) {
+        if (chatFrame.style.getPropertyValue('display') !== 'none') {
+            if (chatInput.value.length > 0) {
+                var text = chatInput.value;
+                chatInput.value = '';
+                Network.server.chat(text);
+            }
+            chatFrame.style.setProperty('display', 'none');
+        } else {
+            chatFrame.style.setProperty('display', null);
+            chatInput.focus();
+                
         }
+        G.enterDelay = true;
+        setTimeout(function() { G.enterDelay = false; }, 200);
     }
 
 

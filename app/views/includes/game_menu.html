@@ -1,0 +1,91 @@
+<!-- Navigation -->
+<a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i> Menu</a>
+
+
+<nav class="no-select" id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+        <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
+
+        <li class="sidebar-brand">
+            <a href="#">{{room.title}}</a>
+        </li>
+
+
+        {% if (req.isAuthenticated()) %}
+            <li>
+                <a href="#">
+                  <img class="" src={{"/img/cursors/" + (req.user.selected_cursor || 1) + ".png"}} width="18"></img>
+                  {{req.user.username}}
+                  {% if isAdmin %}
+                    (ADMIN)
+                  {% endif %}
+                </a>
+            </li>
+        {% endif %}
+
+
+        <li>
+          <a href="https://www.facebook.com/groups/782463635166814/" title="Facebook Development Group" target="_blank">
+            <i class="fa fa-medkit fa-fw"></i>&nbsp;
+              Help
+          </a>
+        </li>
+
+
+
+
+        {% if (req.isAuthenticated()) %}
+          <li id="start-video" class="list-unstyled">
+              <a href="#" id="step1-retry" class="btn btn-success">
+                <i class="fa fa-video-camera fa-fw"></i>&nbsp;
+                Start Video Chat
+              </a>
+          </li>
+        {% endif %}
+
+
+
+
+        <p class="navbar-text">--------------------------------------</p>
+        <div class="clearfix"></div>
+
+        {% if (req.isAuthenticated()) %}
+          <li>
+            <a href="#" title="Create your own games!">
+              <i class="fa fa-sort fa-fw"></i>&nbsp;
+                Arrange layers
+            </a>
+            
+<!--                 <ul class="list-unstyled">
+                  <li>
+                      <a href="#">
+                          <i class="fa fa-puzzle-piece fa-fw"></i>&nbsp;
+                          Gaming Pieces
+                      </a>
+                  </li>
+                  
+                  <li>
+                      <a href="#">
+                          <i class="fa fa-cube fa-fw"></i>&nbsp;
+                          Game Boxes
+                      </a>
+                  </li>
+
+                  <li>
+                      <a href="#">
+                          <i class="fa fa-sitemap fa-fw"></i>&nbsp;
+                          Game Setups
+                      </a>
+                  </li>
+                </ul> -->
+          </li>
+        {% endif %}
+
+       
+
+        <li>
+            <br>
+            <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Ffacebook.com%2Ftablorodotcom&amp;width&amp;layout=button&amp;action=like&amp;show_faces=true&amp;share=true&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:80px; width:150px;"  allowTransparency="true"></iframe>
+        </li>
+    </ul>
+</nav>

@@ -9,26 +9,30 @@ UI.timeout = null;
 UI.init = function () {
 
     //  The score
-    UI.gameText = game.add.text(0, 0, 'Table ||| '  + roomName, {
-        font: '22px Arial',
-        fill: '#ccc'
-    });
-    UI.gameText.alpha = 0.7;
+    // UI.gameText = game.add.text(0, 0, 'Table ||| '  + roomName, {
+    //     font: '22px Arial',
+    //     fill: '#ccc'
+    // });
+    // UI.gameText.alpha = 0.7;
 
     UI.nameText = game.add.text(0, 0, '----------------\nNAME:' + playerName, {
-        font: '18px Arial',
+        font: '16px Helvetica',
         fill: '#ccc'
     });
     UI.nameText.align = 'right';
     UI.nameText.alpha = 0.7;
+    UI.nameText.setShadow(1,2,'#000000');
+    
 
 
     UI.messageText = game.add.text(0, 0, 'Messages:', {
-        font: '18px Arial',
+        font: '14px monospace',
         fill: '#ccc'
     });
     UI.messageText.align = 'right';
-    UI.messageText.alpha = 0.7;
+    UI.messageText.alpha = 0.8;
+    UI.messageText.setShadow(3,3,'#000000', 1);
+
 
     // UI.graphics = game.add.graphics(0, 0);
     // UI.graphics.lineStyle(5, 0x888888, 1);
@@ -41,7 +45,8 @@ UI.init = function () {
     // );
 
 
-    UI.textElements = [UI.gameText, UI.nameText, UI.messageText];
+    // UI.textElements = [UI.gameText, UI.nameText, UI.messageText];
+    UI.textElements = [UI.nameText, UI.messageText];
 
     UI.update();
 };
@@ -52,10 +57,11 @@ UI.update = function () {
     console.log('UI.update');
 
     R.forEach(UI.fixedToCamera(false))(UI.textElements);
-    UI.messageText.x = game.camera.width - 200;
-    UI.gameText.x = UI.nameText.x = 16;
-    UI.gameText.y = 5;
-    UI.nameText.y = 40;
+    UI.messageText.x = game.camera.width - 230;
+    // UI.gameText.x = 
+    UI.nameText.x = 16;
+    // UI.gameText.y = 5;
+    UI.nameText.y = 16;
     UI.messageText.y = 280;
     R.forEach(UI.fixedToCamera(true))(UI.textElements);
 };
@@ -73,30 +79,44 @@ UI.handCursor = function (button) {
 };
 
 UI.message = function () {
-    UI.messageText.alpha = 0.7;
-    var text = R.join(' ', slice(arguments));
-    text = text.match(/.{1,19}/g); // split string every 30 characters
+    UI.messageText.alpha = 0.8;
+    var rawtext = R.join(' ', slice(arguments));
 
+    var text = rawtext.match(/.{1,25}/g); // split string every 30 characters
     UI.lines = R.concat(text, UI.lines);
 
     if (UI.lines.length > 10) {
         UI.lines.pop();
     }
 
+    console.log('rawtext', rawtext, rawtext.length);
+
     UI.messageText.setText(R.join('\n')(UI.lines) + '\n...');
+
+
     clearTimeout(UI.timeout);
+    if(UI.messageTween) UI.messageTween.stop();
+
     UI.timeout = setTimeout(function() {
-        game.add.tween(UI.messageText).to({
+        UI.messageTween = game.add.tween(UI.messageText).to({
             alpha: 0
         }, 2000, Phaser.Easing.Linear.None, true);
     }, 10000);
 };
 
+UI.chat = function (name, text) {
+    UI.message(name +  ': ' + text);
+    UI.messageText.addColor('#5cb85c', 0);
+    UI.messageText.addColor('#cccccc', name.length);
+};
+
 UI.setNames = function (names) {
     UI.nameText.setText(R.join('\n')(names));
+    UI.nameText.addColor('#5cb85c', 0);
+    UI.nameText.addColor('#cccccc', playerName.length);
     // UI.nameText.setText(R.join('-', new Array(gameName.length * 3)) + '\nTable: ' + roomName + '\n' + R.join('\n')(names));
 };
 
 UI.updateNames = function () {
-    UI.setNames(R.concat([':you: ' + playerName], R.pluck('name', R.values(playerList))));
+    UI.setNames(R.concat([playerName], R.pluck('name', R.values(playerList))));
 };

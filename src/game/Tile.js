@@ -28,12 +28,12 @@ T.draggable = function (tile) {
 };
 
 T.highlight = function (tile) {
-    console.log('highlight', tile);
+    // console.log('highlight', tile);
     tile.alpha = 0.8;
 };
 
 T.unlight = function (tile) {
-    console.log('highlight', tile);
+    // console.log('highlight', tile);
     tile.alpha = 1.0;
 };
 

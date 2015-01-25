@@ -1,78 +1,40 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <title>{{title}}</title>
 
-        <link href="/css/game.css" rel="stylesheet">
-        <link href="/css/video.css" rel="stylesheet">
-        <link href="/css/bootstrap.css" rel="stylesheet">
+{% extends '../layouts/play.html' %}
 
-        <script type="text/javascript" src="/eureca.js"></script>
-        <script type="text/javascript" src="/js/phaser.js"></script>
-        <script type="text/javascript" src="/js/ramda.js"></script>
-        <script type="text/javascript" src="/js/jquery.js"></script>
-        <script type="text/javascript" src="/js/peer.js"></script>
 
-        {% if process.env.NODE_ENV === 'development' %}
-            <script type="text/javascript" src="/Game.js"></script>
-            <script type="text/javascript" src="/Network.js"></script>
-            <script type="text/javascript" src="/Cursor.js"></script>
-            <script type="text/javascript" src="/UI.js"></script>
-            <script type="text/javascript" src="/Assets.js"></script>
-            <script type="text/javascript" src="/Controls.js"></script>
-            <script type="text/javascript" src="/Dice.js"></script>
-            <script type="text/javascript" src="/Utils.js"></script>
-            <script type="text/javascript" src="/Tile.js"></script>
-            <script type="text/javascript" src="/Stack.js"></script>
-            <script type="text/javascript" src="/Hand.js"></script>
-            <script type="text/javascript" src="/Video.js"></script>
-            <script type="text/javascript" src="/main.js"></script>
-        {% else %}
-            <script type="text/javascript" src="/js/compiled.js"></script>
-        {% endif %}
+{% block main %}
+    {% include '../includes/game_menu.html' %}
 
-        <script type="text/javascript">
-            var playerName = '{{user.username}}';
-            var cursorId = Number('{{user.selected_cursor}}') || 1;
-            var mode = '{{mode}}';
-            var roomName = '{{room.title}}';
-            var gameName = '{{game.title}}';
-            var assets = JSON.parse('{{ JSON.stringify(assets) }}');
-        </script>
-    </head>
-  
-    <body style="cursor : url(/img/cursors/{{user.selected_cursor}}.png), auto;">
-        
-        <!-- Loading message -->
-        {% include '../includes/please_wait.html' %}
-        
-        <!-- Video area -->
-        <div id="video-container" style="display:none;">
-            <div id="start-video">
-                    <a href="#" class="btn btn-success" id="step1-retry">Start Video Chat</a>
-            </div>
-            <div class="step message" id="step1">
-                <p>Please click <a class="btn btn-default" disabled="true">allow</a> on top of your screen for video chat.</p>
-                <p>Built in peer to peer video chat needs <strong>Firefox</strong> or <strong>Chrome</strong> browsers.</p>
-                <p class="small">Safari and Internet Explorer do not support <a href="http://iswebrtcreadyyet.com/" target="_blank" >WebRTC</a> yet.</p>
-                <div id="step1-error">
-                    <p>Failed to access the webcam and microphone.</p>
-                    <a href="#" class="btn btn-primary" id="step1-retry">Try again</a>
-                </div>
-            </div>
-            
-            <video class="video" id="my-video" muted="true" style="display:none;" autoplay></video>
+    <!-- Loading message -->
+    {% include '../includes/please_wait.html' %}
 
-            <div id="their-videos">
-
-            </div>
-
-            <div class="clearfix"></div>
-            
-            <div class="chat">
-                <textarea type="text" id="chatInput" placeholder="type to chat..."></textarea>
+    <!-- Video area -->
+    <div id="video-container" style="display:none;" class="no-select">
+    <!--             <div id="start-video">
+                <a href="#" class="btn btn-success" id="step1-retry">Start Video Chat</a>
+        </div> -->
+        <div class="step message" id="step1">
+            <p>Please click <a class="btn btn-default" disabled="true">allow</a> on top of your screen for video chat.</p>
+            <p>Built in peer to peer video chat needs <strong>Firefox</strong> or <strong>Chrome</strong> browsers.</p>
+            <p class="small">Safari and Internet Explorer do not support <a href="http://iswebrtcreadyyet.com/" target="_blank" >WebRTC</a> yet.</p>
+            <div id="step1-error">
+                <p>Failed to access the webcam and microphone.</p>
+                <a href="#" class="btn btn-primary" id="step1-retry">Try again</a>
             </div>
         </div>
-    </body>
-</html>
+        
+        <video class="video" id="my-video" muted="true" style="display:none;" autoplay></video>
+
+        <div id="their-videos">
+
+        </div>
+
+        <div class="clearfix"></div>
+        
+    </div>
+
+    <div class="chat" id="chatFrame" class="no-select">
+        <input type="text" id="chatInput" placeholder="Press ENTER to chat..." autofocus></input>
+    </div>
+
+{% endblock %}

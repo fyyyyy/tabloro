@@ -1,61 +1,23 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <title>{{title}}</title>
+{% extends '../layouts/play.html' %}
 
-        <link href="/css/game.css" rel="stylesheet">
-        <link href="/css/video.css" rel="stylesheet">
-        <link href="/css/bootstrap.css" rel="stylesheet">
-
-        <script type="text/javascript" src="/eureca.js"></script>
-        <script type="text/javascript" src="/js/phaser.js"></script>
-        <script type="text/javascript" src="/js/ramda.js"></script>
-        <script type="text/javascript" src="/js/jquery.js"></script>
-        <script type="text/javascript" src="/js/peer.js"></script>
-
-        {% if process.env.NODE_ENV === 'development' %}
-            <script type="text/javascript" src="/Game.js"></script>
-            <script type="text/javascript" src="/Network.js"></script>
-            <script type="text/javascript" src="/Cursor.js"></script>
-            <script type="text/javascript" src="/UI.js"></script>
-            <script type="text/javascript" src="/Assets.js"></script>
-            <script type="text/javascript" src="/Controls.js"></script>
-            <script type="text/javascript" src="/Dice.js"></script>
-            <script type="text/javascript" src="/Utils.js"></script>
-            <script type="text/javascript" src="/Tile.js"></script>
-            <script type="text/javascript" src="/Stack.js"></script>
-            <script type="text/javascript" src="/Hand.js"></script>
-            <script type="text/javascript" src="/Video.js"></script>
-            <script type="text/javascript" src="/main.js"></script>
-        {% else %}
-            <script type="text/javascript" src="/js/compiled.js"></script>
-        {% endif %}
-
-        <script type="text/javascript">
-            var playerName = '{{user.username}}';
-            var cursorId = Number('{{user.selected_cursor}}') || 1;
-            var mode = '{{mode}}';
-            var roomName = '{{roomName || room.title}}';
-            var gameName = '{{game.title}}';
-            var assets = JSON.parse('{{ JSON.stringify(assets) }}');
-        </script>
-    </head>
-    <body style="cursor: url(/img/cursors/{{user.selected_cursor}}.png), auto;">
+{% block main %}
         
-        {% include '../includes/please_wait.html' %}
-       
+    {% include '../includes/please_wait.html' %}
 
-        {% if (mode === 'setup' && isOwner) %}
-            <div id="edit-container">
-                <button onclick="G.saveSetup()" class="btn btn-success">Save Setup</button>
-            </div>
-        {% else %}
-            <div id="edit-container">
-                <a href="{{backUrl}}" class="btn btn-warning">End Test</a>
-            </div>
-        {% endif %}
+
+    {% if (mode === 'setup' && isOwner) %}
+        <div id="edit-container">
+            <button onclick="G.saveSetup()" class="btn btn-success">Save Setup</button>
+        </div>
+    {% else %}
+        <div id="edit-container">
+            <a href="{{backUrl}}" class="btn btn-warning">End Test</a>
+        </div>
+    {% endif %}
+
+    <div class="chat" id="chatFrame" class="no-select" style="display: none;">
+        <input type="text" id="chatInput" placeholder="Press ENTER to chat..." autofocus></input>
+    </div>
+
         
-        
-    </body>
-</html>
+{% endblock %}
