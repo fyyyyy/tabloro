@@ -14,8 +14,7 @@ T.draggable = function (tile) {
     tile.controls = tile.controls || game.add.group();
 
     tile.inputEnabled = true;
-    tile.input.enableDrag(false, true);
-    tile.input.useHandCursor = true;
+    tile.input.enableDrag(false, true, true);
 
     game.physics.arcade.enable(tile);
     tile.body.collideWorldBounds = true;
@@ -60,8 +59,7 @@ T.lock = function ( tile) {
 
 T.unlock = function ( tile) {
     Controls.lockControls.tint = 0xFFFFFF;
-    tile.input.enableDrag(false, true);
-    tile.input.useHandCursor = true;
+    tile.input.enableDrag(false, true, true);
     return tile;
 };
 
