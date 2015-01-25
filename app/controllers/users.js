@@ -5,6 +5,10 @@
 
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
+var Piece = mongoose.model('Piece');
+var Box = mongoose.model('Box');
+var Setup = mongoose.model('Setup');
+var Table = mongoose.model('Table');
 var utils = require('../../lib/utils');
 var extend = require('util')._extend;
 
@@ -40,13 +44,28 @@ exports.index = function (req, res){
 
   User.list(options, function (err, users) {
     if (err) return res.render('500');
-    User.count().exec(function (err, count) {
-      res.render('users/index', {
-        title: 'Users',
-        users: users,
-        page: page + 1,
-        pages: Math.ceil(count / perPage),
-        count: count
+
+    Piece.count().exec(function (err, countPieces) {
+      Box.count().exec(function (err, countBoxes) {
+        Setup.count().exec(function (err, countSetups) {
+          Table.count().exec(function (err, countTables) {
+
+            User.count().exec(function (err, count) {
+              res.render('users/index', {
+                title: 'Users',
+                users: users,
+                page: page + 1,
+                pages: Math.ceil(count / perPage),
+                count: count,
+                countPieces: countPieces,
+                countBoxes: countBoxes,
+                countSetups: countSetups,
+                countTables: countTables
+              });
+            });
+
+          });
+        });
       });
     });
   });

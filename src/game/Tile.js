@@ -15,12 +15,26 @@ T.draggable = function (tile) {
 
     tile.inputEnabled = true;
     tile.input.enableDrag(false, true);
-    tile.input.useHandCursor = true;
+    // tile.input.useHandCursor = true;
 
     game.physics.arcade.enable(tile);
     tile.body.collideWorldBounds = true;
 
+    tile.events.onInputOver.add(T.highlight);
+    tile.events.onInputOut.add(T.unlight);
+
+
     return tile;
+};
+
+T.highlight = function (tile) {
+    console.log('highlight', tile);
+    tile.alpha = 0.8;
+};
+
+T.unlight = function (tile) {
+    console.log('highlight', tile);
+    tile.alpha = 1.0;
 };
 
 T.networkAble = function (tile) {
@@ -53,7 +67,7 @@ T.lock = function ( tile) {
     if (tile.lockable) {
         Controls.lockControls.tint = 0xFF3366;
         tile.input.disableDrag();
-        tile.input.useHandCursor = false;
+        // tile.input.useHandCursor = false;
     }
     return tile;
 };
@@ -61,7 +75,7 @@ T.lock = function ( tile) {
 T.unlock = function ( tile) {
     Controls.lockControls.tint = 0xFFFFFF;
     tile.input.enableDrag(false, true);
-    tile.input.useHandCursor = true;
+    // tile.input.useHandCursor = true;
     return tile;
 };
 

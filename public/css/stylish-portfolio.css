@@ -556,4 +556,10 @@ a.skype {
     color: #d43f3a;
 }
 
+.share-header {
+    position: absolute;
+    top: 26%;
+    left: 5px;
+}
+
 

@@ -8,7 +8,13 @@
 
   <div class="spacer"></div>
 
-    <p>Total: {{count}}</p>
+    <p>
+      Users: {{count}} \
+      Pieces: {{countPieces}} \
+      Boxes: {{countBoxes}} \
+      Setups: {{countSetups}} \
+      Tables: {{countTables}}
+    </p>
     {% if (users.length) %}
       {% for user in users %}
         {% include 'user.html' %}
