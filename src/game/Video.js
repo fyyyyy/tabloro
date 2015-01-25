@@ -12,6 +12,7 @@ Video.init = function () {
   console.log('VIDEO Connecting ...');
   $('#video-container').show();
   $('#step1').hide();
+  $('#their-videos').hide();
   $('#start-video').click(function () {
     Video.start();
   });
@@ -33,6 +34,7 @@ Video.start = function () {
   Video.started = true;
   $('#start-video').hide();
   $('#step1').show();
+  $('#their-videos').show();
 
 
   Video.newPeerServerConnection();
@@ -80,6 +82,7 @@ Video.newClient = function (clientId, clientName) {
   
   console.debug('new VIDEO client', clientId, clientName);
   if (!clientId) {
+    console.error('no clientId given', clientId, clientName);
     return;
   }
 
@@ -116,9 +119,6 @@ Video.killClient = function (clientId, clientName) {
 
 
 Video.addVideo = function (id) {
-  if (!Video.started) {
-    return;
-  }
   $('#their-videos').append(
     '<div class="video-group" id="' + id + '">' +
       '<div class="step3">' +
