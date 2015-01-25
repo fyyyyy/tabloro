@@ -272,6 +272,7 @@ Network.setup = function () {
     Network.client.exports.arrangeLayer = function(client, groupName) {
         console.log(client.name, 'arrangeLayer', groupName);
         game.world.setChildIndex(G.groups.all()[groupName], game.world.children.length -1);
+        game.world.setChildIndex(Controls.controls, game.world.children.length -1);
         UI.chat(client.name.toUpperCase(), 'arranged layer ' + groupName);
     };
 

@@ -66,7 +66,7 @@ Controls.add = function () {
 
     Controls.graphics = game.add.graphics(0, 0);
     Controls.graphics.lineStyle(10, 0xFFFFFF, 0.8);
-    Controls.graphics.beginFill(0xAABBEE, 0.3);
+    Controls.graphics.beginFill(0x33BBFF, 0.4);
 };
 
 
