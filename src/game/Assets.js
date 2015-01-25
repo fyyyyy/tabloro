@@ -22,7 +22,7 @@ Assets.preload = function (game) {
     game.load.image('rotate', '/assets/rotate.png');
     game.load.spritesheet('button', '/assets/button_sprite_sheet.png', 193, 71);
 
-    // game.load.crossOrigin = "anonymous";
+    game.load.crossOrigin = "anonymous";
     R.forEach(function (asset) {
         game.load[asset.method].apply(game.load, asset.args);
         console.log('loading', asset.method, asset.args);
