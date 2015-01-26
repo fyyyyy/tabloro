@@ -19,7 +19,9 @@
 
   <div class="spacer"></div>
 
-  <div class="row">
+  <section>
+    
+  <div class="container">
     {% if (articles.length) %}
       {% for article in articles %}
         {% include 'article.html' %}
@@ -39,6 +41,7 @@
     {% endif %}
   </div>
 
+  </section>
 
 <div class="clearfix"></div>
 <div class="about"></div>

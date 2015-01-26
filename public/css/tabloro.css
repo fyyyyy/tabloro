@@ -463,32 +463,70 @@ footer {
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
-    color: #eee;
+    color: #000;
     /*text-shadow: 1px 2px 5px #432;*/
-    text-shadow: 2px 2px 0px #321;
+    /*text-shadow: 2px 2px 0px #321;*/
+
 }
 
 
 footer .list-unstyled {    
     color: #000;
-    opacity: 0.8;
     text-shadow: none;
 }
 
 
-footer .list-inline a{
-    color: #000;
-    text-shadow: 0px -1px 0px #987;
+footer  a{
+    color: #428bca;
+    text-shadow: none;
+
     opacity: 0.7;
+   text-shadow:
+       0.5px 1px 0 #210;
+
+
+}
+
+footer .list-inline a{
+            -webkit-text-stroke: 0.5px #210;
+   text-shadow:
+       0.5px 0.5px 0 #210;
+     -0.5px -0.5px 0 #210;  
+      0.5px -0.5px 0 #210;
+      -0.5px 0.5px 0 #210;
+       0.5px 0.5px 0 #210;
+}
+
+footer .list-inline a:hover{
+    color: #428bca;
+    
+    -webkit-text-stroke: 0.5px #cba;
+   text-shadow:
+       0.5px 0.5px 0 #cba,
+     -0.5px -0.5px 0 #cba,  
+      0.5px -0.5px 0 #cba,
+      -0.5px 0.5px 0 #cba,
+       0.5px 0.5px 0 #cba;
+
 
 }
 
 .footer-title {
     color: #000;
-    text-shadow: 0px -1px 0px #987;
+    text-shadow: none;
+    
+    text-shadow: -1px -1px 0px #765;
+    text-shadow: 0px -0.5px 0px #765;
     opacity: 0.7;
 
 }
+
+
+.footer-title .small{
+    color: #000;
+    font-size: 30%;
+}
+
 
 
 .small {
