@@ -1,10 +1,16 @@
 <div id="please_wait" style="position: absolute; top: 30%; left:30%">
     <center style="color: #888;">
-    <h1>Please wait while loading '{{room.title}}'. Don't switch tabs...</h1>
+
+
+    <h1>
+      <img src="/img/ajax-loader.gif">
+      Please wait while loading '{{room.title}}'. Don't switch tabs...
+    </h1>
     <p>Please do <b>not</b> switch tabs during loading or your game wont start properly. This is an <b>issue</b> we have to fix.</p>
     <p>Loading may take 0-3 <b>minutes</b> depending on your connection.</p>
     
     <hr>
+    <h3 id="load_error"></h3>
     
     {% include '../includes/controls.html' %}
     

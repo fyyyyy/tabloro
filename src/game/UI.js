@@ -7,18 +7,19 @@ UI.lines = [];
 UI.timeout = null;
 
 UI.init = function () {
+    UI.group = game.add.group();
 
     //  The score
     // UI.gameText = game.add.text(0, 0, 'Table ||| '  + roomName, {
     //     font: '22px Arial',
     //     fill: '#ccc'
-    // });
+    // }, UI.group);
     // UI.gameText.alpha = 0.7;
 
     UI.nameText = game.add.text(0, 0, '----------------\nNAME:' + playerName, {
         font: '16px Helvetica',
         fill: '#ccc'
-    });
+    }, UI.group);
     UI.nameText.align = 'right';
     UI.nameText.alpha = 0.7;
     UI.nameText.setShadow(1,2,'#000000');
@@ -28,7 +29,7 @@ UI.init = function () {
     UI.messageText = game.add.text(0, 0, 'Messages:', {
         font: '14px monospace',
         fill: '#ccc'
-    });
+    }, UI.group);
     UI.messageText.align = 'right';
     UI.messageText.alpha = 0.8;
     UI.messageText.setShadow(3,3,'#000000', 1);

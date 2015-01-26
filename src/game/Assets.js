@@ -24,7 +24,20 @@ Assets.preload = function (game) {
 
     // game.load.crossOrigin = "Anonymous";
     R.forEach(function (asset) {
-        game.load[asset.method].apply(game.load, asset.args);
         console.log('loading', asset.method, asset.args);
+        var key = asset.args[0];
+
+        if (asset.method === 'spritesheet') {
+            game.load.onFileError.addOnce(function () {
+                console.log('onFileError');
+                $('#load_error').text('Could not load asset. Too many frames specified, or frames not fitting inside texture');
+            }, game);
+    
+            game.load[asset.method].apply(game.load, asset.args);
+
+            return;
+            
+        }
+        game.load[asset.method].apply(game.load, asset.args);
     })(assets);
 };

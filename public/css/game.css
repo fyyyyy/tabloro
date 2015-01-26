@@ -26,3 +26,7 @@ body {
 .sidebar-nav .btn-success{
     color: #efefef;
 }
+
+#load_error {
+  color: #F35;
+}
