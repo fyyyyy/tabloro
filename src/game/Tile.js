@@ -11,8 +11,6 @@ T.centerAnchor = function (tile) {
 
 T.draggable = function (tile) {
 
-    tile.controls = tile.controls || game.add.group();
-
     tile.inputEnabled = true;
     tile.input.enableDrag(false, true);
     // tile.input.useHandCursor = true;
@@ -29,12 +27,19 @@ T.draggable = function (tile) {
 
 T.highlight = function (tile) {
     // console.log('highlight', tile);
-    tile.alpha = 0.8;
+    Controls.highlight.clear();
+    Controls.highlight.drawRect(
+        tile.x - tile.width / 2,
+        tile.y - tile.height / 2,
+        tile.width,
+        tile.height
+    );
 };
 
 T.unlight = function (tile) {
     // console.log('highlight', tile);
-    tile.alpha = 1.0;
+    Controls.highlight.clear();
+    
 };
 
 T.networkAble = function (tile) {
@@ -191,6 +196,7 @@ T.onStartDrag = function (tile) {
     console.log('onStartDrag', tile.id);
 
     H.release(tile);
+    Controls.highlight.clear();
 
     Controls.verifySelection(tile);
     

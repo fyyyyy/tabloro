@@ -7,6 +7,7 @@ G._groups = {};
 
 G.groups = {
     add: function (groupName, index, rotateBy, flipable, handable, lockable) {
+        console.log('adding group');
         index = index || 0;
         rotateBy = rotateBy || 0;
 
