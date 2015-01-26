@@ -45,13 +45,39 @@ UI.init = function () {
     //     Screen.y / 4
     // );
 
+    UI.chatInput = document.getElementById('chatInput');
+    UI.chatFrame = document.getElementById('chatFrame');
 
     // UI.textElements = [UI.gameText, UI.nameText, UI.messageText];
     UI.textElements = [UI.nameText, UI.messageText];
 
     UI.update();
+
 };
 
+
+UI.sendChat = function () {
+    if (chatInput.value.length > 0) {
+        var text = chatInput.value;
+        chatInput.value = '';
+        Network.server.chat(text);
+    }
+};
+
+UI.showChat = function () {
+    chatFrame.style.setProperty('display', '');
+    chatInput.focus();
+
+};
+
+
+UI.hideChat = function () {
+    chatFrame.style.setProperty('display', 'none');
+};
+
+UI.chatVisible = function () {
+    return chatFrame.style.getPropertyValue('display') !== 'none';
+};
 
 
 UI.update = function () {

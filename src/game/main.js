@@ -1,4 +1,4 @@
-/*global Phaser, R, T, G, console, Network, random, window, UI, Assets, document*/
+/*global Phaser, R, T, G, Controls, console, Network, window, UI, Assets, document*/
 "use strict";
 
 
@@ -18,18 +18,12 @@ var game = new Phaser.Game(Screen.x, Screen.y, Phaser.CANVAS, 'boardgame', {
 });
 
 
-var redDice;
-var stacks;
 var players;
 var table;
 var playerList = {};
 var player = {};
 
-var stack1;
-var stack2;
 
-var chatInput;
-var chatFrame;
 
 var screenShot = function () {
     window.open(game.canvas.toDataURL());
@@ -38,8 +32,6 @@ var screenShot = function () {
 
 function preload() {
     // game is available here
-    chatInput = document.getElementById('chatInput');
-    chatFrame = document.getElementById('chatFrame');
     Assets.preload(game);
 }
 
@@ -57,6 +49,7 @@ function create() {
     Controls.add(); // on top of tiles
 
     UI.init(); // do before players
+    if (mode === 'play') { UI.showChat()};
     setupPlayers();
     Cursor.set();
     if(mode === 'play') Video.init();
@@ -70,6 +63,10 @@ function setupStage() {
     if(please_wait) please_wait.remove();
     game.stage.disableVisibilityChange = true; // loose tab focus, game will continue
     game.scale.scaleMode = Phaser.ScaleManager.RESIZE;
+    game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+    game.scale.fullScreenTarget = document.body;
+
+
     game.scale.onResize = UI.update;
     var canvas = game.canvas;
 
@@ -95,6 +92,14 @@ function setupStage() {
 }
 
 
+function gofull() {
+    if (game.scale.isFullScreen) {
+        game.scale.stopFullScreen();
+        return;
+    }
+    game.scale.startFullScreen();
+}
+
 
 function setupTable() {
     var backgroundInput = game.add.image(0,0);
@@ -118,7 +123,7 @@ function setupTable() {
 function buildAssetArray (asset, maxFrames) {
     var assetArray = [];
     for (var i = 0; i < maxFrames; i++) {
-        R.times(function (n) {
+        R.times(function () {
             assetArray.push(i);
         })(asset.counts[i] || 1);
     }
@@ -241,7 +246,7 @@ function addTokens(which, group, x, y, scale) {
 
 
 
-function setupPlayers () {
+function setupPlayers() {
     UI.updateNames();
     players = game.add.group();
     players.z = 17;
@@ -263,35 +268,33 @@ function update() {
     };
 
 
-    if (game.input.keyboard.isDown(Phaser.Keyboard.UP))
+    if (game.input.keyboard.isDown(Phaser.Keyboard.UP)
+        || game.input.keyboard.isDown(Phaser.Keyboard.W) && !UI.chatVisible())
     {
-        game.camera.y -= 30;
+        game.camera.y -= 50;
     }
-    else if (game.input.keyboard.isDown(Phaser.Keyboard.DOWN))
+    else if (game.input.keyboard.isDown(Phaser.Keyboard.DOWN)
+             || game.input.keyboard.isDown(Phaser.Keyboard.S) && !UI.chatVisible())
     {
-        game.camera.y += 30;
+        game.camera.y += 50;
     }
-    else if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT))
+    else if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT)
+             || game.input.keyboard.isDown(Phaser.Keyboard.A) && !UI.chatVisible())
     {
-        game.camera.x -= 30;
+        game.camera.x -= 50;
     }
-    else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT))
+    else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)
+             || game.input.keyboard.isDown(Phaser.Keyboard.D) && !UI.chatVisible())
     {
-        game.camera.x += 30;
+        game.camera.x += 50;   
     } else if(!G.enterDelay && game.input.keyboard.isDown(Phaser.Keyboard.ENTER)) {
         console.log('ENTER pressed');
-        if (chatFrame.style.getPropertyValue('display') !== 'none') {
-            if (chatInput.value.length > 0) {
-                var text = chatInput.value;
-                chatInput.value = '';
-                Network.server.chat(text);
-            }
-            chatFrame.style.setProperty('display', 'none');
+        if (UI.chatVisible()) {
+            UI.sendChat();
+            UI.hideChat();
         } else {
             console.log('showChat');
-            chatFrame.style.setProperty('display', '');
-            chatInput.focus();
-                
+            UI.showChat();
         }
         G.enterDelay = true;
         setTimeout(function() { G.enterDelay = false; }, 200);
@@ -311,7 +314,9 @@ function update() {
 
     // Utils.alignPosition(player, mouseWorldPosition);
 
-    if (!player.lastPosition || (player.lastPosition.x != mouseWorldPosition.x) || (player.lastPosition.y != mouseWorldPosition.y)) {
+    if (!player.lastPosition
+        || (player.lastPosition.x != mouseWorldPosition.x)
+        || (player.lastPosition.y != mouseWorldPosition.y)) {
         Network.server.moveCursor(mouseWorldPosition);
         player.lastPosition = mouseWorldPosition;
     }
