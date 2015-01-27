@@ -7,13 +7,8 @@ module.exports = {
   variants: {
     article: {
       resize: {
-        detail: 'x440'
-      },
-      crop: {
-
-      },
-      resizeAndCrop: {
-        mini: { resize: '63504@', crop: '252x210' }
+        detail: 'x440',
+        mini: '252x210>'
       }
     },
 

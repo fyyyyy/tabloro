@@ -15,8 +15,10 @@ T.draggable = function (tile) {
     tile.input.enableDrag(false, true);
     // tile.input.useHandCursor = true;
 
-    game.physics.arcade.enable(tile);
-    tile.body.collideWorldBounds = true;
+    if (tile.width < 200 || tile.height < 200) {
+        game.physics.arcade.enable(tile);
+        tile.body.collideWorldBounds = true;
+    }
 
     tile.events.onInputOver.add(T.highlight);
     tile.events.onInputOut.add(T.unlight);
