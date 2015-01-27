@@ -57,10 +57,10 @@
                 <label class="col-sm-3 control-label">List in Public?</label>
                 <div class="col-sm-9">
                   <div class="btn-group" data-toggle="buttons">
-                    <label href="#" for="isPrivate2" class="btn btn-xs btn-default {% if (!box.isPrivate) %} active {% endif %}">public
+                    <label href="#" for="isPrivate2" class="btn btn btn-success {% if (!box.isPrivate) %} active {% endif %}">public
                       <input type="radio" id="isPrivate2" name="isPrivate" value="0" />
                     </label>
-                    <label href="#" for="isPrivate1" class="btn btn-xs btn-default {% if (box.isPrivate) %} active {% endif %}" >private
+                    <label href="#" for="isPrivate1" class="btn btn btn-warning {% if (box.isPrivate) %} active {% endif %}" >private
                       <input type="radio" id="isPrivate1" name="isPrivate" value="1" />
                     </label>
                   </div>

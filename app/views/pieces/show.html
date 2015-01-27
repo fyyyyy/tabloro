@@ -111,6 +111,11 @@
           </li>
         {% endif %}
 
+        {% if (piece.isStash) %}
+          <li class="list-group-item list-group-item-info">Is Stash
+            <i class="fa fa-inbox pull-right"></i>
+          </li>
+        {% endif %}
 
 
         {% if (piece.handable) %}

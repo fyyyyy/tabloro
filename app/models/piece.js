@@ -74,6 +74,10 @@ var PieceSchema = new Schema({
     type: Boolean,
     default: false
   },
+  isStash: {
+    type: Boolean,
+    default: false
+  },
   lockable: {
     type: Boolean,
     default: false

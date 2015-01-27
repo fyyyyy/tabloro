@@ -78,6 +78,19 @@
             </div>
           </div>
 
+          
+            <div class="form-group">
+              <label for="rules" class="col-sm-3 control-label">Rules</label>
+              <div class="col-sm-9">
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-institution fa-fw"></i>
+                  </div>
+                  <input type="text" name="rules" value="{{ table.rules }}" placeholder="Enter custom rules link for this table, e.g. http://myblog.com/rules..." class="form-control" id="rules">
+                </div>
+              </div>
+            </div>
+
           <div class="panel panel-default col-sm-offset-3">
             <div class="panel-heading">
               <h4><a data-toggle="collapse" data-target="#accordion">
@@ -149,22 +162,6 @@
             </div>
 
 
-            <div class="form-group">
-              <label for="rules" class="col-sm-3 control-label">House Rules</label>
-              <div class="col-sm-9">
-                <div class="input-group">
-                  <div class="input-group-addon">
-                    <i class="fa fa-institution fa-fw"></i>
-                  </div>
-                  <input type="text" name="rules" value="{{ table.rules }}" placeholder="Enter custom rules link for this table, e.g. http://myblog.com/rules..." class="form-control" id="rules">
-                </div>
-                <p class="help-block">Find rules 
-                  <a href="http://boardgames.lovetoknow.com/Printable_Instructions_for_Board_Games" target="_blank">1</a>
-                  <a href="http://www.gamingcorner.nl/board-rules.htm" target="_blank">2</a>
-                  <a href="https://www.google.com/?q=board+game+rules" target="_blank">3</a>
-                </p>
-              </div>
-            </div>
 
             <div class="form-group">
               <label for="tags" class="col-sm-3 control-label">Tags</label>

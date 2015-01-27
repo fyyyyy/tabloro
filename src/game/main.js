@@ -5,7 +5,7 @@
 
 
 // retina display scaling
-var Screen = {}, World = {width: 4000, height: 2000};
+var Screen = {}, World = {width: 5000, height: 4000};
 Screen.x = window.innerWidth;
 Screen.y = window.innerHeight;
 
@@ -168,6 +168,8 @@ function setupAssets (gameAssets) {
                 R.times(function () {
                     Dice.add(groupName, G.groups.get(groupName), maxFrames);
                 })(R.head(R.of(asset.counts)) || 1);
+            } else if (asset.isStash){
+                addStash(groupName, yOffset, R.head(R.of(asset.counts)) || 1, G.groups.get(groupName));
             } else {
                 addCards(groupName, yOffset, buildAssetArray(asset, maxFrames), G.groups.get(groupName));
             }
@@ -190,11 +192,22 @@ function onArrangeLayer (groupName) {
 
 
 
+function addStash (title, yOffset, array, group) {
+    console.log('addStash', title, yOffset, array, group);
+    var offsetX = 0;
+    
+    R.times(function (n) {
+        var tile = group.create(offsetX, yOffset, title, n);
+        tile.defaultFrame = 1;
+        R.compose(T.setId, Cursor.reset, T.networkAble, T.lockable(true), T.flipable(group.flipable), T.draggable, T.centerAnchor)(tile);
+
+    })(array);
+    
+}
 
 
-function addCards(title, yOffset, array, group, stack, scale) {
-    scale = scale || 1.0;
-    var cards = [];
+
+function addCards(title, yOffset, array, group) {
     var last;
     var tempOffsetX = 0;
     var tempOffsetY = 0;
@@ -218,11 +231,8 @@ function addCards(title, yOffset, array, group, stack, scale) {
         }
         var tile = group.create(offsetX, yOffset + tempOffsetY + nOffsetY, title, n);
         tile.defaultFrame = n;
-        if (stack && stack.config.hidden) T.hide(tile);
-        T.scale(scale, tile);
         R.compose(T.setId, Cursor.reset, T.networkAble, T.lockable(group.lockable), T.stackable, T.flipable(group.flipable), T.rotateable(group.rotateBy), T.handable(group.handable),  T.draggable, T.centerAnchor)(tile);
 
-        cards.push(tile.id);
         Controls.target = tile;
         last = n;
         // console.log('tile created', tile.id);
