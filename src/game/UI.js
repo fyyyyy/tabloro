@@ -4,6 +4,7 @@
 var UI = {};
 
 UI.lines = [];
+UI.menuLines = [];
 UI.timeout = null;
 
 UI.init = function () {
@@ -110,15 +111,26 @@ UI.message = function () {
     var rawtext = R.join(' ', slice(arguments));
 
     var text = rawtext.match(/.{1,25}/g); // split string every 30 characters
+    console.log('rawtext', rawtext);
+    
+    
+    // chat text
     UI.lines = R.concat(text, UI.lines);
-
     if (UI.lines.length > 10) {
         UI.lines.pop();
     }
-
-    console.log('rawtext', rawtext, rawtext.length);
-
     UI.messageText.setText(R.join('\n')(UI.lines) + '\n...');
+
+    
+    // menu chat text
+    UI.menuLines = R.concat([rawtext], UI.menuLines);
+    if (UI.menuLines.length > 10) {
+        UI.menuLines.pop();
+    }
+    $('#menu-chat-text').html(R.join('<br><br>')(UI.menuLines));
+
+    console.log(UI.menuLines);
+
 
 
     clearTimeout(UI.timeout);

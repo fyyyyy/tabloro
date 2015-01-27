@@ -27,3 +27,11 @@ body {
 #load_error {
   color: #F35;
 }
+
+
+#menu-chat-text {
+  color: #acc;
+  font-size: 80%;
+  line-height: 12px;
+  font-family: 'Courier';
+}
