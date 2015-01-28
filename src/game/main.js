@@ -49,7 +49,6 @@ function create() {
     Controls.add(); // on top of tiles
 
     UI.init(); // do before players
-    if (mode === 'play') { UI.showChat()};
     setupPlayers();
     Cursor.set();
     if(mode === 'play') Video.init();
@@ -200,7 +199,7 @@ function addStash (title, yOffset, array, group) {
         var tile = group.create(offsetX, yOffset, title, n);
         tile.defaultFrame = 1;
         tile.isStash = true;
-        R.compose(T.setId, Cursor.reset, T.networkAble, T.lockable(true), T.draggable, T.centerAnchor)(tile);
+        R.compose(T.setId, Cursor.reset, T.networkAble, T.draggable, T.centerAnchor)(tile);
         T.hide(tile);
 
     })(array);

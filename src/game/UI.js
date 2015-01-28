@@ -111,7 +111,6 @@ UI.message = function () {
     var rawtext = R.join(' ', slice(arguments));
 
     var text = rawtext.match(/.{1,25}/g); // split string every 30 characters
-    console.log('rawtext', rawtext);
     
     
     // chat text
@@ -128,9 +127,6 @@ UI.message = function () {
         UI.menuLines.pop();
     }
     $('#menu-chat-text').html(R.join('<br><br>')(UI.menuLines));
-
-    console.log(UI.menuLines);
-
 
 
     clearTimeout(UI.timeout);

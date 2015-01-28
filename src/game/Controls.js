@@ -17,13 +17,13 @@ Controls.add = function () {
     Controls.controls = game.add.group();
     Controls.controls.position.set(-100);
     
-    Controls.rotationControls = Controls.make('rotate', T.releaseRotate, T.startRotate);
-    Controls.flipControls = Controls.make('flip', T.onFlip);
-    Controls.stackControls = Controls.make('stack', S.onTidy);
-    Controls.shuffleControls = Controls.make('shuffle', S.onShuffle);
-    Controls.handControls = Controls.make('hand', T.onTake);
-    Controls.lockControls = Controls.make('lock', T.onLock);
-    Controls.userControls = Controls.make('user', T.onUserOwn);
+    Controls.rotationControls = Controls.make(Controls.controls, 'rotate', T.releaseRotate, T.startRotate);
+    Controls.flipControls = Controls.make(Controls.controls, 'flip', T.onFlip);
+    Controls.stackControls = Controls.make(Controls.controls, 'stack', S.onTidy);
+    Controls.shuffleControls = Controls.make(Controls.controls, 'shuffle', S.onShuffle);
+    Controls.handControls = Controls.make(Controls.controls, 'hand', T.onTake);
+    Controls.lockControls = Controls.make(Controls.controls, 'lock', T.onLock);
+    Controls.userControls = Controls.make(Controls.controls, 'user', T.onUserOwn);
     
     Controls.rotationControls.scale.set(0.7);
 
@@ -36,8 +36,8 @@ Controls.add = function () {
     Controls.highlight.beginFill(0x0077FF, 0.2);
 };
 
-Controls.make = function (assetName, upMethod, downMethod) {
-    var control = Controls.controls.create(0,0, assetName);
+Controls.make = function (group, assetName, upMethod, downMethod) {
+    var control = group.create(0,0, assetName);
     T.centerAnchor(control);
     control.inputEnabled = true;
     control.input.useHandCursor = true;
@@ -70,11 +70,7 @@ Controls.colorize = function (tile) {
     if (tile.isStash) {
         Controls.userControls.tint = !tile.ownedBy ? 0xFFFFFF: tile.ownedBy === playerName ? 0x33FF66: 0xFF3366;
     }
-    if (tile.input.draggable) {
-        Controls.lockControls.tint = 0xFFFFFF;
-    } else {
-        Controls.lockControls.tint = 0xFF3366;
-    }
+    
     return tile;
 };
 
@@ -174,7 +170,7 @@ Controls.findSelectedTiles = function (rect) {
     R.mapObj(function (group) {
         R.forEach(function (child) {
            var found = Utils.pointIntersection(child, rect);
-           if (found && child.input.draggable && child.stackable) {
+           if (found && !child.locked && child.stackable) {
                 T.select(child);
                 selected.push(child);
            } else {

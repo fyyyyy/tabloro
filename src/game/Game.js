@@ -4,10 +4,15 @@
 var G = {};
 
 G._groups = {};
+G._tiles = {};
+
+G.addTile = function (tile) {
+    G._tiles[tile.id] = tile;
+};
 
 G.groups = {
     add: function (groupName, index, rotateBy, flipable, handable, lockable) {
-        console.log('adding group', groupName);
+        // console.log('adding group', groupName);
         index = index || 0;
         rotateBy = rotateBy || 0;
 
@@ -91,19 +96,19 @@ G.removeRotationPosition = function (id) {
 };
 
 G.findTile = function (tileId) {
-    tileId = Number(tileId);
-    var foundTile;
+    // tileId = Number(tileId);
+    // var foundTile;
 
-    // TODO: optimize lookup
-    R.mapObj(function (group) {
-        foundTile = R.find(R.propEq('id', tileId))(group.children) || foundTile;        
-    })(G.groups.all());
+    // // TODO: optimize lookup
+    // R.mapObj(function (group) {
+    //     foundTile = R.find(R.propEq('id', tileId))(group.children) || foundTile;        
+    // })(G.groups.all());
 
-    if (!foundTile) {
-        console.error('tile not found', tileId);
-        return {};
-    }
-    return foundTile;
+    // if (!foundTile) {
+    //     console.error('tile not found', tileId);
+    //     return {};
+    // }
+    return G._tiles[tileId];
 };
 
 
@@ -116,15 +121,15 @@ G.findTiles = function (tileIds) {
 
 
 
-G.findStack = function (stackId) {
-    stackId = Number(stackId);
-    var stack = R.find(R.propEq('id', stackId))(stacks.children);
-    if (!stack) {
-        console.error('stack not found', stackId, stack);
-        return {};
-    }
-    return stack;
-};
+// G.findStack = function (stackId) {
+//     stackId = Number(stackId);
+//     var stack = R.find(R.propEq('id', stackId))(stacks.children);
+//     if (!stack) {
+//         console.error('stack not found', stackId, stack);
+//         return {};
+//     }
+//     return stack;
+// };
 
 
 G.saveSetup = function saveSetup() {

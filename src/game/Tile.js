@@ -53,17 +53,16 @@ T.userOwns = function (tile, name) {
 
 T.nobodyOwns = function (tile) {
     delete tile.ownedBy;
-    T.enableInput(tile);
+    if (!tile.locked) T.enableInput(tile);
     Controls.colorize(tile);
     return tile;
 };
 
+
 T.highlight = function (tile) {
     // console.log('highlight', tile);
     Controls.highlight.clear();
-    if (!tile.input.draggable) {
-        return;
-    }
+    
     if (tile.isStash && (!tile.ownedBy || tile.ownedBy === playerName)) {
         T.show(tile);
         return;
@@ -79,6 +78,7 @@ T.highlight = function (tile) {
 T.unlight = function (tile) {
     // console.log('highlight', tile);
     Controls.highlight.clear();
+    if(tile.controls) (tile.controls.visible = false);
     if (tile.isStash) {
         T.hide(tile);
     }
@@ -108,36 +108,78 @@ T.stackable = function (tile) {
     return tile;
 };
 
+
+
+
+
+/*********** LOCK **************************************/
+
 T.lockable = function (lockable) {
     return function (tile) {
         tile.lockable = lockable;
+        tile.controls = Controls.make(tile.parent, 'lock', T.onUnLock.bind(tile, tile));
+        tile.controls.tint = 0xFF3366;
+        tile.controls.alpha = 0;
+        tile.controls.scale.set(0.65);
+        tile.controls.events.onInputOver.add(T.overLock);
+        tile.controls.events.onInputOut.add(T.outLock);
+        tile.addChild(tile.controls);
         return tile;
     };
 };
 
 T.onLock = function () {
     var tile = Controls.target;
-
-    console.log('lock', tile);
+    console.log('onLock', tile);
     Network.server.tileLock(tile.id);
     return tile;
 };
 
-T.lock = function ( tile) {
+T.onUnLock = function (tile) {
+    console.log('onUnLock', tile);
+    Network.server.tileLock(tile.id);
+    return tile;
+};
+
+T.lock = function (tile) {
+    console.log('lock', tile);
+
     if (tile.lockable) {
-        Controls.lockControls.tint = 0xFF3366;
-        tile.input.disableDrag();
+        tile.controls.visible = true;
+        tile.controls.alpha = 1.0;
+        tile.locked = true;
+        T.disableInput(tile);
+        Controls.hide(tile);
+
+        setTimeout(function() {
+            game.add.tween(tile.controls).to({
+                alpha: 0
+            }, 1000, Phaser.Easing.Linear.None, true, 0, false);
+        }, 1000);
+
+        // tile.input.disableDrag();
         // tile.input.useHandCursor = false;
     }
     return tile;
 };
 
 T.unlock = function ( tile) {
-    Controls.lockControls.tint = 0xFFFFFF;
-    tile.input.enableDrag(false, true);
+    tile.controls.visible = false;
+    delete tile.locked;
+    T.enableInput(tile);
+    // tile.input.enableDrag(false, true);
     // tile.input.useHandCursor = true;
     return tile;
 };
+
+T.overLock = function (control) {
+    control.alpha = 1.0;
+};
+
+T.outLock = function (control) {
+    control.alpha = 0;
+};
+
 
 T.scale = R.curry(function (scale, tile) {
     tile.scale.set(scale);
@@ -146,6 +188,7 @@ T.scale = R.curry(function (scale, tile) {
 
 T.setId = function (tile) {
     tile.id = T.id++;
+    G.addTile(tile);
     return tile;
 };
 
@@ -329,14 +372,14 @@ T.flip = function (tile) {
 
 
 T.show = function (tile) {
-    console.log('T.show', tile.id);
+    // console.log('T.show', tile.id);
 
     if ((tile.flipable || tile.isStash) && tile.defaultFrame) tile.frame = tile.defaultFrame;
     return tile;
 };
 
 T.hide = function (tile) {
-    console.log('T.hide', tile.id);
+    // console.log('T.hide', tile.id);
     if ((tile.flipable || tile.isStash) && tile.defaultFrame) tile.frame = 0;
     return tile;
 };

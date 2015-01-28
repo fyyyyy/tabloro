@@ -123,12 +123,10 @@ Network.setup = function () {
         
         T.syncTile(tile, newPosition);
 
-        UI.message('Positioning tile', tileId);
+        // UI.message('Positioning tile', tileId);
 
         if (newPosition.lock) {
             T.lock(tile);
-        } else {
-            T.unlock(tile);
         }
 
         if (newPosition.ownedBy) {
