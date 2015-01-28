@@ -199,7 +199,9 @@ function addStash (title, yOffset, array, group) {
     R.times(function (n) {
         var tile = group.create(offsetX, yOffset, title, n);
         tile.defaultFrame = 1;
-        R.compose(T.setId, Cursor.reset, T.networkAble, T.lockable(true), T.flipable(group.flipable), T.draggable, T.centerAnchor)(tile);
+        tile.isStash = true;
+        R.compose(T.setId, Cursor.reset, T.networkAble, T.lockable(true), T.draggable, T.centerAnchor)(tile);
+        T.hide(tile);
 
     })(array);
     

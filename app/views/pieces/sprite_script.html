@@ -39,11 +39,12 @@
       
       appendTiles = function (i, style) {
         console.log('appending', piece._id);
+        var isSpecial = piece.isDice || piece.isStash;
 
         var numberDom;
         
         if (editCount) { // button
-          numberDom = (piece.isDice  && i > 0) ?
+          numberDom = (isSpecial  && i > 0) ?
             '<span class="piece-input"></span>'
             :
             '<span class="piece-input">' +
@@ -63,7 +64,7 @@
           var link = owner ? '<a href="/boxes/{{box.id}}/count#tiles-' + piece._id  + '" class="btn btn-primary btn-xs">' + counts + '</a>'
                  : 
                  '<span class="text-primary">' + counts + '</span>';
-          numberDom = (piece.isDice  && i > 0) ?
+          numberDom = (isSpecial  && i > 0) ?
             '<span class="piece-number">' +
               '<a href="#" class="btn">' +
               '</a>' +

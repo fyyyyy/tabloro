@@ -17,52 +17,15 @@ Controls.add = function () {
     Controls.controls = game.add.group();
     Controls.controls.position.set(-100);
     
-    Controls.rotationControls = Controls.controls.create(0, 0, 'rotate');
-    Controls.flipControls = Controls.controls.create(50, 0, 'flip');
-    Controls.stackControls = Controls.controls.create(100, 0, 'stack');
-    Controls.shuffleControls = Controls.controls.create(150, 0, 'shuffle');
-    Controls.handControls = Controls.controls.create(150, 0, 'hand');
-    Controls.lockControls = Controls.controls.create(150, 0, 'lock');
+    Controls.rotationControls = Controls.make('rotate', T.onRotate);
+    Controls.flipControls = Controls.make('flip', T.onFlip);
+    Controls.stackControls = Controls.make('stack', S.onTidy);
+    Controls.shuffleControls = Controls.make('shuffle', S.onShuffle);
+    Controls.handControls = Controls.make('hand', T.onTake);
+    Controls.lockControls = Controls.make('lock', T.onLock);
+    Controls.userControls = Controls.make('user', T.onUserOwn);
     
     Controls.rotationControls.scale.set(0.7);
-    
-    T.centerAnchor(Controls.rotationControls);
-    T.centerAnchor(Controls.flipControls);
-    T.centerAnchor(Controls.stackControls);
-    T.centerAnchor(Controls.shuffleControls);
-    T.centerAnchor(Controls.handControls);
-    T.centerAnchor(Controls.lockControls);
-    
-    Controls.rotationControls.inputEnabled = true;
-    Controls.rotationControls.input.useHandCursor = true;
-    Controls.rotationControls.events.onInputUp.add(T.onRotate);
-    
-    Controls.flipControls.inputEnabled = true;
-    Controls.flipControls.input.useHandCursor = true;
-    Controls.flipControls.events.onInputUp.add(T.onFlip);
-
-    Controls.stackControls.inputEnabled = true;
-    Controls.stackControls.input.useHandCursor = true;
-    Controls.stackControls.events.onInputUp.add(S.onTidy);
-    
-    Controls.shuffleControls.inputEnabled = true;
-    Controls.shuffleControls.input.useHandCursor = true;
-    Controls.shuffleControls.events.onInputUp.add(S.onShuffle);
-
-    Controls.handControls.inputEnabled = true;
-    Controls.handControls.input.useHandCursor = true;
-    Controls.handControls.events.onInputUp.add(T.onTake);
-
-    Controls.lockControls.inputEnabled = true;
-    Controls.lockControls.input.useHandCursor = true;
-    Controls.lockControls.events.onInputUp.add(T.onLock);
-    
-    Cursor.reset(Controls.rotationControls);
-    Cursor.reset(Controls.flipControls);
-    Cursor.reset(Controls.stackControls);
-    Cursor.reset(Controls.shuffleControls);
-    Cursor.reset(Controls.handControls);
-    Cursor.reset(Controls.lockControls);
 
     Controls.graphics = game.add.graphics(0, 0);
     Controls.graphics.lineStyle(10, 0xFFFFFF, 0.8);
@@ -71,6 +34,16 @@ Controls.add = function () {
     Controls.highlight = game.add.graphics(0, 0);
     Controls.highlight.lineStyle(10, 0xFFFFFF, 0.8);
     Controls.highlight.beginFill(0x0077FF, 0.2);
+};
+
+Controls.make = function (assetName, method) {
+    var control = Controls.controls.create(0,0, assetName);
+    T.centerAnchor(control);
+    control.inputEnabled = true;
+    control.input.useHandCursor = true;
+    control.events.onInputUp.add(method);
+    Cursor.reset(control);
+    return control;
 };
 
 
@@ -92,6 +65,18 @@ Controls.at = function (tile) {
     Utils.toCorner(Controls.controls, tile);
 };
 
+Controls.colorize = function (tile) {
+    if (tile.isStash) {
+        Controls.userControls.tint = !tile.ownedBy ? 0xFFFFFF: tile.ownedBy === playerName ? 0x33FF66: 0xFF3366;
+    }
+    if (tile.input.draggable) {
+        Controls.lockControls.tint = 0xFFFFFF;
+    } else {
+        Controls.lockControls.tint = 0xFF3366;
+    }
+    return tile;
+};
+
 Controls.show = function (tile) {
     Controls.positionX = 0;  
 
@@ -100,13 +85,10 @@ Controls.show = function (tile) {
     Controls.position(Controls.flipControls, tile.flipable);
     Controls.position(Controls.rotationControls, tile.rotateable && !Controls.selected.length);
     Controls.position(Controls.handControls, tile.handable && !Controls.selected.length);
+    Controls.position(Controls.userControls, tile.isStash && !Controls.selected.length);
     console.log('lockable check');
     Controls.position(Controls.lockControls, tile.lockable && !Controls.selected.length);
-    if (tile.input.draggable) {
-        Controls.lockControls.tint = 0xFFFFFF;
-    } else {
-        Controls.lockControls.tint = 0xFF3366;
-    }
+    Controls.colorize(tile);
     // multi selection
     Controls.position(Controls.stackControls, Controls.selected.length && !tile.isDice);
     Controls.position(Controls.shuffleControls, Controls.selected.length && !tile.isDice);
@@ -134,6 +116,7 @@ Controls.hide = function (tile) {
     } else {
         Controls.controls.visible = false;
     }
+    return tile;
 };
 
 
@@ -190,7 +173,7 @@ Controls.findSelectedTiles = function (rect) {
     R.mapObj(function (group) {
         R.forEach(function (child) {
            var found = Utils.pointIntersection(child, rect);
-           if (found && child.input.draggable) {
+           if (found && child.input.draggable && child.stackable) {
                 T.select(child);
                 selected.push(child);
            } else {

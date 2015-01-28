@@ -118,11 +118,10 @@ Network.setup = function () {
         console.log('Initial positioning of tile ', tileId);
         
         var tile = G.findTile(tileId);
-        Controls.hide(tile);
         
-        R.compose(T.enableInput, T.show)(tile);
+        R.compose(T.enableInput, Controls.hide)(tile);
         
-        Utils.syncTile(tile, newPosition);
+        T.syncTile(tile, newPosition);
 
         UI.message('Positioning tile', tileId);
 
@@ -131,6 +130,13 @@ Network.setup = function () {
         } else {
             T.unlock(tile);
         }
+
+        if (newPosition.ownedBy) {
+            T.userOwns(tile, newPosition.ownedBy);
+        } else {
+            T.nobodyOwns(tile);
+        }
+
 
         if (!newPosition.hand) { return; }
         
@@ -154,7 +160,7 @@ Network.setup = function () {
         G.removeUpdatePosition(playerList[client.id]);
         delete tile.relativePosition;
 
-        Utils.syncTile(tile, newPosition);
+        T.syncTile(tile, newPosition);
         UI.message(client.name, 'moved a tile', tile.id);
 
     };
@@ -197,7 +203,6 @@ Network.setup = function () {
 
 
     Network.client.exports.lock = function (client, tileId) {
-        console.log(client.name + ' locks tile ', tileId);
         
         var tile = G.findTile(tileId);
         T.lock(tile);
@@ -206,12 +211,29 @@ Network.setup = function () {
     };
 
     Network.client.exports.unlock = function (client, tileId) {
-        console.log(client.name + ' unlocks tile ', tileId);
         
         var tile = G.findTile(tileId);
         T.unlock(tile);
         
         UI.message(client.name, 'unlocks tile', tile.id);
+    };
+
+
+    Network.client.exports.ownedBy = function (client, tileId) {
+        
+        var tile = G.findTile(tileId);
+        T.userOwns(tile, client.name);
+        
+        UI.message(client.name, 'owns tile', tile.id);
+    };
+
+
+    Network.client.exports.releasedBy = function (nom, tileId) {
+        
+        var tile = G.findTile(tileId);
+        T.nobodyOwns(tile);
+        
+        UI.message(nom, 'released tile', tile.id);
     };
     /******************* STACKS ******************/
 
@@ -231,7 +253,7 @@ Network.setup = function () {
     //     G.removeUpdatePosition(playerList[client.id]);
     //     stack.remoteDragged = false;
 
-    //     Utils.syncTile(stack, newPosition);
+    //     T.syncTile(stack, newPosition);
 
     //     S.tidy(stack);
     //     UI.message(client.name, 'moved stack', stackId);
@@ -273,6 +295,7 @@ Network.setup = function () {
         console.log(client.name, 'arrangeLayer', groupName);
         game.world.setChildIndex(G.groups.all()[groupName], game.world.children.length -1);
         game.world.setChildIndex(Controls.controls, game.world.children.length -1);
+        game.world.setChildIndex(UI.group, game.world.children.length -1);
         UI.chat(client.name.toUpperCase(), 'arranged layer ' + groupName);
     };
 

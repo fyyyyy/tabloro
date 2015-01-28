@@ -29,7 +29,7 @@ var server = require('http').createServer(app);
 var eurecaServer = new EurecaServer({
   allow: [ // Network client methods
     'setId', 'spawnPlayer', 'kill', 'updateCursor',
-    'positionTile', 'dropTile', 'dragTiles', 'flipTile', 'toHand', 'fromHand', 'lock', 'unlock',
+    'positionTile', 'dropTile', 'dragTiles', 'flipTile', 'toHand', 'fromHand', 'lock', 'unlock', 'ownedBy', 'releasedBy',
     'updateStackCards', 'flipStack',
     'spin',
     'receiveChat', 'arrangeLayer'

@@ -23,13 +23,48 @@ T.draggable = function (tile) {
     tile.events.onInputOver.add(T.highlight);
     tile.events.onInputOut.add(T.unlight);
 
+    tile.events.onInputDown.add(T.onDragControllable);
+    tile.events.onInputUp.add(T.onStopDragControllable);
 
+
+    return tile;
+};
+
+T.onUserOwn = function (tile) {
+    var tile = Controls.target;
+    console.log('onUserOwn', playerName, tile);
+
+    Network.server.tileOwnedBy(tile.id);
+    return tile;
+};
+
+
+T.userOwns = function (tile, name) {
+    if (tile.isStash) {
+        tile.ownedBy = name;
+        Controls.colorize(tile);
+        if (tile.ownedBy !== playerName) {
+            T.disableInput(tile);
+            T.hide(tile);
+        }
+    }
+    return tile;
+};
+
+T.nobodyOwns = function (tile) {
+    delete tile.ownedBy;
+    T.enableInput(tile);
+    Controls.colorize(tile);
     return tile;
 };
 
 T.highlight = function (tile) {
     // console.log('highlight', tile);
     Controls.highlight.clear();
+    if (tile.isStash && (!tile.ownedBy || tile.ownedBy === playerName)) {
+        T.show(tile);
+        return;
+    }
     Controls.highlight.drawRect(
         tile.x - tile.width / 2,
         tile.y - tile.height / 2,
@@ -41,7 +76,22 @@ T.highlight = function (tile) {
 T.unlight = function (tile) {
     // console.log('highlight', tile);
     Controls.highlight.clear();
-    
+    if (tile.isStash) {
+        T.hide(tile);
+    }
+};
+
+T.syncTile = function (tile, b) {
+    if (tile && b) {
+        tile.x = b.x;
+        tile.y = b.y;
+        tile.rotation = b.rotation;
+        tile.frame = b.frame;
+        if (tile.isStash) {
+            T.hide(tile);
+        }
+
+    } else console.error('alignPosition', tile, b);
 };
 
 T.networkAble = function (tile) {
@@ -105,8 +155,7 @@ T.resetRotation = function (tile) {
 T.rotateable = function (rotateable) {
     return function (tile) {
         tile.rotateable = (rotateable && tile.parent.rotateBy) || false;
-        tile.events.onInputDown.add(T.onDragControllable);
-        tile.events.onInputUp.add(T.onStopDragControllable);
+
         return tile;
     };
 };
@@ -132,8 +181,6 @@ T.flipable = function (flipable) {
     if (!flipable) { return R.I;}
     return function (tile) {
         tile.flipable = true;
-        tile.events.onInputDown.add(T.onDragControllable);
-        tile.events.onInputUp.add(T.onStopDragControllable);
         return tile;
     };
 };
@@ -231,6 +278,10 @@ T.onStopDragControllable = function (tile) {
     Controls.at(tile);
 };
 
+T.disableInput = function (tile) {
+    tile.inputEnabled = false;
+    return tile;
+};
 
 T.enableInput = function (tile) {
     tile.inputEnabled = true;
@@ -251,12 +302,15 @@ T.flip = function (tile) {
 
 
 T.show = function (tile) {
-    if (tile.flipable && tile.defaultFrame) tile.frame = tile.defaultFrame;
+    console.log('T.show', tile.id);
+
+    if ((tile.flipable || tile.isStash) && tile.defaultFrame) tile.frame = tile.defaultFrame;
     return tile;
 };
 
 T.hide = function (tile) {
-    if (tile.flipable && tile.defaultFrame) tile.frame = 0;
+    console.log('T.hide', tile.id);
+    if ((tile.flipable || tile.isStash) && tile.defaultFrame) tile.frame = 0;
     return tile;
 };
 

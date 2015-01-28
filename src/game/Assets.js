@@ -17,6 +17,7 @@ Assets.preload = function (game) {
     game.load.image('stack', '/assets/load.png');
     game.load.image('shuffle', '/assets/shuffle.png');
     game.load.image('hand', '/assets/hand.png');
+    game.load.image('user', '/assets/user.png');
     game.load.image('lock', '/assets/lock.png');
     game.load.image('table', '/assets/table_low.jpg');
     game.load.image('rotate', '/assets/rotate.png');

@@ -102,14 +102,7 @@ var Utils = {
         } else console.error('alignRelativePosition', a, b);
     },
 
-    syncTile: function (a, b) {
-        if (a && b) {
-            a.x = b.x;
-            a.y = b.y;
-            a.rotation = b.rotation;
-            a.frame = b.frame;
-        } else console.error('alignPosition', a, b);
-    },
+
 
     alignRelativePosRot: function (a, b) {
         if (a && b && a.relativePosition) {
