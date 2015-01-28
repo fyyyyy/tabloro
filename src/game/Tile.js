@@ -61,6 +61,9 @@ T.nobodyOwns = function (tile) {
 T.highlight = function (tile) {
     // console.log('highlight', tile);
     Controls.highlight.clear();
+    if (!tile.input.draggable) {
+        return;
+    }
     if (tile.isStash && (!tile.ownedBy || tile.ownedBy === playerName)) {
         T.show(tile);
         return;
