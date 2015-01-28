@@ -60,25 +60,35 @@ G.addText = R.curryN(2, function (text, button, fn, fill) {
 G.updatePositions = [];
 
 G.update = function () {
-    R.forEach(function (obj) {
-        if (obj.follower.input.draggable) {
-            if (obj.follower.relativePosition) {
-                Utils.alignRelativePosition(obj.follower, obj.target);
+    R.forEach(function (tile) {
+        if (tile.follower && tile.follower.input.draggable) {
+            if (tile.follower.relativePosition) {
+                Utils.alignRelativePosition(tile.follower, tile.target);
                 return;
             }
-            Utils.alignPosition(obj.follower, obj.target);
+            Utils.alignPosition(tile.follower, tile.target);
+        }
+        if (tile.startRotatePosition) {
+            var delta = Utils.delta(tile.startRotatePosition, Utils.getMousePosition());
+            var rotateByDeg = Utils.rad2Deg(tile.parent.rotateBy);
+            var rotationInDegree = Math.floor((- delta.x * 2 + delta.y  * 2 ) / rotateByDeg) * rotateByDeg;
+            var rotationInRad = Utils.deg2Rad(rotationInDegree);
+            tile.rotation = tile.startRotation + rotationInRad;
         }
     })(G.updatePositions);
 };
 
-G.addUpdatePosition = function (obj) {
-    G.updatePositions.push(obj);
+G.addUpdatePosition = function (tile) {
+    G.updatePositions.push(tile);
 };
 
 G.removeUpdatePosition = function (target) {
     G.updatePositions = R.reject(R.propEq('target', target))(G.updatePositions);
 };
 
+G.removeRotationPosition = function (id) {
+    G.updatePositions = R.reject(R.propEq('id', id))(G.updatePositions);
+};
 
 G.findTile = function (tileId) {
     tileId = Number(tileId);

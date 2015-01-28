@@ -274,10 +274,7 @@ function update() {
     H.update();
 
 
-    var mouseWorldPosition = {
-        x: Math.floor(game.input.activePointer.worldX),
-        y: Math.floor(game.input.activePointer.worldY)
-    };
+    var mouseWorldPosition = Utils.getMousePosition();
 
 
     if (game.input.keyboard.isDown(Phaser.Keyboard.UP)

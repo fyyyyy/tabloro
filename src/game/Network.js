@@ -149,6 +149,7 @@ Network.setup = function () {
 
 
     Network.client.exports.dropTile = function (client, tileId, newPosition) {
+        console.log('dropTile', tileId, newPosition);
         if (Network.isMine(client.id)) return; // this is me //////////////
 
         console.log(client.name + ' drops tile ', tileId, 'at', newPosition);

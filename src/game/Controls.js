@@ -17,7 +17,7 @@ Controls.add = function () {
     Controls.controls = game.add.group();
     Controls.controls.position.set(-100);
     
-    Controls.rotationControls = Controls.make('rotate', T.onRotate);
+    Controls.rotationControls = Controls.make('rotate', T.releaseRotate, T.startRotate);
     Controls.flipControls = Controls.make('flip', T.onFlip);
     Controls.stackControls = Controls.make('stack', S.onTidy);
     Controls.shuffleControls = Controls.make('shuffle', S.onShuffle);
@@ -36,12 +36,13 @@ Controls.add = function () {
     Controls.highlight.beginFill(0x0077FF, 0.2);
 };
 
-Controls.make = function (assetName, method) {
+Controls.make = function (assetName, upMethod, downMethod) {
     var control = Controls.controls.create(0,0, assetName);
     T.centerAnchor(control);
     control.inputEnabled = true;
     control.input.useHandCursor = true;
-    control.events.onInputUp.add(method);
+    control.events.onInputUp.add(upMethod);
+    if (downMethod) control.events.onInputDown.add(downMethod);
     Cursor.reset(control);
     return control;
 };

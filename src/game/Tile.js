@@ -160,21 +160,45 @@ T.rotateable = function (rotateable) {
     };
 };
 
-T.onRotate = function onRotate() {
+T.startRotate = function () {
     var tile = Controls.target;
-    console.log('onRotate', tile);
+    // console.log('startRotate', tile);
+     tile.startRotatePosition = Utils.getMousePosition();
+     tile.startRotation = tile.rotation;
+     console.log(tile.startRotatePosition);
+     G.addUpdatePosition(tile);
+};    
 
-    var rotation = tile.parent.rotateBy;
 
-    var position = T.getPosition(tile);
-    position.rotation = tile.rotation + rotation;
-    console.log(position.rotation, rotation);
+T.releaseRotate = function () {
+    var tile = Controls.target;
+    // console.log('releaseRotate', tile);
 
-    Network.server.tileDragStop(tile.id, position);
+    // var endRotatePosition = Utils.getMousePosition();
+    // console.log('endRotatePosition', endRotatePosition);
+    // var delta = Utils.delta(tile.startRotatePosition, endRotatePosition);
+    // console.log('delta', delta.x + delta.y);
 
-    game.add.tween(tile).to({
-        rotation: '+' + rotation
-    }, 50, Phaser.Easing.Linear.None, true, 0, false);
+    var deltaRotation = tile.rotation - tile.startRotation;
+
+    if (Math.abs(deltaRotation + 0.01)  < tile.parent.rotateBy) {
+        tile.rotation += tile.parent.rotateBy;
+    }
+
+    delete tile.startRotatePosition;
+    delete tile.startRotation;
+    G.removeRotationPosition(tile.id);
+
+    // var rotation = Utils.deg2Rad(delta.x / 2 + delta.y / 2) || tile.parent.rotateBy;
+
+
+    // position.rotation = (tile.rotation || 0) + rotation;
+
+    Network.server.tilesDragStop(T.getSelectedIds(tile), T.getPositions(tile));
+
+    // game.add.tween(tile).to({
+    //     rotation: '+' + rotation
+    // }, 50, Phaser.Easing.Linear.None, true, 0, false);
 };
 
 T.flipable = function (flipable) {
@@ -251,15 +275,15 @@ T.onStartDrag = function (tile) {
     
     var relativePositions = Controls.selected.length && R.pluck('relativePosition')(Controls.selected) || [{x: 0, y: 0}];
 
-    Network.server.tileDragStart(T.getSelectedIds(tile), relativePositions);
+    Network.server.tilesDragStart(T.getSelectedIds(tile), relativePositions);
     Controls.setTarget(tile);
 };
 
 
 T.onStopDrag = function (tile) {
     T.dragging = false;
-    console.log('onStopDrag');
-    Network.server.tileDragStop(T.getSelectedIds(tile), T.getPositions(tile));
+    console.log('onStopDrag', tile.id);
+    Network.server.tilesDragStop(T.getSelectedIds(tile), T.getPositions(tile));
 };
 
 T.onDragControllable = function (tile) {

@@ -112,6 +112,13 @@ var Utils = {
         } else console.error('alignRelativePosRot', a, b);
     },
 
+    getMousePosition: function () {
+        return {
+            x: Math.floor(game.input.activePointer.worldX),
+            y: Math.floor(game.input.activePointer.worldY)
+        };
+    },
+
     toCorner: function (a, b) {
         if (a && b) {
             a.x = b.x - b.width / 2;
