@@ -97,18 +97,7 @@ G.removeRotationPosition = function (id) {
 
 G.findTile = function (tileId) {
     // tileId = Number(tileId);
-    // var foundTile;
-
-    // // TODO: optimize lookup
-    // R.mapObj(function (group) {
-    //     foundTile = R.find(R.propEq('id', tileId))(group.children) || foundTile;        
-    // })(G.groups.all());
-
-    // if (!foundTile) {
-    //     console.error('tile not found', tileId);
-    //     return {};
-    // }
-    return G._tiles[tileId];
+    return G._tiles[tileId] || {};
 };
 
 

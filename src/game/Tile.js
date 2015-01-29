@@ -68,11 +68,13 @@ T.highlight = function (tile) {
         return;
     }
     Controls.highlight.drawRect(
-        tile.x - tile.width / 2,
-        tile.y - tile.height / 2,
+        - tile.width / 2,
+        - tile.height / 2,
         tile.width,
         tile.height
     );
+    Controls.highlight.angle = tile.angle;
+    Utils.alignPosition(Controls.highlight, tile);
 };
 
 T.unlight = function (tile) {
@@ -112,7 +114,7 @@ T.stackable = function (tile) {
 
 
 
-/*********** LOCK **************************************/
+/*********** LOCK **************************************************************************************/
 
 T.lockable = function (lockable) {
     return function (tile) {
@@ -192,6 +194,9 @@ T.setId = function (tile) {
     return tile;
 };
 
+
+/****** ROTATE ***************************************************************************************/
+
 T.resetRotation = function (tile) {
     tile.rotation = 0;
     return tile;
@@ -220,11 +225,6 @@ T.releaseRotate = function () {
     var tile = Controls.target;
     // console.log('releaseRotate', tile);
 
-    // var endRotatePosition = Utils.getMousePosition();
-    // console.log('endRotatePosition', endRotatePosition);
-    // var delta = Utils.delta(tile.startRotatePosition, endRotatePosition);
-    // console.log('delta', delta.x + delta.y);
-
     var deltaRotation = tile.rotation - tile.startRotation;
 
     if (Math.abs(deltaRotation + 0.01)  < tile.parent.rotateBy) {
@@ -234,11 +234,6 @@ T.releaseRotate = function () {
     delete tile.startRotatePosition;
     delete tile.startRotation;
     G.removeRotationPosition(tile.id);
-
-    // var rotation = Utils.deg2Rad(delta.x / 2 + delta.y / 2) || tile.parent.rotateBy;
-
-
-    // position.rotation = (tile.rotation || 0) + rotation;
 
     Network.server.tilesDragStop(T.getSelectedIds(tile), T.getPositions(tile));
 
