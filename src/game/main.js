@@ -60,7 +60,6 @@ function create() {
 function setupStage() {
     var please_wait = document.getElementById('please_wait');
     if(please_wait) please_wait.remove();
-    game.stage.disableVisibilityChange = true; // loose tab focus, game will continue
     game.scale.scaleMode = Phaser.ScaleManager.RESIZE;
     game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
     game.scale.fullScreenTarget = document.body;
@@ -86,6 +85,7 @@ function setupStage() {
     
     game.world.setBounds(0, 0, World.width, World.height);
     game.scale.setScreenSize(true);
+    game.stage.disableVisibilityChange = true; // loose tab focus, game will continue
 
 
 }
