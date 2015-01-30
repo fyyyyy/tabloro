@@ -1,4 +1,4 @@
-{% if (piece.atlasjson) %}
+{% if (piece.atlasjson || piece.jsonAtlas) %}
     { json }
 {% elseif (piece.frameWidth) %}
   {% if (piece.isDice) %}

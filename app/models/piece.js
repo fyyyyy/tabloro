@@ -53,6 +53,9 @@ var PieceSchema = new Schema({
     type: String,
     trim: false
   },
+  jsonAtlas: {
+    type: Object
+  },
   frameWidth: {
     type: Number
   },

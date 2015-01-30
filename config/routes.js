@@ -120,6 +120,7 @@ module.exports = function (app, passport) {
   app.get('/pieces/new', auth.requiresLogin, pieces.new);
   app.post('/pieces', auth.requiresLogin, pieces.create);
   app.get('/pieces/:pieceId', pieceView, pieces.show);
+  app.get('/pieces/:pieceId/json', auth.requiresLogin, pieces.json);
   app.get('/pieces/:pieceId/edit', pieceAuth, pieces.edit);
   app.put('/pieces/:pieceId', pieceAuth, pieces.update);
   app.delete('/pieces/:pieceId', pieceAuth, pieces.destroy);

@@ -138,6 +138,12 @@
           </li>
         {% endif %}
 
+        {% if (piece.jsonAtlas) %}
+          <li class="list-group-item list-group-item-default">
+            Json Atlas
+          </li>
+        {% endif %}
+
         {% if (piece.frameWidth) %}
           <li class="list-group-item list-group-item-default">
             Frame width: <strong class="pull-right">{{piece.frameWidth}} pixel</strong>

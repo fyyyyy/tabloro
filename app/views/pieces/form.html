@@ -154,8 +154,7 @@
                   </li>
                   <li role="presentation">
                     <a href="#tab3" aria-controls="tab3" role="tab" data-toggle="tab">
-                      { json }
-                      Atlas Json Hash
+                      { json } Multipack Atlas
                     </a>
                   </li>
                 </ul>
@@ -182,18 +181,33 @@
                   
 
                   <div role="tabpanel" class="tab-pane" id="tab3">
+                    
+                    <p class="alert bg-info">
+                      <strong>TIP</strong><br/>
+                      This format allows to package pieces of different sizes within a single image.
+                      See example <a href="/assets/kenney space.png" target="_blank">image</a> & <a href="/assets/kenney space.json" target="_blank">json</a>.
+                      <br/>
+                      <img src="/assets/kenney_space_small.jpg"></img>
+                      <br/>
+                      To create a json atlas, download <a class="btn btn-primary btn-xs" href="https://www.codeandweb.com/texturepacker/" target="_blank">Texture Packer</a> and select the
+                      <a href="https://cdn.codeandweb.com/blog/2014/12/17/creating-spritesheets-for-phaser-with-texturepacker/texturepacker-choose-phaser.png" target="_blank">Phaser JSON Hash</a> format.
+                      See the export
+                      <a href="https://cdn.codeandweb.com/blog/2014/12/17/creating-spritesheets-for-phaser-with-texturepacker/texturepacker-adding-sprites.png" target="_blank">settings example</a>
+                    </p>
+
                     <p>
                       If the above image contains multiple game pieces with a corresponding Atlas file in .json Hash format.
-                      You can upload your json file on <a href="http://myjson.com/" target="_blank">this cool website</a>, then post the link below.
                     </p>
+
+
                     <div class="form-group">
-                      <label for="atlasjson" class="col-sm-3 control-label"> Url to your JSON Hash Atlas </label>
+                      <label for="jsonAtlas" class="col-sm-3 control-label">.json Atlas data</label>
                       <div class="col-sm-9">
                         <div class="input-group">
                           <div class="input-group-addon">
-                            url
+                            <i class="fa fa-list fa-fw"></i>
                           </div>
-                          <input type="text" name="atlasjson" value="{{ piece.atlasjson }}" placeholder="Enter the atlas url for this piece, e.g. http://www.myserver.com/atlas.json" class="form-control" id="atlasjson">
+                          <textarea name="jsonAtlas"  placeholder="Copy&paste the jsonAtlas data from your .json file created by TexturePacker" class="form-control" id="jsonAtlas" rows="20">{% if (piece.jsonAtlas) %}{{ JSON.stringify(piece.jsonAtlas) }}{% endif %}</textarea>
                         </div>
                       </div>
                     </div>
@@ -213,17 +227,6 @@
                       </div>
                     </div>
 
-                    
-                    <p class="alert bg-info">
-                      <strong>TIP</strong><br/>
-                      This format allows to package pieces of different sizes within a single image.
-                      See example <a href="/assets/catan-terrain.png" target="_blank">image</a> & <a href="/assets/catan-terrain.json" target="_blank">json</a>.
-                      <br/>
-                      To create a json atlas, download <a class="btn btn-primary btn-xs" href="https://www.codeandweb.com/texturepacker/" target="_blank">Texture Packer</a> and select the
-                      <a href="https://cdn.codeandweb.com/blog/2014/12/17/creating-spritesheets-for-phaser-with-texturepacker/texturepacker-choose-phaser.png" target="_blank">Phaser JSON Hash</a> format.
-                      See the export
-                      <a href="https://cdn.codeandweb.com/blog/2014/12/17/creating-spritesheets-for-phaser-with-texturepacker/texturepacker-adding-sprites.png" target="_blank">settings example</a>
-                    </p>
                   </div>
                   
                   <div role="tabpanel" class="tab-pane" id="tab4">

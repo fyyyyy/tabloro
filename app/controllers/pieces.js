@@ -85,6 +85,8 @@ exports.create = function (req, res) {
     var images = req.files.image ? [req.files.image] : undefined;
 
     piece.user = req.user;
+    if(piece.jsonAtlas) piece.jsonAtlas = JSON.parse(piece.jsonAtlas);
+
 
     piece.uploadAndSave(images, function (err) {
         if (!err) {
@@ -125,6 +127,19 @@ exports.update = function (req, res){
   // make sure no one changes the user
   delete req.body.user;
   piece = extend(piece, req.body);
+  console.log('jsonAtlas', piece.jsonAtlas);
+
+  try {
+    if(piece.jsonAtlas) piece.jsonAtlas = JSON.parse(piece.jsonAtlas);
+  } catch(e) {
+    res.render('pieces/edit', {
+      title: 'Edit Piece(s)',
+      piece: piece,
+      errors: ['Json format wrong']
+    });
+    return;
+  }
+  
 
 
 
@@ -160,6 +175,23 @@ exports.show = function (req, res) {
             piece: piece,
             isOwner: piece.user.id === req.user.id
         });
+    });
+};
+
+
+
+/**
+ * json
+ */
+
+exports.json = function (req, res) {
+    var piece = req.piece;
+
+    Piece.load(piece.id, function (err, piece) {
+        if (err) return next(err);
+        if (!piece) return next(new Error('piece not found'));
+        req.piece = piece;
+        res.json(piece.jsonAtlas);
     });
 };
 

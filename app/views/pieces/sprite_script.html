@@ -3,6 +3,7 @@
   (function () {
     /*globals $, R, Image, document*/
 
+    console.log('parse data');
     var piece = JSON.parse('{{JSON.stringify(piece)}}');
     var editCount = JSON.parse('{{editCount}}' || 'false');
     var showCount = JSON.parse('{{showCount}}' || 'false');
@@ -137,11 +138,33 @@
 
     });
 
-    if (piece.atlasjson) {
+    if (piece.atlasjson || piece.jsonAtlas) {
       document.addEventListener('DOMContentLoaded', function() { 
         console.log('DOMContentLoaded, atlasjson');
 
-        $.getJSON(piece.atlasjson, function (data) {
+        if (!piece.jsonAtlas) {
+
+          $.getJSON(piece.atlasjson, function (data) {
+            var setImageWidth = function () {
+              var frames = data.frames;
+              // console.log('frames', data);
+
+              for (var i =  0; i < frames.length; i++) {
+                var frame = frames[i].frame;
+                var xOffset = - frame.x;
+                var yOffset = - frame.y;
+                var width = frame.w;
+                var height = frame.h;
+                appendTiles(i, setStyle(width, height, xOffset, yOffset));
+              }
+            };
+            
+            checkImageLoaded(setImageWidth);
+          });
+
+        } else {
+          console.log('jsonAtlas', piece.jsonAtlas);
+          var data  = piece.jsonAtlas;
           var setImageWidth = function () {
             var frames = data.frames;
             // console.log('frames', data);
@@ -157,7 +180,8 @@
           };
           
           checkImageLoaded(setImageWidth);
-        });
+          
+        }
       });
       
     } else if (piece.frameWidth) {
