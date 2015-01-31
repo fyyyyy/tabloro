@@ -18,7 +18,7 @@
     
     <div class="row container">
       <div class="col-md-12">
-        <form method="post" action="{{ action }}" enctype="multipart/form-data" role="form" class="form-horizontal">
+        <form method="post" action="{{ action }}" enctype="multipart/form-data" role="form" class="form-horizontal" id="pieceform">
 
           <input type="hidden" name="_csrf" value="{{ csrf_token }}">
 
@@ -55,16 +55,19 @@
 
 
           <div class="form-group required">
-            <label for="file" class="col-sm-3 control-label">Image</label>
+            <label for="image" class="col-sm-3 control-label">Image</label>
             <div class="col-sm-9">
               <div class="input-group">
                 <div class="input-group-addon">
                   <i class="fa fa-image fa-fw"></i>
                 </div>
-                <input type="file" name="image" class="form-control" id="file" {% if (piece.isNew) %}required="true"{% endif %}>
+                <input type="file" name="image" class="form-control" onchange="readURL()" id="image" {% if (piece.isNew) %}required="true"{% endif %}>
               </div>
-              <p class="help-block">Use this free <a href="http://www.picresize.com/batch.php" target="_blank">online converter</a> to resize multiple images in one go.</p>
-              <p class="help-block">A card should be 100x140 pixels to 150x220 pixels in size, game boards should be between 512x512 (chess) to 2048x2048 (Funkenschlag) pixels in size</p>
+              <input type=range id=size min=0 max=100 value=50 onchange="changeScale()">
+              <p class="help-block" id="size-text">Resize</p>
+              <p class="help-block">Use the slider to scale down your image. It will appear as large in game as shown here.
+                A single card should be 100x140 pixels to 150x220 pixels in size, game boards should be between 512x512 (chess) to 1024x1024 (Funkenschlag) pixels in size</p>
+              <canvas id="cc" height="0"></canvas>
             </div>
           </div>
 
@@ -370,5 +373,176 @@
 
 <div class="about"></div>
   
+<script type="text/javascript">
+/*global $, document*/
+
+  var canvas = document.getElementById("cc");
+  var ctx = canvas.getContext("2d");
+  var oldFile;
+  var toResizeImage;
+
+  var readURL = function readURL() {
+    console.log('readURL');
+    var input = $("#image")[0];
+    oldFile = input && input.files && input.files[0] || oldFile;
+    if (oldFile) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        toResizeImage = new Image();
+        
+        toResizeImage.onload = function () {
+          resizeImage(oldFile);
+          // $('[type=submit]').off('click');
+          // $('[type=submit]').on('click', function (e) {
+         // });
+        };
+        toResizeImage.src = e.target.result;
+        console.log(toResizeImage.width);
+      };
+
+      if(input)reader.readAsDataURL(input.files[0]);
+    }
+  };
+
+
+var changeScale = function () {
+  console.log('changeScale');
+  resizeImage(oldFile);
+};
+
+  var resizeImage = function (oldFile) {
+              var W = toResizeImage.width;
+          var H = toResizeImage.height;
+          canvas.width = W;
+          canvas.height = H;
+          ctx.drawImage(toResizeImage, 0, 0); //draw image
+
+          //resize by ratio
+          //var ratio = 0.43895525; //from 0 to 1
+          //resample_hermite(canvas, W, H, Math.round(W*ratio), Math.round(H*ratio));
+          //resize manually
+          var slider = parseInt($('#size').val());
+          var ratio = slider / 100;
+          var resizedWidth = Math.floor(toResizeImage.width * ratio);
+          var resizedHeight = Math.floor(toResizeImage.height * ratio);
+          
+          $('#size-text').text('Resize: ' + slider + '%   (' + resizedWidth + 'x' + resizedHeight + ' pixel)');
+          
+          resample_hermite(canvas, W, H, resizedWidth, resizedHeight);
+          
+          var blob = dataURItoBlob(canvas.toDataURL());
+          console.log('oldFile', oldFile.name);
+          $('#pieceform').off();
+          $('#pieceform').submit(function (e) {
+            $('[type=submit]').attr('disabled', 'true');
+            $('[type=submit]').text('Please wait...');
+  
+            $('#image').remove();
+            var fd = new FormData(document.forms[0]);
+            fd.append('filename', oldFile.name);
+            fd.append('filetype', oldFile.type);
+            fd.append('resized', blob);
+  
+            e.preventDefault();
+            $.ajax({
+              url: "{{action}}",
+              type: "POST",
+              data: fd,
+              processData: false,
+              contentType: false,
+              success: function(data) {
+                console.log('data', data);
+                 document.location.pathname = '/pieces/' + data;
+              }
+            });
+              return false;
+          });
+  };
+
+
+
+
+
+function resample_hermite(canvas, W, H, W2, H2){
+  var time1 = Date.now();
+  W2 = Math.round(W2);
+  H2 = Math.round(H2);
+  var img = canvas.getContext("2d").getImageData(0, 0, W, H);
+  var img2 = canvas.getContext("2d").getImageData(0, 0, W2, H2);
+  var data = img.data;
+  var data2 = img2.data;
+  var ratio_w = W / W2;
+  var ratio_h = H / H2;
+  var ratio_w_half = Math.ceil(ratio_w/2);
+  var ratio_h_half = Math.ceil(ratio_h/2);
+  
+  for(var j = 0; j < H2; j++){
+    for(var i = 0; i < W2; i++){
+      var x2 = (i + j*W2) * 4;
+      var weight = 0;
+      var weights = 0;
+      var weights_alpha = 0;
+      var gx_r = gx_g = gx_b = gx_a = 0;
+      var center_y = (j + 0.5) * ratio_h;
+      for(var yy = Math.floor(j * ratio_h); yy < (j + 1) * ratio_h; yy++){
+        var dy = Math.abs(center_y - (yy + 0.5)) / ratio_h_half;
+        var center_x = (i + 0.5) * ratio_w;
+        var w0 = dy*dy //pre-calc part of w
+        for(var xx = Math.floor(i * ratio_w); xx < (i + 1) * ratio_w; xx++){
+          var dx = Math.abs(center_x - (xx + 0.5)) / ratio_w_half;
+          var w = Math.sqrt(w0 + dx*dx);
+          if(w >= -1 && w <= 1){
+            //hermite filter
+            weight = 2 * w*w*w - 3*w*w + 1;
+            if(weight > 0){
+              dx = 4*(xx + yy*W);
+              //alpha
+              gx_a += weight * data[dx + 3];
+              weights_alpha += weight;
+              //colors
+              if(data[dx + 3] < 255)
+                weight = weight * data[dx + 3] / 250;
+              gx_r += weight * data[dx];
+              gx_g += weight * data[dx + 1];
+              gx_b += weight * data[dx + 2];
+              weights += weight;
+              }
+            }
+          }   
+        }
+      data2[x2]     = gx_r / weights;
+      data2[x2 + 1] = gx_g / weights;
+      data2[x2 + 2] = gx_b / weights;
+      data2[x2 + 3] = gx_a / weights_alpha;
+      }
+    }
+  console.log("hermite = "+(Math.round(Date.now() - time1)/1000)+" s");
+  canvas.getContext("2d").clearRect(0, 0, Math.max(W, W2), Math.max(H, H2));
+    canvas.width = W2;
+    canvas.height = H2;
+  canvas.getContext("2d").putImageData(img2, 0, 0);
+}
+
+function dataURItoBlob(dataURI) {
+    // convert base64/URLEncoded data component to raw binary data held in a string
+    var byteString;
+    if (dataURI.split(',')[0].indexOf('base64') >= 0)
+        byteString = atob(dataURI.split(',')[1]);
+    else
+        byteString = unescape(dataURI.split(',')[1]);
+
+    // separate out the mime component
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+    // write the bytes of the string to a typed array
+    var ia = new Uint8Array(byteString.length);
+    for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+
+    return new Blob([ia], {type:mimeString});
+}
+</script>
 
 {% endblock %}

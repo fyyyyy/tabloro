@@ -82,7 +82,10 @@ exports.create = function (req, res) {
     console.log('create piece', req.body);
     var piece = new Piece(req.body);
     piece.user = req.user;
-    var images = req.files.image ? [req.files.image] : undefined;
+    
+    var images;
+    images = req.files.image ? [req.files.image] : undefined;
+    images = req.files.resized ? [req.files.resized] : images;
 
     piece.user = req.user;
     if(piece.jsonAtlas) piece.jsonAtlas = JSON.parse(piece.jsonAtlas);
@@ -91,7 +94,11 @@ exports.create = function (req, res) {
     piece.uploadAndSave(images, function (err) {
         if (!err) {
             req.flash('success', 'Successfully created piece!');
-            return res.redirect('/pieces/' + piece.id);
+
+            if(req.xhr) {
+                return res.json(piece.id);
+            }
+            return res.redirect('/pieces/' + piece._id);
         }
         console.log(err);
         res.render('pieces/new', {
@@ -122,12 +129,16 @@ exports.edit = function (req, res) {
 
 exports.update = function (req, res){
   var piece = req.piece;
-  var images = req.files.image ? [req.files.image] : undefined;
+    
+    var images;
+    images = req.files.image ? [req.files.image] : undefined;
+    images = req.files.resized ? [req.files.resized] : images;
+
 
   // make sure no one changes the user
   delete req.body.user;
+
   piece = extend(piece, req.body);
-  console.log('jsonAtlas', piece.jsonAtlas);
 
   try {
     if(piece.jsonAtlas) piece.jsonAtlas = JSON.parse(piece.jsonAtlas);
@@ -145,7 +156,10 @@ exports.update = function (req, res){
 
   piece.uploadAndSave(images, function (err) {
     if (!err) {
-      return res.redirect('/pieces/' + piece._id);
+        if(req.xhr) {
+            return res.json(piece.id);
+        }
+        return res.redirect('/pieces/' + piece._id);
     }
 
     res.render('pieces/edit', {
