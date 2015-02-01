@@ -56,6 +56,23 @@ UI.init = function () {
 
 };
 
+UI.listGroupsInMenu = function() {
+    var groups = G._masterGroup.children;
+    console.log('UI.listGroupsInMenu', groups);
+    var i = 0;
+    $('#layers').children().slice(1,99).remove();
+    R.forEach(function (group) {
+        $('#layers').append(
+            '<li>' + 
+                '<a href="#" onclick="onArrangeLayer(\'' + group.name + '\')">' + 
+                    ++i + '. ' +
+                    '<i class="fa ' + group.icon + ' fa-fw"></i>&nbsp;' + 
+                    group.name + 
+                '</a>' +
+        '</li>');
+    })(R.reverse(groups));
+};
+
 
 UI.sendChat = function () {
     if (chatInput.value.length > 0) {

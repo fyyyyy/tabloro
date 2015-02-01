@@ -40,11 +40,13 @@ function create() {
     if (G.created) {
         return;
     }
-    G.created = true;
     setupStage();
     setupTable();
 
+    G.init(game);
     setupAssets(assets);
+    UI.listGroupsInMenu();
+
 
     Controls.add(); // on top of tiles
 
@@ -132,21 +134,18 @@ function buildAssetArray (asset, maxFrames) {
 function setupAssets (gameAssets) {
     var yOffset = 100;
     var maxFrames = 1;
-    G.groups.add('tokens');
 
     R.forEach(function (asset) {
         yOffset += 150;
 
         var groupName = asset.args[0];
-        var icon = 'fa-photo';
 
         console.log('adding asset group', groupName);
 
-        G.groups.add(groupName, 0, Utils.deg2Rad(asset.rotateBy), asset.flipable, asset.handable, asset.lockable);
+        G.groups.add(groupName, 0, asset);
 
 
         if (asset.method === 'atlasJSONHash') {
-            icon = 'fa-cube';
             maxFrames = game.cache.getFrameCount(groupName);
             addCards(groupName, yOffset, buildAssetArray(asset, maxFrames), G.groups.get(groupName));
         }
@@ -156,13 +155,10 @@ function setupAssets (gameAssets) {
         }
 
         if (asset.method === 'spritesheet') {
-            icon = 'fa-th';
 
             maxFrames = asset.args[4];
 
             if (asset.isDice) {
-                icon = 'fa-random';
-
                 console.log('adding dice', R.head(R.of(asset.counts)));
                 R.times(function () {
                     Dice.add(groupName, G.groups.get(groupName), maxFrames);
@@ -174,18 +170,15 @@ function setupAssets (gameAssets) {
             }
         }
 
-        $('#layers').append(
-            '<li>' + 
-                '<a href="#" onclick="onArrangeLayer(\'' + groupName + '\')">' + 
-                    '<i class="fa ' + icon + ' fa-fw"></i>&nbsp;' + 
-                    groupName + 
-                '</a>' +
-        '</li>');
     })(gameAssets);
+
 }
 
+
+
+
 function onArrangeLayer (groupName) {
-    console.log('arrangeLayers', groupName);
+    console.log('arrangeLayers', G._masterGroup.children);
     Network.server.arrangeLayer(groupName);
 }
 

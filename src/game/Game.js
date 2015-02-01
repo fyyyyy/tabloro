@@ -11,17 +11,18 @@ G.addTile = function (tile) {
 };
 
 G.groups = {
-    add: function (groupName, index, rotateBy, flipable, handable, lockable) {
+    add: function (groupName, index, asset) {
         // console.log('adding group', groupName);
         index = index || 0;
-        rotateBy = rotateBy || 0;
 
-        G._groups[groupName] = game.add.group();
+        G._groups[groupName] = G._masterGroup.add(game.add.group());
         G._groups[groupName].z = index;
-        G._groups[groupName].rotateBy = rotateBy;
-        G._groups[groupName].flipable = flipable;
-        G._groups[groupName].handable = handable;
-        G._groups[groupName].lockable = lockable;
+        G._groups[groupName].name = groupName;
+        G._groups[groupName].rotateBy = Utils.deg2Rad(asset.rotateBy) || 0;
+        G._groups[groupName].flipable = asset.flipable;
+        G._groups[groupName].handable = asset.handable;
+        G._groups[groupName].lockable = asset.lockable;
+        G._groups[groupName].icon = G.getIcon(asset);
     },
     get: function (groupName) {
         return G._groups[groupName];
@@ -31,19 +32,26 @@ G.groups = {
     }
 };
 
+G.getIcon = function (asset) {
+    if (asset.method === 'spritesheet') {
+        if (asset.isDice) {
+            return 'fa-random';
+        }
+        return 'fa-th';
+    }
+    if (asset.method === 'atlasJSONHash') {
+        return 'fa-cube';
+    }
+    return 'fa-photo';
+};
+
+
 
 G.init = function (game) {
-    G.button = R.converge(
-        game.add.button,
-        R.always(0),
-        R.always(0),
-        R.always('button'),
-        R.I,
-        R.argN(1),
-        R.always(1),
-        R.always(0),
-        R.always(2)
-    ).bind(game.add);
+    G.created = true;
+
+    G._masterGroup = game.add.group();
+
 };
 
 
