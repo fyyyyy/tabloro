@@ -8,6 +8,7 @@
 var mongoose = require('mongoose');
 var Box = mongoose.model('Box');
 var Piece = mongoose.model('Piece');
+var Setup = mongoose.model('Setup');
 var utils = require('../../lib/utils');
 var R = require('../../public/js/ramda.js');
 var extend = require('util')._extend;
@@ -402,12 +403,24 @@ exports.test = function (req, res) {
 
 exports.destroy = function (req, res) {
     var box = req.box;
-    box.remove(function (err) {
+
+    Setup.find({box: box}, function (err, setups) {
         if (err) {
-            req.flash('alert', 'Could not delete box');
-            return;
+            req.flash('error', 'Could not delete box');
+            return res.redirect('/boxes/' + box._id);
         }
-        req.flash('info', 'Box deleted successfully');
-        res.redirect('/boxes');
+        if (setups.length > 0) {
+            req.flash('error', 'Could not delete box, its currently used by ' + setups.length + ' setups! Please delete the setups >' + R.join(',', R.pluck('title')(setups)) + '< first.');
+            return res.redirect('/boxes/' + box._id);
+        }
+        
+        box.remove(function (err) {
+            if (err) {
+                req.flash('alert', 'Could not delete box');
+                return;
+            }
+            req.flash('info', 'Box deleted successfully');
+            res.redirect('/boxes');
+        });
     });
 };

@@ -613,3 +613,6 @@ a.skype {
     -o-user-select: none; 
 }
 
+.alert {
+    padding: 30px;
+}

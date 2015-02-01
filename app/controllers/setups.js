@@ -8,6 +8,7 @@
 var mongoose = require('mongoose');
 var Setup = mongoose.model('Setup');
 var Piece = mongoose.model('Piece');
+var Table = mongoose.model('Table');
 var utils = require('../../lib/utils');
 var R = require('../../public/js/ramda.js');
 
@@ -181,12 +182,28 @@ exports.test = function (req, res) {
 
 exports.destroy = function (req, res) {
     var setup = req.setup;
-    setup.remove(function (err) {
+
+    Table.find({setup: setup}, function (err, tables) {
         if (err) {
-            req.flash('alert', 'Could not delete game setup');
+            req.flash('error', 'Could not delete setup');
+            res.redirect('/boxes/' + setup.box.id + '/setups/' + setup.title);
+           
             return;
         }
-        req.flash('info', 'Deleted successfully');
-        res.redirect('/setups');
+        if (tables.length > 0) {
+            req.flash('error', 'Could not delete setup, its currently used by ' + tables.length + ' tables! Please delete the tables >> ' + R.join(',', R.pluck('title')(tables)) + ' << before deleting this setup.');
+            res.redirect('/boxes/' + setup.box.id + '/setups/' + setup.title);
+            return;
+        }
+        
+        setup.remove(function (err) {
+            if (err) {
+                req.flash('alert', 'Could not delete game setup');
+                return;
+            }
+            req.flash('info', 'Deleted successfully');
+            res.redirect('/setups');
+        });
     });
+
 };

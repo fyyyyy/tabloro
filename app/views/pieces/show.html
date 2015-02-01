@@ -194,7 +194,7 @@
         {% endif %}
         {% if isOwner || isAdmin %}
           <li class="list-group-item list-group-item-danger">
-            <form action="{{ '/pieces/' + piece.title }}" method="post" onsubmit="return confirm('Are you sure?')">
+            <form action="{{ '/pieces/' + piece.id }}" method="post" onsubmit="return confirm('Are you sure?')">
               <br>
               <input type="hidden" name="_csrf" value="{{ csrf_token }}">
               <a href="{{ '/pieces/' + piece.id + '/edit' }}" title="edit" class="btn btn-default">

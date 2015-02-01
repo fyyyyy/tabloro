@@ -130,7 +130,7 @@
           </li>
           
           <li class="list-group-item list-group-item-danger">
-            <form action="{{ '/boxes/' + box.title }}" method="post" onsubmit="return confirm('Are you sure?')">
+            <form action="{{ '/boxes/' + box.id }}" method="post" onsubmit="return confirm('Are you sure?')">
               <input type="hidden" name="_csrf" value="{{ csrf_token }}">
               <input type="hidden" name="_method" value="DELETE">
               <button class="btn btn-danger" type="submit">Delete Box</button>
