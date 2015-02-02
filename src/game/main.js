@@ -142,16 +142,16 @@ function setupAssets (gameAssets) {
 
         console.log('adding asset group', groupName);
 
-        G.groups.add(groupName, 0, asset);
+        var group = G.groups.add(groupName, 0, asset);
 
 
         if (asset.method === 'atlasJSONHash') {
             maxFrames = game.cache.getFrameCount(groupName);
-            addCards(groupName, yOffset, buildAssetArray(asset, maxFrames), G.groups.get(groupName));
+            addCards(groupName, yOffset, buildAssetArray(asset, maxFrames), group);
         }
 
         if (asset.method === 'image') {
-            addTokens(R.repeatN(groupName, asset.counts || maxFrames), G.groups.get(groupName), 100, yOffset);
+            addTokens(R.repeatN(groupName, asset.counts || maxFrames), group, 100, yOffset);
         }
 
         if (asset.method === 'spritesheet') {
@@ -161,12 +161,12 @@ function setupAssets (gameAssets) {
             if (asset.isDice) {
                 console.log('adding dice', R.head(R.of(asset.counts)));
                 R.times(function () {
-                    Dice.add(groupName, G.groups.get(groupName), maxFrames);
+                    Dice.add(groupName, group, maxFrames);
                 })(R.head(R.of(asset.counts)) || 1);
             } else if (asset.isStash){
-                addStash(groupName, yOffset, R.head(R.of(asset.counts)) || 1, G.groups.get(groupName));
+                addStash(groupName, yOffset, R.head(R.of(asset.counts)) || 1, group);
             } else {
-                addCards(groupName, yOffset, buildAssetArray(asset, maxFrames), G.groups.get(groupName));
+                addCards(groupName, yOffset, buildAssetArray(asset, maxFrames), group);
             }
         }
 

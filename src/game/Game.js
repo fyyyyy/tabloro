@@ -23,6 +23,7 @@ G.groups = {
         G._groups[groupName].handable = asset.handable;
         G._groups[groupName].lockable = asset.lockable;
         G._groups[groupName].icon = G.getIcon(asset);
+        return G._groups[groupName];
     },
     get: function (groupName) {
         return G._groups[groupName];
@@ -40,7 +41,7 @@ G.getIcon = function (asset) {
         return 'fa-th';
     }
     if (asset.method === 'atlasJSONHash') {
-        return 'fa-cube';
+        return 'fa-th-list';
     }
     return 'fa-photo';
 };
