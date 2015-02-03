@@ -115,7 +115,7 @@ Network.setup = function () {
 
     Network.client.exports.positionTile = function (client, tileId, newPosition) {
         if (! Network.isMine(client.id)) return; // this is NOT me ////////
-        console.log('Initial positioning of tile ', tileId);
+        console.log('positioning tile ', tileId);
         
         var tile = G.findTile(tileId);
         

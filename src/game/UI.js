@@ -64,7 +64,7 @@ UI.listGroupsInMenu = function() {
     R.forEach(function (group) {
         $('#layers').append(
             '<li>' + 
-                '<a href="#" onclick="onArrangeLayer(\'' + group.name + '\')">' + 
+                '<a href="#" onclick="UI.onArrangeLayer(\'' + group.name + '\')">' + 
                     ++i + '. ' +
                     '<i class="fa ' + group.icon + ' fa-fw"></i>&nbsp;' + 
                     group.name + 
@@ -73,6 +73,27 @@ UI.listGroupsInMenu = function() {
     })(R.reverse(groups));
 };
 
+
+UI.onArrangeLayer = function (groupName) {
+    console.log('arrangeLayers', G._masterGroup.children);
+    Network.server.arrangeLayer(groupName);
+};
+
+UI.enterPressed = function () {
+    if (UI.enterDelay) {
+        return;
+    }
+    console.log('ENTER pressed');
+        if (UI.chatVisible()) {
+            UI.sendChat();
+            UI.hideChat();
+        } else {
+            console.log('showChat');
+            UI.showChat();
+        }
+        UI.enterDelay = true;
+        setTimeout(function() { UI.enterDelay = false; }, 200);
+};
 
 UI.sendChat = function () {
     if (chatInput.value.length > 0) {

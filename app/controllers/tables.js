@@ -178,10 +178,11 @@ exports.update = function (req, res){
   table = extend(table, req.body);
 
 
-  table.update(function (err) {
+  table.save(function (err) {
     if (!err) {
       return res.redirect('/tables/' + table.title);
     }
+    console.log(req.body);
     console.error(err);
     res.render('tables/edit', {
         title: 'Edit ' + req.table.title,

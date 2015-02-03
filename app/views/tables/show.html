@@ -155,7 +155,7 @@
           {% include '../includes/controls.html' %}
 
         </li>
-        {% if isAdmin %}
+        {% if isOwner || isAdmin %}
           <li class="list-group-item list-group-item-danger">
             <form action="{{ '/tables/' + table.title }}" method="post" onsubmit="return confirm('Are you sure?')">
               <br>

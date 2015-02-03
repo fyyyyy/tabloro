@@ -31,7 +31,6 @@ var screenShot = function () {
 
 
 function preload() {
-    // game is available here
     Assets.preload(game);
 }
 
@@ -75,7 +74,6 @@ function setupStage() {
     // canvas.height = window.innerHeight * window.devicePixelRatio;
     // canvas.style.width = window.innerWidth + "px";
     // canvas.style.height = window.innerHeight + "px";
-    // game.input.scale.set(window.devicePixelRatio);
 
     game.canvas.oncontextmenu = function (e) { e.preventDefault(); };
     // game.canvas.style.setProperty('cursor', 'none');
@@ -139,10 +137,8 @@ function setupAssets (gameAssets) {
         yOffset += 150;
 
         var groupName = asset.args[0];
-
-        console.log('adding asset group', groupName);
-
         var group = G.groups.add(groupName, 0, asset);
+        console.log('adding asset group', groupName);
 
 
         if (asset.method === 'atlasJSONHash') {
@@ -174,13 +170,6 @@ function setupAssets (gameAssets) {
 
 }
 
-
-
-
-function onArrangeLayer (groupName) {
-    console.log('arrangeLayers', G._masterGroup.children);
-    Network.server.arrangeLayer(groupName);
-}
 
 
 
@@ -253,6 +242,7 @@ function addTokens(which, group, x, y, scale) {
 function setupPlayers() {
     UI.updateNames();
     players = game.add.group();
+    players.name = 'players';
     players.z = 17;
     player = {cursor: cursorId, name: playerName};
 }
@@ -288,17 +278,8 @@ function update() {
              || game.input.keyboard.isDown(Phaser.Keyboard.D) && !UI.chatVisible())
     {
         game.camera.x += 50;   
-    } else if(!G.enterDelay && game.input.keyboard.isDown(Phaser.Keyboard.ENTER)) {
-        console.log('ENTER pressed');
-        if (UI.chatVisible()) {
-            UI.sendChat();
-            UI.hideChat();
-        } else {
-            console.log('showChat');
-            UI.showChat();
-        }
-        G.enterDelay = true;
-        setTimeout(function() { G.enterDelay = false; }, 200);
+    } else if(game.input.keyboard.isDown(Phaser.Keyboard.ENTER)) {
+        UI.enterPressed();
     }
 
 
