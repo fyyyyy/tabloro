@@ -101,7 +101,11 @@ exports.create = function (req, res) {
             }
             return res.redirect('/pieces/' + piece._id);
         }
+        
         console.log(err);
+        if(req.xhr) {
+            return res.status(500).json(err);
+        }
         res.render('pieces/new', {
             title: 'New Gaming Piece(s)',
             piece: piece,

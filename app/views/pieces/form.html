@@ -451,12 +451,17 @@ var changeScale = function () {
               data: fd,
               processData: false,
               contentType: false,
-              success: function(data) {
-                console.log('data', data);
-                 document.location.pathname = '/pieces/' + data;
+              success: function(id) {
+                console.log('id', id);
+                 document.location.pathname = '/pieces/' + id;
+              },
+              error: function (err) {
+                console.error(err);
+                alert(err.responseJSON.errors.title.message + ': ' + err.responseJSON.errors.title.value );
+                return false;
               }
             });
-              return false;
+            return false;
           });
   };
 
