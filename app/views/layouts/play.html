@@ -36,7 +36,8 @@
         {% endif %}
 
         <script type="text/javascript">
-            var playerName = '{{user.username}}';
+            var playerName = '{{user.username }}';
+            playerName = playerName || "Guest_" + Date.now().toString().slice(-8,-1);
             var cursorId = Number('{{user.selected_cursor}}') || 1;
             var mode = '{{mode}}';
             var roomName = '{{roomName || room.title}}';
