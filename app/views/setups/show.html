@@ -88,12 +88,12 @@
             </p>
           </li>
         {% endif %}
-        {% if isAdmin %}
-          <li class="list-group-item list-group-item-warning">
+        {% if isOwner || isAdmin %}
+<!--           <li class="list-group-item list-group-item-warning">
             <a href="{{ '/setups/' + setup.title + '/edit' }}" title="edit" class="btn btn-warning">
               Edit Game Setup
             </a>
-          </li>
+          </li> -->
           <li class="list-group-item list-group-item-danger">
             <form action="{{ '/setups/' + setup.title }}" method="post" onsubmit="return confirm('Are you sure?')">
               <input type="hidden" name="_csrf" value="{{ csrf_token }}">

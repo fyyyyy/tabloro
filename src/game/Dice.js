@@ -15,6 +15,7 @@ Dice.add = function (assetName, group, numSides) {
     dice.isDice = true;
 
     T.draggable(dice);
+    T.stackable(dice);
 
     Dice.spinnable(dice);
     Cursor.reset(dice);
