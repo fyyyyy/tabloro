@@ -4,6 +4,7 @@
  */
 
 var mongoose = require('mongoose');
+var utils = require('../../lib/utils');
 
 var Schema = mongoose.Schema;
 var User = require('../models/user.js');
@@ -58,6 +59,13 @@ SetupSchema.path('title').validate(function (title, fn) {
     });
   } else fn(true);
 }, 'Game setup name already exists');
+
+
+SetupSchema.path('title').validate(function (title, fn) {
+  if (this.isNew || this.isModified('title')) {
+      fn(utils.validateTitle(title));
+  } else fn(true);
+}, 'Name can only contain letters, numbers and underscore.');
 
 
 /**

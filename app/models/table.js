@@ -2,6 +2,7 @@
 /**
  * Module dependencies.
  */
+var utils = require('../../lib/utils');
 
 var mongoose = require('mongoose');
 
@@ -63,6 +64,13 @@ TableSchema.path('title').validate(function (title, fn) {
     });
   } else fn(true);
 }, 'Table name already exists');
+
+
+TableSchema.path('title').validate(function (title, fn) {
+  if (this.isNew || this.isModified('title')) {
+      fn(utils.validateTitle(title));
+  } else fn(true);
+}, 'Name can only contain letters, numbers and underscore.');
 
 
 /**

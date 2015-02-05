@@ -457,7 +457,9 @@ var changeScale = function () {
               },
               error: function (err) {
                 console.error(err);
-                alert(err.responseJSON.errors.title.message + ': ' + err.responseJSON.errors.title.value );
+                $('[type=submit]').removeAttr('disabled');
+                $('[type=submit]').text('Submit');
+                alert(err.responseJSON ? err.responseJSON.errors.title.message + ': ' + err.responseJSON.errors.title.value : err.statusText );
                 return false;
               }
             });

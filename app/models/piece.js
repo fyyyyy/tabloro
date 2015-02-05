@@ -7,6 +7,7 @@ var mongoose = require('mongoose');
 var Imager = require('imager');
 var config = require('config');
 var imagerConfig = require(config.root + '/config/imager.js');
+var utils = require('../../lib/utils');
 
 var Schema = mongoose.Schema;
 var User = require('../models/user.js');
@@ -134,6 +135,14 @@ PieceSchema.path('title').validate(function (title, fn) {
     });
   } else fn(true);
 }, 'Piece name already exists');
+
+
+
+PieceSchema.path('title').validate(function (title, fn) {
+  if (this.isNew || this.isModified('title')) {
+      fn(utils.validateTitle(title));
+  } else fn(true);
+}, 'Name can only contain letters, numbers and underscore.');
 
 
 PieceSchema.pre('save', function (next) {

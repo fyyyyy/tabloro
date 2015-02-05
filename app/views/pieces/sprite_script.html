@@ -4,7 +4,19 @@
     /*globals $, R, Image, document*/
 
     console.log('parse data');
-    var piece = JSON.parse('{{JSON.stringify(piece)}}');
+    var piece = {};
+    piece.image =  JSON.parse('{{JSON.stringify(piece.image)}}');
+    piece._id =  JSON.parse('{{JSON.stringify(piece._id)}}');
+    piece.isDice =  JSON.parse('{{JSON.stringify(piece.isDice)}}');
+    piece.isStash =  JSON.parse('{{JSON.stringify(piece.isStash)}}');
+    piece.frameWidth =  JSON.parse('{{JSON.stringify(piece.frameWidth)}}');
+    piece.frameHeight =  JSON.parse('{{JSON.stringify(piece.frameHeight)}}');
+    piece.maxFrames =  JSON.parse('{{JSON.stringify(piece.maxFrames)}}');
+    piece.flipable =  JSON.parse('{{JSON.stringify(piece.flipable)}}');
+    piece.jsonAtlas =  JSON.parse('{{JSON.stringify(piece.jsonAtlas)}}');
+    piece.atlasjson =  JSON.parse('{{JSON.stringify(piece.atlasjson)}}');
+    piece.spacing =  JSON.parse('{{JSON.stringify(piece.spacing)}}');
+    console.log('piece', piece);
     var editCount = JSON.parse('{{editCount}}' || 'false');
     var showCount = JSON.parse('{{showCount}}' || 'false');
     var owner = JSON.parse('{{owner}}' || 'false');

@@ -7,6 +7,7 @@ var mongoose = require('mongoose');
 var Imager = require('imager');
 var config = require('config');
 var imagerConfig = require(config.root + '/config/imager.js');
+var utils = require('../../lib/utils');
 
 
 var Schema = mongoose.Schema;
@@ -90,6 +91,12 @@ BoxSchema.path('title').validate(function (title, fn) {
     });
   } else fn(true);
 }, 'Box name already exists');
+
+BoxSchema.path('title').validate(function (title, fn) {
+  if (this.isNew || this.isModified('title')) {
+      fn(utils.validateTitle(title));
+  } else fn(true);
+}, 'Name can only contain letters, numbers and underscore.');
 
 
 BoxSchema.pre('remove', function (next) {

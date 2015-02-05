@@ -92,11 +92,20 @@ exports.create = function (req, res) {
     console.log('create table', req.body);
     var table = new Table(req.body);
     var setupName = req.body.setupName;
+    table.setupName = setupName;
 
     table.user = req.user;
     table.stacks = {};
 
     Setup.findOne({title: setupName}).exec(function (err, setup) {
+        if (err || !setup) {
+            console.log(err);
+            return res.render('tables/new', {
+                title: 'New Table',
+                table: table,
+                errors: ['Setup: ' + setupName + ' could not be found!']
+            });
+        }
         table.setup = setup;
         table.box = setup.box;
         table.tiles = setup.tiles || {};

@@ -59,6 +59,7 @@ function create() {
 
 
 function setupStage() {
+    game.stage.disableVisibilityChange = true; // loose tab focus, game will continue
     var please_wait = document.getElementById('please_wait');
     if(please_wait) please_wait.remove();
     game.scale.scaleMode = Phaser.ScaleManager.RESIZE;
