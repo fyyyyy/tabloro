@@ -51,7 +51,7 @@
       
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h4>Game Info</h4>
+          <h4>About {{table.box.title}}</h4>
         </div>
         <div class="panel-body">
 
@@ -64,12 +64,12 @@
           <div class="muted min200">
             {% if (table.box.image.cdnUri) %}
               <a href="{{table.box.link}}" target="_blank">
-                <img style="opacity: 0.5; padding-right: 10px;" class="img-responsive max200 min200 pull-left" src="{{ table.box.image.cdnUri + '/detail_' + table.box.image.files[0] }}" alt="">
+                <img style="padding-right: 10px;" class="img-responsive max200 min200 pull-left" src="{{ table.box.image.cdnUri + '/detail_' + table.box.image.files[0] }}" alt="">
               </a>
             {% endif %}
             <p class="pull-left">{{table.box.description}}</p>
             {% if (table.box.link) %}
-              <a href="{{table.box.link}}" target="_blank">External link</a>
+              <a href="{{table.box.link}}" title="{{table.box.link}}" target="_blank">Link to external website</a>
             {% endif %}
           </div>
         </div>
