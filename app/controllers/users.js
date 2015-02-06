@@ -11,6 +11,7 @@ var Setup = mongoose.model('Setup');
 var Table = mongoose.model('Table');
 var utils = require('../../lib/utils');
 var extend = require('util')._extend;
+var R = require('ramda.js');
 
 
 /**
@@ -42,10 +43,18 @@ exports.index = function (req, res){
     page: page
   };
 
+  var countElements = 0;
+
   User.list(options, function (err, users) {
     if (err) return res.render('500');
 
-    Piece.count().exec(function (err, countPieces) {
+    Piece.find().exec(function (err, pieces) {
+      var countPieces = pieces.length;
+      
+      R.forEach(function (piece) {
+        countElements += parseInt(piece.maxFrames) || 0;
+      })(pieces);
+
       Box.count().exec(function (err, countBoxes) {
         Setup.count().exec(function (err, countSetups) {
           Table.count().exec(function (err, countTables) {
@@ -60,7 +69,8 @@ exports.index = function (req, res){
                 countPieces: countPieces,
                 countBoxes: countBoxes,
                 countSetups: countSetups,
-                countTables: countTables
+                countTables: countTables,
+                countElements: countElements
               });
             });
 
