@@ -97,7 +97,29 @@
           </li>
         {% endif %}
 
-       
+         {% if (req.isAuthenticated()) %}
+
+          <li>
+            <a href="/logout" title="logout">
+              <i class="fa fa-sign-out fa-fw"></i>&nbsp;
+              Logout
+            </a>
+          </li>
+        {% else %}
+          <li class="{% if (isActive('/login')) %}active{% endif %}">
+            <a href="/login" title="Login">
+              <i class="fa fa-sign-in fa-fw"></i>&nbsp;
+              Login
+            </a>
+          </li>
+
+          <li class="{% if (isActive('/signup')) %}active{% endif %}">
+            <a href="/signup" title="Signup">
+              <i class="fa fa-plus fa-fw"></i>&nbsp;
+              Signup
+            </a>
+          </li>
+        {% endif %}
 
         <li>
             <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Ffacebook.com%2Ftablorodotcom&amp;width&amp;layout=button&amp;action=like&amp;show_faces=true&amp;share=true&amp;height=20" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:22px; width:150px;"  allowTransparency="true"></iframe>

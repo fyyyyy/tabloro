@@ -15,16 +15,14 @@
         {{ article.title }}
       </a>
     </h2>
-    <p>{{ article.body }}</p>
+    <p>{{ article.body | striptags }}</p>
 
     <span class="muted">{{ article.createdAt.toISOString()|date('M d, Y  h:i a') }}</span>
 
     {% if (article.user) %}
       &nbsp; - &nbsp;
       <span>Author: </span>
-      <a href="{{ '/users/' + article.user._id }}">
-        {{ article.user.name || article.user.username }}
-      </a>
+      Franky
     {% endif %}
 
     {% if (article.tags) %}

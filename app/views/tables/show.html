@@ -46,25 +46,32 @@
             PLAY &nbsp;
             <i class="fa fa-play"></i>
           </a>
-          <hr>
-          
+        </div>
+      </div>
+      
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4>Game Info</h4>
+        </div>
+        <div class="panel-body">
+
           {% if (table.rules) %}
             <li class="list-group-item list-group-item-default">
               <i class="fa fa-institution fa-fw"></i>
               <a href="{{table.rules}}" target="_blank">Game Rules</a>
             </li>
           {% endif %}
-          <p class="muted min200">
+          <div class="muted min200">
             {% if (table.box.image.cdnUri) %}
-              <img style="opacity: 0.5;" class="img-responsive max200 min200 pull-right" src="{{ table.box.image.cdnUri + '/detail_' + table.box.image.files[0] }}" alt="">
+              <a href="{{table.box.link}}" target="_blank">
+                <img style="opacity: 0.5; padding-right: 10px;" class="img-responsive max200 min200 pull-left" src="{{ table.box.image.cdnUri + '/detail_' + table.box.image.files[0] }}" alt="">
+              </a>
             {% endif %}
-            <pre>{{table.box.description}}</pre>
-          </p>
-          
-
-
-          <!-- <i class="fa fa-google-plus"></i>
-          <a href="http://hangouts.google.com/onair">Create google hangout</a> -->
+            <p class="pull-left">{{table.box.description}}</p>
+            {% if (table.box.link) %}
+              <a href="{{table.box.link}}" target="_blank">External link</a>
+            {% endif %}
+          </div>
         </div>
       </div>
     </div>

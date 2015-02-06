@@ -10,13 +10,11 @@
   <section class="container">
     
     <div class="col-md-8">
-      <p class="large">{{ article.body }}</p>
+      <p class="large">{{ article.body | raw }}</p>
       <div class="meta">
         {% if (article.user) %}
           Author: &nbsp;
-          <a href="{{ '/users/' + article.user._id }}">
-            {{ article.user.username }}
-          </a>
+          Franky
         {% endif %}
         {% if (article.tags) %}
           <p>

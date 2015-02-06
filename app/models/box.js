@@ -42,6 +42,10 @@ var BoxSchema = new Schema({
       unique: true
     }
   },
+  link: {
+    type: String,
+    trim: true
+  },
   description: {
     type: String
   },

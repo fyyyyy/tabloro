@@ -31,11 +31,17 @@
           <div class="col-md-7">
             <h4>Description</h4>
             <pre>{{box.description}}</pre>
+            {% if (box.link) %}
+              <a href="{{box.link}}" target="_blank">External link</a>
+            {% endif %}
+
           </div>
 
           <div class="col-md-5">
             {% if (!box.isNew && box.image && box.image.files && box.image.files.length) %}
-              <img class="img-responsive" src="{{ box.image.cdnUri + '/detail_' + box.image.files[0] }}" alt="">
+              <a href="{{box.link}}" target="_blank">
+                <img class="img-responsive" src="{{ box.image.cdnUri + '/detail_' + box.image.files[0] }}" alt="">
+              </a>
             {% endif %}
           </div>
 
