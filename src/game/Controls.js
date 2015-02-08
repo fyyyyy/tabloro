@@ -193,7 +193,7 @@ Controls.dragAlong = function (tiles) {
 
 Controls.update = function () {
     if (Controls.selecting) {
-        if (game.input.mouse.event || game.input.pointer1.event) {
+        if (game.input.mouse.event || game.input.pointer1.active) {
             Controls.rect.width =  game.input.activePointer.worldX - Controls.rect.x;
             Controls.rect.height = game.input.activePointer.worldY - Controls.rect.y;
             Controls.graphics.clear();
@@ -210,7 +210,7 @@ Controls.update = function () {
         }
     }
     else if (Controls.selected.length) {
-        if (game.input.mouse.event || game.input.pointer1.event) {
+        if (game.input.mouse.event || game.input.pointer1.active) {
             Controls.dragAlong(Controls.selected);  
         }
     }
