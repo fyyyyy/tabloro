@@ -64,7 +64,7 @@
                 <input type="file" name="image" class="form-control" onchange="readURL()" id="image" {% if (piece.isNew) %}required="true"{% endif %}>
               </div>
               <input type=range id=size min=0 max=100 value=100 onchange="changeScale()">
-              <p class="help-block" id="size-text">Resize</p>
+              <p class="text-primary" id="size-text">Resize</p>
               <p class="help-block">Needs FIREFOX or CHROME. Use the slider to scale down your image. It will appear as large in game as shown here.
                 A single card should be 100x140 pixels to 150x220 pixels in size, game boards should be between 512x512 (chess) to 1024x1024 (Funkenschlag) pixels in size</p>
               <canvas id="cc" height="0"></canvas>
