@@ -53,6 +53,7 @@ UI.init = function () {
     UI.textElements = [UI.nameText, UI.messageText];
 
     UI.chatSound = game.add.audio('chatSound');
+    UI.disconnectSound = game.add.audio('disconnectSound');
 
 
     UI.update();
@@ -162,7 +163,7 @@ UI.hudMessage = function () {
     UI.messageText.setText(R.join('\n')(UI.lines) + '\n...');
 
     
-    UI.message(rawtext);
+    UI.log(rawtext);
 
 
     clearTimeout(UI.timeout);
@@ -177,7 +178,7 @@ UI.hudMessage = function () {
 
 
 // Menu message
-UI.message = function (text) {
+UI.log = function (text) {
     // menu chat text
     var rawtext = R.join(' ', slice(arguments));
 
@@ -188,11 +189,15 @@ UI.message = function (text) {
     $('#menu-chat-text').html(R.join('<br><br>')(UI.menuLines));
 };
 
-UI.chat = function (userName, text) {
+UI.chat = function (userName, text, sound) {
     UI.messageText.clearColors();
     UI.hudMessage(userName +  ': ' + text);
     UI.messageText.addColor('#5cb85c', 0);
     UI.messageText.addColor('#cccccc', userName.length + 1);
+    if (sound) {
+        sound.play();
+        return;
+    }
     if (playerName.toLowerCase() !== userName.toLowerCase()) UI.chatSound.play();
 };
 

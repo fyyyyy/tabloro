@@ -133,5 +133,5 @@ G.findTiles = function (tileIds) {
 G.saveSetup = function saveSetup() {
     console.log('saving Game Setup');
     Network.server.saveSetup();
-    UI.message('Saved setup', gameName);
+    UI.chat('Saved setup', gameName);
 };

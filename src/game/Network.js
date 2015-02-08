@@ -22,16 +22,16 @@ Network.setup = function () {
 
     Network.client.onConnectionLost(function () {
         console.log('onConnectionLost');
-        UI.message('Connection to server lost!!!');
+        UI.log('Connection to server lost!!!');
     });
 
     Network.client.onDisconnect(function () {
         console.log('onDisconnect');
-        UI.message('Disconnected from server!!!');
+        UI.log('Disconnected from server!!!');
     });
     Network.client.onConnectionRetry(function () {
         console.log('onConnectionRetry');
-        UI.message('Retry connection to  server...');
+        UI.log('Retry connection to  server...');
     });
 
 
@@ -47,7 +47,7 @@ Network.setup = function () {
 
 
         create();
-        UI.message( playerName + ' connected to server');
+        UI.log( playerName + ' connected to server');
         Network.ready = true;
 
     };
@@ -61,7 +61,7 @@ Network.setup = function () {
             console.log('killing ', client.name, playerList[client.id]);
             delete playerList[client.id];
 
-            UI.message(client.name, 'left the table...');
+            UI.chat(client.name, 'left the table...', UI.disconnectSound);
             UI.updateNames();
         }
         Video.killClient(client.id, client.name);
@@ -76,11 +76,10 @@ Network.setup = function () {
         var p = Cursor.new(client);
         playerList[client.id] = p;
 
-        UI.message(client.name, 'joined the table!');
+        UI.chat(client.name, 'joined the table!');
         UI.updateNames();
 
         Video.newClient(client.id, client.name);
-        UI.chatSound.play();
     };
 
 
@@ -124,7 +123,7 @@ Network.setup = function () {
         
         T.syncTile(tile, newPosition);
 
-        // UI.message('Positioning tile', tileId);
+        // UI.log('Positioning tile', tileId);
 
         if (newPosition.lock) {
             T.lock(tile);
@@ -161,7 +160,7 @@ Network.setup = function () {
         delete tile.relativePosition;
 
         T.syncTile(tile, newPosition);
-        UI.message(client.name, 'moved a tile', tile.id);
+        UI.log(client.name, 'moved a tile', tile.id);
 
     };
 
@@ -174,7 +173,7 @@ Network.setup = function () {
         Controls.hide(tile);
         
         tile.frame = newFrame;
-        UI.message(client.name, 'flipped tile', tile.id);
+        UI.log(client.name, 'flipped tile', tile.id);
         
     };
 
@@ -187,7 +186,7 @@ Network.setup = function () {
         Controls.hide(tile);
         tile.visible = false;
         
-        UI.message(client.name, 'took a tile to hand');
+        UI.log(client.name, 'took a tile to hand');
     };
 
     Network.client.exports.fromHand = function (client, tileId) {
@@ -198,7 +197,7 @@ Network.setup = function () {
         T.hide(tile);
         tile.visible = true;
         
-        UI.message(client.name, 'plays tile from hand');
+        UI.log(client.name, 'plays tile from hand');
     };
 
 
@@ -207,7 +206,7 @@ Network.setup = function () {
         var tile = G.findTile(tileId);
         T.lock(tile);
         
-        UI.message(client.name, 'locks tile', tile.id);
+        UI.log(client.name, 'locks tile', tile.id);
     };
 
     Network.client.exports.unlock = function (client, tileId) {
@@ -215,7 +214,7 @@ Network.setup = function () {
         var tile = G.findTile(tileId);
         T.unlock(tile);
         
-        UI.message(client.name, 'unlocks tile', tile.id);
+        UI.log(client.name, 'unlocks tile', tile.id);
     };
 
 
@@ -224,7 +223,7 @@ Network.setup = function () {
         var tile = G.findTile(tileId);
         T.userOwns(tile, client.name);
         
-        UI.message(client.name, 'owns tile', tile.id);
+        UI.log(client.name, 'owns tile', tile.id);
     };
 
 
@@ -233,7 +232,7 @@ Network.setup = function () {
         var tile = G.findTile(tileId);
         T.nobodyOwns(tile);
         
-        UI.message(nom, 'released tile', tile.id);
+        UI.log(nom, 'released tile', tile.id);
     };
     /******************* STACKS ******************/
 
@@ -256,7 +255,7 @@ Network.setup = function () {
     //     T.syncTile(stack, newPosition);
 
     //     S.tidy(stack);
-    //     UI.message(client.name, 'moved stack', stackId);
+    //     UI.log(client.name, 'moved stack', stackId);
     // };
 
 
@@ -278,7 +277,7 @@ Network.setup = function () {
 
     Network.client.exports.spin = function(client, diceInGroup, delays, values) {
         Dice.spin(diceInGroup, delays, values);
-        UI.message('Spinning', diceInGroup.length, 'dice');
+        UI.log('Spinning', diceInGroup.length, 'dice');
     };
 
 
@@ -286,7 +285,7 @@ Network.setup = function () {
 
     Network.client.exports.receiveChat = function(client, text) {
         console.log(client.name, 'says', text);
-        UI.chat(client.name.toUpperCase(), text);
+        UI.chat(client.name, text);
     };
 
     /******************* LAYERS ******************/
@@ -295,7 +294,7 @@ Network.setup = function () {
         console.log(client.name, 'arrangeLayer', groupName);
         G._masterGroup.setChildIndex(G.groups.all()[groupName], G._masterGroup.children.length -1);
         UI.listGroupsInMenu();
-        UI.chat(client.name.toUpperCase(), 'arranged layer ' + groupName);
+        UI.log(client.name, 'arranged layer ' + groupName);
     };
 
 };
