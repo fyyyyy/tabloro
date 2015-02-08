@@ -9,7 +9,9 @@
         <link href="/css/tabloro.css" rel="stylesheet">
         <link href="/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link href="/css/game.css" rel="stylesheet">
-
+        
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="mobile-web-app-capable" content="yes">
 
         <script type="text/javascript" src="/eureca.js"></script>
         <script type="text/javascript" src="/js/phaser.js"></script>
@@ -37,6 +39,7 @@
 
         <script type="text/javascript">
             var playerName = '{{user.username }}';
+            var guestMode = playerName ? false : true;
             playerName = playerName || "Guest_" + Date.now().toString().slice(-8,-1);
             var cursorId = Number('{{user.selected_cursor}}') || 1;
             var mode = '{{mode}}';

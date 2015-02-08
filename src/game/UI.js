@@ -28,11 +28,11 @@ UI.init = function () {
 
 
     UI.messageText = game.add.text(0, 0, 'Messages:', {
-        font: '14px monospace',
+        font: '18px monospace',
         fill: '#ccc'
     }, UI.group);
     UI.messageText.align = 'right';
-    UI.messageText.alpha = 0.8;
+    UI.messageText.alpha = 1.0;
     UI.messageText.setShadow(3,3,'#000000', 1);
 
 
@@ -51,6 +51,9 @@ UI.init = function () {
 
     // UI.textElements = [UI.gameText, UI.nameText, UI.messageText];
     UI.textElements = [UI.nameText, UI.messageText];
+
+    UI.chatSound = game.add.audio('chatSound');
+
 
     UI.update();
 
@@ -123,7 +126,7 @@ UI.update = function () {
     console.log('UI.update');
 
     R.forEach(UI.fixedToCamera(false))(UI.textElements);
-    UI.messageText.x = game.camera.width - 230;
+    UI.messageText.x = game.camera.width - 280;
     // UI.gameText.x = 
     UI.nameText.x = 16;
     // UI.gameText.y = 5;
@@ -144,8 +147,8 @@ UI.handCursor = function (button) {
     return button;
 };
 
-UI.message = function () {
-    UI.messageText.alpha = 0.8;
+UI.hudMessage = function () {
+    UI.messageText.alpha = 1.0;
     var rawtext = R.join(' ', slice(arguments));
 
     var text = rawtext.match(/.{1,25}/g); // split string every 30 characters
@@ -159,12 +162,7 @@ UI.message = function () {
     UI.messageText.setText(R.join('\n')(UI.lines) + '\n...');
 
     
-    // menu chat text
-    UI.menuLines = R.concat([rawtext], UI.menuLines);
-    if (UI.menuLines.length > 10) {
-        UI.menuLines.pop();
-    }
-    $('#menu-chat-text').html(R.join('<br><br>')(UI.menuLines));
+    UI.message(rawtext);
 
 
     clearTimeout(UI.timeout);
@@ -177,11 +175,25 @@ UI.message = function () {
     }, 10000);
 };
 
+
+// Menu message
+UI.message = function (text) {
+    // menu chat text
+    var rawtext = R.join(' ', slice(arguments));
+
+    UI.menuLines = R.concat([rawtext], UI.menuLines);
+    if (UI.menuLines.length > 30) {
+        UI.menuLines.pop();
+    }
+    $('#menu-chat-text').html(R.join('<br><br>')(UI.menuLines));
+};
+
 UI.chat = function (userName, text) {
     UI.messageText.clearColors();
-    UI.message(userName +  ': ' + text);
+    UI.hudMessage(userName +  ': ' + text);
     UI.messageText.addColor('#5cb85c', 0);
     UI.messageText.addColor('#cccccc', userName.length + 1);
+    if (playerName.toLowerCase() !== userName.toLowerCase()) UI.chatSound.play();
 };
 
 UI.setNames = function (names) {

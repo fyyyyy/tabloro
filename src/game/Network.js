@@ -80,6 +80,7 @@ Network.setup = function () {
         UI.updateNames();
 
         Video.newClient(client.id, client.name);
+        UI.chatSound.play();
     };
 
 

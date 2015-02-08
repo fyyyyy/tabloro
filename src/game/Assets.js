@@ -22,6 +22,7 @@ Assets.preload = function (game) {
     game.load.image('table', '/assets/table_low.jpg');
     game.load.image('rotate', '/assets/rotate.png');
     game.load.spritesheet('button', '/assets/button_sprite_sheet.png', 193, 71);
+    game.load.audio('chatSound', '/sounds/notify.wav');
 
     // game.load.crossOrigin = "Anonymous";
     R.forEach(function (asset) {
