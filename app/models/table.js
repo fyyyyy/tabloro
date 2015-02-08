@@ -70,7 +70,7 @@ TableSchema.path('title').validate(function (title, fn) {
   if (this.isNew || this.isModified('title')) {
       fn(utils.validateTitle(title));
   } else fn(true);
-}, 'Name can only contain letters, numbers and underscore.');
+}, 'Name can only contain letters, numbers, space and underscore.');
 
 
 /**
