@@ -369,6 +369,10 @@ exports.show = function (req, res) {
                 boxPieces.push(piece);
             })(sanitizedOrder);
 
+            // merge with those where no order has been specified
+            boxPieces = R.union(boxPieces, unsortedPieces);
+
+
         } else {
 
             R.forEach(function (piece) {
