@@ -8,14 +8,16 @@
       {% if isOwner || !piece.isPrivate %}
         &nbsp;
         {{piece.title | title}}
+
+
         
-        <a href="/pieces/{{ piece.id }}" target="_blank" class="btn btn-default btn-xs btn-square nomargin pull-right">
+        <a href="/pieces/{{ piece.id }}" target="_blank" class="pull-right">
           {% if (piece.isPrivate) %}
             <i class="fa fa-key"></i>
           {% endif %}
-
           Click to show
         </a>
+
       {% endif %}
     </div>
 
@@ -24,7 +26,19 @@
 
       
 {% block footer %}
-  {% if isOwner %}
+  {% if isOwner || isAdmin %}
+
+
+    <a href="/boxes/{{box.id}}/up/{{ piece.id }}" title="show on top of other pieces" class="btn btn-default btn-xs btn-square nomargin pull-right">
+        <i class="fa fa-arrow-up"></i>
+    </a>
+    <a href="/boxes/{{box.id}}/down/{{ piece.id }}" title="show below other pieces" class="btn btn-default btn-xs btn-square nomargin pull-right">
+        <i class="fa fa-arrow-down"></i>
+    </a>
+    {% if (!isNaN(box.order[piece.id])) %}
+      <p class="badge pull-right">layer: {{box.order[piece.id]}}</p>
+    {% endif %}
+
     <form method="post" action="/boxes/{{box.id}}/remove/{{piece.id}}" role="form" class="form-horizontal">
       <input type="hidden" name="_csrf" value="{{ csrf_token }}">
       <input type="hidden" name="_method" value="PUT">

@@ -57,6 +57,13 @@
                 Start Video Chat
               </a>
           </li>
+        {% else %}
+          <li class="{% if (isActive('/signup')) %}active{% endif %}">
+            <a href="/signup" title="Signup" class="btn btn-success">
+              <i class="fa fa-plus fa-fw"></i>&nbsp;
+              Signup for Video Chat & more
+            </a>
+          </li>
         {% endif %}
 
 
@@ -68,8 +75,7 @@
         {% if (req.isAuthenticated()) %}
           <li id="layers">
             <a href="#" title="Create your own games!">
-              <i class="fa fa-sort fa-fw"></i>&nbsp;
-                Click a layer to bring it to top
+                Click a layer to move it up
             </a>
             
 <!--                 <ul class="list-unstyled">

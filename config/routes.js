@@ -143,6 +143,8 @@ module.exports = function (app, passport) {
     app.get('/boxes/:boxId/add/', boxAuth, boxes.addList);
     app.put('/boxes/:boxId/add/:pieceId', boxAuth, boxes.add);
     app.put('/boxes/:boxId/remove/:pieceId', boxAuth, boxes.remove);
+    app.get('/boxes/:boxId/up/:pieceId', boxAuth, boxes.up);
+    app.get('/boxes/:boxId/down/:pieceId', boxAuth, boxes.down);
     app.delete('/boxes/:boxId', boxAuth, boxes.destroy);
 
 

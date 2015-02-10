@@ -43,7 +43,10 @@ function create() {
     setupTable();
 
     G.init(game);
-    setupAssets(assets);
+    
+    var sortByValue = R.sortBy(R.prop('order'));
+
+    setupAssets(sortByValue(assets));
     UI.listGroupsInMenu();
 
 
@@ -133,12 +136,22 @@ function buildAssetArray (asset, maxFrames) {
 function setupAssets (gameAssets) {
     var yOffset = 100;
     var maxFrames = 1;
+    var lastOrder;
+    var lastGroup;
 
     R.forEach(function (asset) {
         yOffset += 150;
+        var groupName;
+        var group;
 
-        var groupName = asset.args[0];
-        var group = G.groups.add(groupName, 0, asset);
+        groupName = asset.args[0];
+
+        if (lastOrder && lastOrder === asset.order) {
+            group = lastGroup;
+        } else {
+            group = G.groups.add(groupName, asset.order || 0, asset);
+        }
+
         console.log('adding asset group', groupName);
 
 
@@ -167,6 +180,8 @@ function setupAssets (gameAssets) {
             }
         }
 
+        lastOrder = asset.order;
+        lastGroup = group;
     })(gameAssets);
 
 }

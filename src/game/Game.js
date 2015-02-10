@@ -22,16 +22,17 @@ G.groups = {
     add: function (groupName, index, asset) {
         // console.log('adding group', groupName);
         index = index || 0;
+        var group = G._masterGroup.add(game.add.group());
+        group.z = index;
+        group.name = groupName;
+        group.rotateBy = Utils.deg2Rad(asset.rotateBy) || 0;
+        group.flipable = asset.flipable;
+        group.handable = asset.handable;
+        group.lockable = asset.lockable;
+        group.icon = G.getIcon(asset);
 
-        G._groups[groupName] = G._masterGroup.add(game.add.group());
-        G._groups[groupName].z = index;
-        G._groups[groupName].name = groupName;
-        G._groups[groupName].rotateBy = Utils.deg2Rad(asset.rotateBy) || 0;
-        G._groups[groupName].flipable = asset.flipable;
-        G._groups[groupName].handable = asset.handable;
-        G._groups[groupName].lockable = asset.lockable;
-        G._groups[groupName].icon = G.getIcon(asset);
-        return G._groups[groupName];
+        G._groups[groupName] = group;
+        return group;
     },
     get: function (groupName) {
         return G._groups[groupName];

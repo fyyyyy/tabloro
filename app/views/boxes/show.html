@@ -160,7 +160,9 @@
         
         <div class="dark-brown">
           {% for piece in boxPieces %}
+            {% if (piece) %}
               {% include 'remove_piece.html' %}
+            {% endif %}
           {% endfor %}
         </div>
 

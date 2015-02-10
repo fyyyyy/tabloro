@@ -70,7 +70,7 @@ UI.listGroupsInMenu = function() {
             '<li>' + 
                 '<a href="#" onclick="UI.onArrangeLayer(\'' + group.name + '\')">' + 
                     ++i + '. ' +
-                    '<i class="fa ' + group.icon + ' fa-fw"></i>&nbsp;' + 
+                    '<i class="fa fa-arrow-up fa-fw"></i>&nbsp;' + 
                     group.name + 
                 '</a>' +
         '</li>');

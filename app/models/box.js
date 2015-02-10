@@ -71,6 +71,7 @@ var BoxSchema = new Schema({
   },
   pieces: [{type : Schema.ObjectId, ref : 'Piece', unique: true}],
   counts: {type: Object, default: {}},
+  order: {type: Object, default: {}},
   user: {
     type: Schema.ObjectId,
     ref: 'User'

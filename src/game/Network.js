@@ -262,8 +262,10 @@ Network.setup = function () {
     /******************* LAYERS ******************/
 
     Network.client.exports.arrangeLayer = function(client, groupName) {
-        console.log(client.name, 'arrangeLayer', groupName);
-        G._masterGroup.setChildIndex(G.groups.all()[groupName], G._masterGroup.children.length -1);
+        var group = G.groups.all()[groupName];
+        console.log(client.name, 'arrangeLayer', groupName, group);
+        G._masterGroup.moveUp(group);
+        console.log('moved up');
         UI.listGroupsInMenu();
         UI.log(client.name, 'arranged layer ' + groupName);
     };

@@ -307,7 +307,7 @@ T.getPosition = function (tile) {
 
 T.onStartDrag = function (tile) {
     T.dragging = true;
-    console.log('onStartDrag', tile.id);
+    console.log('onStartDrag', tile.id, tile.parent.z);
 
     H.release(tile);
     Controls.highlight.clear();

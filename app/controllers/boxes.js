@@ -198,6 +198,7 @@ exports.addList = function (req, res) {
 
 exports.add = function (req, res){
   var box = req.box;
+  var piece = req.piece;
 
   // make sure no one changes the user
   delete req.body.user;
@@ -206,15 +207,19 @@ exports.add = function (req, res){
   var refPage = ref.match(/\?page=(\d+)/) && ref.match(/\?page=(\d+)/)[1];
   var pageKeeper = refPage ? '?page=' + refPage : '';
 
+  var order = box.order;
+  order[piece.id] = order[piece.id] || box.pieces.length;
+
   box.update({
         $addToSet: {
-            pieces: req.piece
-        }
+            pieces: piece
+        },
+        order: order
     }, function (err) {
 
     
     if (!err) {
-        req.flash('info', 'Added pieces :::' + req.piece.title + '::: to box');
+        req.flash('info', 'Added pieces :::' + piece.title + '::: to box');
         return res.redirect('/boxes/' + box._id + '/add' + pageKeeper);
     }
 
@@ -234,18 +239,23 @@ exports.add = function (req, res){
 
 exports.remove = function (req, res){
   var box = req.box;
+  var piece = req.piece;
 
   // make sure no one changes the user
   delete req.body.user;
   box = extend(box, req.body);
 
+  var order = box.order;
+  delete order[piece.id];
+
   box.update({
         $pull: {
-            pieces: req.piece
-        }
+            pieces: piece
+        },
+        order: order
     }, function (err) {
     if (!err) {
-        req.flash('info', 'Removed piece :::' + req.piece.title + '::: from box');
+        req.flash('info', 'Removed piece :::' + piece.title + '::: from box');
         return res.redirect('/boxes/' + box._id);
     }
 
@@ -258,6 +268,74 @@ exports.remove = function (req, res){
   });  
 };
 
+
+/**
+ * Order piece upwards
+ */
+
+exports.up = function (req, res){
+  var box = req.box;
+  var piece = req.piece
+
+  // make sure no one changes the user
+  delete req.body.user;
+  box = extend(box, req.body);
+  
+  var order = box.order;
+  order[piece.id] = order[piece.id] || 2;
+  order[piece.id] = order[piece.id] -1;
+  if (order[piece.id] < 1) {order[piece.id] = 1;}
+
+  box.update({ order: order}, function (err) {
+
+    
+    if (!err) {
+        req.flash('info', 'Orderd piece :::' + piece.title + '::: upwards');
+        return res.redirect('/boxes/' + box._id);
+    }
+
+    req.flash('alert', 'Could not order pieces in box');
+    res.render('boxes/show', {
+      title: 'View Box',
+      box: box,
+      errors: utils.errors(err.errors || err)
+    });
+  });  
+};
+
+
+
+/**
+ * Order piece downwards
+ */
+
+exports.down = function (req, res){
+  var box = req.box;
+  var piece = req.piece;
+
+  // make sure no one changes the user
+  delete req.body.user;
+  box = extend(box, req.body);
+  var order = box.order;
+  
+  order[piece.id] = order[piece.id] || box.pieces.length;
+  order[piece.id] = order[piece.id] + 1;
+  box.update({ order: order}, function (err) {
+
+    
+    if (!err) {
+        req.flash('info', 'Orderd piece :::' + piece.title + '::: downwards');
+        return res.redirect('/boxes/' + box._id);
+    }
+
+    req.flash('alert', 'Could not order pieces in box');
+    res.render('boxes/show', {
+      title: 'View Box',
+      box: box,
+      errors: utils.errors(err.errors || err)
+    });
+  });  
+};
 
 
 /**
@@ -281,10 +359,24 @@ exports.show = function (req, res) {
         var boxPieces = [];
         var stringedPieces = R.map(R.func('toString'))(box.pieces);
 
-        R.forEach(function (piece) {
-            var idx = R.indexOf(piece.id)(stringedPieces);
-            boxPieces[idx] = piece;
-        })(unsortedPieces);
+        // if order was defined, backwards compability
+        if (R.values(box.order).length) {
+            var sanitizedOrder = utils.sortByValue(box.order);
+            console.log(sanitizedOrder);
+            R.forEach(function (sanitizedArray) {
+                var pieceId = R.head(sanitizedArray);
+                var piece = R.find(R.propEq('id', pieceId))(unsortedPieces);
+                boxPieces.push(piece);
+            })(sanitizedOrder);
+
+        } else {
+
+            R.forEach(function (piece) {
+                var idx = R.indexOf(piece.id)(stringedPieces);
+                boxPieces[idx] = piece;
+            })(unsortedPieces);
+            
+        }
 
             
         Box.load(box.id, function (err, box) {
