@@ -234,29 +234,6 @@ Network.setup = function () {
         
         UI.log(nom, 'released tile', tile.id);
     };
-    /******************* STACKS ******************/
-
-    // Network.client.exports.dragStack = function (client, stackId) {
-    //     console.log(client.name  + ' drags stack ', stackId);
-    //     if (Network.isMine(client.id)) return; //this is me
-    //     var stack = G.findStack(stackId);
-    //     stack.remoteDragged = true;
-    //     G.addUpdatePosition({follower: stack, target: playerList[client.id]});
-    // };
-
-
-    // Network.client.exports.dropStack = function (client, stackId, newPosition) {
-    //     console.log(client.name + ' moved stack ', stackId);
-    //     if (Network.isMine(client.id)) return; //this is me
-    //     var stack = G.findStack(stackId);
-    //     G.removeUpdatePosition(playerList[client.id]);
-    //     stack.remoteDragged = false;
-
-    //     T.syncTile(stack, newPosition);
-
-    //     S.tidy(stack);
-    //     UI.log(client.name, 'moved stack', stackId);
-    // };
 
 
 
@@ -264,12 +241,6 @@ Network.setup = function () {
         console.log('updateCards', method, tiles);
         S[method](G.findTiles(tiles), position);
     };
-
-    // Network.client.exports.flipStack = function(client, stackId) {
-    //     var stack = G.findStack(stackId);
-    //     S.flipCards(stack);
-    // };
-
 
 
 

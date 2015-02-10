@@ -6,9 +6,17 @@ var G = {};
 G._groups = {};
 G._tiles = {};
 
+
+G.init = function (game) {
+    G.created = true;
+    G._masterGroup = game.add.group();
+};
+
+
 G.addTile = function (tile) {
     G._tiles[tile.id] = tile;
 };
+
 
 G.groups = {
     add: function (groupName, index, asset) {
@@ -33,6 +41,8 @@ G.groups = {
     }
 };
 
+
+
 G.getIcon = function (asset) {
     if (asset.method === 'spritesheet') {
         if (asset.isDice) {
@@ -44,15 +54,6 @@ G.getIcon = function (asset) {
         return 'fa-th-list';
     }
     return 'fa-photo';
-};
-
-
-
-G.init = function (game) {
-    G.created = true;
-
-    G._masterGroup = game.add.group();
-
 };
 
 
@@ -117,17 +118,6 @@ G.findTiles = function (tileIds) {
     })(tileIds);
 };
 
-
-
-// G.findStack = function (stackId) {
-//     stackId = Number(stackId);
-//     var stack = R.find(R.propEq('id', stackId))(stacks.children);
-//     if (!stack) {
-//         console.error('stack not found', stackId, stack);
-//         return {};
-//     }
-//     return stack;
-// };
 
 
 G.saveSetup = function saveSetup() {
