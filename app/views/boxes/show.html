@@ -155,7 +155,10 @@
           <h4>
             Contents of Game Box ({{boxPieces.length}} piece sets)
           </h4>
-          <p class="muted">Pieces added to the box last are drawn <strong>on top</strong> of previously added pieces. Add game boards first, then cards, then tokens etc.</p>
+          {% if isOwner || isAdmin %}
+            <p class="muted">Pieces are rendered in a certain <strong>layer order</strong>. Lower layers are drawn below, higher layers are drawn on top. You can also put pieces in the same layer, for example to allow 2 decks of cards to be shuffled/mixed.</p>
+          {% endif %}
+        
         </div>
         
         <div class="dark-brown">

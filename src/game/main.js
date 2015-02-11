@@ -46,7 +46,13 @@ function create() {
     
     var sortByValue = R.sortBy(R.prop('order'));
 
-    setupAssets(sortByValue(assets));
+    var s = R.compose(R.sum, R.filter(R.lte(1)), R.map(R.prop('order')))(assets);
+    if (s) {
+        console.debug('sorting assets');
+        setupAssets(sortByValue(assets));
+    } else {
+        setupAssets(assets);
+    }
     UI.listGroupsInMenu();
 
 

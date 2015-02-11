@@ -208,7 +208,7 @@ exports.add = function (req, res){
   var pageKeeper = refPage ? '?page=' + refPage : '';
 
   var order = box.order;
-  order[piece.id] = order[piece.id] || box.pieces.length;
+  order[piece.id] = order[piece.id] || box.pieces.length + 1;
 
   box.update({
         $addToSet: {

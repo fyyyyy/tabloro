@@ -210,6 +210,7 @@ exports.update = function (req, res){
 exports.play = function (req, res) {
     var table = req.table;
     var setup = table.setup;
+    setup.order = table.box.order;
 
     Piece.list({ criteria: {'_id': {$in: setup.pieces }}}, function (err, unsortedPieces) {
         if (err) {

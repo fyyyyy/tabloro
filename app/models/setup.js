@@ -94,7 +94,7 @@ SetupSchema.statics = {
   load: function (title, cb) {
     this.findOne({ title : title })
     .populate('user', 'name username')
-    .populate('box', 'title gameType image')
+    .populate('box', 'title gameType image order')
     .exec(cb);
   },
 

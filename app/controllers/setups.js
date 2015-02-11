@@ -148,8 +148,10 @@ exports.show = function (req, res) {
  */
 
 exports.test = function (req, res) {
-    var box = req.box;
     var setup = req.setup;
+    var box = setup.box;
+    setup.order = setup.box.order;
+
 
     Piece.list({ criteria: {'_id': {$in: setup.pieces }}}, function (err, unsortedPieces) {
         if (err) {
