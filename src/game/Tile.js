@@ -15,10 +15,10 @@ T.draggable = function (tile) {
     tile.input.enableDrag(false, true);
     // tile.input.useHandCursor = true;
 
-    if (tile.width < 200 || tile.height < 200) {
-        game.physics.arcade.enable(tile);
-        tile.body.collideWorldBounds = true;
-    }
+    // if (tile.width < 200 || tile.height < 200) {
+    //     game.physics.arcade.enable(tile);
+    //     tile.body.collideWorldBounds = true;
+    // }
 
     tile.events.onInputOver.add(T.highlight);
     tile.events.onInputOut.add(T.unlight);
@@ -324,7 +324,19 @@ T.onStartDrag = function (tile) {
 T.onStopDrag = function (tile) {
     T.dragging = false;
     console.log('onStopDrag', tile.id);
+    T.checkBounds(tile);
+
     Network.server.tilesDragStop(T.getSelectedIds(tile), T.getPositions(tile));
+};
+
+T.checkBounds = function (tile) {
+    if (tile.width < 200 || tile.height < 200) {
+        if (tile.x < 0) { tile.x = 0; }
+        if (tile.x > World.width) { tile.x = World.width; }
+        if (tile.y < 0) { tile.y = 0; }
+        if (tile.y > World.height) { tile.y = World.height; }
+    }
+    return tile;
 };
 
 T.onDragControllable = function (tile) {

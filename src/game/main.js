@@ -88,8 +88,6 @@ function setupStage() {
     game.canvas.oncontextmenu = function (e) { e.preventDefault(); };
     // game.canvas.style.setProperty('cursor', 'none');
 
-    //  We're going to be using physics, so enable the Arcade Physics system
-    game.physics.startSystem(Phaser.Physics.ARCADE);
 
     //  A simple background for our game
     
@@ -255,7 +253,7 @@ function addTokens(which, group, x, y, scale) {
         var token = group.create(x + (S.offsetX * idx), y + (S.offsetY * idx ), n);
         T.setId(token);
         T.scale(scale, token);
-        R.compose(Cursor.reset, T.networkAble,  T.rotateable(group.rotateBy), T.lockable(group.lockable), T.handable(group.handable), T.draggable, T.centerAnchor)(token);
+        R.compose(Cursor.reset, T.stackable, T.networkAble,  T.rotateable(group.rotateBy), T.lockable(group.lockable), T.handable(group.handable), T.draggable, T.centerAnchor)(token);
     })(which);
 }
 

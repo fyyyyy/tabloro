@@ -171,6 +171,7 @@ Controls.findSelectedTiles = function (rect) {
         R.forEach(function (child) {
            var found = Utils.pointIntersection(child, rect);
            if (found && !child.locked && child.stackable) {
+                console.log('found');
                 T.select(child);
                 selected.push(child);
            } else {
