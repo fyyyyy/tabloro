@@ -3,8 +3,15 @@
 
 var Dice = {};
 
-Dice.add = function (assetName, group, numSides) {
-    var dice = group.create(100 + 80 * group.children.length, 100, assetName);
+Dice.add = function (assetName, group, numSides, yOffset) {
+    var x = 100 + 80 * group.children.length;
+    var y = yOffset;
+    if (x >= 2000) {
+        var t = Math.floor(x / 2000);
+        x -= 2000 * t - 100;
+        y += 100 * t;
+    }
+    var dice = group.create(x, y, assetName);
     group.numSides = numSides;
 
     dice.animations.add('spin', R.range(0, numSides));

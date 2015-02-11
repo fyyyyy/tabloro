@@ -21,10 +21,12 @@
 #video-container {
     width: auto;
     padding: 5px;
-    text-align: left;
+    text-align: center;
+    margin-left: 50%;
+    margin-right: 50%;
+    width: 350px;
     position: absolute;
-    top: 10px;
-    right: 2px;
+    top: 0px;
 }
 
 #edit-container {

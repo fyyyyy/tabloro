@@ -11,6 +11,8 @@ navigator.getUserMedia = navigator.getUserMedia ||
 Video.init = function () {
   console.log('VIDEO Connecting ...');
   $('#video-container').show();
+  $('#video-container').draggable();
+
   $('#step1').hide();
   $('#their-videos').hide();
   $('#start-video').click(function () {

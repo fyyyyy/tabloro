@@ -1,5 +1,5 @@
 
-{% extends '../layouts/play.html' %}
+{% extends '../layouts/game.html' %}
 
 
 {% block main %}
@@ -14,9 +14,8 @@
                 <a href="#" class="btn btn-success" id="step1-retry">Start Video Chat</a>
         </div> -->
         <div class="step message" id="step1">
-            <p>Please click <a class="btn btn-default" disabled="true">allow</a> on top of your screen for video chat.</p>
-            <p>Built in peer to peer video chat needs <strong>Firefox</strong> or <strong>Chrome</strong> browsers.</p>
-            <p class="small">Safari and Internet Explorer do not support <a href="http://iswebrtcreadyyet.com/" target="_blank" >WebRTC</a> yet.</p>
+            <p>Please allow tabloro to access your camera.</p>
+            <p>Needs <strong>Firefox</strong> or <strong>Chrome</strong></p>
             <div id="step1-error">
                 <p>Failed to access the webcam and microphone.</p>
                 <a href="#" class="btn btn-primary" id="step1-retry">Try again</a>
@@ -32,7 +31,6 @@
         <div class="clearfix"></div>
         
     </div>
-
 
 
 {% endblock %}

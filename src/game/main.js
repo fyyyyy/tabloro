@@ -175,7 +175,7 @@ function setupAssets (gameAssets) {
             if (asset.isDice) {
                 console.log('adding dice', R.head(R.of(asset.counts)));
                 R.times(function () {
-                    Dice.add(groupName, group, maxFrames);
+                    Dice.add(groupName, group, maxFrames, yOffset);
                 })(R.head(R.of(asset.counts)) || 1);
             } else if (asset.isStash){
                 addStash(groupName, yOffset, R.head(R.of(asset.counts)) || 1, group);
@@ -228,7 +228,7 @@ function addCards(title, yOffset, array, group) {
             tempOffsetY = 0;
         }
         offsetX = 100 + (nOffsetX * 120) + tempOffsetX;
-        if (offsetX >= World.width) {
+        if (offsetX >= World.width - 100) {
             nOffsetX = 0;
             nOffsetY+= 100;
         }
