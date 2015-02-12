@@ -24,6 +24,7 @@ Assets.preload = function (game) {
     game.load.spritesheet('button', '/assets/button_sprite_sheet.png', 193, 71);
     game.load.audio('chatSound', '/sounds/notify.wav');
     game.load.audio('disconnectSound', '/sounds/disconnect.wav');
+    game.load.audio('callSound', '/sounds/call.wav');
 
     // game.load.crossOrigin = "Anonymous";
     R.forEach(function (asset) {

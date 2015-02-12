@@ -11,14 +11,14 @@
     <!-- Video area -->
     <div id="video-container" style="display:none;" class="no-select">
     <!-- <div id="start-video">
-                <a href="#" class="btn btn-success" id="step1-retry">Start Video Chat</a>
+                <a href="#" class="btn btn-success" id="get-media-retry">Start Video Chat</a>
         </div> -->
-        <div class="step message" id="step1">
+        <div class="step message bg-success" id="get-media">
             <p>Please allow tabloro to access your camera.</p>
             <p>Needs <strong>Firefox</strong> or <strong>Chrome</strong></p>
-            <div id="step1-error">
+            <div id="get-media-error">
                 <p>Failed to access the webcam and microphone.</p>
-                <a href="#" class="btn btn-primary" id="step1-retry">Try again</a>
+                <a href="#" class="btn btn-primary" id="get-media-retry">Try again</a>
             </div>
         </div>
         
@@ -31,6 +31,25 @@
         <div class="clearfix"></div>
         
     </div>
+
+
+    <div class="modal fade" id="accept-call-modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Accept incoming video call</h4>
+          </div>
+          <div class="modal-body">
+            <p>Do you want to accept an incoming video call from <b id="callee-name"></b> ?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-success" id="accept-call-button">Accept</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
 
 {% endblock %}

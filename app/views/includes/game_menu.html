@@ -7,7 +7,10 @@
         <a id="menu-close" href="#" class="btn btn-dark btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
 
         <li class="sidebar-brand">
-            <a href="#">{{room.title}}</a>
+            <a href="#">tabloro.com</a>
+        </li>
+        <li>
+          <a>Table <strong>{{room.title}}</strong></a>
         </li>
 
 
@@ -47,21 +50,50 @@
           </a>  
         </li>
 
+        {% if (req.isAuthenticated()) %}
+
+          <li>
+            <a href="/logout" title="logout">
+              <i class="fa fa-sign-out fa-fw"></i>&nbsp;
+              Logout
+            </a>
+          </li>
+        {% else %}
+          <li class="{% if (isActive('/login')) %}active{% endif %}">
+            <a href="/login" title="Login">
+              <i class="fa fa-sign-in fa-fw"></i>&nbsp;
+              Login
+            </a>
+          </li>
+
+          <li class="{% if (isActive('/signup')) %}active{% endif %}">
+            <a href="/signup" title="Signup">
+              <i class="fa fa-plus fa-fw"></i>&nbsp;
+              Signup
+            </a>
+          </li>
+        {% endif %}
+
+        <li>
+            <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Ffacebook.com%2Ftablorodotcom&amp;width&amp;layout=button&amp;action=like&amp;show_faces=true&amp;share=true&amp;height=20" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:22px; width:150px;"  allowTransparency="true"></iframe>
+        </li>
+
+
 
 
 
         {% if (req.isAuthenticated()) %}
-          <li id="start-video" class="list-unstyled">
+<!--           <li id="start-video" class="list-unstyled">
               <a href="#" id="step1-retry" class="btn btn-success">
                 <i class="fa fa-video-camera fa-fw"></i>&nbsp;
                 Start Video Chat
               </a>
-          </li>
+          </li> -->
         {% else %}
           <li class="{% if (isActive('/signup')) %}active{% endif %}">
             <a href="/signup" title="Signup" class="btn btn-success">
               <i class="fa fa-plus fa-fw"></i>&nbsp;
-              Signup for Video Chat & more
+              Signup to play <strong>more games</strong>
             </a>
           </li>
         {% endif %}
@@ -69,7 +101,7 @@
 
 
 
-        <p class="navbar-text">--------------------------------------</p>
+        <p class="navbar-text">-------------------------------------------</p>
         <div class="clearfix"></div>
 
         {% if (req.isAuthenticated()) %}
@@ -103,35 +135,8 @@
           </li>
         {% endif %}
 
-         {% if (req.isAuthenticated()) %}
 
-          <li>
-            <a href="/logout" title="logout">
-              <i class="fa fa-sign-out fa-fw"></i>&nbsp;
-              Logout
-            </a>
-          </li>
-        {% else %}
-          <li class="{% if (isActive('/login')) %}active{% endif %}">
-            <a href="/login" title="Login">
-              <i class="fa fa-sign-in fa-fw"></i>&nbsp;
-              Login
-            </a>
-          </li>
-
-          <li class="{% if (isActive('/signup')) %}active{% endif %}">
-            <a href="/signup" title="Signup">
-              <i class="fa fa-plus fa-fw"></i>&nbsp;
-              Signup
-            </a>
-          </li>
-        {% endif %}
-
-        <li>
-            <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Ffacebook.com%2Ftablorodotcom&amp;width&amp;layout=button&amp;action=like&amp;show_faces=true&amp;share=true&amp;height=20" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:22px; width:150px;"  allowTransparency="true"></iframe>
-        </li>
-
-        <p class="navbar-text">LOG --------------------------------------</p>
+        <p class="navbar-text">----LOG----------------------------------</p>
         <div class="clearfix"></div>
 
         <li><p id="menu-chat-text"></p></li>

@@ -1,3 +1,7 @@
+body {
+    font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
 #my-video {
   width: 140px;
   max-height: 120px;
@@ -24,7 +28,7 @@
     text-align: center;
     margin-left: 50%;
     margin-right: 50%;
-    width: 350px;
+    width: 100%;
     position: absolute;
     top: 0px;
 }
@@ -44,7 +48,7 @@
 
 .step {
     float: left;
-    padding: 25px;
+    padding: 15px;
 }
 
 .step3 {

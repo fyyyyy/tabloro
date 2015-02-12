@@ -145,6 +145,9 @@ function setupAssets (gameAssets) {
 
     R.forEach(function (asset) {
         yOffset += 150;
+        if (yOffset >= World.height - 100) {
+            yOffset = 100;
+        }
         var groupName;
         var group;
 
@@ -232,6 +235,10 @@ function addCards(title, yOffset, array, group) {
             nOffsetX = 0;
             nOffsetY+= 100;
         }
+        if (nOffsetY >= World.height - 100) {
+            nOffsetY = 100;
+        }
+
         var tile = group.create(offsetX, yOffset + tempOffsetY + nOffsetY, title, n);
         tile.defaultFrame = n;
         R.compose(T.setId, Cursor.reset, T.networkAble, T.lockable(group.lockable), T.stackable, T.flipable(group.flipable), T.rotateable(group.rotateBy), T.handable(group.handable),  T.draggable, T.centerAnchor)(tile);

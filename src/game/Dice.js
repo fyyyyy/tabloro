@@ -11,6 +11,9 @@ Dice.add = function (assetName, group, numSides, yOffset) {
         x -= 2000 * t - 100;
         y += 100 * t;
     }
+    if (y >= World.height - 100) {
+        y = 100;
+    }
     var dice = group.create(x, y, assetName);
     group.numSides = numSides;
 
