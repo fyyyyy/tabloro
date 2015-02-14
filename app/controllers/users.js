@@ -52,7 +52,7 @@ exports.index = function (req, res){
       var countPieces = pieces.length;
       
       R.forEach(function (piece) {
-        countElements += parseInt(piece.maxFrames) || 0;
+        countElements += parseInt(piece.maxFrames) || 1;
       })(pieces);
 
       Box.count().exec(function (err, countBoxes) {
