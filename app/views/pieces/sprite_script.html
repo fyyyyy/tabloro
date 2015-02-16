@@ -31,12 +31,9 @@
     var appendTiles;
     var image = document.getElementById('spritesheet-' + piece._id);
 
-    var setStyle = function (width, height, xOffset, yOffset, imageSize) {
+    var setStyle = function (width, height, xOffset, yOffset) {
       // console.log('set style', width, height, xOffset, yOffset);
-      imageSize = imageSize || 'original';
-      if (!showCount && !editCount) {
-        imageSize = 'original';
-      }
+
       var margin = 'margin: 20px;';
       if (editCount) {
         margin = 'margin: 20px; margin-right: 40px; margin-bottom: 60px;';
@@ -45,7 +42,7 @@
       return margin + ' display: inline-block; ' + 
                         'width: ' + width + 'px; ' + 
                         'height: ' + height + 'px; ' +
-                        'background: url(' + piece.image.cdnUri + '/' + imageSize + '_' + piece.image.files[0] + ') ' +
+                        'background: url(' + piece.image.cdnUri + '/original_' + piece.image.files[0] + ') ' +
                         xOffset + 'px ' +
                         yOffset + 'px;';
     };
@@ -228,7 +225,7 @@
 
         var setImageWidth = function (imageWidth, imageHeight) {
           console.log('imageWidth', imageWidth, imageHeight);
-          appendTiles(0, setStyle(imageWidth, imageHeight, 0, 0, 'mini'));
+          appendTiles(0, setStyle(imageWidth, imageHeight, 0, 0));
         };
         
         
