@@ -16,6 +16,8 @@ UI.init = function () {
     //     fill: '#ccc'
     // }, UI.group);
     // UI.gameText.alpha = 0.7;
+    UI.graphics = game.add.graphics(0, 0);
+    UI.group.addChild(UI.graphics);
 
     UI.nameText = game.add.text(0, 0, '----------------\nNAME:' + playerName, {
         font: '16px Helvetica',
@@ -27,30 +29,22 @@ UI.init = function () {
     
 
 
+
     UI.messageText = game.add.text(0, 0, 'Messages:', {
         font: '18px monospace',
-        fill: '#ccc'
+        fill: '#fff'
     }, UI.group);
     UI.messageText.align = 'right';
     UI.messageText.alpha = 1.0;
     UI.messageText.setShadow(3,3,'#000000', 1);
 
 
-    // UI.graphics = game.add.graphics(0, 0);
-    // UI.graphics.lineStyle(5, 0x888888, 1);
-    // UI.graphics.beginFill(0x333222111, 1);
-    // UI.graphics.drawRect(
-    //     Screen.x / 4,
-    //     Screen.y / 4,
-    //     Screen.x / 4,
-    //     Screen.y / 4
-    // );
 
     UI.chatInput = document.getElementById('chatInput');
     UI.chatFrame = document.getElementById('chatFrame');
 
     // UI.textElements = [UI.gameText, UI.nameText, UI.messageText];
-    UI.textElements = [UI.nameText, UI.messageText];
+    UI.textElements = [UI.nameText, UI.messageText, UI.graphics];
 
     UI.chatSound = game.add.audio('chatSound');
     UI.disconnectSound = game.add.audio('disconnectSound');
@@ -133,7 +127,10 @@ UI.update = function () {
     // UI.gameText.y = 5;
     UI.nameText.y = 16;
     UI.messageText.y = 280;
+
+    Utils.alignPosition(UI.graphics, UI.messageText);
     R.forEach(UI.fixedToCamera(true))(UI.textElements);
+    
 };
 
 
@@ -150,6 +147,7 @@ UI.handCursor = function (button) {
 
 UI.hudMessage = function () {
     UI.messageText.alpha = 1.0;
+    UI.graphics.alpha = 1.0;
     var rawtext = R.join(' ', slice(arguments));
 
     var text = rawtext.match(/.{1,25}/g); // split string every 30 characters
@@ -165,12 +163,26 @@ UI.hudMessage = function () {
     
     UI.log(rawtext);
 
+    UI.graphics.clear();
+    UI.graphics.lineStyle(1, 0x888888, 1);
+    UI.graphics.beginFill(0x333222111, 0.5);
+    UI.graphics.drawRect(
+        - 10,
+         - 10,
+        UI.messageText.width + 20,
+        UI.messageText.height + 20
+    );
+
 
     clearTimeout(UI.timeout);
-    if(UI.messageTween) UI.messageTween.stop();
+    if(UI.messageTween)  UI.messageTween.stop();
+    if(UI.graphicsTween) UI.graphicsTween.stop();
 
     UI.timeout = setTimeout(function() {
         UI.messageTween = game.add.tween(UI.messageText).to({
+            alpha: 0
+        }, 2000, Phaser.Easing.Linear.None, true);
+        UI.graphicsTween = game.add.tween(UI.graphics).to({
             alpha: 0
         }, 2000, Phaser.Easing.Linear.None, true);
     }, 10000);

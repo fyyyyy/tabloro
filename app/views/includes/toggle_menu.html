@@ -15,8 +15,7 @@
       $('#sidebar-wrapper').toggleClass('active');
   });
 
-
-  if (guestMode) {
+  if (typeof guestMode != 'undefined' && guestMode === true) {
       $('#sidebar-wrapper').toggleClass('active');
   }
 </script>
