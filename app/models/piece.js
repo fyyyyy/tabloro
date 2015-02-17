@@ -147,7 +147,7 @@ PieceSchema.path('title').validate(function (title, fn) {
 
 PieceSchema.pre('save', function (next) {
 
-  if (this.atlasjson) {
+  if (this.atlasjson || this.jsonAtlas) {
     this.type = 'atlasJSONHash';
   } else if (this.frameWidth) {
     this.type = 'spritesheet';
