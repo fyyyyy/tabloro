@@ -70,7 +70,7 @@ function create() {
 function setupHammer () {
 
     hammertime = new Hammer(document.body);
-    hammertime.get('pan').set({ direction: Hammer.DIRECTION_ALL, pointers: 2 });
+    hammertime.get('pan').set({ direction: Hammer.DIRECTION_ALL, pointers: 3 });
     hammertime.get('pinch').set({ enable: true });
 
 
