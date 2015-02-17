@@ -79,8 +79,8 @@ function setupHammer () {
     });
     hammertime.on('pan', function(ev) {
         UI.hudMessage('pan', ev.deltaX, ev.deltaY, ev.pointers.length);
-        game.camera.x += ev.deltaX;   
-        game.camera.y += ev.deltaY;   
+        game.camera.x -= ev.deltaX / 2;   
+        game.camera.y -= ev.deltaY / 2;   
 
     });
 
