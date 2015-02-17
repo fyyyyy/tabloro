@@ -1,4 +1,4 @@
-/*global Phaser, R, T, G, Controls, console, Network, window, UI, Assets, document*/
+/*global Hammer, Phaser, R, T, G, Controls, console, Network, window, UI, Assets, document*/
 "use strict";
 
 
@@ -22,7 +22,7 @@ var players;
 var table;
 var playerList = {};
 var player = {};
-
+var hammertime;
 
 
 var screenShot = function () {
@@ -59,12 +59,32 @@ function create() {
     Controls.add(); // on top of tiles
 
     UI.init(); // do before players
+    setupHammer();
     setupPlayers();
     Cursor.set();
     if(mode === 'play') Video.init();
     H.init();
 }
 
+
+function setupHammer () {
+
+    hammertime = new Hammer(document.body);
+    hammertime.get('pan').set({ direction: Hammer.DIRECTION_ALL, pointers: 2 });
+    hammertime.get('pinch').set({ enable: true });
+
+
+    hammertime.on('pinch', function(ev) {
+        UI.hudMessage('pinch', ev.deltaX, ev.deltaY, ev.pointers.length);
+    });
+    hammertime.on('pan', function(ev) {
+        UI.hudMessage('pan', ev.deltaX, ev.deltaY, ev.pointers.length);
+        game.camera.x += ev.deltaX;   
+        game.camera.y += ev.deltaY;   
+
+    });
+
+}
 
 
 function setupStage() {
