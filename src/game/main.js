@@ -77,6 +77,7 @@ function setupHammer () {
     hammertime = new Hammer(document.getElementsByTagName('canvas')[0]);
     hammertime.get('pan').set({ direction: Hammer.DIRECTION_ALL, pointers: 3 });
     hammertime.get('pinch').set({ enable: true });
+    hammertime.get('pinch').requireFailure(hammertime.get('pan'));
 
 
     hammertime.on('pinch', function(ev) {
@@ -114,6 +115,8 @@ function zoom (mult) {
         currIEZoom += step * mult;
         $('body').css('zoom', ' ' + currIEZoom + '%');
     }
+    window.resizeTo(width - 1, height);
+    window.resizeTo(width + 1, height);
 }
 
 
