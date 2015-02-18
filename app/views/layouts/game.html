@@ -13,16 +13,16 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+        
+        {% if process.env.NODE_ENV === 'development' %}
+            <script type="text/javascript" src="/js/magictouch.js"></script>
+        {% endif %}
 
         <script type="text/javascript" src="/eureca.js"></script>
         <script type="text/javascript" src="/js/phaser.js"></script>
         <script type="text/javascript" src="/js/ramda.js"></script>
         <script type="text/javascript" src="/js/jquery.js"></script>
         <script type="text/javascript" src="/js/peer.js"></script>
-        
-        {% if process.env.NODE_ENV === 'development' %}
-            <script type="text/javascript" src="/js/magictouch.js"></script>
-        {% endif %}
 
         <script type="text/javascript" src="/js/hammer.js"></script>
         <script src="/js/bootstrap.min.js"></script>
