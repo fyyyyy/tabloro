@@ -23,6 +23,11 @@ var table;
 var playerList = {};
 var player = {};
 var hammertime;
+var oldCameraX;
+var oldCameraY;
+  var currFFZoom = 1;
+    var currIEZoom = 100;
+
 
 
 var screenShot = function () {
@@ -69,7 +74,7 @@ function create() {
 
 function setupHammer () {
 
-    hammertime = new Hammer(document.body);
+    hammertime = new Hammer(document.getElementsByTagName('canvas')[0]);
     hammertime.get('pan').set({ direction: Hammer.DIRECTION_ALL, pointers: 3 });
     hammertime.get('pinch').set({ enable: true });
 
@@ -77,13 +82,38 @@ function setupHammer () {
     hammertime.on('pinch', function(ev) {
         UI.hudMessage('pinch', ev.deltaX, ev.deltaY, ev.pointers.length);
     });
-    hammertime.on('pan', function(ev) {
-        UI.hudMessage('pan', ev.deltaX, ev.deltaY, ev.pointers.length);
-        game.camera.x -= ev.deltaX / 2;   
-        game.camera.y -= ev.deltaY / 2;   
-
+    
+    hammertime.on('pinchin', function() {
+        zoom(1);
     });
 
+    hammertime.on('pinchout', function() {
+        zoom(-1);
+    });
+
+    hammertime.on('panstart', function() {
+        oldCameraX = game.camera.x;
+        oldCameraY = game.camera.y;
+    });
+
+    hammertime.on('panmove', function(ev) {
+        UI.hudMessage('pan', ev.deltaX, ev.deltaY, ev.pointers.length);
+        game.camera.x = oldCameraX - ev.deltaX;
+        game.camera.y = oldCameraY - ev.deltaY;
+    });
+
+}
+
+function zoom (mult) {
+    if (navigator.userAgent.match(/Firefox/)){
+        var step = 0.02;
+        currFFZoom += step * mult; 
+        $('body').css('MozTransform','scale(' + currFFZoom + ')');
+    } else {
+        var step = 2;
+        currIEZoom += step * mult;
+        $('body').css('zoom', ' ' + currIEZoom + '%');
+    }
 }
 
 
