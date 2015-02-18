@@ -129,7 +129,7 @@ Controls.onStartSelection = function (target, point) {
     console.log('onStartSelection', point);
     Controls.hide();
     Controls.selecting = true;
-    Controls.rect = {x: point.x / game.camera.scale.x, y: point.y / game.camera.scale.y};
+    Controls.rect = {x: point.worldX / game.camera.scale.x, y: point.worldY / game.camera.scale.y};
 };
 
 

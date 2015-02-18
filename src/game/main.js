@@ -80,17 +80,6 @@ function setupHammer () {
     hammertime.get('pinch').requireFailure(hammertime.get('pan'));
 
 
-    hammertime.on('pinch', function(ev) {
-        UI.hudMessage('pinch', ev.deltaX, ev.deltaY, ev.pointers.length);
-    });
-    
-    hammertime.on('pinchin', function() {
-        zoom(-1);
-    });
-
-    hammertime.on('pinchout', function() {
-        zoom(1);
-    });
 
     hammertime.on('panstart', function() {
         oldCameraX = game.camera.x;
@@ -101,6 +90,18 @@ function setupHammer () {
         UI.hudMessage('pan', ev.deltaX, ev.deltaY, ev.pointers.length);
         game.camera.x = oldCameraX - ev.deltaX;
         game.camera.y = oldCameraY - ev.deltaY;
+    });
+
+    hammertime.on('pinch', function(ev) {
+        UI.hudMessage('pinch', ev.deltaX, ev.deltaY, ev.pointers.length);
+    });
+    
+    hammertime.on('pinchin', function() {
+        zoom(-0.5);
+    });
+
+    hammertime.on('pinchout', function() {
+        zoom(0.5);
     });
 
 }
