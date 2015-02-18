@@ -85,11 +85,11 @@ function setupHammer () {
     });
     
     hammertime.on('pinchin', function() {
-        zoom(1);
+        zoom(-1);
     });
 
     hammertime.on('pinchout', function() {
-        zoom(-1);
+        zoom(1);
     });
 
     hammertime.on('panstart', function() {
@@ -115,8 +115,8 @@ function zoom (mult) {
         currIEZoom += step * mult;
         $('body').css('zoom', ' ' + currIEZoom + '%');
     }
-    window.resizeTo(width - 1, height);
-    window.resizeTo(width + 1, height);
+    window.resizeTo(window.outerWidth - 1, window.outerHeight);
+    window.resizeTo(window.outerWidth + 1, window.outerHeight);
 }
 
 
