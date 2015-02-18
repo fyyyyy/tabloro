@@ -1,4 +1,4 @@
-/*global Hammer, Phaser, R, T, G, Controls, console, Network, window, UI, Assets, document*/
+/*global $, Hammer, Phaser, R, T, G, Controls, console, Network, window, UI, Assets, document*/
 "use strict";
 
 
@@ -25,8 +25,8 @@ var player = {};
 var hammertime;
 var oldCameraX;
 var oldCameraY;
-  var currFFZoom = 1;
-    var currIEZoom = 100;
+var currFFZoom = 1;
+var currIEZoom = 100;
 
 
 
@@ -106,17 +106,18 @@ function setupHammer () {
 }
 
 function zoom (mult) {
-    if (navigator.userAgent.match(/Firefox/)){
-        var step = 0.02;
-        currFFZoom += step * mult; 
-        $('body').css('MozTransform','scale(' + currFFZoom + ')');
-    } else {
-        var step = 2;
-        currIEZoom += step * mult;
-        $('body').css('zoom', ' ' + currIEZoom + '%');
-    }
-    window.resizeTo(window.outerWidth - 1, window.outerHeight);
-    window.resizeTo(window.outerWidth + 1, window.outerHeight);
+    game.camera.scale.set(game.camera.scale.x + mult / 100);
+    // var step;
+    // if (navigator.userAgent.match(/Firefox/)){
+    //     step = 0.02;
+    //     currFFZoom += step * mult; 
+    //     $('body').css('MozTransform','scale(' + currFFZoom + ')');
+    // } else {
+    //     step = 2;
+    //     currIEZoom += step * mult;
+    //     $('body').css('zoom', ' ' + currIEZoom + '%');
+    // }
+    // $(window).trigger('resize');
 }
 
 
@@ -358,10 +359,18 @@ function update() {
              || game.input.keyboard.isDown(Phaser.Keyboard.D) && !UI.chatVisible())
     {
         game.camera.x += 50;   
-    } else if(game.input.keyboard.isDown(Phaser.Keyboard.ENTER)) {
+    }
+    else if(game.input.keyboard.isDown(Phaser.Keyboard.ENTER)) {
         UI.enterPressed();
     }
-
+    else if (game.input.keyboard.isDown(Phaser.Keyboard.I) && !UI.chatVisible())
+    {
+        zoom(1);
+    }
+    else if (game.input.keyboard.isDown(Phaser.Keyboard.O) && !UI.chatVisible())
+    {
+        zoom(-1);
+    }
 
     if (game.input.mouse.event) {
         // console.log(game.input.mouse.event)

@@ -126,10 +126,10 @@ Controls.cursors = function () {
 // multi select
 
 Controls.onStartSelection = function (target, point) {
-    console.log('onStartSelection');
+    console.log('onStartSelection', point);
     Controls.hide();
     Controls.selecting = true;
-    Controls.rect = {x: point.worldX, y: point.worldY};
+    Controls.rect = {x: point.x / game.camera.scale.x, y: point.y / game.camera.scale.y};
 };
 
 
@@ -195,8 +195,8 @@ Controls.dragAlong = function (tiles) {
 Controls.update = function () {
     if (Controls.selecting) {
         if (game.input.mouse.event || game.input.pointer1.active) {
-            Controls.rect.width =  game.input.activePointer.worldX - Controls.rect.x;
-            Controls.rect.height = game.input.activePointer.worldY - Controls.rect.y;
+            Controls.rect.width =  game.input.activePointer.worldX / game.camera.scale.x - Controls.rect.x;
+            Controls.rect.height = game.input.activePointer.worldY / game.camera.scale.y - Controls.rect.y;
             Controls.graphics.clear();
 
             Controls.selected = Controls.findSelectedTiles(Controls.sanitizeRect(Controls.rect));
