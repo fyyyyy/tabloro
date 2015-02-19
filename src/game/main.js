@@ -80,9 +80,9 @@ function setupHammer () {
     pan.set({ direction: Hammer.DIRECTION_ALL, pointers: 2});
     
     var pinch = hammertime.get('pinch');
-    pinch.set({ enable: true, threshold: 50 });
+    pinch.set({ enable: true, threshold: 5 });
     
-    pan.recognizeWith(pinch);
+    pinch.recognizeWith(pan);
 
 
 
