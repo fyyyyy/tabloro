@@ -128,6 +128,9 @@ Controls.cursors = function () {
 Controls.onStartSelection = function (target, point) {
     console.log('onStartSelection', point);
     Controls.hide();
+    if (touching) {
+        return;
+    }
     Controls.selecting = true;
     Controls.rect = {x: point.worldX / game.camera.scale.x, y: point.worldY / game.camera.scale.y};
 };

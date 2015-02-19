@@ -27,6 +27,7 @@ var oldCameraX;
 var oldCameraY;
 var currFFZoom = 1;
 var currIEZoom = 100;
+var touching = false;
 
 
 
@@ -89,6 +90,17 @@ function setupHammer () {
     hammertime.on('panstart', function() {
         oldCameraX = game.camera.x;
         oldCameraY = game.camera.y;
+        touching = true;
+    });
+
+    hammertime.on('panend', function() {
+        touching = false;
+    });
+    hammertime.on('pinchstart', function() {
+        touching = true;
+    });
+    hammertime.on('pinchend', function() {
+        touching = false;
     });
 
     hammertime.on('panmove', function(ev) {
@@ -102,11 +114,11 @@ function setupHammer () {
     });
     
     hammertime.on('pinchin', function() {
-        zoom(-1);
+        zoom(-0.6);
     });
 
     hammertime.on('pinchout', function() {
-        zoom(1);
+        zoom(0.6);
     });
 
 }
