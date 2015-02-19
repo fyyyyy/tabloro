@@ -102,11 +102,11 @@ function setupHammer () {
     });
     
     hammertime.on('pinchin', function() {
-        zoom(-0.3);
+        zoom(-1);
     });
 
     hammertime.on('pinchout', function() {
-        zoom(0.3);
+        zoom(1);
     });
 
 }
