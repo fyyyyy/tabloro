@@ -75,9 +75,14 @@ function create() {
 function setupHammer () {
 
     hammertime = new Hammer(document.getElementsByTagName('canvas')[0]);
-    hammertime.get('pan').set({ direction: Hammer.DIRECTION_ALL, pointers: 3 });
-    hammertime.get('pinch').set({ enable: true });
-    hammertime.get('pinch').requireFailure(hammertime.get('pan'));
+    
+    var pan = hammertime.get('pan');
+    pan.set({ direction: Hammer.DIRECTION_ALL, pointers: 2});
+    
+    var pinch = hammertime.get('pinch');
+    pinch.set({ enable: true });
+    
+    pinch.recognizeWith(pan);
 
 
 
@@ -97,11 +102,11 @@ function setupHammer () {
     });
     
     hammertime.on('pinchin', function() {
-        zoom(-0.5);
+        zoom(-0.3);
     });
 
     hammertime.on('pinchout', function() {
-        zoom(0.5);
+        zoom(0.3);
     });
 
 }
