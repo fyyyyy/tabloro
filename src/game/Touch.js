@@ -6,6 +6,9 @@ var Touch = {};
 Touch.touching = false;
 
 Touch.init = function () {
+    // add 2 more pointers, 4 total
+    game.input.addPointer();
+    game.input.addPointer();
 
     Touch.hammertime = new Hammer(document.getElementsByTagName('canvas')[0]);
     
@@ -51,16 +54,16 @@ Touch.init = function () {
         if (Controls.target.input.isDragged) {
             return;
         }
-        UI.hudMessage('pinchin', ev.deltaX, ev.deltaY, ev.pointers.length);
         zoom(-0.6);
+        UI.hudMessage('pinchin', ev.deltaX, ev.deltaY, ev.pointers.length);
     });
 
     Touch.hammertime.on('pinchout', function() {
         if (Controls.target.input.isDragged) {
             return;
         }
-        UI.hudMessage('pinchout', ev.deltaX, ev.deltaY, ev.pointers.length);
         zoom(0.6);
+        UI.hudMessage('pinchout', ev.deltaX, ev.deltaY, ev.pointers.length);
     });
 
 }
