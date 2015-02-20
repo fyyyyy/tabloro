@@ -36,20 +36,30 @@ Touch.init = function () {
     });
 
     Touch.hammertime.on('panmove', function(ev) {
+        if (Controls.target.input.isDragged) {
+            return;
+        }
         UI.hudMessage('pan', ev.deltaX, ev.deltaY, ev.pointers.length);
         game.camera.x = Touch.oldCameraX - ev.deltaX;
         game.camera.y = Touch.oldCameraY - ev.deltaY;
     });
 
-    Touch.hammertime.on('pinch', function(ev) {
-        UI.hudMessage('pinch', ev.deltaX, ev.deltaY, ev.pointers.length);
-    });
+    // Touch.hammertime.on('pinch', function(ev) {
+    // });
     
     Touch.hammertime.on('pinchin', function() {
+        if (Controls.target.input.isDragged) {
+            return;
+        }
+        UI.hudMessage('pinchin', ev.deltaX, ev.deltaY, ev.pointers.length);
         zoom(-0.6);
     });
 
     Touch.hammertime.on('pinchout', function() {
+        if (Controls.target.input.isDragged) {
+            return;
+        }
+        UI.hudMessage('pinchout', ev.deltaX, ev.deltaY, ev.pointers.length);
         zoom(0.6);
     });
 
