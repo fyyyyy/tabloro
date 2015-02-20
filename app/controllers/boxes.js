@@ -184,7 +184,9 @@ exports.addList = function (req, res) {
                     pieces: globalPieces,
                     count: globalPiecesCount,
                     isOwner: box.user.id === req.user.id,
+                    page: page + 1,
                     pages: Math.ceil(count / perPage)
+                
                 });
             });
         });
