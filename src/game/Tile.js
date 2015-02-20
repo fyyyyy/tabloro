@@ -306,6 +306,10 @@ T.getPosition = function (tile) {
 
 
 T.onStartDrag = function (tile) {
+    if (Touch.touching) {
+        tile.input.stopDrag(game.input.activePointer);
+    }
+
     T.dragging = true;
     console.log('onStartDrag', tile.id, tile.parent.z);
 

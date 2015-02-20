@@ -128,7 +128,7 @@ Controls.cursors = function () {
 Controls.onStartSelection = function (target, point) {
     console.log('onStartSelection', point);
     Controls.hide();
-    if (touching) {
+    if (Touch.touching) {
         return;
     }
     Controls.selecting = true;
@@ -196,7 +196,7 @@ Controls.dragAlong = function (tiles) {
 
 
 Controls.update = function () {
-    if (touching) {
+    if (Touch.touching) {
         Controls.onStopSelection();
     }
     

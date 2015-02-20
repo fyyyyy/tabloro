@@ -54,6 +54,14 @@ UI.init = function () {
 
 };
 
+UI.gofull = function () {
+    if (game.scale.isFullScreen) {
+        game.scale.stopFullScreen();
+        return;
+    }
+    game.scale.startFullScreen();
+};
+
 UI.listGroupsInMenu = function() {
     var groups = G._masterGroup.children;
     console.log('UI.listGroupsInMenu', groups);

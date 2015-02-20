@@ -1,4 +1,4 @@
-/*global $, Hammer, Phaser, R, T, G, Controls, console, Network, window, UI, Assets, document*/
+/*global $, Hammer, Phaser, R, T, G, Controls, Touch, console, Network, window, UI, Assets, document*/
 "use strict";
 
 
@@ -22,12 +22,7 @@ var players;
 var table;
 var playerList = {};
 var player = {};
-var hammertime;
-var oldCameraX;
-var oldCameraY;
-var currFFZoom = 1;
-var currIEZoom = 100;
-var touching = false;
+
 
 
 
@@ -65,7 +60,7 @@ function create() {
     Controls.add(); // on top of tiles
 
     UI.init(); // do before players
-    setupHammer();
+    Touch.init();
     setupPlayers();
     Cursor.set();
     if(mode === 'play') Video.init();
@@ -73,55 +68,7 @@ function create() {
 }
 
 
-function setupHammer () {
 
-    hammertime = new Hammer(document.getElementsByTagName('canvas')[0]);
-    
-    var pan = hammertime.get('pan');
-    pan.set({ direction: Hammer.DIRECTION_ALL, pointers: 2});
-    
-    var pinch = hammertime.get('pinch');
-    pinch.set({ enable: true, threshold: 0.1 });
-    
-    pinch.recognizeWith(pan);
-
-
-
-    hammertime.on('panstart', function() {
-        oldCameraX = game.camera.x;
-        oldCameraY = game.camera.y;
-        touching = true;
-    });
-
-    hammertime.on('panend', function() {
-        touching = false;
-    });
-    hammertime.on('pinchstart', function() {
-        touching = true;
-    });
-    hammertime.on('pinchend', function() {
-        touching = false;
-    });
-
-    hammertime.on('panmove', function(ev) {
-        UI.hudMessage('pan', ev.deltaX, ev.deltaY, ev.pointers.length);
-        game.camera.x = oldCameraX - ev.deltaX;
-        game.camera.y = oldCameraY - ev.deltaY;
-    });
-
-    hammertime.on('pinch', function(ev) {
-        UI.hudMessage('pinch', ev.deltaX, ev.deltaY, ev.pointers.length);
-    });
-    
-    hammertime.on('pinchin', function() {
-        zoom(-0.6);
-    });
-
-    hammertime.on('pinchout', function() {
-        zoom(0.6);
-    });
-
-}
 
 function zoom (mult) {
     game.camera.scale.set(game.camera.scale.x + mult / 100);
@@ -170,14 +117,6 @@ function setupStage() {
 
 }
 
-
-function gofull() {
-    if (game.scale.isFullScreen) {
-        game.scale.stopFullScreen();
-        return;
-    }
-    game.scale.startFullScreen();
-}
 
 
 function setupTable() {
