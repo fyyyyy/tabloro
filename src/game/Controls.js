@@ -196,6 +196,10 @@ Controls.dragAlong = function (tiles) {
 
 
 Controls.update = function () {
+    if (touching) {
+        Controls.onStopSelection();
+    }
+    
     if (Controls.selecting) {
         if (game.input.mouse.event || game.input.pointer1.active) {
             Controls.rect.width =  game.input.activePointer.worldX / game.camera.scale.x - Controls.rect.x;
