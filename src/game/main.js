@@ -175,11 +175,11 @@ function setupAssets (gameAssets) {
 
         if (asset.method === 'atlasJSONHash') {
             maxFrames = game.cache.getFrameCount(groupName);
-            addCards(groupName, yOffset, buildAssetArray(asset, maxFrames), group);
+            addCards(groupName, yOffset, buildAssetArray(asset, maxFrames), group, asset.rotateBy);
         }
 
         if (asset.method === 'image') {
-            addTokens(R.repeatN(groupName, asset.counts || maxFrames), group, 100, yOffset);
+            addTokens(R.repeatN(groupName, asset.counts || maxFrames), group, 100, yOffset, asset.rotateBy);
         }
 
         if (asset.method === 'spritesheet') {
@@ -224,7 +224,7 @@ function addStash (title, yOffset, array, group) {
 
 
 
-function addCards(title, yOffset, array, group) {
+function addCards(title, yOffset, array, group, rotateBy) {
     var last;
     var tempOffsetX = 0;
     var tempOffsetY = 0;
@@ -252,26 +252,27 @@ function addCards(title, yOffset, array, group) {
 
         var tile = group.create(offsetX, yOffset + tempOffsetY + nOffsetY, title, n);
         tile.defaultFrame = n;
-        R.compose(T.setId, Cursor.reset, T.networkAble, T.lockable(group.lockable), T.stackable, T.flipable(group.flipable), T.rotateable(group.rotateBy), T.handable(group.handable),  T.draggable, T.centerAnchor)(tile);
+        R.compose(T.setId, Cursor.reset, T.networkAble, T.lockable(group.lockable), T.stackable, T.flipable(group.flipable), T.rotateable(rotateBy), T.handable(group.handable),  T.draggable, T.centerAnchor)(tile);
 
         Controls.target = tile;
         last = n;
-        // console.log('tile created', tile.id);
+        // console.log('tile created', tile.rotateBy);
     })(array);
     return Controls.target;
 }
 
 
 
-function addTokens(which, group, x, y, scale) {
+function addTokens(which, group, x, y, rotateBy) {
     x = x || 100;
     y = y || 300;
-    scale = scale || 1.0;
     R.forEach.idx(function (n, idx) {
         var token = group.create(x + (S.offsetX * idx), y + (S.offsetY * idx ), n);
         T.setId(token);
-        T.scale(scale, token);
-        R.compose(Cursor.reset, T.stackable, T.networkAble,  T.rotateable(group.rotateBy), T.lockable(group.lockable), T.handable(group.handable), T.draggable, T.centerAnchor)(token);
+        // T.scale(scale, token);
+        R.compose(Cursor.reset, T.stackable, T.networkAble,  T.rotateable(rotateBy), T.lockable(group.lockable), T.handable(group.handable), T.draggable, T.centerAnchor)(token);
+        // console.log('token created', token.rotateBy);
+
     })(which);
 }
 

@@ -203,10 +203,12 @@ T.resetRotation = function (tile) {
 };
 
 
-T.rotateable = function (rotateable) {
+T.rotateable = function (rotateBy) {
     return function (tile) {
-        tile.rotateable = (rotateable && tile.parent.rotateBy) || false;
-
+        rotateBy = Number(rotateBy);
+        tile.rotateable = (rotateBy && rotateBy > 0) ? true : false;
+        tile.rotateBy = Utils.deg2Rad(rotateBy);
+        console.log('rotateable', tile.rotateable, tile.rotateBy);
         return tile;
     };
 };
@@ -216,7 +218,7 @@ T.startRotate = function () {
     // console.log('startRotate', tile);
      tile.startRotatePosition = Utils.getMousePosition();
      tile.startRotation = tile.rotation;
-     console.log(tile.startRotatePosition);
+     // console.log('startRotatePosition', tile.startRotatePosition);
      G.addUpdatePosition(tile);
 };    
 
@@ -227,8 +229,10 @@ T.releaseRotate = function () {
 
     var deltaRotation = tile.rotation - tile.startRotation;
 
-    if (Math.abs(deltaRotation + 0.01)  < tile.parent.rotateBy) {
-        tile.rotation += tile.parent.rotateBy;
+    if (Math.abs(deltaRotation + 0.01)  < tile.rotateBy) {
+        tile.rotation += tile.rotateBy;
+    } else {
+        // console.error('not enough', deltaRotation, tile.rotation, tile.startRotation);
     }
 
     delete tile.startRotatePosition;

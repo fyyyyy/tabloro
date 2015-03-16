@@ -25,7 +25,6 @@ G.groups = {
         var group = G._masterGroup.add(game.add.group());
         group.z = index;
         group.name = groupName;
-        group.rotateBy = Utils.deg2Rad(asset.rotateBy) || 0;
         group.flipable = asset.flipable;
         group.handable = asset.handable;
         group.lockable = asset.lockable;
@@ -86,7 +85,7 @@ G.update = function () {
         }
         if (tile.startRotatePosition) {
             var delta = Utils.delta(tile.startRotatePosition, Utils.getMousePosition());
-            var rotateByDeg = Utils.rad2Deg(tile.parent.rotateBy);
+            var rotateByDeg = Utils.rad2Deg(tile.rotateBy);
             var rotationInDegree = Math.floor((- delta.x * 2 + delta.y  * 2 ) / rotateByDeg) * rotateByDeg;
             var rotationInRad = Utils.deg2Rad(rotationInDegree);
             tile.rotation = tile.startRotation + rotationInRad;
