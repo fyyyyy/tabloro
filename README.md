@@ -3,7 +3,7 @@
 
 Your game table in the browser.
 
-Play <strong>any</strong> board or card game with friends &amp family.
+Play <strong>any</strong> board or card game with friends & family.
 
 Tabloro runs on your mac, pc, tablet, or smartphone.
 
