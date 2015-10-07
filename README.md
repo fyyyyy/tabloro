@@ -9,8 +9,8 @@ Tabloro runs on your mac, pc, tablet, or smartphone.
 
 Every game session is saved online. Every move can be replayed or rewinded any time. ( TODO )
 
-Built in private <a href="http://iswebrtcreadyyet.com/" target="_blank" class="text-default" ><u>peer to peer</u></a> video &amp audio chat in the browser.
+Built in private <a href="http://iswebrtcreadyyet.com/" target="_blank" class="text-default" ><u>peer to peer</u></a> video & audio chat in the browser.
 
-Scan & upload your own board game tiles, share the link and start playing with friends &amp family.
+Scan & upload your own board game tiles, share the link and start playing with friends & family.
 
 Built with http://phaser.io and http://peerjs.com/ for peer2peer video&audio chat
