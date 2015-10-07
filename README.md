@@ -13,4 +13,4 @@ Built in private <a href="http://iswebrtcreadyyet.com/" target="_blank" class="t
 
 Scan & upload your own board game tiles, share the link and start playing with friends & family.
 
-Built with http://phaser.io and http://peerjs.com/ for peer2peer video&audio chat
+Built with nodejs, express, eureca, http://phaser.io and http://peerjs.com/ for peer2peer video&audio chat
