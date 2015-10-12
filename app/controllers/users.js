@@ -31,6 +31,24 @@ exports.load = function (req, res, next, id) {
 };
 
 
+exports.emails = function (req, res){
+  var options = {};
+
+  User.list(options, function (err, users) {
+    if (err) return res.render('500');
+
+    User.count().exec(function (err, count) {
+      res.render('users/emails', {
+        title: 'Email',
+        users: users,
+        count: count
+      });
+
+    });
+  });
+};
+
+
 /**
  * List
  */
@@ -50,7 +68,7 @@ exports.index = function (req, res){
 
     Piece.find().exec(function (err, pieces) {
       var countPieces = pieces.length;
-      
+
       R.forEach(function (piece) {
         countElements += parseInt(piece.maxFrames) || 1;
       })(pieces);
