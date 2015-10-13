@@ -15,4 +15,7 @@ Scan & upload your own board game tiles, share the link and start playing with f
 
 Built with nodejs, express, mongodb, eureca, http://phaser.io and http://peerjs.com/ for peer2peer video&audio chat
 
+Based on madhums <a href="https://github.com/madhums/node-express-mongoose-demo">express demo</a>, look here for setup instructions
+
 <img src="http://www.tabloro.com/img/meta.jpg"></img>
+
