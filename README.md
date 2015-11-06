@@ -18,6 +18,8 @@ Based on madhums <a href="https://github.com/madhums/node-express-mongoose-demo"
 
 Using functional programming concepts in many areas. Instead of classes i have used namespaces like *T* for Tile which is a bunch of functions that apply Tile like functionality to objects, e.g. *T.onFlip*. Or e.g. *Dice* as in *Dice.spin* for dice-like functionality. These functions can be mixed and matched to add functionality to game objects. They are really just namespaces, not instances of classes.
 
+Released under MIT License https://opensource.org/licenses/MIT
+
 <a href="http://ramdajs.com/">Ramda</a> is used throughout as functional toolkit. Its a little bit cleaner than underscore or lo-dash, but thats also a matter of taste.
 
 <img src="http://www.tabloro.com/img/meta.jpg"></img>
