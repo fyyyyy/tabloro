@@ -1,5 +1,5 @@
 
-# Tabloro
+#  <a href="http://www.tabloro.com/" target="_blank" class="tabloro" >Tabloro.com</a>
 
 Your game table in the browser. Play <strong>any</strong> board or card game with friends & family.
 
