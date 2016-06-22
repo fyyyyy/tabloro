@@ -24,3 +24,41 @@ Released under MIT License https://opensource.org/licenses/MIT
 
 <img src="http://www.tabloro.com/img/meta.jpg"></img>
 
+
+
+
+You need to set the env variables for your amazon s3 storage etc.
+Please use US-standard region buckets, otherwise there is a bug with middleware
+
+ADMIN_MAIL
+
+test@test.com
+
+IMAGER_S3_BUCKET
+
+e.g. mytabloro
+
+IMAGER_S3_KEY
+
+IMAGER_S3_SECRET
+
+MONGOHQ_URL
+
+e.g. mongodb://heroku_app...
+
+MONGOLAB_URI
+
+e.g. mongodb://heroku_....
+
+NODE_ENV
+
+e.g. production
+
+NODE_PATH
+
+e.g. ./config:./app/controllers:./lib
+
+PORT
+
+e.g. 80
+
