@@ -39,7 +39,7 @@
     "gulp-concat": "^2.4.2",
     "gulp-uglify": "^1.0.2",
     "imager": "0.2.7",
-    "method-override": "2.2.0",
+    "method-override": "3.0.0",
     "mongoose": "5.7.8",
     "morgan": "1.9.1",
     "multer": "0.1.4",
