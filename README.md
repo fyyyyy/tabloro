@@ -9,12 +9,16 @@ Built in private <a href="http://iswebrtcreadyyet.com/" target="_blank" class="t
 
 Scan & upload your own board game tiles, share the link and start playing with friends & family.
 
+**NEW March 2020:** Simple Server branch perfect for you and your friends - uses local storage instead of AWS and updated to work with node 10  (plenty of deprecated warnings remain though).
+~See simpleserver_setup_notes.txt ~
+
 ---
 
 
 Built with nodejs, express, mongodb, eureca, http://phaser.io and http://peerjs.com/ for peer2peer video&audio chat
 
 Based on madhums <a href="https://github.com/madhums/node-express-mongoose-demo">express demo</a>, look there for **setup** instructions
+More detailed instructions for setup specifically for the simpleserver branch can be found in **simpleserver_setup_notes.txt**
 
 Using functional programming concepts in many areas. Instead of classes i have used namespaces like *T* for Tile which is a bunch of functions that apply Tile like functionality to objects, e.g. *T.onFlip*. Or e.g. *Dice* as in *Dice.spin* for dice-like functionality. These functions can be mixed and matched to add functionality to game objects. They are really just namespaces, not instances of classes.
 

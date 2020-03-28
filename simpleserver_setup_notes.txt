@@ -1,0 +1,62 @@
+
+#I set this up on a near end of life but fresh Ubuntu 16.0.4 server install.
+#I've collected what I have from my setup and listed it here - may be incomplete.
+
+
+sudo apt-get update
+sudo apt-get install imagemagick
+
+
+#SET UP MONGODB ################
+
+sudo apt-get install mongodb
+
+sudo service mongodb start
+service --status-all
+more /var/log/mongodb/mongodb.log
+
+#you may have to fix file access permission issues. 
+#Specifically check /var/log/mongodb/mongodb.log is owned by mongodb, group mongodb
+
+#if you have an error related to lack of 3GB of space we need to add smallfiles = true to /etc/mongodb.conf. Use vi or:
+echo 'smallfiles = true' >> /etc/mongodb.conf
+
+
+# SET UP NODE ################
+
+curl -sL https://deb.nodesource.com/setup_10.x | sudo bash -
+sudo apt-get install -y nodejs
+npm --version     #mine is 6.13.4  on the server and 6.5.0  on my dev machine.
+node --version    #mine is 10.19.0 on the server and 9.10.0 on my dev machine.
+
+
+
+# GET TABLORO ##############
+
+### Choice 1: download code only as zip
+sudo apt-get install curl
+curl -L -o master.zip https://github.com/JJones780/tabloro/zipball/simpleserver
+mv JJ* tabloro
+
+### Choice 2: download git - for developers. If you intend to contribute consider forking your own version now.
+sudo apt-get install git
+git clone https://github.com/JJones780/tabloro.git
+git checkout simpleserver
+
+
+
+# SET UP TABLORO #############
+
+cd tabloro
+npm install
+
+cd config/env
+cp env.example.json env.json
+cd ../..
+
+mkdir public/userdat        # this is instead of AWS for storage. It's only you and a few friends right?
+
+npm start
+
+
+# note all the deprecation warnings!  You  ( or maybe I ) can fix this later.
