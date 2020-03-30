@@ -15,7 +15,8 @@
     "type": "git"
   },
   "engines": {
-    "node": "0.11.13"
+    "node": ">=11",
+    "npm": "6.x"
   },
   "scripts": {
     "start": "NODE_PATH=./config:./app/controllers:./lib NODE_ENV=development ./node_modules/.bin/nodemon server.js",
