@@ -5,3 +5,4 @@ Makefile
 .DS_Store
 *.sublime*
 package-lock.json
+export/
