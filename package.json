@@ -31,7 +31,7 @@
     "cookie-session": "1.0.2",
     "csurf": "1.6.1",
     "engine.io": "^1.4.3",
-    "eureca.io": "^0.6.2",
+    "eureca.io": "^0.8.2",
     "express": "4.9.0",
     "express-session": "1.8.2",
     "forever": "0.11.1",
