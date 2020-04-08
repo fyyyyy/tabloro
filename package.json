@@ -15,7 +15,7 @@
     "type": "git"
   },
   "engines": {
-    "node": "0.11.14"
+    "node": "4.0"
   },
   "scripts": {
     "start": "NODE_PATH=./config:./app/controllers:./lib NODE_ENV=development ./node_modules/.bin/nodemon server.js",
@@ -31,7 +31,7 @@
     "cookie-session": "1.0.2",
     "csurf": "1.6.1",
     "engine.io": "^1.4.3",
-    "eureca.io": "^0.7.1",
+    "eureca.io": "^0.6.2",
     "express": "4.9.0",
     "express-session": "1.8.2",
     "forever": "0.11.1",
