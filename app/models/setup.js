@@ -54,17 +54,17 @@ SetupSchema.path('title').validate(function (title, fn) {
   var Setup = mongoose.model('Setup');
 
   if (this.isNew || this.isModified('title')) {
-    Setup.find({ title: title }).exec(function (err, setups) {
-      fn(!err && setups.length === 0);
+    return Setup.find({ title: title }).exec(function (err, setups) {
+      return (setups.length === 0);
     });
-  } else fn(true);
+  } else return true;
 }, 'Game setup name already exists');
 
 
 SetupSchema.path('title').validate(function (title, fn) {
   if (this.isNew || this.isModified('title')) {
-      fn(utils.validateTitle(title));
-  } else fn(true);
+      return(utils.validateTitle(title));
+  } else return true;
 }, 'Name can only contain letters, numbers, space and underscore.');
 
 

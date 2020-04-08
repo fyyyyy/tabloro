@@ -74,14 +74,14 @@ UserSchema.path('email').validate(function (email) {
 
 UserSchema.path('email').validate(function (email, fn) {
   var User = mongoose.model('User');
-  if (this.skipValidation()) fn(true);
+  if (this.skipValidation()) return true;
 
   // Check only when it is a new user or when email field is modified
   if (this.isNew || this.isModified('email')) {
-    User.find({ email: email }).exec(function (err, users) {
-      fn(!err && users.length === 0);
+    return User.find({ email: email }).exec(function (err, users) {
+      return (users.length === 0);
     });
-  } else fn(true);
+  } else return true;
 }, 'Email already exists');
 
 UserSchema.path('username').validate(function (username) {

@@ -92,7 +92,7 @@ BoxSchema.path('title').validate(function (title, fn) {
     return Box.find({
       title: title
     }).exec(function (err, boxes) {
-      fn(!err && boxes.length === 0);
+      return boxes.length === 0;
     });
   } else return Box;
 }, 'Box name already exists');
