@@ -1,7 +1,7 @@
 
 /*!
  * Tabloro
- * Copyright(c) 2014 Franky Trigub frankyyyy@live.com
+ * Copyright(c) 2014 Franky T frankyyyy@live.com
  * 
  */
 /**
