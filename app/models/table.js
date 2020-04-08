@@ -61,9 +61,6 @@ TableSchema.path('title').validate(function (title, fn) {
   if (this.isNew || this.isModified('title')) {
     return Table.find({ title: title }).exec(function (err, tables) {
       return tables.length === 0;
-    })
-    .catch(function (err) {
-      throw err;
     });
   } else return Box;
 }, 'Table name already exists');
