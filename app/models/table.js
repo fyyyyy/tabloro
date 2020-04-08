@@ -59,17 +59,20 @@ TableSchema.path('title').validate(function (title, fn) {
   var Table = mongoose.model('Table');
 
   if (this.isNew || this.isModified('title')) {
-    Table.find({ title: title }).exec(function (err, tables) {
-      fn(!err && tables.length === 0);
+    return Table.find({ title: title }).exec(function (err, tables) {
+      return tables.length === 0;
+    })
+    .catch(function (err) {
+      throw err;
     });
-  } else fn(true);
+  } else return Box;
 }, 'Table name already exists');
 
 
 TableSchema.path('title').validate(function (title, fn) {
   if (this.isNew || this.isModified('title')) {
-      fn(utils.validateTitle(title));
-  } else fn(true);
+      return utils.validateTitle(title);
+  } else return true;
 }, 'Name can only contain letters, numbers, space and underscore.');
 
 
