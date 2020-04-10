@@ -1,0 +1,1 @@
+npm install --unsafe-perm

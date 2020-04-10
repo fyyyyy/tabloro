@@ -25,7 +25,7 @@ var getTags = function (tags) {
  */
 
 var setTags = function (tags) {
-  returnreturn (typeof tags === 'string' && tags.split(',')) || [''];;
+  return (typeof tags === 'string' && tags.split(',')) || ['']
 };
 
 /**

@@ -27,7 +27,7 @@ var getTags = function (tags) {
  */
 
 var setTags = function (tags) {
-  returnreturn (typeof tags === 'string' && tags.split(',')) || [''];;
+  return (typeof tags === 'string' && tags.split(',')) || ['']
 };
 
 /**
@@ -89,18 +89,18 @@ BoxSchema.path('title').validate(function (title, fn) {
   var Box = mongoose.model('Box');
 
   if (this.isNew || this.isModified('title')) {
-    Box.find({
+    return Box.find({
       title: title
     }).exec(function (err, boxes) {
-      fn(!err && boxes.length === 0);
+      return boxes.length === 0;
     });
-  } else fn(true);
+  } else return Box;
 }, 'Box name already exists');
 
 BoxSchema.path('title').validate(function (title, fn) {
   if (this.isNew || this.isModified('title')) {
-      fn(utils.validateTitle(title));
-  } else fn(true);
+      return utils.validateTitle(title);
+  } else return true;
 }, 'Name can only contain letters, numbers, space and underscore.');
 
 
