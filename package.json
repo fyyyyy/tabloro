@@ -35,8 +35,8 @@
     "eureca.io": "^0.6.42",
     "express": "4.9.0",
     "express-session": "1.8.2",
-    "forever": "0.11.1",
-    "gulp": "^3.8.10",
+    "forever": "4.0.3",
+    "gulp": "^4.0.2",
     "gulp-concat": "^2.4.2",
     "gulp-uglify": "^1.0.2",
     "imager": "0.2.7",
@@ -60,8 +60,8 @@
     "del": "^1.1.0",
     "gulp-changed": "^1.1.0",
     "gulp-uglify": "^1.0.2",
-    "mocha": "1.21.4",
-    "nodemon": "1.2.1",
+    "mocha": "10.1.0",
+    "nodemon": "1.19.4",
     "should": "4.0.4",
     "supertest": "0.13.0"
   }
