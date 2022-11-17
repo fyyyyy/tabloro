@@ -61,7 +61,7 @@
     "gulp-changed": "^1.1.0",
     "gulp-uglify": "^1.0.2",
     "mocha": "10.1.0",
-    "nodemon": "1.19.4",
+    "nodemon": "2.0.20",
     "should": "4.0.4",
     "supertest": "0.13.0"
   }
