@@ -63,6 +63,6 @@
     "mocha": "10.1.0",
     "nodemon": "1.19.4",
     "should": "4.0.4",
-    "supertest": "0.13.0"
+    "supertest": "6.3.3"
   }
 }
